@@ -1,0 +1,876 @@
+[
+    {
+        "Hora_coleta": "11:00",
+        "Dados": [
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 1013,
+                "Preco_Avista": 982.61
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 1108,
+                "Preco_Avista": 1074.76
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1108,
+                "Preco_Avista": 1074.76
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1139,
+                "Preco_Avista": 1104.83
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 2049,
+                "Preco_Avista": 1987.53
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2605,
+                "Preco_Avista": 2526.85
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3333,
+                "Preco_Avista": 3233.0099999999998
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3658,
+                "Preco_Avista": 3548.2599999999998
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 1014,
+                "Preco_Avista": 983.5799999999999
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 1109,
+                "Preco_Avista": 1075.73
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1109,
+                "Preco_Avista": 1075.73
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1140,
+                "Preco_Avista": 1105.8
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 2068,
+                "Preco_Avista": 2005.96
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2624,
+                "Preco_Avista": 2545.2799999999997
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3335,
+                "Preco_Avista": 3234.95
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3673,
+                "Preco_Avista": 3562.81
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 1016,
+                "Preco_Avista": 985.52
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 1047,
+                "Preco_Avista": 1015.5899999999999
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1111,
+                "Preco_Avista": 1077.67
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1142,
+                "Preco_Avista": 1107.74
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 2043,
+                "Preco_Avista": 1981.71
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2608,
+                "Preco_Avista": 2529.7599999999998
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3337,
+                "Preco_Avista": 3236.89
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3640,
+                "Preco_Avista": 3530.7999999999997
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 950,
+                "Preco_Avista": 921.5
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 1045,
+                "Preco_Avista": 1013.65
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1078,
+                "Preco_Avista": 1045.66
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1109,
+                "Preco_Avista": 1075.73
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 1948,
+                "Preco_Avista": 1889.56
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2463,
+                "Preco_Avista": 2389.11
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3180,
+                "Preco_Avista": 3084.6
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3443,
+                "Preco_Avista": 3339.71
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 919,
+                "Preco_Avista": 891.43
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 983,
+                "Preco_Avista": 953.51
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1046,
+                "Preco_Avista": 1014.62
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1078,
+                "Preco_Avista": 1045.66
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 1954,
+                "Preco_Avista": 1895.3799999999999
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2455,
+                "Preco_Avista": 2381.35
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3127,
+                "Preco_Avista": 3033.19
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3371,
+                "Preco_Avista": 3269.87
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 952,
+                "Preco_Avista": 923.4399999999999
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 1015,
+                "Preco_Avista": 984.55
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1047,
+                "Preco_Avista": 1015.5899999999999
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1111,
+                "Preco_Avista": 1077.67
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 1940,
+                "Preco_Avista": 1881.8
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2460,
+                "Preco_Avista": 2386.2
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3131,
+                "Preco_Avista": 3037.0699999999997
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3360,
+                "Preco_Avista": 3259.2
+            }
+        ]
+    },
+    {
+        "Hora_coleta": "12:00",
+        "Dados": [
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 1013,
+                "Preco_Avista": 982.61
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 1013,
+                "Preco_Avista": 982.61
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 1108,
+                "Preco_Avista": 1074.76
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 1108,
+                "Preco_Avista": 1074.76
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1108,
+                "Preco_Avista": 1074.76
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1108,
+                "Preco_Avista": 1074.76
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1139,
+                "Preco_Avista": 1104.83
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1139,
+                "Preco_Avista": 1104.83
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 2049,
+                "Preco_Avista": 1987.53
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 2049,
+                "Preco_Avista": 1987.53
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2605,
+                "Preco_Avista": 2526.85
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2605,
+                "Preco_Avista": 2526.85
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3333,
+                "Preco_Avista": 3233.0099999999998
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3333,
+                "Preco_Avista": 3233.0099999999998
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3658,
+                "Preco_Avista": 3548.2599999999998
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3658,
+                "Preco_Avista": 3548.2599999999998
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 1014,
+                "Preco_Avista": 983.5799999999999
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 1014,
+                "Preco_Avista": 983.5799999999999
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 1109,
+                "Preco_Avista": 1075.73
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 1109,
+                "Preco_Avista": 1075.73
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1109,
+                "Preco_Avista": 1075.73
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1109,
+                "Preco_Avista": 1075.73
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1140,
+                "Preco_Avista": 1105.8
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1140,
+                "Preco_Avista": 1105.8
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 2068,
+                "Preco_Avista": 2005.96
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 2068,
+                "Preco_Avista": 2005.96
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2624,
+                "Preco_Avista": 2545.2799999999997
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2624,
+                "Preco_Avista": 2545.2799999999997
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3335,
+                "Preco_Avista": 3234.95
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3335,
+                "Preco_Avista": 3234.95
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3673,
+                "Preco_Avista": 3562.81
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3673,
+                "Preco_Avista": 3562.81
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 1016,
+                "Preco_Avista": 985.52
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 1016,
+                "Preco_Avista": 985.52
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 1047,
+                "Preco_Avista": 1015.5899999999999
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 1047,
+                "Preco_Avista": 1015.5899999999999
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1111,
+                "Preco_Avista": 1077.67
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1111,
+                "Preco_Avista": 1077.67
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1142,
+                "Preco_Avista": 1107.74
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1142,
+                "Preco_Avista": 1107.74
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 2043,
+                "Preco_Avista": 1981.71
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 2043,
+                "Preco_Avista": 1981.71
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2608,
+                "Preco_Avista": 2529.7599999999998
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2608,
+                "Preco_Avista": 2529.7599999999998
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3337,
+                "Preco_Avista": 3236.89
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3337,
+                "Preco_Avista": 3236.89
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3640,
+                "Preco_Avista": 3530.7999999999997
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3640,
+                "Preco_Avista": 3530.7999999999997
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 950,
+                "Preco_Avista": 921.5
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 950,
+                "Preco_Avista": 921.5
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 1045,
+                "Preco_Avista": 1013.65
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 1045,
+                "Preco_Avista": 1013.65
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1078,
+                "Preco_Avista": 1045.66
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1078,
+                "Preco_Avista": 1045.66
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1109,
+                "Preco_Avista": 1075.73
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1109,
+                "Preco_Avista": 1075.73
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 1948,
+                "Preco_Avista": 1889.56
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 1948,
+                "Preco_Avista": 1889.56
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2463,
+                "Preco_Avista": 2389.11
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2463,
+                "Preco_Avista": 2389.11
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3180,
+                "Preco_Avista": 3084.6
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3180,
+                "Preco_Avista": 3084.6
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3443,
+                "Preco_Avista": 3339.71
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3443,
+                "Preco_Avista": 3339.71
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 919,
+                "Preco_Avista": 891.43
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 919,
+                "Preco_Avista": 891.43
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 983,
+                "Preco_Avista": 953.51
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 983,
+                "Preco_Avista": 953.51
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1046,
+                "Preco_Avista": 1014.62
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1046,
+                "Preco_Avista": 1014.62
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1078,
+                "Preco_Avista": 1045.66
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1078,
+                "Preco_Avista": 1045.66
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 1954,
+                "Preco_Avista": 1895.3799999999999
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 1954,
+                "Preco_Avista": 1895.3799999999999
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2455,
+                "Preco_Avista": 2381.35
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2455,
+                "Preco_Avista": 2381.35
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3127,
+                "Preco_Avista": 3033.19
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3127,
+                "Preco_Avista": 3033.19
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3371,
+                "Preco_Avista": 3269.87
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3371,
+                "Preco_Avista": 3269.87
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 952,
+                "Preco_Avista": 923.4399999999999
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco_Parcelado": 952,
+                "Preco_Avista": 923.4399999999999
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 1015,
+                "Preco_Avista": 984.55
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco_Parcelado": 1015,
+                "Preco_Avista": 984.55
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1047,
+                "Preco_Avista": 1015.5899999999999
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco_Parcelado": 1047,
+                "Preco_Avista": 1015.5899999999999
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1111,
+                "Preco_Avista": 1077.67
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco_Parcelado": 1111,
+                "Preco_Avista": 1077.67
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 1940,
+                "Preco_Avista": 1881.8
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco_Parcelado": 1940,
+                "Preco_Avista": 1881.8
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2460,
+                "Preco_Avista": 2386.2
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco_Parcelado": 2460,
+                "Preco_Avista": 2386.2
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3131,
+                "Preco_Avista": 3037.0699999999997
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco_Parcelado": 3131,
+                "Preco_Avista": 3037.0699999999997
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3360,
+                "Preco_Avista": 3259.2
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco_Parcelado": 3360,
+                "Preco_Avista": 3259.2
+            }
+        ]
+    }
+]

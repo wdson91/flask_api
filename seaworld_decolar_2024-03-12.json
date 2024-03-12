@@ -1,0 +1,562 @@
+[
+    {
+        "Hora_coleta": "11:00",
+        "Dados": [
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            }
+        ]
+    },
+    {
+        "Hora_coleta": "07:00",
+        "Dados": [
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            }
+        ]
+    },
+    {
+        "Hora_coleta": "17:00",
+        "Dados": [
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": "-",
+                "Preco_Avista": "-"
+            }
+        ]
+    },
+    {
+        "Hora_coleta": "12:00",
+        "Dados": [
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia 1 Parque - SeaWorld Orlando",
+                "Preco_Parcelado": 708,
+                "Preco_Avista": 686.76
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "14 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 1384,
+                "Preco_Avista": 1342.48
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "2 Dias 2 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 953,
+                "Preco_Avista": 924.41
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "3 Dias 3 Parques - SeaWorld Orlando",
+                "Preco_Parcelado": 956,
+                "Preco_Avista": 927.3199999999999
+            }
+        ]
+    }
+]

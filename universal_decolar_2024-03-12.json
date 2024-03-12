@@ -1,0 +1,330 @@
+[
+    {
+        "Hora_coleta": "12:00",
+        "Dados": [
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "14 Dias 3 Parques - Universal Orlando",
+                "Preco_Parcelado": 1349,
+                "Preco_Avista": 1308.53
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1922,
+                "Preco_Avista": 1864.34
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "14 Dias 3 Parques - Universal Orlando",
+                "Preco_Parcelado": 1350,
+                "Preco_Avista": 1309.5
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1955,
+                "Preco_Avista": 1896.35
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "14 Dias 3 Parques - Universal Orlando",
+                "Preco_Parcelado": 2056,
+                "Preco_Avista": 1994.32
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 2029,
+                "Preco_Avista": 1968.1299999999999
+            }
+        ]
+    },
+    {
+        "Hora_coleta": "12:00",
+        "Dados": [
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco_Parcelado": 1004,
+                "Preco_Avista": 973.88
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1349,
+                "Preco_Avista": 1308.53
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "14 Dias 3 Parques - Universal Orlando",
+                "Preco_Parcelado": 2053,
+                "Preco_Avista": 1991.4099999999999
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1922,
+                "Preco_Avista": 1864.34
+            },
+            {
+                "Data_viagem": "2024-03-17",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1922,
+                "Preco_Avista": 1864.34
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco_Parcelado": 1004,
+                "Preco_Avista": 973.88
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco_Parcelado": 1006,
+                "Preco_Avista": 975.8199999999999
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1349,
+                "Preco_Avista": 1308.53
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1350,
+                "Preco_Avista": 1309.5
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "14 Dias 3 Parques - Universal Orlando",
+                "Preco_Parcelado": 1350,
+                "Preco_Avista": 1309.5
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1922,
+                "Preco_Avista": 1864.34
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1955,
+                "Preco_Avista": 1896.35
+            },
+            {
+                "Data_viagem": "2024-03-22",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1922,
+                "Preco_Avista": 1864.34
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco_Parcelado": 1006,
+                "Preco_Avista": 975.8199999999999
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco_Parcelado": 1070,
+                "Preco_Avista": 1037.8999999999999
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1350,
+                "Preco_Avista": 1309.5
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "14 Dias 3 Parques - Universal Orlando",
+                "Preco_Parcelado": 1415,
+                "Preco_Avista": 1372.55
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1955,
+                "Preco_Avista": 1896.35
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 2029,
+                "Preco_Avista": 1968.1299999999999
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1955,
+                "Preco_Avista": 1896.35
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1955,
+                "Preco_Avista": 1896.35
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco_Parcelado": 1070,
+                "Preco_Avista": 1037.8999999999999
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco_Parcelado": 943,
+                "Preco_Avista": 914.7099999999999
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1415,
+                "Preco_Avista": 1372.55
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1415,
+                "Preco_Avista": 1372.55
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "14 Dias 3 Parques - Universal Orlando",
+                "Preco_Parcelado": 1289,
+                "Preco_Avista": 1250.33
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 2029,
+                "Preco_Avista": 1968.1299999999999
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1796,
+                "Preco_Avista": 1742.12
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 2029,
+                "Preco_Avista": 1968.1299999999999
+            },
+            {
+                "Data_viagem": "2024-04-28",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 2029,
+                "Preco_Avista": 1968.1299999999999
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco_Parcelado": 943,
+                "Preco_Avista": 914.7099999999999
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1289,
+                "Preco_Avista": 1250.33
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1289,
+                "Preco_Avista": 1250.33
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "14 Dias 3 Parques - Universal Orlando",
+                "Preco_Parcelado": 1258,
+                "Preco_Avista": 1220.26
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1796,
+                "Preco_Avista": 1742.12
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1807,
+                "Preco_Avista": 1752.79
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1796,
+                "Preco_Avista": 1742.12
+            },
+            {
+                "Data_viagem": "2024-05-16",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1796,
+                "Preco_Avista": 1742.12
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco_Parcelado": 912,
+                "Preco_Avista": 884.64
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco_Parcelado": 912,
+                "Preco_Avista": 884.64
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1258,
+                "Preco_Avista": 1220.26
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1258,
+                "Preco_Avista": 1220.26
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "14 Dias 3 Parques - Universal Orlando",
+                "Preco_Parcelado": 1321,
+                "Preco_Avista": 1281.37
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1807,
+                "Preco_Avista": 1752.79
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1875,
+                "Preco_Avista": 1818.75
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1807,
+                "Preco_Avista": 1752.79
+            },
+            {
+                "Data_viagem": "2024-07-16",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco_Parcelado": 1807,
+                "Preco_Avista": 1752.79
+            }
+        ]
+    }
+]
