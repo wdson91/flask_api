@@ -158,7 +158,7 @@ async def coletar_precos_voupra_disney(hour,array_datas):
         "Ingresso 2 Dias Disney - Adulto": "2 Dias - Disney World Basico",
         "Ingresso 3 Dias Disney - Adulto": "3 Dias - Disney World Basico",
         "Ingresso 4 Dias Disney - Adulto": "4 Dias - Disney World Basico",
-        "Ingresso 4 Dias Disney para 4 Parques Diferentes - Adulto": "4 Dias - Disney Promocional",
+        "Ingresso 4 Dias pelo Preço de 3 Dias (4 Parques Diferentes) - Adulto": "4 Dias - Disney Promocional",
         "Ingresso 5 Dias Disney - Adulto": "5 Dias - Disney World Basico"
     }
 
