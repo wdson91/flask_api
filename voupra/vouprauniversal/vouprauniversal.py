@@ -122,7 +122,7 @@ def extract_data_and_return_dataframe(array_datas, hour):
     df_data = pd.DataFrame(all_data)
     nome_arquivo = 'dados.json'
     
-    salvar_dados_margem(df_data, nome_arquivo, 'voupra')
+    salvar_dados_margem(df_data, nome_arquivo, 'voupra',hour)
 
 
 async def coletar_precos_voupra_universal(hour,array_datas):

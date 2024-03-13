@@ -39,6 +39,6 @@ async def seaworld_decolar(json_data, data_hora):
 
     nome_arquivo = f'seaworld_decolar_{datetime.now().strftime("%Y-%m-%d")}.json'
     
-    salvar_dados(formatted_data, nome_arquivo ,'decolar', '12:00')
+    salvar_dados(formatted_data, nome_arquivo ,'decolar', str(data_hora))
     
     return jsonify({"message": "Dados salvos com sucesso!"})
