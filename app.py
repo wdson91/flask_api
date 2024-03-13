@@ -1,16 +1,20 @@
 from imports import *
 from decolar_disney import disney_decolar
+from run import executar_ambos
 from sea import seaworld_decolar
 from universal_decolar import universal_decolar
 
 
 app = Flask(__name__)
+days_to_add = [5, 10, 20, 47, 65, 126]
+sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
+hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
 
 # Função para gerar as URLs com as datas desejadas
 def generate_urls(url):
     base_url =  url
     base_date = datetime.now()
-    days_to_add = [5, 10, 20, 47, 65, 126]
+    
 
     urls_with_dates = []
 
@@ -54,28 +58,34 @@ def hello():
 @app.route('/receive_json_universal', methods=['POST'])
 async def receive_json_universal():
     sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
-    data_hora = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
     data_list = request.json
-    await universal_decolar(data_list,data_hora)
+    await universal_decolar(data_list,hora_global)
 
     return jsonify({"message": "Dados salvos com sucesso!"})
 
 @app.route('/receive_json_disney', methods=['POST'])
 async def receive_json_disney():
     sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
-    data_hora = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
     data_list = request.json
-    await disney_decolar(data_list,data_hora)
+    await disney_decolar(data_list,hora_global)
 
     return jsonify({"message": "Dados salvos com sucesso!"})
 
 @app.route('/receive_json_seaworld', methods=['POST'])
 async def receive_json_seaworld():
-    sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
-    data_hora = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
     data_list = request.json
-    await seaworld_decolar(data_list,data_hora)
+    await seaworld_decolar(data_list,hora_global)
 
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+@app.route('/calibrar', methods=['GET'])
+async def calibrar():
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
+    await executar_ambos(hora_global,days_to_add)
     return jsonify({"message": "Dados salvos com sucesso!"})
 
 

@@ -8,6 +8,7 @@ services:
       - "4443:4443"
     networks:
       - grid
+
   selenium-node-chrome:
     container_name: selenium-node-chrome
     image: selenium/node-chrome:latest
@@ -18,13 +19,19 @@ services:
     shm_size: "4g"
     networks:
       - grid
+
   python_app:
     container_name: python_app
     build:
       context: .
       dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
     depends_on:
       - selenium-hub
+    networks:
+      - grid
+
 networks:
   grid:
     driver: bridge

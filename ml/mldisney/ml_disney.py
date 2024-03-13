@@ -14,8 +14,8 @@ def get_future_date(days):
 async def coletar_precos_ml_disney(hour,array_datas):
     logging.info("Iniciando a coleta de preços ML Disney")
     options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
+    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     
     dados = []
     wait = WebDriverWait(driver, 4)

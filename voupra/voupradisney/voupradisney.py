@@ -135,9 +135,9 @@ async def coletar_precos_voupra_disney(hour,array_datas):
     extract_data_and_return_dataframe(array_datas, hour)
     
     options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
-    #driver = webdriver.Chrome()
+    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
+    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    
 
     # Configuração de logs
     log_format = '%(asctime)s - %(levelname)s - %(message)s'

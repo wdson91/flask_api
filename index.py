@@ -22,7 +22,7 @@ async def executar_ambos(hour, array_datas):
 async def agendar_execucao():
     while True:
         current_time = datetime.now(pytz.timezone('America/Sao_Paulo'))  # Obtém a hora atual com o fuso horário de São Paulo
-        target_hours = ["07:00", "11:37", "14:00", "17:00"]  # Lista de horários-alvo para execução das tarefas
+        target_hours = ["07:00", "11:00", "14:00", "17:00"]  # Lista de horários-alvo para execução das tarefas
 
         # Itera sobre os horários-alvo
         for hour in target_hours:
