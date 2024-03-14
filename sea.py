@@ -11,12 +11,12 @@ async def seaworld_decolar(json_data, data_hora):
     days_to_add = [5, 10, 20, 47, 65, 126]
     # Converter o JSON para um DataFrame pandas
     df = pd.DataFrame(json_data)
-    hora_coleta = '07:00'
+    
     # Remover duplicatas nos nomes dos parques e, em seguida, aplicar o trim
     df['Parque'] = df['Parque'].str.strip()
     df['Parque'] = df['Parque'].map(mapping)
     df = df.dropna(subset=['Parque'])
-
+    hora= df['Hora_coleta'].iloc[0]
     # Obter a data atual
     data_atual = datetime.now().date()
 
@@ -36,9 +36,8 @@ async def seaworld_decolar(json_data, data_hora):
         df_temp = df_temp[['Data_viagem', 'Parque', 'Preco_Parcelado', 'Preco_Avista']]
         formatted_data.extend(df_temp.to_dict(orient='records'))
         
-
     nome_arquivo = f'seaworld_decolar_{datetime.now().strftime("%Y-%m-%d")}.json'
     
-    salvar_dados(formatted_data, nome_arquivo ,'decolar', str(data_hora))
+    salvar_dados_decolar(formatted_data, nome_arquivo ,'decolar', str(hora))
     
     return jsonify({"message": "Dados salvos com sucesso!"})

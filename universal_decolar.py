@@ -26,12 +26,12 @@ async def universal_decolar(data,data_hora):
         
     # Criar um DataFrame pandas a partir da lista de dados filtrados
     df = pd.DataFrame(filtered_data_list)
-    
+    hora = df['Hora_coleta'].iloc[0]
     df = df.sort_values(by=['Data_viagem', 'Parque'])
     df['Preco_Avista'] = df['Preco_Parcelado'] * 0.97 
     df = df[['Data_viagem', 'Parque', 'Preco_Parcelado', 'Preco_Avista']]
     # Converter o DataFrame de volta para uma lista de dicionários
-     
+
     # Agrupar os dados por data_viagem e converter em formato de lista
     grouped_data = df.groupby('Data_viagem').apply(lambda x: x.to_dict(orient='records')).reset_index(
         name='Dados')
@@ -40,8 +40,8 @@ async def universal_decolar(data,data_hora):
     formatted_data = []
     for index, row in grouped_data.iterrows():
         formatted_data.extend(row['Dados'])
-        
+    
     nome_arquivo = f'universal_decolar_{datetime.now().strftime("%Y-%m-%d")}.json'
-    salvar_dados(formatted_data, nome_arquivo ,'decolar',"12:00")
+    salvar_dados_decolar(formatted_data, nome_arquivo ,'decolar',str(hora))
 
     return jsonify({"message": "Dados salvos com sucesso!"})

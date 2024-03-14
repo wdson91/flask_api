@@ -13,15 +13,16 @@ def extract_data_and_return_dataframe(array_datas, hour):
 
     # Mapeamento dos nomes dos parques
     mapeamento_nomes = {
-        "1 Dia - Magic Kingdom Disney": "1 Dia - Disney Basico Magic Kingdom",
-        "1 Dia - Hollywood Studios Disney": "1 Dia - Disney Basico Hollywood Studios",
-        "1 Dia - Animal Kingdom Disney": "1 Dia - Disney Basico Animal Kingdom",
-        "1 Dia - Epcot Disney": "1 Dia - Disney Basico Epcot",
-        "2 Dias - Disney Básico": "2 Dias - Disney World Basico",
-        "3 DIAS DISNEY - ATÉ 10% OFF": "3 Dias - Disney World Basico",
-        "4 DIAS DISNEY - ATÉ 10% OFF": "4 Dias - Disney World Basico",
-        "SUPER PROMOÇÃO -  4 DIAS DISNEY ATÉ 25% OFF": "4 Dias - Disney Promocional",
-        "5 DIAS DISNEY - ATÉ 10% OFF": "5 Dias - Disney World Basico"
+        378149: "1 Dia - Disney Basico Magic Kingdom",
+        378155: "1 Dia - Disney Basico Hollywood Studios",
+        378158: "1 Dia - Disney Basico Animal Kingdom",
+        378152: "1 Dia - Disney Basico Epcot",
+        372961: "2 Dias - Disney World Basico",
+        372963: "3 Dias - Disney World Basico",
+        372965: "4 Dias - Disney World Basico",
+        379852: "4 Dias - Disney Promocional",
+        381001: "4 Dias - Disney Promocional com Aquatico e Esportes",
+        372967: "5 Dias - Disney World Basico"
     }
 
     for data in datas:
@@ -88,7 +89,7 @@ def extract_data_and_return_dataframe(array_datas, hour):
 
         # Itere sobre os produtos e adicione os dados ao conjunto
         for produto in produtos:
-            categoria_titulo = produto['CategoriaTitulo']
+            id = produto['Id']
             margem = produto['Margem']
             margem_categoria = produto['MargemCategoria']
             # Verificar se 'Margem' é um número válido
@@ -100,12 +101,12 @@ def extract_data_and_return_dataframe(array_datas, hour):
                 margem = '-'
                 margem_categoria = '-'
             # Verifique se o parque está no mapeamento
-            if categoria_titulo in mapeamento_nomes:
+            if id in mapeamento_nomes:
                 # Mapeie o nome do parque
-                categoria_titulo = mapeamento_nomes[categoria_titulo]
+                id = mapeamento_nomes[id]
 
                 # Adicione os dados ao conjunto
-                all_data_set.add((data_viagem, categoria_titulo, margem, margem_categoria))
+                all_data_set.add((data_viagem, id, margem, margem_categoria))
 
     # Feche o navegador
     driver.quit()
@@ -158,7 +159,8 @@ async def coletar_precos_voupra_disney(hour,array_datas):
         "Ingresso 2 Dias Disney - Adulto": "2 Dias - Disney World Basico",
         "Ingresso 3 Dias Disney - Adulto": "3 Dias - Disney World Basico",
         "Ingresso 4 Dias Disney - Adulto": "4 Dias - Disney World Basico",
-        "Ingresso 4 Dias pelo Preço de 3 Dias (4 Parques Diferentes) - Adulto": "4 Dias - Disney Promocional",
+        "Ingresso 4 Dias Disney para 4 Parques Diferentes - Adulto": "4 Dias - Disney Promocional",
+        "Super Combo 8 Dias de Experiências Disney - 4 Dias Parques Temáticos (1 Diferente por Dia) e 4 Dias Parques Aquáticos – Adulto":"4 Dias - Disney Promocional com Aquatico e Esportes",
         "Ingresso 5 Dias Disney - Adulto": "5 Dias - Disney World Basico"
     }
 

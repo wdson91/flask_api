@@ -21,9 +21,9 @@ def extract_data_and_return_dataframe(array_datas, hour):
 
     # Mapeamento dos nomes dos parques
     mapeamento_nomes = {
-        "1 Dia - SeaWorld Orlando": "1 Dia 1 Parque - SeaWorld Orlando",
-        "SUPER PROMOÇÃO – 3 DIAS SEAWORLD PARKS": "3 Dias 3 Parques - SeaWorld Orlando",
-        "14 Dias com 3 parques (Super Promoção)": "14 Dias 3 Parques - SeaWorld Orlando"
+        376028: "1 Dia 1 Parque - SeaWorld Orlando",
+        376030: "3 Dias 3 Parques - SeaWorld Orlando",
+        376032: "14 Dias 3 Parques - SeaWorld Orlando"
     }
 
     for data in datas:
@@ -90,7 +90,7 @@ def extract_data_and_return_dataframe(array_datas, hour):
 
         # Itere sobre os produtos e adicione os dados ao conjunto
         for produto in produtos:
-            categoria_titulo = produto['CategoriaTitulo']
+            id = produto['Id']
             margem = produto['Margem']
             margem_categoria = produto['MargemCategoria']
             # Verificar se 'Margem' é um número válido
@@ -102,12 +102,12 @@ def extract_data_and_return_dataframe(array_datas, hour):
                 margem = '-'
                 margem_categoria = '-'
             # Verifique se o parque está no mapeamento
-            if categoria_titulo in mapeamento_nomes:
+            if id in mapeamento_nomes:
                 # Mapeie o nome do parque
-                categoria_titulo = mapeamento_nomes[categoria_titulo]
+                id = mapeamento_nomes[id]
 
                 # Adicione os dados ao conjunto
-                all_data_set.add((data_viagem, categoria_titulo, margem, margem_categoria))
+                all_data_set.add((data_viagem, id, margem, margem_categoria))
 
     # Feche o navegador
     driver.quit()
@@ -154,8 +154,8 @@ async def coletar_precos_voupra_sea(hour,array_datas):
     # Mapeamento de nomes desejados
     mapeamento_nomes = {
         "Ingresso 1 Dia SeaWorld - Adulto ou Criança": "1 Dia 1 Parque - SeaWorld Orlando",
-        "Ingresso 3 Dias SeaWorld Parks com 3 Parques - Adulto ou Criança": "3 Dias 3 Parques - SeaWorld Orlando",
-        "Ingresso 14 Dias SeaWorld Parks com 3 Parques - Adulto ou Criança": "14 Dias 3 Parques - SeaWorld Orlando"
+        "Super Combo Até 60% OFF (Por Dia) – 3 Dias de Parques – Escolha entre: SeaWorld, Busch Gardens e Aquatica – Adulto ou Criança": "3 Dias 3 Parques - SeaWorld Orlando",
+        "Super Combo Até 90% OFF – 14 Dias de Parques + Estacionamento Grátis – Escolha entre: SeaWorld, Busch Gardens e Aquatica – Adulto ou Criança": "14 Dias 3 Parques - SeaWorld Orlando"
     }
 
     dados = []

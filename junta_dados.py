@@ -1,6 +1,6 @@
 from imports import *
 
-async def juntarjsons():
+async def juntarjsons(hour):
     # Lista de empresas e parques
     empresas = ['voupra', 'vmz', 'decolar', 'ml']
     parques = ['disney', 'universal', 'seaworld']
@@ -8,46 +8,60 @@ async def juntarjsons():
     # Obtém a data atual
     data_atual = datetime.now().strftime("%Y-%m-%d")
 
+    # Dicionário para armazenar os dados modificados
+    dados_modificados = {}
+
+    # Obtém o horário atual
+    hora_atual = datetime.now(pytz.timezone('America/Sao_Paulo'))
+
+    # Subtrai 20 minutos
+    nova_hora = hora_atual - timedelta(minutes=20)
+
+    # Formata a nova hora para o formato desejado (HH:MM)
+    nova_hora_formatada = nova_hora.strftime("%H:%M")
+    
     # Baixa os arquivos JSON dos diferentes parques e empresas
     for empresa in empresas:
         for parque in parques:
             baixar_blob_se_existir(f'{parque}_{empresa}_{data_atual}.json', empresa)
 
-    # Carrega os dados JSON baixados para cada empresa e parque
-    dados = {}
-    for empresa in empresas:
-        dados[empresa] = {}
-        for parque in parques:
-            dados[empresa][parque] = carregar_dados_json(f'{parque}_{empresa}_{data_atual}.json')
+            # Carrega os dados JSON baixados
+            dados = carregar_dados_json(f'{parque}_{empresa}_{data_atual}.json')
 
-    # Combina os dados de todas as empresas e parques
-    dados_combinados = {
-        empresa: {parque: dados[empresa][parque] for parque in parques} for empresa in empresas
-    }
+            # Modifica o último dado para a hora global
+            if dados:
+                dados[-1]['Hora_coleta'] = nova_hora_formatada
 
-    # Cria um DataFrame a partir dos dados combinados
-    df = pd.DataFrame(dados_combinados)
+                # Atualiza o dicionário de dados modificados
+                if empresa not in dados_modificados:
+                    dados_modificados[empresa] = {}
+                dados_modificados[empresa][parque] = dados
 
     # Nome do arquivo para salvar os dados
     nome_arquivo = f'dados_{datetime.now().strftime("%Y-%m-%d")}.json'
-
-    # Salva os dados no Blob Storage e também localmente como um arquivo JSON
-    salvar_dados_margem(df, nome_arquivo, 'dados')
-
-    # Salva o JSON localmente como um arquivo
+    
+    # Salva os dados modificados no Blob Storage e também localmente como um arquivo JSON
     with open(nome_arquivo, 'w') as f:
-        json.dump(dados_combinados, f)
+        json.dump(dados_modificados, f)
 
+    
+    df = pd.read_json(nome_arquivo)
+    df = pd.DataFrame(df)
+
+    salvar_dados_margem(df, nome_arquivo, 'dados',nova_hora_formatada)
+    
+    #Remova os arquivos JSON locais
     for empresa in empresas:
         for parque in parques:
             arquivo_json = f'{parque}_{empresa}_{data_atual}.json'
             if os.path.exists(arquivo_json):
                 os.remove(arquivo_json)
-
+    
     logging.info("Arquivos JSON locais excluídos.")
-    # Registra a finalização da coleta
-    logging.info("Coleta finalizada.")
 
 if __name__ == "__main__":
+    # Hora global
+    hour = datetime.now().strftime("%H:%M")
+    
     # Crie um loop de eventos e execute a função principal
-    asyncio.run(juntarjsons())
+    asyncio.run(juntarjsons(hour))

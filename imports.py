@@ -4,7 +4,6 @@ from flask import Flask, jsonify, request
 from datetime import datetime, timedelta
 import pandas as pd
 import pytz
-from salvardadosdecolar import salvar_dados
 import asyncio
 import os
 import sys
@@ -22,6 +21,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import logging
 from bs4 import BeautifulSoup
 import json
+from salvardadosdecolar import salvar_dados_decolar
 from salvardados import *
 from urllib.parse import urlparse, parse_qs
 import chromedriver_autoinstaller
@@ -49,6 +49,9 @@ from ml.mldisney.ml_disney import coletar_precos_ml_disney
 from ml.mlsea.mlsea import coletar_precos_ml_seaworld
 
 import os
+
+sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
+hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
 
 def get_directories():
     """

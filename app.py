@@ -5,10 +5,11 @@ from sea import seaworld_decolar
 from universal_decolar import universal_decolar
 
 
+
 app = Flask(__name__)
 days_to_add = [5, 10, 20, 47, 65, 126]
-sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
-hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+
+
 
 # Função para gerar as URLs com as datas desejadas
 def generate_urls(url):
@@ -52,7 +53,7 @@ def get_date():
 
 @app.route('/', methods=['GET'])
 def hello():
-    return "Hello, World!"
+    return  hora_global
 
 
 @app.route('/receive_json_universal', methods=['POST'])
@@ -60,6 +61,7 @@ async def receive_json_universal():
     sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
     
     data_list = request.json
+    
     await universal_decolar(data_list,hora_global)
 
     return jsonify({"message": "Dados salvos com sucesso!"})
@@ -77,6 +79,7 @@ async def receive_json_disney():
 async def receive_json_seaworld():
     
     data_list = request.json
+    
     await seaworld_decolar(data_list,hora_global)
 
     return jsonify({"message": "Dados salvos com sucesso!"})

@@ -26,7 +26,11 @@ async def main_ml(hour,array_datas,run_once=False):
             await coletar_precos_ml_universal(hour,array_datas)
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Universal: {e}")
-        
+            
+        try:
+            await juntarjsons(hour)
+        except Exception as e:
+            logging.error(f"Erro durante a junção dos arquivos: {e}")
         return 
 if __name__ == "__main__":
     # Crie um loop de eventos e execute a função principal

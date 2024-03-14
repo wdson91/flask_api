@@ -13,15 +13,17 @@ async def main_vmz(hour,array_datas,run_once=False):
             await coletar_precos_vmz_disneybasicos(array_datas,hour)
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")
+
         try: 
             await coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour)
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")
+            
         try:
-            # Execute as funções assíncronas em sequência
             await coletar_precos_vmz(hour,array_datas)
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")
+            
         try:
             await coletar_precos_vmz_seaworld(hour,array_datas)
         except Exception as e:
@@ -32,8 +34,7 @@ async def main_vmz(hour,array_datas,run_once=False):
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Universal: {e}")
 
-        # return
- 
+        return
 
 if __name__ == "__main__":
     # Crie um loop de eventos e execute a função principal

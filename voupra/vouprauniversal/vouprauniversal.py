@@ -13,11 +13,11 @@ def extract_data_and_return_dataframe(array_datas, hour):
 
     # Mapeamento dos nomes dos parques
     mapeamento_nomes = {
-        "1 DIA COM 1 PARQUE - ATÉ 10% OFF ": "1 Dia 1 Parque - Universal Orlando",
-        "1 DIA COM 2 PARQUES - ATÉ 10% OFF": "1 Dia 2 Parques - Universal Orlando",
-        "2 DIAS COM 2 PARQUES - ATÉ 10% OFF": "2 Dias 2 Parques - Universal Orlando",
-        "SUPER PROMOÇÃO - 4 DIAS UNIVERSAL ATÉ 10% OFF": "4 Dias 2 Parques - Universal Orlando",
-        "SUPER PROMOÇÃO - 14 DIAS UNIVERSAL ATÉ 10% OFF": "14 Dias 3 Parques - Universal Orlando"
+        369879: "1 Dia 1 Parque - Universal Orlando",
+        369881: "1 Dia 2 Parques - Universal Orlando",
+        361016: "2 Dias 2 Parques - Universal Orlando",
+        352939: "4 Dias 2 Parques - Universal Orlando",
+        361018: "14 Dias 3 Parques - Universal Orlando"
     }
 
     for data in datas:
@@ -84,9 +84,10 @@ def extract_data_and_return_dataframe(array_datas, hour):
 
         # Itere sobre os produtos e adicione os dados ao conjunto
         for produto in produtos:
-            categoria_titulo = produto['CategoriaTitulo']
+            Id = produto['Id']
             margem = produto['Margem']
             margem_categoria = produto['MargemCategoria']
+            
             # Verificar se 'Margem' é um número válido
             try:
                 # Tentar converter 'Margem' para float
@@ -96,12 +97,12 @@ def extract_data_and_return_dataframe(array_datas, hour):
                 margem = '-'
                 margem_categoria = '-'
             # Verifique se o parque está no mapeamento
-            if categoria_titulo in mapeamento_nomes:
+            if Id in mapeamento_nomes:
                 # Mapeie o nome do parque
-                categoria_titulo = mapeamento_nomes[categoria_titulo]
+                Id = mapeamento_nomes[Id]
 
                 # Adicione os dados ao conjunto
-                all_data_set.add((data_viagem, categoria_titulo, margem, margem_categoria))
+                all_data_set.add((data_viagem, Id, margem, margem_categoria))
 
     # Feche o navegador
     driver.quit()
@@ -144,8 +145,8 @@ async def coletar_precos_voupra_universal(hour,array_datas):
         "Ingresso 1 Dia Universal Orlando com 1 Parque – Adulto": "1 Dia 1 Parque - Universal Orlando",
         "Ingresso 1 Dia Universal Orlando com 2 Parques – Adulto": "1 Dia 2 Parques - Universal Orlando",
         "Ingresso 2 Dias Universal Orlando com 2 Parques – Adulto": "2 Dias 2 Parques - Universal Orlando",
-        "Ingresso 4 Dias Universal Orlando com 2 Parques - Adulto": "4 Dias 2 Parques - Universal Orlando",
-        "Ingresso 14 Dias Universal Orlando com Todos os Parques, Recomendado – Adulto": "14 Dias 3 Parques - Universal Orlando"
+        "Super Combo 4 Dias Universal até 60% OFF (POR DIA) – Livre Acesso ao Universal Studios e Islands of Adventure – Adulto": "4 Dias 2 Parques - Universal Orlando",
+        "Super Combo 14 Dias Universal até 90% OFF (POR DIA) – Livre Acesso ao Universal Studios, Islands of Adventure e Volcano Bay – Adulto": "14 Dias 3 Parques - Universal Orlando"
     }
 
     dados = []
@@ -172,8 +173,9 @@ async def coletar_precos_voupra_universal(hour,array_datas):
                 try:
                     # Extraindo o título do produto
                     titulo = produto.find_element(By.CLASS_NAME,"produto_titulo")
-                    titulo_texto = titulo.text
                     
+                    titulo_texto = titulo.text
+                    titulo_texto = titulo_texto.strip()
                     # Extraindo o preço do produto
                     preco = produto.find_element(By.CLASS_NAME,"produto_preco_padrao")
                     driver.execute_script("arguments[0].classList.remove('d-none');", preco)

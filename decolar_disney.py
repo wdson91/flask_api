@@ -1,6 +1,7 @@
 from imports import *
 
 
+
 async def disney_decolar(data,data_hora):
     data_list = data  # Recebe a lista de objetos JSON enviada na solicitação
 
@@ -29,7 +30,7 @@ async def disney_decolar(data,data_hora):
 
     # Criar um DataFrame pandas a partir da lista de dados filtrados
     df = pd.DataFrame(filtered_data_list)
-    
+    hora= df['Hora_coleta'].iloc[0]
     df = df.sort_values(by=['Data_viagem', 'Parque'])
     df['Preco_Avista'] = df['Preco_Parcelado'] * 0.97 
     df = df[['Data_viagem', 'Parque', 'Preco_Parcelado', 'Preco_Avista']]
@@ -45,6 +46,6 @@ async def disney_decolar(data,data_hora):
         formatted_data.extend(row['Dados'])
 
     nome_arquivo = f'disney_decolar_{datetime.now().strftime("%Y-%m-%d")}.json'
-    salvar_dados(formatted_data, nome_arquivo ,'decolar',"12:00")
+    salvar_dados_decolar(formatted_data, nome_arquivo ,'decolar',str(hora))
     
     return jsonify({"message": "Dados salvos com sucesso!"})

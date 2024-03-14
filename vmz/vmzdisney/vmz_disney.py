@@ -51,7 +51,8 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hour):
     ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/epcot?",  '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Basico Epcot'),
     ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/disney-ingresso-hollywood-studios-1dia?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Basico Hollywood Studios'),
     ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/disney-ingresso-animal-kingdom-1dia?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Basico Animal Kingdom'),
-    ("https://www.vmzviagens.com.br/ingressos/orlando/promocao-disney-world-4-park-magic/promocao-disney-world-4-park-magic?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[3]/div[1]/span[1]', '4 Dias - Disney Promocional')
+    ("https://www.vmzviagens.com.br/ingressos/orlando/promocao-disney-world-4-park-magic/promocao-disney-world-4-park-magic?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[3]/div[1]/span[1]', '4 Dias - Disney Promocional'),
+    ("https://www.vmzviagens.com.br/ingressos/orlando/promocao-disney-world-4-park-magic/4-park-magic-com-parque-aquatico-e-esportes?",'//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[3]/div[2]/span[1]',"4 Dias - Disney Promocional com Aquatico e Esportes")
     # Adicione outros sites, XPaths e nomes de parques conforme necessario
 ]
 
@@ -79,7 +80,7 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hour):
                 price_text = preco_texto.text
                 price_decimal = float(price_text.replace('R$', '').replace('.', '').replace(',', '.').strip())
                 new_price = round(price_decimal , 2)
-                preco_parcelado = round(price_decimal * 1.10, 2)
+                preco_parcelado = round(price_decimal * 1.08, 2)
             except NoSuchElementException:
                 # Se o elemento não for encontrado, atribua um traço "-" ao valor
                 new_price = "-"
@@ -130,7 +131,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour):
     def mudar_mes_ano(driver, mes, ano):
         try:
             # Espera até que o seletor do ano esteja clicável
-            year_select = WebDriverWait(driver, waiter + 10).until(EC.element_to_be_clickable((By.ID, "year-control")))
+            year_select = WebDriverWait(driver, waiter + 20).until(EC.element_to_be_clickable((By.ID, "year-control")))
             
             # Lê o ano atual selecionado
             ano_atual = year_select.get_attribute("value")
@@ -173,7 +174,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour):
                     calendar_event_price = elemento.find_element(By.CLASS_NAME, 'calendar-event-price')
                     price_text = calendar_event_price.text.strip()
                     preco_avista = float(price_text.replace('R$', '').replace('.', '').replace(',', '.').strip())
-                    preco_parcelado = round(preco_avista * 1.10, 2)
+                    preco_parcelado = round(preco_avista * 1.08,2)
                     
                     return preco_avista, preco_parcelado
         except Exception as e:

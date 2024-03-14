@@ -4,7 +4,7 @@ from datetime import datetime
 import pytz
 import pandas as pd
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
-
+from imports import *
 # Substitua pelos seus detalhes de conexão
 connect_str = "DefaultEndpointsProtocol=https;AccountName=sdarq;AccountKey=1WFQXUd7f2vQwRLa2EZod7EtrtyE7HmlKZwBWfby5EuAPy2TvFgM/XSfyG5SzqxIQriIYLpqgMNrEANpCIP0cA==;EndpointSuffix=core.windows.net"
 #container_name = f'imagens/Automacao_python/{pasta}'
@@ -50,8 +50,8 @@ def salvar_dados(df, nome_arquivo_json, pasta,hour):
     data_hora_coleta = hour
     
     
-    #novos_dados = df.to_dict(orient='records')
-    novo_registro = {'Hora_coleta': data_hora_coleta, 'Dados': df}
+    novos_dados = df.to_dict(orient='records')
+    novo_registro = {'Hora_coleta': hour, 'Dados': novos_dados}
 
     # Baixar o arquivo JSON do Azure Blob Storage se ele existir
     baixar_blob_se_existir(nome_arquivo_json, pasta)
@@ -66,14 +66,12 @@ def salvar_dados(df, nome_arquivo_json, pasta,hour):
     with open(nome_arquivo_json, 'w') as file:
         json.dump(dados_exist, file, indent=4)
         
-    
-    
     # Fazer upload do arquivo atualizado para o Azure Blob Storage
     upload_blob(nome_arquivo_json, nome_arquivo_json, pasta)
 
 def salvar_dados_margem(df, nome_arquivo_json, pasta, hour):
     # Converter o DataFrame para JSON
-    json_data = df.to_json(orient='records')
+    json_data = df.to_json()
 
     # Inicializar o cliente do serviço de Blob
     blob_service_client = BlobServiceClient.from_connection_string(connect_str)
