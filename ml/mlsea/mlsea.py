@@ -18,8 +18,8 @@ async def coletar_precos_ml_seaworld(hour, array_datas):
     options = webdriver.ChromeOptions()
     
     # WebDriver remoto
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
+    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     dados = []
     wait = WebDriverWait(driver, 5)
     logging.info("Iniciando a coleta de preços ML SeaWorld")

@@ -3,7 +3,7 @@ from decolar_disney import disney_decolar
 from run import executar_ambos
 from sea import seaworld_decolar
 from universal_decolar import universal_decolar
-
+import pyautogui
 
 
 app = Flask(__name__)
@@ -87,7 +87,8 @@ async def receive_json_seaworld():
 @app.route('/calibrar', methods=['GET'])
 async def calibrar():
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
-    
+    time.sleep(3)
+    pyautogui.hotkey('ctrl', '1')
     await executar_ambos(hora_global,days_to_add)
     return jsonify({"message": "Dados salvos com sucesso!"})
 

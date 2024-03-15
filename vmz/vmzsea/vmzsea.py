@@ -18,8 +18,8 @@ async def coletar_precos_vmz_seaworld(hour,array_datas):
 
     # Configuração inicial do Selenium
     options = webdriver.ChromeOptions()
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
+    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
 
     # Definindo as datas
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]

@@ -14,8 +14,8 @@ def extract_data_and_return_dataframe(array_datas, hour):
 
     # Inicialize o driver do Selenium (certifique-se de ter o WebDriver correspondente instalado)
     options = webdriver.ChromeOptions()
-    #driver = webdriver.Chrome(options=options)
-    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
+    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     # Lista para armazenar os dados dos produtos
     all_data_set = set()  # Usando um conjunto para armazenar dados únicos
 
@@ -137,8 +137,8 @@ async def coletar_precos_voupra_sea(hour,array_datas):
     extract_data_and_return_dataframe(array_datas, hour)
     
     options = webdriver.ChromeOptions()
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
+    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     #driver = webdriver.Chrome()
 
     # Configuração de logs
