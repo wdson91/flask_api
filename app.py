@@ -4,7 +4,7 @@ from run import executar_ambos
 from sea import seaworld_decolar
 from universal_decolar import universal_decolar
 import pyautogui
-
+from pynput.keyboard import Key, Controller
 
 app = Flask(__name__)
 days_to_add = [5, 10, 20, 47, 65, 126]
@@ -33,14 +33,14 @@ def generate_urls(url):
 # Rota GET para retornar as URLs com as datas desejadas
 @app.route('/urls_disney', methods=['GET'])
 def get_urls_disney():
-    urls = generate_urls("https://www.decolar.com/atracoes-turisticas/d-DY_ORL/ingressos+para+walt+disney+world+resort-orlando?from=2024-03-08&to=2025-03-08&destination=ORL&distribution=1&fixedDate={date}&modalityId=ANNUAL-2D-2024")
+    urls = generate_urls("https://www.decolar.com/atracoes-turisticas/d-DY_ORL/ingressos+para+walt+disney+world+resort-orlando?clickedPrice=702&priceDate=1710530966837&clickedCurrency=BRL&distribution=1&fixedDate={date}")
     
     return jsonify(urls)
 
 @app.route('/urls_universal', methods=['GET'])
 def get_urls_universal():
     
-    urls = generate_urls("https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?distribution=1&modalityId=ORL_2P1DPTP-date&fixedDate={date}")
+    urls = generate_urls("https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?distribution=1-date&fixedDate={date}")
     
     return jsonify(urls)
 
@@ -86,11 +86,31 @@ async def receive_json_seaworld():
 
 @app.route('/calibrar', methods=['GET'])
 async def calibrar():
+    
+    global calibragem
+    global hora_global
+    global tipo_calibragem
+    
+    calibragem = 1
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    tipo_calibragem = 'manual'
+    
     time.sleep(3)
-    pyautogui.hotkey('ctrl', '1')
+    pyautogui.hotkey('ctrl', '2')
     await executar_ambos(hora_global,days_to_add)
     return jsonify({"message": "Dados salvos com sucesso!"})
+
+@app.route('/status_calibragem', methods=['GET'])
+async def status_calibragem():
+    
+    global calibragem
+    global hora_global
+    global tipo_calibragem
+    
+    
+    return jsonify({"Porcentagem": calibragem,
+                    "Hora_inicio": hora_global,
+                    "Tipo": tipo_calibragem})
 
 
 if __name__ == '__main__':
