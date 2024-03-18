@@ -139,6 +139,19 @@ def set_calibragem():
     else:
         return jsonify({'error': 'Falta o parâmetro "novo_valor" no corpo da solicitação'}), 400
 
+@app.route('/abortar_calibracao', methods=['POST'])
+def abortar_calibragem():
+    global calibrating
+    
+    # Se a calibragem não estiver em andamento, retorne uma mensagem de erro
+    if not calibrating:
+        return jsonify({"error": "Não há calibragem em andamento para ser abortada"}), 400
+    
+    # Define a variável de controle como False para abortar a calibragem
+    calibrating = False
+    
+    # Reinicia a aplicação
+    os.execl(sys.executable, sys.executable, *sys.argv)
 if __name__ == '__main__':
     
     app.run(debug=True, host='0.0.0.0',port=5000)
