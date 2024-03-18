@@ -1,12 +1,8 @@
-import time
-import json
-import pandas as pd
-from bs4 import BeautifulSoup
-from selenium import webdriver
-from urllib.parse import urlparse, parse_qs
-from datetime import datetime, timedelta
+
 from imports import *
 
+
+from atualizar_calibragem import atualizar_calibragem
 
 
 async def coletar_precos_voupra_sea(hour,array_datas):
@@ -139,8 +135,9 @@ async def coletar_precos_voupra_sea(hour,array_datas):
 
     nome_arquivo = f'seaworld_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
     salvar_dados(df, nome_arquivo, 'voupra', hour)
-
-    logging.info("Coleta de preços finalizada.")
+    
+    atualizar_calibragem(20)
+    logging.info("Coleta de preços Voupra Seaworld  finalizada.")
 
 
 # async def coletar_precos_voupra_sea(hour,array_datas):

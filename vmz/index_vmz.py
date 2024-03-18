@@ -14,31 +14,31 @@ async def main_vmz(hour,array_datas,run_once=False):
         logging.info("Iniciando coleta de preços.")
         try:
             await coletar_precos_vmz_disneybasicos(array_datas,hour)
-            calibragem = 45
+            
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")
 
         try: 
             await coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour)
-            calibragem = 55
+            
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")
             
         try:
             await coletar_precos_vmz(hour,array_datas)
-            calibragem = 65
+            
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")
             
         try:
             await coletar_precos_vmz_seaworld(hour,array_datas)
-            calibragem = 75
+            
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços do SeaWorld: {e}")
 
         try:
             await coletar_precos_vmz_universal(hour,array_datas)
-            calibragem = 85
+            
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Universal: {e}")
 

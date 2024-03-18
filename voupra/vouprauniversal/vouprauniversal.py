@@ -1,5 +1,7 @@
 from imports import *
 
+from atualizar_calibragem import atualizar_calibragem
+        
 async def coletar_precos_voupra_universal(hour,array_datas):
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
@@ -137,7 +139,7 @@ async def coletar_precos_voupra_universal(hour,array_datas):
     nome_arquivo = f'universal_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
     
     salvar_dados(df, nome_arquivo,'voupra',hour)
-
+    atualizar_calibragem(15)
 # async def coletar_precos_voupra_universal(hour,array_datas):
     
     

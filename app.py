@@ -33,9 +33,10 @@ def generate_urls(url):
 # Rota GET para retornar as URLs com as datas desejadas
 @app.route('/urls_disney', methods=['GET'])
 def get_urls_disney():
-    urls = generate_urls("https://www.decolar.com/atracoes-turisticas/d-DY_ORL/ingressos+para+walt+disney+world+resort-orlando?clickedPrice=702&priceDate=1710530966837&clickedCurrency=BRL&distribution=1&fixedDate={date}")
+    urls = generate_urls("https://www.decolar.com/atracoes-turisticas/d-DY_ORL/ingressos+para+walt+disney+world+resort-orlando?clickedPrice=702&priceDate=1710530966837&clickedCurrency=BRL&distribution=1&modalityId=ANNUAL-2D-2024&fixedDate={date}")
     
     return jsonify(urls)
+
 
 @app.route('/urls_universal', methods=['GET'])
 def get_urls_universal():
@@ -107,11 +108,24 @@ async def status_calibragem():
     global hora_global
     global tipo_calibragem
     
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     
     return jsonify({"Porcentagem": calibragem,
                     "Hora_inicio": hora_global,
-                    "Tipo": tipo_calibragem})
+                    "Tipo": tipo_calibragem,
+                    "Data": data_atual})
 
+
+@app.route('/calibragem', methods=['POST'])
+def set_calibragem():
+    global calibragem
+    
+    novo_valor = request.json.get('novo_valor')
+    if novo_valor is not None:
+        calibragem = novo_valor
+        return jsonify({'message': 'Calibragem atualizada com sucesso', 'novo_valor': calibragem})
+    else:
+        return jsonify({'error': 'Falta o parâmetro "novo_valor" no corpo da solicitação'}), 400
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0',port=5000)

@@ -1,6 +1,9 @@
+from atualizar_calibragem import atualizar_calibragem
 from imports import *
 
-def coletar_precos_voupra_disney(array_datas, hour):
+
+async def coletar_precos_voupra_disney( hour,array_datas,):
+
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
     # Initialize the Selenium driver (make sure to have the corresponding WebDriver installed)
@@ -139,8 +142,11 @@ def coletar_precos_voupra_disney(array_datas, hour):
 
     nome_arquivo = f'disney_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
     salvar_dados(df, nome_arquivo, 'voupra', hour)
-
-    logging.info("Coleta de preços finalizada.")
+    
+    # Define o novo valor para calibragem
+    atualizar_calibragem(10)
+    
+    logging.info("Coleta de preços Voupra Disney finalizada.")
 
 # async def coletar_precos_voupra_disney(hour,array_datas):
 #     # Configuração do Selenium

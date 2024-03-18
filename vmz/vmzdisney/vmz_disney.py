@@ -1,10 +1,11 @@
+from atualizar_calibragem import atualizar_calibragem
 from imports import *
 
+        
 
 async def coletar_precos_vmz(hour,array_datas):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-  
-   # Defina sua lógica para baixar os arquivos e esperar por eles
+    # Defina sua lógica para baixar os arquivos e esperar por eles
     baixar_blob_se_existir('disney_vmz_basicos_parcial.json', 'vmz')
     baixar_blob_se_existir('disney_vmz_dias_parcial.json', 'vmz')
     
@@ -29,7 +30,7 @@ async def coletar_precos_vmz(hour,array_datas):
     
     
     logging.info("Coleta finalizada.")
-
+    atualizar_calibragem(65)
     return 
 
 
@@ -100,6 +101,8 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hour):
     df = pd.DataFrame(dados)
     salvar_dados(df, 'disney_vmz_basicos_parcial.json','vmz',hour)
     driver.quit()
+    
+    atualizar_calibragem(40)
     return
 
 async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour):
@@ -229,6 +232,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour):
     df = pd.DataFrame(resultados)
     salvar_dados(df, 'disney_vmz_dias_parcial.json','vmz',hour)
     driver.quit()
+    atualizar_calibragem(60)
     return
 
 

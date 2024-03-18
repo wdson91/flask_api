@@ -1,5 +1,6 @@
 from imports import *
 
+from atualizar_calibragem import atualizar_calibragem
 async def coletar_precos_vmz_universal(hour, array_datas):
     logging.info("Iniciando coleta de preços da Universal Orlando.")
     
@@ -75,7 +76,7 @@ def extrair_precos(driver):
         preco_final_avista = float(preco_avista_element.text.replace('R$ ', '').replace('.','').replace(',', '.'))
         preco_parcelado = preco_parcelado_element.text.replace('R$ ', '').replace(',', '.')
         preco_float = float(preco_parcelado) * 10
-
+    atualizar_calibragem(75)
     return preco_float, preco_final_avista
 
 

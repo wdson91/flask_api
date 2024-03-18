@@ -1,5 +1,6 @@
 from imports import *
 arquivos = os.listdir()
+from atualizar_calibragem import atualizar_calibragem
 
 async def juntarjsons(hour):
     # Lista de empresas e parques
@@ -19,8 +20,8 @@ async def juntarjsons(hour):
     nova_hora = hora_atual - timedelta(minutes=25)
 
     # Formata a nova hora para o formato desejado (HH:MM)
-    nova_hora_formatada = nova_hora.strftime("%H:%M")
-    
+    #nova_hora_formatada = nova_hora.strftime("%H:%M")
+    nova_hora_formatada = hour
     # Baixa os arquivos JSON dos diferentes parques e empresas
     for empresa in empresas:
         for parque in parques:
@@ -55,9 +56,10 @@ async def juntarjsons(hour):
     for arquivo in arquivos:
         if arquivo.endswith('.json'):
             os.remove(arquivo)
-        
+    
+    
     logging.info("Arquivos JSON locais excluídos.")
-
+    atualizar_calibragem(100)
 if __name__ == "__main__":
     # Hora global
     hour = datetime.now().strftime("%H:%M")
