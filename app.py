@@ -7,6 +7,11 @@ import pyautogui
 from pynput.keyboard import Key, Controller
 
 app = Flask(__name__)
+cors = CORS(app, resource={
+    r"/*":{
+        "origins":"*"
+    }
+})
 days_to_add = [5, 10, 20, 47, 65, 126]
 
 
@@ -98,7 +103,7 @@ async def calibrar():
     tipo_calibragem = tipo
     
     time.sleep(3)
-    #pyautogui.hotkey('ctrl', '2')
+    pyautogui.hotkey('ctrl', '2')
     await executar_ambos(hora_global, days_to_add)
     
     return jsonify({"message": "Dados salvos com sucesso!"})

@@ -21,6 +21,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 import logging
 import schedule
+from flask_cors import CORS
 from bs4 import BeautifulSoup
 import json
 from threading import Thread
