@@ -1,5 +1,6 @@
 import asyncio
 from datetime import datetime, timedelta
+import pyautogui
 import pytz
 import logging
 
@@ -12,6 +13,7 @@ array_datas =  [5, 10, 20, 47, 65, 126]
 # Define uma função assíncrona para executar as tarefas 'main_voupra', 'main_vmz' e 'main_ml' ao mesmo tempo
 async def executar_ambos(hour, array_datas):
     await asyncio.gather(
+        pyautogui.hotkey('ctrl', '2'),
         main_voupra(hour, array_datas, run_once=True),  # Executa a função main_voupra com o argumento hour
         main_vmz(hour, array_datas, run_once=True),     # Executa a função main_vmz com o argumento hour
         main_ml(hour, array_datas, run_once=True)        # Executa a função main_ml com o argumento hour
@@ -22,16 +24,16 @@ async def executar_ambos(hour, array_datas):
 async def agendar_execucao():
     while True:
         current_time = datetime.now(pytz.timezone('America/Sao_Paulo'))  # Obtém a hora atual com o fuso horário de São Paulo
-        target_hours = ["07:00", "11:00", "14:00", "17:00"]  # Lista de horários-alvo para execução das tarefas
+        target_hours = ["07:00", "11:00", "12:36", "17:00"]  # Lista de horários-alvo para execução das tarefas
 
         # Itera sobre os horários-alvo
         for hour in target_hours:
             target_time = datetime.strptime(hour, "%H:%M")  # Converte a string de hora para um objeto datetime
-            target_time -= timedelta(minutes=30)  # Subtrai 30 minutos do horário-alvo
+            #target_time -= timedelta(minutes=30)  # Subtrai 30 minutos do horário-alvo
 
             # Verifica se a hora atual corresponde a meia hora antes do horário-alvo
             if current_time.hour == target_time.hour and current_time.minute == target_time.minute:
-                await executar_ambos('11:00', array_datas)  # Executa as tarefas definidas na função 'executar_ambos'
+                await executar_ambos(hour, array_datas)  # Executa as tarefas definidas na função 'executar_ambos'
 
         # Aguarda 60 segundos antes de verificar novamente os horários
         await asyncio.sleep(60)

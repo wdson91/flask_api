@@ -1,8 +1,8 @@
 from imports import *
-from decolar_disney import disney_decolar
+from decolar.decolar_disney import disney_decolar
 from run import executar_ambos
-from sea import seaworld_decolar
-from universal_decolar import universal_decolar
+from decolar.sea import seaworld_decolar
+from decolar.universal_decolar import universal_decolar
 import pyautogui
 from pynput.keyboard import Key, Controller
 
@@ -87,20 +87,21 @@ async def receive_json_seaworld():
 
 @app.route('/calibrar', methods=['GET'])
 async def calibrar():
-    
     global calibragem
     global hora_global
     global tipo_calibragem
     
+    tipo = request.args.get('tipo', 'automatica')  # Obter o parâmetro tipo da URL, padrão é 'manual'
+
     calibragem = 1
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
-    tipo_calibragem = 'manual'
+    tipo_calibragem = tipo
     
     time.sleep(3)
-    pyautogui.hotkey('ctrl', '2')
-    await executar_ambos(hora_global,days_to_add)
+    #pyautogui.hotkey('ctrl', '2')
+    await executar_ambos(hora_global, days_to_add)
+    
     return jsonify({"message": "Dados salvos com sucesso!"})
-
 @app.route('/status_calibragem', methods=['GET'])
 async def status_calibragem():
     
@@ -128,4 +129,5 @@ def set_calibragem():
         return jsonify({'error': 'Falta o parâmetro "novo_valor" no corpo da solicitação'}), 400
 
 if __name__ == '__main__':
+    
     app.run(debug=True, host='0.0.0.0',port=5000)

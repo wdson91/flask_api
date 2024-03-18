@@ -20,9 +20,11 @@ from selenium.common.exceptions import ElementClickInterceptedException, Timeout
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 import logging
+import schedule
 from bs4 import BeautifulSoup
 import json
-from salvardadosdecolar import salvar_dados_decolar
+from threading import Thread
+from decolar.salvardadosdecolar import salvar_dados_decolar
 from salvardados import *
 from urllib.parse import urlparse, parse_qs
 import chromedriver_autoinstaller

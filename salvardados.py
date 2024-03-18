@@ -48,8 +48,6 @@ def carregar_dados_json(nome_arquivo):
 def salvar_dados(df, nome_arquivo_json, pasta,hour):
     fuso_horario = pytz.timezone('America/Sao_Paulo')
     data_hora_coleta = hour
-    
-    
     novos_dados = df.to_dict(orient='records')
     novo_registro = {'Hora_coleta': hour, 'Dados': novos_dados}
 
