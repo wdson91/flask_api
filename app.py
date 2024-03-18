@@ -13,7 +13,7 @@ cors = CORS(app, resource={
     }
 })
 days_to_add = [5, 10, 20, 47, 65, 126]
-
+calibrating = False
 
 
 # Função para gerar as URLs com as datas desejadas
@@ -87,17 +87,23 @@ async def receive_json_seaworld():
     data_list = request.json
     
     await seaworld_decolar(data_list,hora_global)
-
     return jsonify({"message": "Dados salvos com sucesso!"})
 
 @app.route('/calibrar', methods=['GET'])
 async def calibrar():
+    
     global calibragem
     global hora_global
     global tipo_calibragem
+    global calibrating
+    
+    # Se a calibragem já estiver em andamento, retorne uma mensagem de erro
+    if calibrating:
+        return jsonify({"error": "Calibragem já em andamento"}), 400
     
     tipo = request.args.get('tipo', 'automatica')  # Obter o parâmetro tipo da URL, padrão é 'manual'
 
+    calibrating = True
     calibragem = 1
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     tipo_calibragem = tipo
