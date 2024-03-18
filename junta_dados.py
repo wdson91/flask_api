@@ -1,4 +1,5 @@
 from imports import *
+arquivos = os.listdir()
 
 async def juntarjsons(hour):
     # Lista de empresas e parques
@@ -15,7 +16,7 @@ async def juntarjsons(hour):
     hora_atual = datetime.now(pytz.timezone('America/Sao_Paulo'))
 
     # Subtrai 20 minutos
-    nova_hora = hora_atual - timedelta(minutes=20)
+    nova_hora = hora_atual - timedelta(minutes=25)
 
     # Formata a nova hora para o formato desejado (HH:MM)
     nova_hora_formatada = nova_hora.strftime("%H:%M")
@@ -51,12 +52,10 @@ async def juntarjsons(hour):
     salvar_dados_margem(df, nome_arquivo, 'dados',nova_hora_formatada)
     
     #Remova os arquivos JSON locais
-    for empresa in empresas:
-        for parque in parques:
-            arquivo_json = f'{parque}_{empresa}_{data_atual}.json'
-            if os.path.exists(arquivo_json):
-                os.remove(arquivo_json)
-    
+    for arquivo in arquivos:
+        if arquivo.endswith('.json'):
+            os.remove(arquivo)
+        
     logging.info("Arquivos JSON locais excluídos.")
 
 if __name__ == "__main__":
