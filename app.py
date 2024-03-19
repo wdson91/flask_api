@@ -179,7 +179,7 @@ def mudar_horarios(horario):
     if horario == '07:00':
         horarios = []
     
-    horario.append(horario)
+    horarios.append(horario)
     
 
 
