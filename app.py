@@ -135,7 +135,7 @@ async def status_calibragem():
                     "Hora_inicio": hora_global,
                     "Tipo": tipo_calibragem,
                     "Data": data_atual,
-                    "horarios":horarios})
+                    "Horarios":horarios})
 
 
 @app.route('/calibragem', methods=['POST'])
@@ -180,7 +180,6 @@ def mudar_horarios(horario):
         horarios = []
     
     horarios.append(horario)
-    
 
 
 if __name__ == '__main__':
