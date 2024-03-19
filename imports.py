@@ -73,5 +73,5 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
 calibragem = 0
 tipo_calibragem = 'automatica'
-
+horarios = []
 

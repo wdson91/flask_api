@@ -16,8 +16,8 @@ cors = CORS(app, resource={
 days_to_add = [5, 10, 20, 47, 65, 126]
 calibrating = False
 
-global horarios
-horarios = []
+
+
 
 # Função para gerar as URLs com as datas desejadas
 def generate_urls(url):
@@ -131,7 +131,7 @@ async def status_calibragem():
     global calibragem
     global hora_global
     global tipo_calibragem
-    
+    global horarios
     
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     
