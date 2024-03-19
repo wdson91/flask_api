@@ -101,7 +101,7 @@ async def calibrar():
     global hora_global
     global tipo_calibragem
     global calibrating
-    
+    global horarios 
     # Se a calibragem já estiver em andamento, retorne uma mensagem de erro
     if calibrating:
         return jsonify({"error": "Calibragem já em andamento"}), 400
@@ -120,6 +120,8 @@ async def calibrar():
     await executar_ambos(hora_global, days_to_add)
     
     return jsonify({"message": "Dados salvos com sucesso!"})
+
+
 @app.route('/status_calibragem', methods=['GET'])
 async def status_calibragem():
     
@@ -132,7 +134,8 @@ async def status_calibragem():
     return jsonify({"Porcentagem": calibragem,
                     "Hora_inicio": hora_global,
                     "Tipo": tipo_calibragem,
-                    "Data": data_atual})
+                    "Data": data_atual,
+                    "horarios":horarios})
 
 
 @app.route('/calibragem', methods=['POST'])
@@ -170,6 +173,14 @@ def finalizar_calibragem():
     # hora_global = None
     # tipo_calibragem = None
 
+def mudar_horarios(horario):
+    global horarios
+    
+    if horario == '07:00':
+        horarios = []
+    
+    horario.append(horario)
+    
 
 
 if __name__ == '__main__':

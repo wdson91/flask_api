@@ -1,4 +1,4 @@
-from app import finalizar_calibragem
+from app import finalizar_calibragem, mudar_horarios
 from imports import *
 from salvardados import baixar_blob_se_existir
 arquivos = os.listdir()
@@ -60,8 +60,11 @@ async def juntarjsons(hour):
         if arquivo.endswith('.json'):
             os.remove(arquivo)
     
+    if hour == "07:00" or "11:00" or "14:00" or "17:00":
+        mudar_horarios(hour)
     
     logging.info("Arquivos JSON locais excluídos.")
+    
     atualizar_calibragem(100)
     finalizar_calibragem()
 if __name__ == "__main__":
