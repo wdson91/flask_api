@@ -15,7 +15,9 @@ cors = CORS(app, resource={
 })
 days_to_add = [5, 10, 20, 47, 65, 126]
 calibrating = False
+
 global horarios
+horarios = []
 
 # Função para gerar as URLs com as datas desejadas
 def generate_urls(url):
@@ -101,7 +103,8 @@ async def calibrar():
     global hora_global
     global tipo_calibragem
     global calibrating
-    global horarios 
+    global horarios
+    
     # Se a calibragem já estiver em andamento, retorne uma mensagem de erro
     if calibrating:
         return jsonify({"error": "Calibragem já em andamento"}), 400
@@ -128,14 +131,15 @@ async def status_calibragem():
     global calibragem
     global hora_global
     global tipo_calibragem
-    global horarios
+    
+    
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     
     return jsonify({"Porcentagem": calibragem,
                     "Hora_inicio": hora_global,
                     "Tipo": tipo_calibragem,
                     "Data": data_atual,
-                    "Horarios":horarios})
+                    "Horarios": horarios})
 
 
 @app.route('/calibragem', methods=['POST'])
