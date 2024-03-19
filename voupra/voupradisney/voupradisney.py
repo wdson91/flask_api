@@ -23,7 +23,7 @@ async def coletar_precos_voupra_disney( hour,array_datas,):
         372961: "2 Dias - Disney World Basico",
         372963: "3 Dias - Disney World Basico",
         372965: "4 Dias - Disney World Basico",
-        379852: "4 Dias - Disney Promocional",
+        379851: "4 Dias - Disney Promocional",
         381001: "4 Dias - Disney Promocional com Aquatico e Esportes",
         372967: "5 Dias - Disney World Basico"
     }

@@ -17,7 +17,7 @@ days_to_add = [5, 10, 20, 47, 65, 126]
 calibrating = False
 
 
-
+horarios = []
 
 # Função para gerar as URLs com as datas desejadas
 def generate_urls(url):
