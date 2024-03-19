@@ -39,9 +39,8 @@ from voupra.vouprasea.vouprasea import coletar_precos_voupra_sea
 from voupra.vouprauniversal.vouprauniversal import coletar_precos_voupra_universal
 from selenium.webdriver.chrome.options import Options
 from urllib.parse import urlparse, parse_qs
-from ml.index_ml import main_ml
-from voupra.index_voupra import main_voupra # Importando a função main do primeiro script
-from vmz.index_vmz import main_vmz # Importando a função do segundo script
+
+from run import executar_ambos
 
 from vmz.vmzdisney.vmz_disney import coletar_precos_vmz
 from vmz.vmzsea.vmzsea import coletar_precos_vmz_seaworld

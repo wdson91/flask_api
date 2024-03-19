@@ -1,10 +1,11 @@
 from imports import *
 from decolar.decolar_disney import disney_decolar
-from run import executar_ambos
+
 from decolar.sea import seaworld_decolar
 from decolar.universal_decolar import universal_decolar
 import pyautogui
 from pynput.keyboard import Key, Controller
+
 
 app = Flask(__name__)
 cors = CORS(app, resource={
@@ -141,7 +142,7 @@ def set_calibragem():
     else:
         return jsonify({'error': 'Falta o parâmetro "novo_valor" no corpo da solicitação'}), 400
 
-@app.route('/abortar_calibracao', methods=['POST'])
+@app.route('/abortar_calibracao', methods=['GET'])
 def abortar_calibragem():
     global calibrating
     

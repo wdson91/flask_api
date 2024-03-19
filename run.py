@@ -1,5 +1,8 @@
 # Importando os módulos necessários
-from imports import *  # Importa os módulos necessários, incluindo funções definidas em 'imports'
+from imports import *
+from ml.index_ml import main_ml
+from vmz.index_vmz import main_vmz
+from voupra.index_voupra import main_voupra  # Importa os módulos necessários, incluindo funções definidas em 'imports'
 
 array_datas =  [5,10,20,47,65,126]
 
