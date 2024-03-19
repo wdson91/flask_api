@@ -110,7 +110,7 @@ async def calibrar():
     
     time.sleep(2)
     if tipo == 'manual':
-        pyautogui.hotkey('ctrl', '2')
+        pyautogui.hotkey('ctrl', '1')
     
     await executar_ambos(hora_global, days_to_add)
     
@@ -154,6 +154,19 @@ def abortar_calibragem():
     
     # Reinicia a aplicação
     os.execl(sys.executable, sys.executable, *sys.argv)
+
+
+def finalizar_calibragem():
+    global calibrating
+    # global hora_global
+    # global tipo_calibragem
+    
+    calibrating = False
+    # hora_global = None
+    # tipo_calibragem = None
+
+
+
 if __name__ == '__main__':
     
     app.run(debug=True, host='0.0.0.0',port=5000)

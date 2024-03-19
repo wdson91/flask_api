@@ -1,10 +1,11 @@
+from app import finalizar_calibragem
 from imports import *
 from salvardados import baixar_blob_se_existir
 arquivos = os.listdir()
 from atualizar_calibragem import atualizar_calibragem
 
 async def juntarjsons(hour):
-    global calibrating
+    
     # Lista de empresas e parques
     empresas = ['voupra', 'vmz', 'decolar', 'ml']
     parques = ['disney', 'universal', 'seaworld']
@@ -62,7 +63,7 @@ async def juntarjsons(hour):
     
     logging.info("Arquivos JSON locais excluídos.")
     atualizar_calibragem(100)
-    calibrating = False
+    finalizar_calibragem()
 if __name__ == "__main__":
     # Hora global
     hour = datetime.now().strftime("%H:%M")
