@@ -44,13 +44,17 @@ def get_urls_disney():
     return jsonify(urls)
 
 
-@app.route('/urls_universal', methods=['GET'])
+@app.route('/urls_universal_basico', methods=['GET'])
 def get_urls_universal():
     
-    urls = generate_urls("https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?distribution=1-date&fixedDate={date}&modalityId=ORL_2P1DPTP-date")
-    
+    urls = generate_urls("https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?distribution=1&date&fixedDate={date}&modalityId=ORL_2P1DPTP-date")
     return jsonify(urls)
 
+@app.route('/urls_universal_14dias', methods=['GET'])
+def get_urls_universal2():
+    
+    urls2 = generate_urls("https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?distribution=1&date&fixedDate={date}&modalityId=ORL_3-PE-2024M-date")
+    return jsonify(urls2)
 @app.route('/date', methods=['GET'])
 def get_date():
     urls = generate_urls()
