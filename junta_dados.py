@@ -2,7 +2,7 @@ from app import *
 from imports import *
 from salvardados import baixar_blob_se_existir
 arquivos = os.listdir()
-from atualizar_calibragem import atualizar_calibragem
+from atualizar_calibragem import atualizar_calibragem, finalizar_calibragem
 
 async def juntarjsons(hour):
     if hour == "07:00" or "11:00" or "14:00" or "17:00":
@@ -61,12 +61,13 @@ async def juntarjsons(hour):
         if arquivo.endswith('.json'):
             os.remove(arquivo)
     
-   
-    
     logging.info("Arquivos JSON locais excluídos.")
     
     atualizar_calibragem(100)
+    
     finalizar_calibragem()
+
+
 if __name__ == "__main__":
     # Hora global
     hour = datetime.now().strftime("%H:%M")

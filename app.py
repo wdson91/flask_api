@@ -166,14 +166,13 @@ def abortar_calibragem():
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 
-def finalizar_calibragem():
+@app.route('/finalizar_calibragem', methods=['POST'])
+def finalizar_calibragem_api():
     global calibrating
-    # global hora_global
-    # global tipo_calibragem
-    
     calibrating = False
     # hora_global = None
     # tipo_calibragem = None
+    return jsonify({"message": "Calibragem finalizada com sucesso!"})
 
 def mudar_horarios(horario):
     global horarios
