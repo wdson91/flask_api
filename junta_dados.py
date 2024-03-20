@@ -2,10 +2,10 @@ from app import *
 from imports import *
 from salvardados import baixar_blob_se_existir
 arquivos = os.listdir()
-from atualizar_calibragem import atualizar_calibragem, finalizar_calibragem
+from atualizar_calibragem import atualizar_calibragem, finalizar_calibragem, mudar_horarios
 
 async def juntarjsons(hour):
-    if hour == "07:00" or "11:35" or "14:00" or "17:00":
+    if hour == "07:00" or "12:00" or "14:00" or "17:00":
         mudar_horarios(hour)
     # Lista de empresas e parques
     empresas = ['voupra', 'vmz', 'decolar', 'ml']

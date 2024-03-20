@@ -14,3 +14,11 @@ def finalizar_calibragem():
         print("Calibragem finalizada com sucesso.")
     else:
         print("Erro ao finalizar a calibragem.")
+        
+def mudar_horarios(hour):
+    response = requests.post('http://localhost:5000/hora', json={'horario': hour})
+    
+    if response.status_code == 200:
+        print("Horários atualizados com sucesso.")
+    else:
+        print("Erro ao atualizar os horários.")

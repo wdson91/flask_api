@@ -174,8 +174,12 @@ def finalizar_calibragem_api():
     # tipo_calibragem = None
     return jsonify({"message": "Calibragem finalizada com sucesso!"})
 
-def mudar_horarios(horario):
+
+app.route('/hora', methods=['POST'])
+def atualizar_hora():
     global horarios
+    
+    horario = request.json.get('horario')
     
     if horario == '07:00':
         horarios = []
