@@ -5,7 +5,7 @@ arquivos = os.listdir()
 from atualizar_calibragem import atualizar_calibragem, finalizar_calibragem
 
 async def juntarjsons(hour):
-    if hour == "07:00" or "11:00" or "14:00" or "17:00":
+    if hour == "07:00" or "11:40" or "14:00" or "17:00":
         mudar_horarios(hour)
     # Lista de empresas e parques
     empresas = ['voupra', 'vmz', 'decolar', 'ml']
