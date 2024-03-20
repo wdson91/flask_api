@@ -35,13 +35,13 @@ async def juntarjsons(hour):
             dados = carregar_dados_json(f'{parque}_{empresa}_{data_atual}.json')
 
             # Modifica o último dado para a hora global
-            if dados:
-                dados[-1]['Hora_coleta'] = nova_hora_formatada
+            #if dados:
+                #dados[-1]['Hora_coleta'] = nova_hora_formatada
 
-                # Atualiza o dicionário de dados modificados
-                if empresa not in dados_modificados:
-                    dados_modificados[empresa] = {}
-                dados_modificados[empresa][parque] = dados
+            # Atualiza o dicionário de dados modificados
+            if empresa not in dados_modificados:
+                dados_modificados[empresa] = {}
+            dados_modificados[empresa][parque] = dados
 
     # Nome do arquivo para salvar os dados
     nome_arquivo = f'dados_{datetime.now().strftime("%Y-%m-%d")}.json'
