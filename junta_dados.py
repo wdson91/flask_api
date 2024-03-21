@@ -64,7 +64,7 @@ async def juntarjsons(hour):
     
     atualizar_calibragem(100)
     
-    time.sleep(30)
+    time.sleep(120)
     finalizar_calibragem()
 
 
