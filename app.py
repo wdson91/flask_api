@@ -1,3 +1,4 @@
+from atualizar_calibragem import mudar_horarios
 from imports import *
 from decolar.decolar_disney import disney_decolar
 
@@ -17,7 +18,7 @@ days_to_add = [5, 10, 20, 47, 65, 126]
 calibrating = False
 
 
-horarios = []
+horarios = ["07:00", "11:00", "14:00"]
 
 # Função para gerar as URLs com as datas desejadas
 def generate_urls(url):
@@ -98,31 +99,38 @@ async def receive_json_seaworld():
 
 @app.route('/calibrar', methods=['GET'])
 async def calibrar():
-    
+
     global calibragem
     global hora_global
     global tipo_calibragem
     global calibrating
     global horarios
-    
+
     # Se a calibragem já estiver em andamento, retorne uma mensagem de erro
     if calibrating:
         return jsonify({"error": "Calibragem já em andamento"}), 400
-    
+
     tipo = request.args.get('tipo', 'automatica')  # Obter o parâmetro tipo da URL, padrão é 'manual'
 
     calibrating = True
     calibragem = 1
     tipo_calibragem = tipo
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
     time.sleep(2)
     if tipo == 'manual':
         pyautogui.hotkey('ctrl', '1')
+
+    if hora_global == "07:00" or "11:00" or "14:00" or "17:00":
+        if hora_global == "07:00":
+            horarios = []
+        horarios.append(hora_global)
+
     await executar_ambos(hora_global, days_to_add)
-    
+
     return jsonify({"message": "Calibragem iniciada com sucesso!"})
-    
-    
+
+
 @app.route('/status_calibragem', methods=['GET'])
 async def status_calibragem():
     
@@ -145,7 +153,8 @@ async def status_calibragem():
 @app.route('/calibragem', methods=['POST'])
 def set_calibragem():
     global calibragem
-    
+
+
     novo_valor = request.json.get('novo_valor')
     if novo_valor is not None:
         calibragem = novo_valor
