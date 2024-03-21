@@ -130,6 +130,7 @@ async def status_calibragem():
     global hora_global
     global tipo_calibragem
     global horarios
+    global calibrating
     
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     
@@ -137,7 +138,8 @@ async def status_calibragem():
                     "Hora_inicio": hora_global,
                     "Tipo": tipo_calibragem,
                     "Data": data_atual,
-                    "Horarios": horarios})
+                    "Horarios": horarios,
+                    "Calibrating": calibrating})
 
 
 @app.route('/calibragem', methods=['POST'])
