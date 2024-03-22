@@ -61,6 +61,7 @@ async def juntarjsons(hour):
             os.remove(arquivo)
     
     logging.info("Arquivos JSON locais excluídos.")
+    
     time.sleep(120)
     atualizar_calibragem(100)
     
