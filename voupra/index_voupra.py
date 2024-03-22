@@ -16,7 +16,12 @@ async def main_voupra(hour,array_datas,data_atual,run_once=False):
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços Disney: {e}")
-
+        try:
+            await coletar_precos_voupra_sea(hour, array_datas,data_atual,data_atual)
+            
+        except Exception as e:
+            logging.error(f"Erro durante a coleta de preços SeaWorld: {e}")
+            
         logging.info("Iniciando coleta de preços Voupra Universal.")
         try:
             
@@ -26,11 +31,7 @@ async def main_voupra(hour,array_datas,data_atual,run_once=False):
             logging.error(f"Erro durante a coleta de preços Universal: {e}")
 
         logging.info("Iniciando coleta de preços Voupra SeaWorld.")
-        try:
-            await coletar_precos_voupra_sea(hour, array_datas,data_atual,data_atual)
-            
-        except Exception as e:
-            logging.error(f"Erro durante a coleta de preços SeaWorld: {e}")
+        
 
         return 
     
