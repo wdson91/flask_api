@@ -2,7 +2,7 @@ from atualizar_calibragem import atualizar_calibragem
 from imports import *
 
 
-async def coletar_precos_voupra_disney( hour,array_datas,):
+async def coletar_precos_voupra_disney( hour,array_datas,data_atual):
 
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
@@ -140,7 +140,7 @@ async def coletar_precos_voupra_disney( hour,array_datas,):
     df['MargemCategoria'].fillna('-', inplace=True)
     df = df.sort_values(by=['Data_viagem', 'Parque'])
 
-    nome_arquivo = f'disney_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
+    nome_arquivo = f'disney_voupra_{data_atual}.json'
     salvar_dados(df, nome_arquivo, 'voupra', hour)
     
     # Define o novo valor para calibragem

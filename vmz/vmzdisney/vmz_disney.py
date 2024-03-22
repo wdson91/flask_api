@@ -3,7 +3,7 @@ from imports import *
 
         
 
-async def coletar_precos_vmz(hour,array_datas):
+async def coletar_precos_vmz(hour,array_datas,data_atual):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     # Defina sua lógica para baixar os arquivos e esperar por eles
     baixar_blob_se_existir('disney_vmz_basicos_parcial.json', 'vmz')
@@ -24,7 +24,7 @@ async def coletar_precos_vmz(hour,array_datas):
     # # Crie o DataFrame a partir dos dados formatados
     # df = pd.DataFrame(dados_formatados)
     
-    nome_arquivo = f'disney_vmz_{datetime.now().strftime("%Y-%m-%d")}.json'
+    nome_arquivo = f'disney_vmz_{data_atual}.json'
     
     salvar_dados(df_sorted, nome_arquivo, 'vmz', hour)
     
@@ -34,7 +34,7 @@ async def coletar_precos_vmz(hour,array_datas):
     return 
 
 
-async def coletar_precos_vmz_disneybasicos(array_datas,hour):
+async def coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual):
     
     options = webdriver.ChromeOptions()
     driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
@@ -105,7 +105,7 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hour):
     atualizar_calibragem(40)
     return
 
-async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour):
+async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,data_atual):
     waiter = 2
      
     options = webdriver.ChromeOptions()

@@ -54,7 +54,7 @@ from ml.mlsea.mlsea import coletar_precos_ml_seaworld
 import os
 
 sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
-hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+
 
 def get_directories():
     """

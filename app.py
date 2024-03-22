@@ -116,7 +116,7 @@ async def calibrar():
     calibragem = 1
     tipo_calibragem = tipo
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
-    
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     time.sleep(2)
     if tipo == 'manual':
         pyautogui.hotkey('ctrl', '1')
@@ -126,7 +126,7 @@ async def calibrar():
             horarios = []
         horarios.append(hora_global)
 
-    await executar_ambos(hora_global, days_to_add)
+    await executar_ambos(hora_global, days_to_add,data_atual)
 
     return jsonify({"message": "Calibragem iniciada com sucesso!"})
 

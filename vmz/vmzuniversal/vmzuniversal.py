@@ -1,7 +1,7 @@
 from imports import *
 
 from atualizar_calibragem import atualizar_calibragem
-async def coletar_precos_vmz_universal(hour, array_datas):
+async def coletar_precos_vmz_universal(hour, array_datas,data_atual):
     logging.info("Iniciando coleta de preços da Universal Orlando.")
     
     # Configuração dos sites e URLs
@@ -50,8 +50,9 @@ async def coletar_precos_vmz_universal(hour, array_datas):
 
         # Criação do DataFrame e salvamento dos dados
         df = pd.DataFrame(dados)
-        nome_arquivo = f'universal_vmz_{datetime.now().strftime("%Y-%m-%d")}.json'
+        nome_arquivo = f'universal_vmz_{data_atual}.json'
         salvar_dados(df, nome_arquivo, 'vmz', hour)
+        atualizar_calibragem(75)
         logging.info("Coleta finalizada Site Vmz- Universal Orlando.")
 
     finally:
@@ -76,7 +77,7 @@ def extrair_precos(driver):
         preco_final_avista = float(preco_avista_element.text.replace('R$ ', '').replace('.','').replace(',', '.'))
         preco_parcelado = preco_parcelado_element.text.replace('R$ ', '').replace(',', '.')
         preco_float = float(preco_parcelado) * 10
-    atualizar_calibragem(75)
+    
     return preco_float, preco_final_avista
 
 

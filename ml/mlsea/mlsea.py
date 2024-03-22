@@ -8,7 +8,7 @@ from atualizar_calibragem import atualizar_calibragem
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
-async def coletar_precos_ml_seaworld(hour, array_datas):
+async def coletar_precos_ml_seaworld(hour, array_datas,data_atual):
     # Configurações do WebDriver Selenium
     options = webdriver.ChromeOptions()
     
@@ -100,7 +100,7 @@ async def coletar_precos_ml_seaworld(hour, array_datas):
     finally:
         driver.quit()
         df = pd.DataFrame(dados)
-        nome_arquivo = f'seaworld_ml_{datetime.now().strftime("%Y-%m-%d")}.json'
+        nome_arquivo = f'seaworld_ml_{data_atual}.json'
         salvar_dados(df, nome_arquivo, 'ml', hour)
         logging.info("Coleta de preços ML SeaWorld concluída")
         atualizar_calibragem(85)

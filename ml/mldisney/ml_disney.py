@@ -6,7 +6,7 @@ from atualizar_calibragem import atualizar_calibragem
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
-async def coletar_precos_ml_disney(hour,array_datas):
+async def coletar_precos_ml_disney(hour,array_datas,data_atual):
     logging.info("Iniciando a coleta de preços ML Disney")
     options = webdriver.ChromeOptions()
     driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
@@ -99,7 +99,7 @@ async def coletar_precos_ml_disney(hour,array_datas):
 
                 df = pd.DataFrame(dados)
                 
-                nome_arquivo = f'disney_ml_{datetime.now().strftime("%Y-%m-%d")}.json'
+                nome_arquivo = f'disney_ml_{data_atual}.json'
                 salvar_dados(df, nome_arquivo,'ml',hour)
                 
                 logging.info("Coleta de preços ML Disney finalizada")

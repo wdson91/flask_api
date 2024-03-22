@@ -5,7 +5,7 @@ from imports import *
 from atualizar_calibragem import atualizar_calibragem
 
 
-async def coletar_precos_voupra_sea(hour,array_datas):
+async def coletar_precos_voupra_sea(hour,array_datas,data_atual):
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
     # Inicialize o driver do Selenium (certifique-se de ter o WebDriver correspondente instalado)
@@ -133,7 +133,7 @@ async def coletar_precos_voupra_sea(hour,array_datas):
     df['MargemCategoria'].fillna('-', inplace=True)
     df = df.sort_values(by=['Data_viagem', 'Parque'])
 
-    nome_arquivo = f'seaworld_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
+    nome_arquivo = f'seaworld_voupra_{data_atual}.json'
     salvar_dados(df, nome_arquivo, 'voupra', hour)
     
     atualizar_calibragem(20)

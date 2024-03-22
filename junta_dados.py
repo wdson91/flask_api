@@ -4,7 +4,7 @@ from salvardados import baixar_blob_se_existir
 arquivos = os.listdir()
 from atualizar_calibragem import atualizar_calibragem, finalizar_calibragem, mudar_horarios
 
-async def juntarjsons(hour):
+async def juntarjsons(hour,data_atual):
     
     # Lista de empresas e parques
     empresas = ['voupra', 'vmz', 'decolar', 'ml']
@@ -43,17 +43,14 @@ async def juntarjsons(hour):
             dados_modificados[empresa][parque] = dados
 
     # Nome do arquivo para salvar os dados
-    nome_arquivo = f'dados_{datetime.now().strftime("%Y-%m-%d")}.json'
+    nome_arquivo = f'dados_{data_atual}.json'
     
     # Salva os dados modificados no Blob Storage e também localmente como um arquivo JSON
     with open(nome_arquivo, 'w') as f:
         json.dump(dados_modificados, f)
 
-    
     df = pd.read_json(nome_arquivo)
     df = pd.DataFrame(df)
-
-    
     
     #Remova os arquivos JSON locais
     for arquivo in arquivos:

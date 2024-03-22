@@ -8,7 +8,7 @@ def get_future_date(days):
 
 # List of days to add to the current date
 
-async def coletar_precos_ml_universal(hour,array_datas):
+async def coletar_precos_ml_universal(hour,array_datas,data_atual):
     options = webdriver.ChromeOptions()
     driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
@@ -91,7 +91,7 @@ async def coletar_precos_ml_universal(hour,array_datas):
                 driver.quit()
                 df = pd.DataFrame(dados)
                 
-                nome_arquivo = f'universal_ml_{datetime.now().strftime("%Y-%m-%d")}.json'
+                nome_arquivo = f'universal_ml_{data_atual}.json'
                 salvar_dados(df, nome_arquivo,'ml',hour)
                 logging.info("Coleta de preços ML Disney finalizada")
                 atualizar_calibragem(95)

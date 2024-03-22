@@ -4,7 +4,7 @@ from imports import *
 
 
         
-async def coletar_precos_vmz_seaworld(hour,array_datas):
+async def coletar_precos_vmz_seaworld(hour,array_datas,data_atual):
     logging.info("Iniciando coleta de preços do SeaWorld.")
     # Lista de sites e nomes de parques
     sites = [
@@ -58,7 +58,7 @@ async def coletar_precos_vmz_seaworld(hour,array_datas):
     # Criando um DataFrame
     df = pd.DataFrame(dados)
     
-    nome_arquivo = f'seaworld_vmz_{datetime.now().strftime("%Y-%m-%d")}.json'
+    nome_arquivo = f'seaworld_vmz_{data_atual}.json'
     salvar_dados(df, nome_arquivo,'vmz',hour)
     atualizar_calibragem(70)
     logging.info("Coleta finalizada Site Vmz- SeaWorld")
