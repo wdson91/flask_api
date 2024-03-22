@@ -53,7 +53,7 @@ async def juntarjsons(hour):
     df = pd.read_json(nome_arquivo)
     df = pd.DataFrame(df)
 
-    salvar_dados_margem(df, nome_arquivo, 'dados',nova_hora_formatada)
+    
     
     #Remova os arquivos JSON locais
     for arquivo in arquivos:
@@ -62,10 +62,11 @@ async def juntarjsons(hour):
     
     logging.info("Arquivos JSON locais excluídos.")
     
-    time.sleep(120)
+    time.sleep(30)
     atualizar_calibragem(100)
     
-    
+    salvar_dados_margem(df, nome_arquivo, 'dados',nova_hora_formatada)
+    time.sleep(30)
     finalizar_calibragem()
 
 
