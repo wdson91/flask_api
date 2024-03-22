@@ -9,11 +9,7 @@ from pynput.keyboard import Key, Controller
 
 
 app = Flask(__name__)
-cors = CORS(app, resource={
-    r"/*":{
-        "origins":"*"
-    }
-})
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 days_to_add = [5, 10, 20, 47, 65, 126]
 calibrating = False
 
