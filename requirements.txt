@@ -9,4 +9,4 @@ chromedriver-autoinstaller==0.6.4
 schedule==1.1.0
 bs4==0.0.1
 flask_cors
-
+pyautogui
