@@ -10,3 +10,5 @@ schedule==1.1.0
 bs4==0.0.1
 flask_cors
 pyautogui
+python3-tk 
+python3-dev
