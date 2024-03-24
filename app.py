@@ -145,7 +145,7 @@ async def status_calibragem():
     global horarios
     global calibrating
     
-    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    global data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     
     return jsonify({"Porcentagem": calibragem,
                     "Hora_inicio": hora_global,
