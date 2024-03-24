@@ -68,7 +68,7 @@ def hello():
 
 @app.route('/receive_json_universal', methods=['POST'])
 async def receive_json_universal():
-    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    #data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     global hora_global
     global data_atual
     data = data_atual
