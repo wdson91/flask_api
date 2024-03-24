@@ -69,10 +69,10 @@ def hello():
 @app.route('/receive_json_universal', methods=['POST'])
 async def receive_json_universal():
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
-    
+    global hora_global
     data_list = request.json
     
-    await universal_decolar(data_list,data_atual)
+    await universal_decolar(data_list,hora_global,data_atual)
 
     return jsonify({"message": "Dados salvos com sucesso!"})
 
