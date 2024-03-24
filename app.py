@@ -68,29 +68,30 @@ def hello():
 
 @app.route('/receive_json_universal', methods=['POST'])
 async def receive_json_universal():
-    sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
+    global data_atual
     
     data_list = request.json
     
-    await universal_decolar(data_list,hora_global)
+    await universal_decolar(data_list,data_atual)
 
     return jsonify({"message": "Dados salvos com sucesso!"})
 
 @app.route('/receive_json_disney', methods=['POST'])
 async def receive_json_disney():
-    sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
+    
+    global data_atual
     
     data_list = request.json
-    await disney_decolar(data_list,hora_global)
+    await disney_decolar(data_list,hora_global,data_atual)
 
     return jsonify({"message": "Dados salvos com sucesso!"})
 
 @app.route('/receive_json_seaworld', methods=['POST'])
 async def receive_json_seaworld():
-    
+    global data_atual
     data_list = request.json
     
-    await seaworld_decolar(data_list,hora_global)
+    await seaworld_decolar(data_list,hora_global,data_atual)
     return jsonify({"message": "Dados salvos com sucesso!"})
 
 @app.route('/calibrar', methods=['GET'])
@@ -101,7 +102,8 @@ async def calibrar():
     global tipo_calibragem
     global calibrating
     global horarios
-
+    global data_atual
+    
     # Se a calibragem já estiver em andamento, retorne uma mensagem de erro
     if calibrating:
         return jsonify({"error": "Calibragem já em andamento"}), 400
