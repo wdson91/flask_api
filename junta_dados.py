@@ -63,7 +63,8 @@ async def juntarjsons(hour,data_atual):
 
 if __name__ == "__main__":
     # Hora global
-       global 
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     
     # Crie um loop de eventos e execute a função principal
-    asyncio.run(juntarjsons(hour,data_atual))
+    asyncio.run(juntarjsons(hora_global,data_atual))
