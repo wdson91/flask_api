@@ -2,7 +2,7 @@ from imports import *
 
 
 
-async def disney_decolar(data,data_hora):
+async def disney_decolar(data,data_hora,data_atual):
     data_list = data  # Recebe a lista de objetos JSON enviada na solicitação
 
     # Trim 'Parque' field in each item
@@ -45,7 +45,7 @@ async def disney_decolar(data,data_hora):
     for index, row in grouped_data.iterrows():
         formatted_data.extend(row['Dados'])
 
-    nome_arquivo = f'disney_decolar_{datetime.now().strftime("%Y-%m-%d")}.json'
+    nome_arquivo = f'disney_decolar_{data_atual}.json'
     salvar_dados_decolar(formatted_data, nome_arquivo ,'decolar',str(hora))
     
     return jsonify({"message": "Dados salvos com sucesso!"})
