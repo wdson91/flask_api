@@ -12,8 +12,10 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 days_to_add = [5, 10, 20, 47, 65, 126]
 calibrating = False
-
-
+global data_atual
+global hora_global
+data_atual = ''
+hora_global = '
 horarios = []
 
 # Função para gerar as URLs com as datas desejadas
@@ -69,7 +71,7 @@ def hello():
 @app.route('/receive_json_universal', methods=['POST'])
 async def receive_json_universal():
     #data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
-    global hora_global
+  hora_global
     global data_atual
     data = data_atual
     hora = hora_global
@@ -145,7 +147,7 @@ async def status_calibragem():
     global horarios
     global calibrating
     
-    global data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     
     return jsonify({"Porcentagem": calibragem,
                     "Hora_inicio": hora_global,
