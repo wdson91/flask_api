@@ -1,6 +1,6 @@
 from imports import *
 
-async def seaworld_decolar(json_data, data_hora):
+async def seaworld_decolar(json_data, data_hora,data_atual):
     # Mapeamento dos nomes dos parques
     mapping = {
         "Ingresso 3 parques pelo preço de 2": "3 Dias 3 Parques - SeaWorld Orlando",
@@ -18,7 +18,7 @@ async def seaworld_decolar(json_data, data_hora):
     df = df.dropna(subset=['Parque'])
     hora= df['Hora_coleta'].iloc[0]
     # Obter a data atual
-    data_atual = datetime.now().date()
+   
 
     # Criar listas de datas de viagem
     datas_viagem = [data_atual + timedelta(days=days) for days in days_to_add]
@@ -36,7 +36,7 @@ async def seaworld_decolar(json_data, data_hora):
         df_temp = df_temp[['Data_viagem', 'Parque', 'Preco_Parcelado', 'Preco_Avista']]
         formatted_data.extend(df_temp.to_dict(orient='records'))
         
-    nome_arquivo = f'seaworld_decolar_{datetime.now().strftime("%Y-%m-%d")}.json'
+    nome_arquivo = f'seaworld_decolar_{data_atual}.json'
     
     salvar_dados_decolar(formatted_data, nome_arquivo ,'decolar', str(hora))
     
