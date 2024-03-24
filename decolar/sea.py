@@ -18,10 +18,11 @@ async def seaworld_decolar(json_data, data_hora,data_atual):
     df = df.dropna(subset=['Parque'])
     hora= df['Hora_coleta'].iloc[0]
     # Obter a data atual
-   
+
+    data = datetime.now().date()
 
     # Criar listas de datas de viagem
-    datas_viagem = [data_atual + timedelta(days=days) for days in days_to_add]
+    datas_viagem = [datal + timedelta(days=days) for days in days_to_add]
 
     # Criar um dicionário para armazenar os dados formatados
     formatted_data = []
