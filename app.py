@@ -68,7 +68,7 @@ def hello():
 
 @app.route('/receive_json_universal', methods=['POST'])
 async def receive_json_universal():
-    global data_atual
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     
     data_list = request.json
     
@@ -79,7 +79,7 @@ async def receive_json_universal():
 @app.route('/receive_json_disney', methods=['POST'])
 async def receive_json_disney():
     
-    global data_atual
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     
     data_list = request.json
     await disney_decolar(data_list,hora_global,data_atual)
@@ -88,7 +88,7 @@ async def receive_json_disney():
 
 @app.route('/receive_json_seaworld', methods=['POST'])
 async def receive_json_seaworld():
-    global data_atual
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     data_list = request.json
     
     await seaworld_decolar(data_list,hora_global,data_atual)
