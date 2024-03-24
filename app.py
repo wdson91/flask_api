@@ -70,9 +70,12 @@ def hello():
 async def receive_json_universal():
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     global hora_global
+    global data_atual
+    data = data_atual
+    hora = hora_global
     data_list = request.json
     
-    await universal_decolar(data_list,hora_global,data_atual)
+    await universal_decolar(data_list,hora_global,data)
 
     return jsonify({"message": "Dados salvos com sucesso!"})
 
@@ -88,10 +91,14 @@ async def receive_json_disney():
 
 @app.route('/receive_json_seaworld', methods=['POST'])
 async def receive_json_seaworld():
-    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    global hora_global
+    global data_atual
+    #data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     data_list = request.json
-    
-    await seaworld_decolar(data_list,hora_global,data_atual)
+   
+    data = data_atual
+    hora = hora_global
+    await seaworld_decolar(data_list,hora,data)
     return jsonify({"message": "Dados salvos com sucesso!"})
 
 @app.route('/calibrar', methods=['GET'])
