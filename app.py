@@ -88,7 +88,7 @@ async def receive_json_disney():
     global hora_global
     global data_atual
     data = data_atual
-    hora = hora_globa
+    hora = hora_global
     data_list = request.json
     await disney_decolar(data_list,hora,data)
 
