@@ -9,10 +9,7 @@ async def juntarjsons(hour,data_atual):
     # Lista de empresas e parques
     empresas = ['voupra', 'vmz', 'decolar', 'ml']
     parques = ['disney', 'universal', 'seaworld']
-
-    # Obtém a data atual
-    data_atual = datetime.now().strftime("%Y-%m-%d")
-
+    
     # Dicionário para armazenar os dados modificados
     dados_modificados = {}
 
@@ -20,7 +17,7 @@ async def juntarjsons(hour,data_atual):
     hora_atual = datetime.now(pytz.timezone('America/Sao_Paulo'))
 
     # Subtrai 20 minutos
-    nova_hora = hora_atual - timedelta(minutes=25)
+    #nova_hora = hora_atual - timedelta(minutes=25)
 
     # Formata a nova hora para o formato desejado (HH:MM)
     #nova_hora_formatada = nova_hora.strftime("%H:%M")
