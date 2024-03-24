@@ -18,7 +18,7 @@ async def seaworld_decolar(json_data, data_hora,data_atual):
     df = df.dropna(subset=['Parque'])
     hora= df['Hora_coleta'].iloc[0]
     # Obter a data atual
-
+    sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
     data = datetime.now(sao_paulo_tz).date()
 
     # Criar listas de datas de viagem
