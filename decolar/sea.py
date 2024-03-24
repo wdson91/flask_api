@@ -22,7 +22,7 @@ async def seaworld_decolar(json_data, data_hora,data_atual):
     data = datetime.now(sao_paulo_tz).date()
 
     # Criar listas de datas de viagem
-    datas_viagem = [datal + timedelta(days=days) for days in days_to_add]
+    datas_viagem = [data + timedelta(days=days) for days in days_to_add]
 
     # Criar um dicionário para armazenar os dados formatados
     formatted_data = []
