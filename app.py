@@ -15,7 +15,7 @@ calibrating = False
 global data_atual
 global hora_global
 data_atual = ''
-hora_global = '
+hora_global = ''
 horarios = []
 
 # Função para gerar as URLs com as datas desejadas
