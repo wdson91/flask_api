@@ -16,12 +16,9 @@ async def juntarjsons(hour,data_atual):
     # Obtém o horário atual
     hora_atual = datetime.now(pytz.timezone('America/Sao_Paulo'))
 
-    # Subtrai 20 minutos
-    #nova_hora = hora_atual - timedelta(minutes=25)
-
-    # Formata a nova hora para o formato desejado (HH:MM)
-    #nova_hora_formatada = nova_hora.strftime("%H:%M")
+   
     nova_hora_formatada = hour
+    
     # Baixa os arquivos JSON dos diferentes parques e empresas
     for empresa in empresas:
         for parque in parques:
