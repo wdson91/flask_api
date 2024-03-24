@@ -19,7 +19,7 @@ async def seaworld_decolar(json_data, data_hora,data_atual):
     hora= df['Hora_coleta'].iloc[0]
     # Obter a data atual
 
-    data = datetime.now().date()
+    data = datetime.now(sao_paulo_tz).date()
 
     # Criar listas de datas de viagem
     datas_viagem = [datal + timedelta(days=days) for days in days_to_add]
