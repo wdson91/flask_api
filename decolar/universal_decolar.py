@@ -13,7 +13,7 @@ async def universal_decolar(data,data_hora,data_atual):
         "Ingresso 1 Parque 1 Dia": "1 Dia 1 Parque - Universal Orlando",
         "Ingresso 2-Park 1-Day Park-to-Park": "1 Dia 2 Parques - Universal Orlando",
         "Ingresso 2 Parques 2 Dias (Parque a Parque)": "2 Dias 2 Parques - Universal Orlando",
-        "Ingresso em 2 Parques 2 Dias (Parque a Parque) + 2 Dias Grátis": "4 Dias 2 Parques - Universal Orlando",
+        "Ingresso - Promoção 2 Parques 4 Dias (Parque a Parque)": "4 Dias 2 Parques - Universal Orlando",
         "Ingresso Explorer 3 Parques 2024": "14 Dias 3 Parques - Universal Orlando"
     }
 
