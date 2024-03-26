@@ -6,13 +6,13 @@ import pandas as pd
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 
 # Substitua pelos seus detalhes de conexão
-connect_str = "DefaultEndpointsProtocol=https;AccountName=shopblob;AccountKey=sq6Uky1VBg/TxprQyuCnfYesOFSWdGGQNED15QKkAGrLb2kShaGwX2qgwD7N+sIBcRXH29taUr6QZRCb+Mip+A==;EndpointSuffix=core.windows.net"
+connect_str = "DefaultEndpointsProtocol=https;AccountName=sdarq;AccountKey=1WFQXUd7f2vQwRLa2EZod7EtrtyE7HmlKZwBWfby5EuAPy2TvFgM/XSfyG5SzqxIQriIYLpqgMNrEANpCIP0cA==;EndpointSuffix=core.windows.net"
 #container_name = f'imagens/Automacao_python/{pasta}'
 
 # Função para verificar se o arquivo existe no Azure Blob Storage e baixá-lo
 def baixar_blob_se_existir(nome_arquivo_json, pasta):
     blob_service_client = BlobServiceClient.from_connection_string(connect_str)
-    container_client = blob_service_client.get_container_client(f'grupoysa-calibragem/{pasta}')
+    container_client = blob_service_client.get_container_client(f'imagens/Automacao_python/{pasta}')
     blob_client = container_client.get_blob_client(nome_arquivo_json)
 
     if blob_client.exists():
@@ -26,7 +26,7 @@ def baixar_blob_se_existir(nome_arquivo_json, pasta):
 # Função para fazer upload do arquivo para o Azure Blob Storage
 def upload_blob(caminho_arquivo_json, nome_arquivo_json, pasta):
     blob_service_client = BlobServiceClient.from_connection_string(connect_str)
-    container_client = blob_service_client.get_container_client(f'grupoysa-calibragem/{pasta}')
+    container_client = blob_service_client.get_container_client(f'imagens/Automacao_python/{pasta}')
     blob_client = container_client.get_blob_client(nome_arquivo_json)
 
     with open(caminho_arquivo_json, "rb") as data:
@@ -76,7 +76,7 @@ def salvar_dados_margem(dados, nome_arquivo_json, pasta):
     blob_service_client = BlobServiceClient.from_connection_string(connect_str)
 
     # Referenciar o container no Blob Storage
-    container_client = blob_service_client.get_container_client(f'grupoysa-calibragem/{pasta}')
+    container_client = blob_service_client.get_container_client(f'imagens/Automacao_python/{pasta}')
 
     # Enviar o JSON para o Blob Storage com o nome desejado
     blob_client = container_client.get_blob_client(nome_arquivo_json)
