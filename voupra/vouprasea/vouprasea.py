@@ -18,8 +18,10 @@ async def coletar_precos_voupra_sea(hour,array_datas,data_atual):
     # Mapeamento dos nomes dos parques
     mapeamento_nomes = {
         376028: "1 Dia 1 Parque - SeaWorld Orlando",
+        376029: "1 Dia 1 Parque - Busch Gardens",
         376030: "3 Dias 3 Parques - SeaWorld Orlando",
-        376032: "14 Dias 3 Parques - SeaWorld Orlando"
+        376031: "3 Dias 3 Parques com Refeições - SeaWorld Orlando",
+        376032: "14 Dias 3 Parques - SeaWorld Orlando",
     }
 
     for data in datas:
