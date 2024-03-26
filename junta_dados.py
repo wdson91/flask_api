@@ -1,6 +1,6 @@
 from app import *
 from imports import *
-from salvardados import baixar_blob_se_existir
+from salvardados import baixar_blob_se_existir, salvar_dados_margem
 arquivos = os.listdir()
 from atualizar_calibragem import atualizar_calibragem, finalizar_calibragem, mudar_horarios
 

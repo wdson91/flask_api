@@ -12,7 +12,7 @@ async def coletar_precos_vmz_seaworld(hour,array_datas,data_atual):
         ("https://www.vmzviagens.com.br/ingressos/orlando/seaworld-orlando/promocao-seaworld-busch-gardens-aquatica", '3 Dias 3 Parques - SeaWorld Orlando'),
         ("https://www.vmzviagens.com.br/ingressos/orlando/seaworld-orlando/seaworld-14-dias-estacionamento", '14 Dias 3 Parques - SeaWorld Orlando'),
         ("https://www.vmzviagens.com.br/ingressos/orlando/busch-gardens-tampa/busch-gardens-seaworld-aquatica-com-plano-alimentacao?data=2024-12-31", '3 Dias 3 Parques com Refeições - SeaWorld Orlando'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/busch-gardens-tampa/busch-gardens-1-dia?",' 1 Dia 1 Parque - Busch Gardens' ),
+        ("https://www.vmzviagens.com.br/ingressos/orlando/busch-gardens-tampa/busch-gardens-1-dia?",'1 Dia 1 Parque - Busch Gardens'),
     ]
 
     # Configuração inicial do Selenium
