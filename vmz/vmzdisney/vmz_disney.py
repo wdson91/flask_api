@@ -1,7 +1,6 @@
 from atualizar_calibragem import atualizar_calibragem
 from imports import *
 
-        
 
 async def coletar_precos_vmz(hour,array_datas,data_atual):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -40,12 +39,7 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual):
     driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     
-    nome_pacotes = {
-        2: "2 Dias - Disney World Basico",
-        3: "3 Dias - Disney World Basico",
-        4: "4 Dias - Disney World Basico",
-        5: "5 Dias - Disney World Basico"
-    }
+    
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     sites = [
@@ -116,7 +110,12 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
         2: "2 Dias - Disney World Basico",
         3: "3 Dias - Disney World Basico",
         4: "4 Dias - Disney World Basico",
-        5: "5 Dias - Disney World Basico"
+        5: "5 Dias - Disney World Basico",
+        6: "6 Dias - Disney World Basico",
+        7: "7 Dias - Disney World Basico",
+        8: "8 Dias - Disney World Basico",
+        9: "9 Dias - Disney World Basico",
+        10: "10 Dias - Disney World Basico",
     }
     def fechar_popups(driver):
         try:
@@ -191,7 +190,12 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
         2: "2 Dias - Disney World Basico",
         3: "3 Dias - Disney World Basico",
         4: "4 Dias - Disney World Basico",
-        5: "5 Dias - Disney World Basico"
+        5: "5 Dias - Disney World Basico",
+        6: "6 Dias - Disney World Basico",
+        7: "7 Dias - Disney World Basico",
+        8: "8 Dias - Disney World Basico",
+        9: "9 Dias - Disney World Basico",
+        10: "10 Dias - Disney World Basico"
     }
 
     def processar_dias(driver, dias,array_datas):
@@ -224,7 +228,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
 
         return dados  # Return the 'dados' list
 
-    dias_para_processar = [2,3,4,5]
+    dias_para_processar = [2,3,4,5,6,7,8,9,10]
     resultados = processar_dias(driver, dias_para_processar,array_datas)
 
     

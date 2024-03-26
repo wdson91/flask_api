@@ -29,4 +29,4 @@ async def executar_ambos(hour, array_datas, data_atual):
 
 # Verifica se o script está sendo executado diretamente
 if __name__ == "__main__":
-    asyncio.run(executar_ambos(hora_global,array_datas))  # Executa a função principal 'main' usando asyncio
+    asyncio.run(executar_ambos(hora_global,array_datas,'2024-03-25'))  # Executa a função principal 'main' usando asyncio

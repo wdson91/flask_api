@@ -11,7 +11,7 @@ async def main_ml(hour,array_datas,data_atual,run_once=False):
     if run_once:
         logging.info("Iniciando coleta de preços.")
         
-        global hora_global
+        
         try:
             # Execute as funções assíncronas em sequência
             await coletar_precos_ml_disney(hour,array_datas,data_atual)
