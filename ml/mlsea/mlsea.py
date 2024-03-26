@@ -86,9 +86,7 @@ async def coletar_precos_ml_seaworld(hour, array_datas,data_atual):
                     except ValueError:
                         print(f"Erro ao converter preço para {park_name}: {price_text}")
 
-               
-
-                # Adicionando dados
+                #Adicionando dados
                 data_hora_atual = datetime.now()
                 
                 dados.append({
@@ -101,7 +99,8 @@ async def coletar_precos_ml_seaworld(hour, array_datas,data_atual):
                 
     except TimeoutException as e:
         print("Erro: Elemento não encontrado ou tempo de espera excedido", e)
-    try:
+    try:    
+        for days in array_datas:
             future_date = get_future_date(days)
             url = f"https://www.vamonessa.com.br/ingressos/BUSCH%20GARDENS%20TAMPA/9?destination=Orlando&destinationCode=2&destinationState=Florida&destinationStateCode=2&date={future_date}"
             driver.get(url)
@@ -111,7 +110,7 @@ async def coletar_precos_ml_seaworld(hour, array_datas,data_atual):
            # Pares de XPaths para botões e elementos de preço correspondentes
             xpath_pairs = [
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div/div[2]/div[1]/button', 
-                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div/div[2]/div[2]/div[2]/div[1]/div[2]/span/span',
+                 '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div/div[2]/div[2]/div[2]/div[1]/div[2]/span/span',
                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div/div[2]/div[2]/div[2]/div[1]/div[1]/span',
                  '1 Dia 1 Parque - Busch Gardens'),
                 # Adicionar outros pares conforme necessário
@@ -155,9 +154,6 @@ async def coletar_precos_ml_seaworld(hour, array_datas,data_atual):
                         
                     except ValueError:
                         print(f"Erro ao converter preço para {park_name}: {price_text}")
-
-               
-
                 # Adicionando dados
                 data_hora_atual = datetime.now()
                 
@@ -167,7 +163,7 @@ async def coletar_precos_ml_seaworld(hour, array_datas,data_atual):
                     'Preco_Parcelado': float(multiplied_price),
                     'Preco_Avista': cash_price_number
                 })
-       
+               
     except TimeoutException as e:
             print("Erro: Elemento não encontrado ou tempo de espera excedido", e)    
     finally:

@@ -103,6 +103,7 @@ async def receive_json_seaworld():
    
     data = data_atual
     hora = hora_global
+    
     await seaworld_decolar(data_list,hora,data)
     return jsonify({"message": "Dados salvos com sucesso!"})
 
