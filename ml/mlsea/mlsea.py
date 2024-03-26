@@ -103,7 +103,7 @@ async def coletar_precos_ml_seaworld(hour, array_datas,data_atual):
         print("Erro: Elemento não encontrado ou tempo de espera excedido", e)
     try:
             future_date = get_future_date(days)
-            url = f"https://www.vamonessa.com.br/ingressos/Orlando/9?destination=Orlando&destinationCode=2&destinationState=Florida&destinationStateCode=2&date={future_date}"
+            url = f"https://www.vamonessa.com.br/ingressos/BUSCH%20GARDENS%20TAMPA/9?destination=Orlando&destinationCode=2&destinationState=Florida&destinationStateCode=2&date={future_date}"
             driver.get(url)
             await asyncio.sleep(3)  # Aguardar o carregamento da página
             logging.info(f"Coletando preços para {future_date}")
