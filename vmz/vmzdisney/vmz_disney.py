@@ -48,7 +48,7 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual):
     ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/disney-ingresso-hollywood-studios-1dia?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Basico Hollywood Studios'),
     ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/disney-ingresso-animal-kingdom-1dia?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Basico Animal Kingdom'),
     ("https://www.vmzviagens.com.br/ingressos/orlando/promocao-disney-world-4-park-magic/4-park-magic?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[3]/div[2]/span[1]', '4 Dias - Disney Promocional'),
-    ("https://www.vmzviagens.com.br/ingressos/orlando/promocao-disney-world-4-park-magic/4-park-magic-com-parque-aquatico-e-esportes?",'//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[3]/div[2]/span[1]',"4 Dias - Disney Promocional com Aquatico e Esportes")
+    ("https://www.vmzviagens.com.br/ingressos/orlando/promocao-disney-world-4-park-magic/4-park-magic-com-parque-aquatico-e-esportes?",'//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]',"4 Dias - Disney Promocional com Aquatico e Esportes")
     # Adicione outros sites, XPaths e nomes de parques conforme necessario
 ]
 
