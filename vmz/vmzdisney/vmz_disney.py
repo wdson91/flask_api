@@ -1,6 +1,8 @@
-from atualizar_calibragem import atualizar_calibragem
 from imports import *
+from salvardados import *
+from atualizar_calibragem import atualizar_calibragem
 
+ 
 
 async def coletar_precos_vmz(hour,array_datas,data_atual):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
