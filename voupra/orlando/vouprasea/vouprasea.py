@@ -140,7 +140,7 @@ async def coletar_precos_voupra_sea(hour,array_datas,data_atual):
     
     atualizar_calibragem(20)
     logging.info("Coleta de preços Voupra Seaworld  finalizada.")
-
+    return
 
 # async def coletar_precos_voupra_sea(hour,array_datas):
 #     # Configuração do Selenium

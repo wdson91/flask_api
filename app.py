@@ -1,4 +1,8 @@
 from atualizar_calibragem import mudar_horarios
+from data import dias_d_mais
+from data2 import dias_d_mais2
+global hora_global
+from decolar.paris.index import decolar_paris2
 from imports import *
 from decolar.decolar_disney import disney_decolar
 
@@ -13,10 +17,30 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 days_to_add = [5, 10, 20, 47, 65, 126]
 calibrating = False
 global data_atual
-global hora_global
-data_atual = ''
-hora_global = ''
+sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
+data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
 horarios = []
+
+@app.route('/teste', methods=['GET'])
+def teste():
+    urls = dias_d_mais([5, 10, 20, 47, 65, 126])
+    
+    return jsonify(urls)
+
+
+@app.route('/paris', methods=['POST'])
+def paris():
+    data = request.json
+    decolar_paris2(data)
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+
+@app.route('/test', methods=['GET'])
+def test():
+    urls = dias_d_mais2([5, 10, 20, 47, 65, 126])
+    
+    return urls
 
 # Função para gerar as URLs com as datas desejadas
 def generate_urls(url):
@@ -32,7 +56,7 @@ def generate_urls(url):
         new_url = base_url.format(date=formatted_date)
 
         # Criar um dicionário com a data e a URL
-        url_data = {'data': formatted_date, 'url': new_url}
+        url_data = {'dias': formatted_date, 'url': new_url}
         
         urls_with_dates.append(url_data)
 
@@ -50,6 +74,14 @@ def get_urls_universal():
     
     urls = generate_urls("https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_2P2DAY-date&fixedDate={date}")
     return jsonify(urls)
+
+@app.route('/urls_universal_aqua', methods=['GET'])
+def get_urls_universal_aqua():
+    
+    urls1 = generate_urls("https://www.decolar.com/atracoes-turisticas/d-DY_ORL/ingressos+para+walt+disney+world+resort-orlando?clickedPrice=701&priceDate=1711572471771&clickedCurrency=BRL&distribution=1&fixedDate={date}&modalityId=4PARKMAGIC-2024&additionalId=DISNEY-4D-WP-SO-water-parks-sports")
+    return jsonify(urls1)
+
+
 
 @app.route('/urls_universal_14dias', methods=['GET'])
 def get_urls_universal2():
@@ -128,7 +160,8 @@ async def calibrar():
     tipo_calibragem = tipo
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
-    time.sleep(2)
+    
+    time.sleep(5)
     if tipo == 'manual':
         pyautogui.hotkey('ctrl', '1')
     

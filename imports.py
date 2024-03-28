@@ -34,9 +34,11 @@ import schedule  # Importa o módulo schedule para agendar tarefas
 from datetime import datetime  # Importa a classe datetime do módulo datetime
 import pytz  # Importa o módulo pytz para lidar com fusos horários
 from selenium.common.exceptions import NoSuchElementException
-from voupra.voupradisney.voupradisney import coletar_precos_voupra_disney
-from voupra.vouprasea.vouprasea import coletar_precos_voupra_sea
-from voupra.vouprauniversal.vouprauniversal import coletar_precos_voupra_universal
+
+from voupra.orlando.voupradisney.voupradisney import coletar_precos_voupra_disney
+from voupra.orlando.vouprasea.vouprasea import coletar_precos_voupra_sea
+from voupra.orlando.vouprauniversal.vouprauniversal import coletar_precos_voupra_universal
+
 from selenium.webdriver.chrome.options import Options
 from urllib.parse import urlparse, parse_qs
 

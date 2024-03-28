@@ -18,6 +18,7 @@ async def disney_decolar(data,data_hora,data_atual):
         "Ingresso de 2 dias - 2024": "2 Dias - Disney World Basico",
         "Bilhete de 3 dias - 2024": "3 Dias - Disney World Basico",
         "Ingresso Mágico 4 dias - 4 parques": "4 Dias - Disney Promocional",
+        "Ingresso Mágico 4 dias - 4 parques + Parques Aquáticos e Esportes Adicionais":"4 Dias - Disney Promocional com Aquatico e Esportes",
         "Ingresso de 4 dias - 2024": "4 Dias - Disney World Basico",
         "Ingresso de 5 dias - 2024": "5 Dias - Disney World Basico",
         "Bilhete de 6 dias - 2024": "6 Dias - Disney World Basico",
