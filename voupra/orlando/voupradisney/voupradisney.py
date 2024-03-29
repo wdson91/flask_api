@@ -7,7 +7,8 @@ async def coletar_precos_disney_aquaticos(hour,array_datas,data_atual):
 
     # Initialize the Selenium driver (make sure to have the corresponding WebDriver installed)
     options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     # driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
 
     # List to store product data

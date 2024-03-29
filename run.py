@@ -13,17 +13,17 @@ async def executar_ambos(hour, array_datas, data_atual):
     except Exception as e:
         logging.error(f"Erro ao executar main_voupra: {e}")  # Registra uma mensagem de log de erro
     
-    # try:
-    #     await main_vmz(hour, array_datas, data_atual, run_once=True)  # Executa a função main_vmz com o argumento hour
-    #     logging.info("main_vmz concluída.")  # Registra uma mensagem de log
-    # except Exception as e:
-    #     logging.error(f"Erro ao executar main_vmz: {e}")  # Registra uma mensagem de log de erro
+    try:
+        await main_vmz(hour, array_datas, data_atual, run_once=True)  # Executa a função main_vmz com o argumento hour
+        logging.info("main_vmz concluída.")  # Registra uma mensagem de log
+    except Exception as e:
+        logging.error(f"Erro ao executar main_vmz: {e}")  # Registra uma mensagem de log de erro
     
-    # try:
-    #     await main_ml(hour, array_datas, data_atual, run_once=True)  # Executa a função main_ml com o argumento hour
-    #     logging.info("main_ml concluída.")  # Registra uma mensagem de log
-    # except Exception as e:
-    #     logging.error(f"Erro ao executar main_ml: {e}")  # Registra uma mensagem de log de erro
+    try:
+        await main_ml(hour, array_datas, data_atual, run_once=True)  # Executa a função main_ml com o argumento hour
+        logging.info("main_ml concluída.")  # Registra uma mensagem de log
+    except Exception as e:
+        logging.error(f"Erro ao executar main_ml: {e}")  # Registra uma mensagem de log de erro
 
 
 # Verifica se o script está sendo executado diretamente
