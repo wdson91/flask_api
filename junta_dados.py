@@ -46,7 +46,7 @@ async def juntarjsons(hour,data_atual):
     
     salvar_dados_margem(df, nome_arquivo, 'dados',nova_hora_formatada)
     
-    logging.info("Arquivos JSON locais excluídos.")
+   
     
     time.sleep(30)
     atualizar_calibragem(100)
@@ -55,6 +55,7 @@ async def juntarjsons(hour,data_atual):
     for arquivo in arquivos:
         if arquivo.endswith('.json'):
             os.remove(arquivo)
+    logging.info("Arquivos JSON locais excluídos.")
     
     time.sleep(30)
     finalizar_calibragem()
