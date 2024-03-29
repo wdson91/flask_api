@@ -169,7 +169,7 @@ async def calibrar():
         if hora_global == "07:00":
             horarios = []
         horarios.append(hora_global)
-
+    time.sleep(3)
     await executar_ambos(hora_global, days_to_add,data_atual)
 
     return jsonify({"message": "Calibragem iniciada com sucesso!"})

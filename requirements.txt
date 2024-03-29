@@ -12,4 +12,5 @@ bs4==0.0.1
 flask_cors
 pyautogui
 pynput
+webdriver-manager
 #sudo apt-get install python3-tk python3-dev
