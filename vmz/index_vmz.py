@@ -1,4 +1,5 @@
 from imports import *
+from junta_dados import juntarjsons
 
 from .vmzdisney.vmz_disney import coletar_precos_vmz, coletar_precos_vmz_disneybasicos, coletar_precos_vmz_disneydias
 from .vmzsea.vmzsea import coletar_precos_vmz_seaworld
@@ -39,7 +40,11 @@ async def main_vmz(hour,array_datas,data_atual,run_once=False):
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Universal: {e}")
-
+        try:
+            await juntarjsons(hour,data_atual)
+            
+        except Exception as e:
+            logging.error(f"Erro durante a junção dos arquivos: {e}")
         return
 
 if __name__ == "__main__":
