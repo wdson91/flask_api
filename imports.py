@@ -20,6 +20,7 @@ from selenium.common.exceptions import ElementClickInterceptedException, Timeout
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 import logging
+from selenium.webdriver.chrome.service import Service as ChromeService
 import schedule
 from flask_cors import CORS
 from bs4 import BeautifulSoup

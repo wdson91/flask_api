@@ -9,7 +9,7 @@ from imports import *
 connect_str = "DefaultEndpointsProtocol=https;AccountName=sdarq;AccountKey=1WFQXUd7f2vQwRLa2EZod7EtrtyE7HmlKZwBWfby5EuAPy2TvFgM/XSfyG5SzqxIQriIYLpqgMNrEANpCIP0cA==;EndpointSuffix=core.windows.net"
 #connect_str = "DefaultEndpointsProtocol=https;AccountName=shopblob;AccountKey=sq6Uky1VBg/TxprQyuCnfYesOFSWdGGQNED15QKkAGrLb2kShaGwX2qgwD7N+sIBcRXH29taUr6QZRCb+Mip+A==;EndpointSuffix=core.windows.net"
 #container_name = f'imagens/Automacao_python'
-container_name_teste = 'imagens/Automacao_python'
+container_name_teste = 'imagens/Automacao_python/teste'
 
 
 # Função para verificar se o arquivo existe no Azure Blob Storage e baixá-lo
