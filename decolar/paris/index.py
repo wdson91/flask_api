@@ -19,18 +19,18 @@ def decolar_paris2(dados):
 
     # Dicionário para mapear o mês
     meses = {
-        'Janeiro': 1,
-        'Fevereiro': 2,
-        'Março': 3,
-        'Abril': 4,
-        'Maio': 5,
-        'Junho': 6,
-        'Julho': 7,
-        'Agosto': 8,
-        'Setembro': 9,
-        'Outubro': 10,
-        'Novembro': 11,
-        'Dezembro': 12
+        'janeiro': 1,
+        'fevereiro': 2,
+        'março': 3,
+        'abril': 4,
+        'maio': 5,
+        'junho': 6,
+        'julho': 7,
+        'agosto': 8,
+        'setembro': 9,
+        'outubro': 10,
+        'novembro': 11,
+        'dezembro': 12
         
     }
     formatted_data = []
@@ -43,15 +43,15 @@ def decolar_paris2(dados):
     # Iterar sobre os dados originais e converter para o formato desejado
     for dado in dados_originais:
         data_viagem = f"2024-{meses[dado['mes']]:02d}-{int(dado['dia']):02d}"
-        preco_parcelado = clean_price(dado['preco'])
-        preco_avista = preco_parcelado * 0.97  # Desconto de 3% para pagamento à vista
-        parque = parques_mapping.get(dado['parque'], dado['parque'])
+        Preco_Parcelado = clean_price(dado['Preco_Parcelado'])
+        preco_avista = Preco_Parcelado * 0.97  # Desconto de 3% para pagamento à vista
+        Parque = parques_mapping.get(dado['Parque'], dado['Parque'])
         Hora_coleta = dado['hora']
         dados_formatados.append({
             'Hora_coleta': Hora_coleta,
             'Data_viagem': data_viagem,
-            'Parque': parque,
-            'Preco_Parcelado': preco_parcelado,
+            'Parque': Parque,
+            'Preco_Parcelado': Preco_Parcelado,
             'Preco_Avista': preco_avista
         })
 
@@ -71,8 +71,8 @@ def decolar_paris2(dados):
     formatted_data = []
     for index, row in grouped_data.iterrows():
         formatted_data.extend(row['Dados'])
-
+    print(formatted_data)
     nome_arquivo = f'disney_decolar_data_atual.json'
-    salvar_dados_decolar(formatted_data, nome_arquivo ,'decolar',str(hora))
+    #salvar_dados_decolar(formatted_data, nome_arquivo ,'decolar',str(hora))
     
     return jsonify({"message": "Dados salvos com sucesso!"})
