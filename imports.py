@@ -60,6 +60,7 @@ import os
 sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
 
 
+
 def get_directories():
     """
     Retorna uma tupla com os caminhos para o diretório atual, pai e avô do arquivo.

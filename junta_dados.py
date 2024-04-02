@@ -46,8 +46,7 @@ async def juntarjsons(hour,data_atual):
     
     salvar_dados_margem(df, nome_arquivo, 'dados',nova_hora_formatada)
     
-   
-    
+    finalizar_calibragem()
     time.sleep(30)
     atualizar_calibragem(100)
     
@@ -56,10 +55,6 @@ async def juntarjsons(hour,data_atual):
         if arquivo.endswith('.json'):
             os.remove(arquivo)
     logging.info("Arquivos JSON locais excluídos.")
-    
-    time.sleep(30)
-    finalizar_calibragem()
-
 
 if __name__ == "__main__":
     # Hora global

@@ -1,6 +1,8 @@
 from atualizar_calibragem import mudar_horarios
 from data import dias_d_mais
 from data2 import dias_d_mais2
+
+
 global hora_global
 from decolar.paris.index import decolar_paris2
 from imports import *
@@ -22,9 +24,9 @@ data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
 hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
 horarios = []
 
-@app.route('/teste', methods=['GET'])
-def teste():
-    urls = dias_d_mais([5, 10, 20, 47, 65, 126])
+@app.route('/meses_paris', methods=['GET'])
+def meses_paris():
+    urls = dias_d_mais([5,47, 65, 126])
     
     return jsonify(urls)
 
@@ -35,10 +37,15 @@ def paris():
     decolar_paris2(data)
     return jsonify({"message": "Dados salvos com sucesso!"})
 
+# @app.route('/dias_paris', methods=['GET'])
+# def dias():
+    
+    
+#     return jsonify(1,2)
 
-@app.route('/test', methods=['GET'])
-def test():
-    urls = dias_d_mais2([5, 10, 20, 47, 65, 126])
+@app.route('/dias_paris', methods=['GET'])
+def dias_paris():
+    urls = dias_d_mais2([5,47, 65, 126])
     
     return urls
 
@@ -174,6 +181,23 @@ async def calibrar():
 
     return jsonify({"message": "Calibragem iniciada com sucesso!"})
 
+@app.route('/calibrar_paris', methods=['GET'])
+async def calibrar_paris():
+    
+    
+    global calibragem
+    global hora_global
+    global tipo_calibragem
+    global calibrating
+    global horarios
+    global data_atual
+    
+    calibrating = True
+    calibragem = 1
+    #tipo_calibragem = tipo
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    #await main_voupra_paris(hora_global, days_to_add,data_atual)
 
 @app.route('/status_calibragem', methods=['GET'])
 async def status_calibragem():

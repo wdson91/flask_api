@@ -6,7 +6,7 @@ def dias_d_mais(lista_dias):
     
    
     # Mapeamento dos nomes dos meses
-    meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+    meses = ['Janeiro', 'Fevereiro', 'Março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
     datas_formatadas = []   
     # Iterar sobre os dias da lista
     for dias in lista_dias:
