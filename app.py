@@ -26,7 +26,7 @@ horarios = []
 
 @app.route('/meses_paris', methods=['GET'])
 def meses_paris():
-    urls = dias_d_mais([5,47, 65, 126])
+    urls = dias_d_mais([5, 10, 20, 47, 65, 126])
     
     return jsonify(urls)
 
@@ -45,7 +45,7 @@ def paris():
 
 @app.route('/dias_paris', methods=['GET'])
 def dias_paris():
-    urls = dias_d_mais2([5,47, 65, 126])
+    urls = dias_d_mais2([5, 10, 20, 47, 65, 126])
     
     return urls
 
