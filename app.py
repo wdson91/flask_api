@@ -1,12 +1,8 @@
 from atualizar_calibragem import mudar_horarios
 
 from imports import *
-
-
-
 import pyautogui
 from pynput.keyboard import Key, Controller
-
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -14,7 +10,7 @@ days_to_add =[5, 10, 20, 47, 65, 126]
 calibrating = False
 global hora_global
 global data_atual
-num_elements = 2
+
 sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
 data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
 hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
@@ -155,7 +151,7 @@ async def receive_json_seaworld():
     global data_atual
     
     data_list = request.json
-   
+
     data = data_atual
     hora = hora_global
     
@@ -164,6 +160,39 @@ async def receive_json_seaworld():
 
 
 #ROTAS PARA CALIFORNIA
+# @app.route('/xpath_california', methods=['GET'])
+# def get_xpath_california():
+    
+#     base_xpath = "/html/body/div[2]/div/div[2]/div/div/div/div[4]/tour-modalities/div/ul/li"
+#     xpaths = []
+#     for i in range(1, num_elements + 1):
+#         xpath = f"{base_xpath}[{i}]/tour-modality-cluster/div/div/em/div/div[2]/div[1]/div[3]/section[1]/date-picker/div/div[1]/div/input"
+#         xpaths.append(xpath)
+    
+#     return jsonify(xpaths)
+
+# @app.route('/xpath_calendar', methods=['GET'])
+# def get_xpath_calendar():
+    
+#     xpath_base = '/html/body/div[2]/div/div[2]/div/div/div/div[4]/tour-modalities/div/ul/li'
+    
+#     xpaths = []
+#     for i in range(1, num_elements + 1):
+#         xpath = f"{xpath_base}[{i}]/tour-modality-cluster/div/div/em/div/div[2]/div[1]/div[3]/section[1]/date-picker/div/span/span"
+#         xpaths.append(xpath)
+    
+#     return jsonify(xpaths)
+
+# @app.route('/xpath_preco_california', methods=['GET'])
+# def get_xpath_preco_california():
+    # base_xpath = "/html/body/div[2]/div/div[2]/div/div/div/div[4]/tour-modalities/div/ul/li"
+    
+    # xpaths = []
+    # for i in range(1, num_elements + 1):
+    #     xpath = f"{base_xpath}[{i}]/tour-modality-cluster/div/div/em/div/div[2]/div[2]/div/div/div[2]/div/span[2]"
+    #     xpaths.append(xpath)
+    # return jsonify(xpaths)
+
 @app.route('/california', methods=['GET'])
 async def coleta_california():
     global data_atual
@@ -189,39 +218,7 @@ async def dados_california():
     await juntarjsons_california(hora_global,data_atual)
     
     return jsonify({"message": "Dados salvos com sucesso!"})
-    
-@app.route('/xpath_california', methods=['GET'])
-def get_xpath_california():
-    
-    base_xpath = "/html/body/div[2]/div/div[2]/div/div/div/div[4]/tour-modalities/div/ul/li"
-    xpaths = []
-    for i in range(1, num_elements + 1):
-        xpath = f"{base_xpath}[{i}]/tour-modality-cluster/div/div/em/div/div[2]/div[1]/div[3]/section[1]/date-picker/div/div[1]/div/input"
-        xpaths.append(xpath)
-    
-    return jsonify(xpaths)
 
-@app.route('/xpath_calendar', methods=['GET'])
-def get_xpath_calendar():
-    
-    xpath_base = '/html/body/div[2]/div/div[2]/div/div/div/div[4]/tour-modalities/div/ul/li'
-    
-    xpaths = []
-    for i in range(1, num_elements + 1):
-        xpath = f"{xpath_base}[{i}]/tour-modality-cluster/div/div/em/div/div[2]/div[1]/div[3]/section[1]/date-picker/div/span/span"
-        xpaths.append(xpath)
-    
-    return jsonify(xpaths)
-
-@app.route('/xpath_preco_california', methods=['GET'])
-def get_xpath_preco_california():
-    base_xpath = "/html/body/div[2]/div/div[2]/div/div/div/div[4]/tour-modalities/div/ul/li"
-    
-    xpaths = []
-    for i in range(1, num_elements + 1):
-        xpath = f"{base_xpath}[{i}]/tour-modality-cluster/div/div/em/div/div[2]/div[2]/div/div/div[2]/div/span[2]"
-        xpaths.append(xpath)
-    return jsonify(xpaths)
 
 @app.route('/receive_json_decolar_california', methods=['POST'])
 def receive_json_decolar_california():
@@ -315,7 +312,6 @@ def abortar_calibragem():
     # Reinicia a aplicação
     os.execl(sys.executable, sys.executable, *sys.argv)
 
-
 @app.route('/finalizar_calibragem', methods=['POST'])
 def finalizar_calibragem_api():
     global calibrating
@@ -342,6 +338,7 @@ def atualizar_hora():
     horarios.append(horario)
 
 
+
+
 if __name__ == '__main__':
-    
     app.run(debug=True, host='0.0.0.0',port=5000)
