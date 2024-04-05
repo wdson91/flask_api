@@ -27,7 +27,7 @@ from bs4 import BeautifulSoup
 import json
 from threading import Thread
 from decolar.salvardadosdecolar import salvar_dados_decolar
-
+from salvardados import salvar_dados
 from salvardados import *
 from urllib.parse import urlparse, parse_qs
 import chromedriver_autoinstaller
