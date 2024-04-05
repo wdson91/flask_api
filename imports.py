@@ -74,7 +74,7 @@ from decolar.orlando.universal_decolar import receive_universal_decolar
 
 
 import os
-
+from excluir_json import apagar_arquivos_json_na_pasta_atual
 sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
 
 

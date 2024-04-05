@@ -48,12 +48,7 @@ async def juntarjsons_california(hour,data_atual):
     
     #finalizar_calibragem()
     
-    #Remova os arquivos JSON locais
-    for arquivo in arquivos:
-        if arquivo.endswith('.json'):
-            os.remove(arquivo)
-    logging.info("Arquivos JSON locais excluídos.")
-
+    apagar_arquivos_json_na_pasta_atual()
     #time.sleep(30)
     #atualizar_calibragem(100)
     

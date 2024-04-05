@@ -1,4 +1,5 @@
 from app import *
+
 from imports import *
 from salvardados import baixar_blob_se_existir, carregar_dados_json, salvar_dados_margem
 arquivos = os.listdir()
@@ -48,12 +49,7 @@ async def juntarjsons(hour,data_atual):
     
     finalizar_calibragem()
     
-    #Remova os arquivos JSON locais
-    for arquivo in arquivos:
-        if arquivo.endswith('.json'):
-            os.remove(arquivo)
-    logging.info("Arquivos JSON locais excluídos.")
-
+    apagar_arquivos_json_na_pasta_atual()
     time.sleep(30)
     atualizar_calibragem(100)
     
