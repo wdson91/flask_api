@@ -4,11 +4,11 @@ from salvardados import baixar_blob_se_existir, carregar_dados_json, salvar_dado
 arquivos = os.listdir()
 from atualizar_calibragem import atualizar_calibragem, finalizar_calibragem, mudar_horarios
 
-async def juntarjsons(hour,data_atual):
+async def juntarjsons_paris(hour,data_atual):
     
     # Lista de empresas e parques
-    empresas = ['voupra', 'vmz', 'decolar', 'ml']
-    parques = ['disney', 'universal', 'seaworld']
+    empresas = ['voupra', 'decolar', 'ml']
+    parques = ['paris']
     
     # Dicionário para armazenar os dados modificados
     dados_modificados = {}
@@ -20,7 +20,7 @@ async def juntarjsons(hour,data_atual):
     # Baixa os arquivos JSON dos diferentes parques e empresas
     for empresa in empresas:
         for parque in parques:
-            baixar_blob_se_existir(f'{parque}_{empresa}_{data_atual}.json', empresa)
+            baixar_blob_se_existir(f'{parque}_{empresa}_{data_atual}.json', f'paris/{empresa}')
 
             # Carrega os dados JSON baixados
             dados = carregar_dados_json(f'{parque}_{empresa}_{data_atual}.json')
@@ -44,9 +44,9 @@ async def juntarjsons(hour,data_atual):
     df = pd.read_json(nome_arquivo)
     df = pd.DataFrame(df)
     
-    salvar_dados_margem(df, nome_arquivo, 'dados',nova_hora_formatada)
+    salvar_dados_margem(df, nome_arquivo, 'paris/dados',nova_hora_formatada)
     
-    finalizar_calibragem()
+    #finalizar_calibragem()
     
     #Remova os arquivos JSON locais
     for arquivo in arquivos:
@@ -55,7 +55,7 @@ async def juntarjsons(hour,data_atual):
     logging.info("Arquivos JSON locais excluídos.")
 
     time.sleep(30)
-    atualizar_calibragem(100)
+    #atualizar_calibragem(100)
     
     
 if __name__ == "__main__":
@@ -64,4 +64,4 @@ if __name__ == "__main__":
     data_atual = datetime.now(pytz.timezone('America/Sao_Paulo')).strftime("%Y-%m-%d")
     
     # Crie um loop de eventos e execute a função principal
-    asyncio.run(juntarjsons(hora_global,data_atual))
+    asyncio.run(juntarjsons_paris(hora_global,data_atual))

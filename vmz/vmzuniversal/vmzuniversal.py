@@ -62,19 +62,20 @@ async def coletar_precos_vmz_universal(hour, array_datas,data_atual):
 
 
 def extrair_precos(driver):
+    # try:
+    #     preco_parcelado_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[1]/div[2]/b')
+    #     preco_avista_element = driver.find_element(By.XPATH,    '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[1]/div[2]/span[1]')
+    # except NoSuchElementException:
     try:
-        preco_parcelado_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[1]/div[2]/b')
-        preco_avista_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[1]/div[2]/span[1]')
-    except NoSuchElementException:
-        try:
             preco_parcelado_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/b')
-            preco_avista_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]')
-        except NoSuchElementException:
+            preco_avista_element = driver.find_element(By.XPATH,    '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]')
+    except NoSuchElementException:
             preco_final_avista = preco_float = "-"
-        else:
-            preco_parcelado = preco_parcelado_element.text.replace('R$ ', '').replace(',', '.')
-            preco_float = float(preco_parcelado) * 10
-            preco_final_avista = float(preco_avista_element.text.replace('R$ ', '').replace('.','').replace(',', '.'))
+            try:
+                preco_parcelado_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[3]/div[2]/b')
+                preco_avista_element = driver.find_element(By.XPATH,    '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[3]/div[2]/span[1]')
+            except NoSuchElementException:
+                preco_final_avista = preco_float = "-"
     else:
         preco_final_avista = float(preco_avista_element.text.replace('R$ ', '').replace('.','').replace(',', '.'))
         preco_parcelado = preco_parcelado_element.text.replace('R$ ', '').replace(',', '.')

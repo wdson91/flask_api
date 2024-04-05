@@ -1,53 +1,80 @@
 from atualizar_calibragem import mudar_horarios
-from data import dias_d_mais
-from data2 import dias_d_mais2
 
 
-global hora_global
-from decolar.paris.index import decolar_paris2
+
+
+from decolar.california.decolar_california import decolar_california
+from decolar.paris.decolar_paris import decolar_paris
+from decolar.paris.dias_paris import dias_paris
+from decolar.paris.meses_paris import meses_paris
 from imports import *
-from decolar.decolar_disney import disney_decolar
-
-from decolar.sea import seaworld_decolar
-from decolar.universal_decolar import universal_decolar
+from decolar.decolar_disney import  receive_disney_decolar
+from decolar.sea_decolar import seaworld_decolar
+from decolar.universal_decolar import receive_universal_decolar
 import pyautogui
 from pynput.keyboard import Key, Controller
-
+from junta_dados_paris import juntarjsons_paris
+from run_paris import executar_paris
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
-days_to_add = [5, 10, 20, 47, 65, 126]
+days_to_add =[5, 10, 20, 47, 65, 126]
 calibrating = False
+global hora_global
 global data_atual
+num_elements = 2
 sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
 data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
 hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
 horarios = []
 
+
+@app.route('/', methods=['GET'])
+def hello():
+    return  hora_global
+
+#ROTAS PARA PARIS
 @app.route('/meses_paris', methods=['GET'])
-def meses_paris():
-    urls = dias_d_mais([5, 10, 20, 47, 65, 126])
+def meses_paris_api():
+    urls = meses_paris(days_to_add)
     
     return jsonify(urls)
 
-
-@app.route('/paris', methods=['POST'])
-def paris():
-    data = request.json
-    decolar_paris2(data)
-    return jsonify({"message": "Dados salvos com sucesso!"})
-
-# @app.route('/dias_paris', methods=['GET'])
-# def dias():
-    
-    
-#     return jsonify(1,2)
-
 @app.route('/dias_paris', methods=['GET'])
-def dias_paris():
-    urls = dias_d_mais2([5, 10, 20, 47, 65, 126])
+def dias_paris_api():
+    urls = dias_paris(days_to_add)
     
     return urls
+
+@app.route('/paris', methods=['GET'])
+async def coleta_paris():
+    global data_atual
+    global hora_global
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
+    array_datas = [5, 10, 20, 47, 65, 126]
+    
+    time.sleep(5)
+    #pyautogui.hotkey('ctrl', '2')
+    await executar_paris(hora_global, array_datas, data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+@app.route('/urls_paris', methods=['GET'])
+def get_urls_paris():
+    urls = ['https://www.decolar.com/atracoes-turisticas/d-GL_PAR_2453/entrada+da+disneyland+paris-paris?clickedPrice=649&priceDate=1711975109134&clickedCurrency=BRL&currency=BRL','https://www.decolar.com/atracoes-turisticas/d-PAM_PAR_53515/disneyland+paris+acesso+a+2+parques+em+2+dias+2024-paris?clickedPrice=1475&priceDate=1712252562173&clickedCurrency=BRL&currency=BRL']
+    
+    return jsonify(urls)
+
+@app.route('/dados_paris', methods=['GET'])
+async def dados_paris():
+    
+    global data_atual
+    global hora_global
+    
+    
+    await juntarjsons_paris(hora_global,data_atual)
 
 # Função para gerar as URLs com as datas desejadas
 def generate_urls(url):
@@ -75,7 +102,15 @@ def get_urls_disney():
     
     return jsonify(urls)
 
+@app.route('/receive_json_decolar_paris', methods=['POST'])
+def receive_json_paris_disney():
+    global data_atual
+    data = request.json
+    decolar_paris(data,data_atual)
+    return jsonify({"message": "Dados salvos com sucesso!"})
 
+
+#ROTAS PARA DECOLAR
 @app.route('/urls_universal_basico', methods=['GET'])
 def get_urls_universal():
     
@@ -88,24 +123,11 @@ def get_urls_universal_aqua():
     urls1 = generate_urls("https://www.decolar.com/atracoes-turisticas/d-DY_ORL/ingressos+para+walt+disney+world+resort-orlando?clickedPrice=701&priceDate=1711572471771&clickedCurrency=BRL&distribution=1&fixedDate={date}&modalityId=4PARKMAGIC-2024&additionalId=DISNEY-4D-WP-SO-water-parks-sports")
     return jsonify(urls1)
 
-
-
 @app.route('/urls_universal_14dias', methods=['GET'])
 def get_urls_universal2():
     
     urls2 = generate_urls("https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?distribution=1&date&fixedDate={date}&modalityId=ORL_3-PE-2024M-date")
     return jsonify(urls2)
-@app.route('/date', methods=['GET'])
-def get_date():
-    urls = generate_urls()
-    
-    return jsonify(urls[1])
-
-
-@app.route('/', methods=['GET'])
-def hello():
-    return  hora_global
-
 
 @app.route('/receive_json_universal', methods=['POST'])
 async def receive_json_universal():
@@ -116,7 +138,7 @@ async def receive_json_universal():
     hora = hora_global
     data_list = request.json
     
-    await universal_decolar(data_list,hora_global,data)
+    await receive_universal_decolar(data_list,hora_global,data)
 
     return jsonify({"message": "Dados salvos com sucesso!"})
 
@@ -129,7 +151,7 @@ async def receive_json_disney():
     data = data_atual
     hora = hora_global
     data_list = request.json
-    await disney_decolar(data_list,hora,data)
+    await receive_disney_decolar(data_list,hora,data)
 
     return jsonify({"message": "Dados salvos com sucesso!"})
 
@@ -145,6 +167,50 @@ async def receive_json_seaworld():
     
     await seaworld_decolar(data_list,hora,data)
     return jsonify({"message": "Dados salvos com sucesso!"})
+
+
+#ROTAS PARA CALIFORNIA
+@app.route('/xpath_california', methods=['GET'])
+def get_xpath_california():
+    
+    base_xpath = "/html/body/div[2]/div/div[2]/div/div/div/div[4]/tour-modalities/div/ul/li"
+    xpaths = []
+    for i in range(1, num_elements + 1):
+        xpath = f"{base_xpath}[{i}]/tour-modality-cluster/div/div/em/div/div[2]/div[1]/div[3]/section[1]/date-picker/div/div[1]/div/input"
+        xpaths.append(xpath)
+    
+    return jsonify(xpaths)
+
+@app.route('/xpath_calendar', methods=['GET'])
+def get_xpath_calendar():
+    
+    xpath_base = '/html/body/div[2]/div/div[2]/div/div/div/div[4]/tour-modalities/div/ul/li'
+    
+    xpaths = []
+    for i in range(1, num_elements + 1):
+        xpath = f"{xpath_base}[{i}]/tour-modality-cluster/div/div/em/div/div[2]/div[1]/div[3]/section[1]/date-picker/div/span/span"
+        xpaths.append(xpath)
+    
+    return jsonify(xpaths)
+
+@app.route('/xpath_preco_california', methods=['GET'])
+def get_xpath_preco_california():
+    base_xpath = "/html/body/div[2]/div/div[2]/div/div/div/div[4]/tour-modalities/div/ul/li"
+    
+    xpaths = []
+    for i in range(1, num_elements + 1):
+        xpath = f"{base_xpath}[{i}]/tour-modality-cluster/div/div/em/div/div[2]/div[2]/div/div/div[2]/div/span[2]"
+        xpaths.append(xpath)
+    return jsonify(xpaths)
+
+@app.route('/receive_json_decolar_california', methods=['POST'])
+def receive_json_decolar_california():
+    global data_atual
+    data = request.json
+    
+    decolar_california(data,data_atual)
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
 
 @app.route('/calibrar', methods=['GET'])
 async def calibrar():
@@ -181,24 +247,6 @@ async def calibrar():
 
     return jsonify({"message": "Calibragem iniciada com sucesso!"})
 
-@app.route('/calibrar_paris', methods=['GET'])
-async def calibrar_paris():
-    
-    
-    global calibragem
-    global hora_global
-    global tipo_calibragem
-    global calibrating
-    global horarios
-    global data_atual
-    
-    calibrating = True
-    calibragem = 1
-    #tipo_calibragem = tipo
-    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
-    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
-    #await main_voupra_paris(hora_global, days_to_add,data_atual)
-
 @app.route('/status_calibragem', methods=['GET'])
 async def status_calibragem():
     
@@ -218,6 +266,9 @@ async def status_calibragem():
                     "Calibrating": calibrating})
 
 
+
+
+
 @app.route('/calibragem', methods=['POST'])
 def set_calibragem():
     global calibragem
@@ -230,7 +281,7 @@ def set_calibragem():
     else:
         return jsonify({'error': 'Falta o parâmetro "novo_valor" no corpo da solicitação'}), 400
 
-@app.route('/abortar_calibracao', methods=['GET'])
+@app.route('/abortar_calibragem', methods=['GET'])
 def abortar_calibragem():
     global calibrating
     
@@ -253,6 +304,11 @@ def finalizar_calibragem_api():
     # tipo_calibragem = None
     return jsonify({"message": "Calibragem finalizada com sucesso!"})
 
+@app.route('/date', methods=['GET'])
+def get_date():
+    urls = generate_urls()
+    
+    return jsonify(urls[1])
 
 app.route('/hora', methods=['POST'])
 def atualizar_hora():

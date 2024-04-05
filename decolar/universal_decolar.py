@@ -1,7 +1,7 @@
 from imports import *
 
 
-async def universal_decolar(data,data_hora,data_atual):
+async def receive_universal_decolar(data,data_hora,data_atual):
     data_list = data  # Recebe a lista de objetos JSON enviada na solicitação
 
     # Trim 'Parque' field in each item

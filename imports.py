@@ -51,9 +51,9 @@ from vmz.vmzsea.vmzsea import coletar_precos_vmz_seaworld
 from vmz.vmzuniversal.vmzuniversal import coletar_precos_vmz_universal
 
 
-from ml.ml_universal.ml_universal import coletar_precos_ml_universal
-from ml.mldisney.ml_disney import coletar_precos_ml_disney
-from ml.mlsea.mlsea import coletar_precos_ml_seaworld
+from ml.orlando.ml_universal.ml_universal import coletar_precos_ml_universal
+from ml.orlando.mldisney.ml_disney import coletar_precos_ml_disney
+from ml.orlando.mlsea.mlsea import coletar_precos_ml_seaworld
 
 import os
 
@@ -75,7 +75,6 @@ def get_directories():
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
-hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
 calibragem = 0
 tipo_calibragem = 'automatica'
 horarios = []

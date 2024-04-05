@@ -1,19 +1,18 @@
-from datetime import datetime
-import json
-from flask import jsonify
-import pandas as pd
 import re
-
-import pytz
+import pandas as pd
+from flask import jsonify
 
 from decolar.salvardadosdecolar import salvar_dados_decolar
 
-def clean_price(price_str):
-    cleaned_price = price_str.replace('R$', '').replace('\n', '').strip()
-    return float(cleaned_price.replace('.', ''))
+def clean_price(string):
+    if isinstance(string, str):  # Verificar se é uma string válida
+        last_three_chars = string[-6:].rstrip()  # Pegar os últimos três caracteres da string
+        #if last_three_chars.isdigit():  # Verificar se os últimos três caracteres são dígitos
+        return int(float(last_three_chars) * 1000)
+    return None
 
-def decolar_paris2(dados):
-    print(dados)
+def decolar_california(dados,data_atual):
+    
     dados_originais = dados
     dados_formatados = []
 
@@ -31,9 +30,8 @@ def decolar_paris2(dados):
         'outubro': 10,
         'novembro': 11,
         'dezembro': 12
-        
     }
-    formatted_data = []
+    
     # Dicionário para mapear os nomes dos parques
     parques_mapping = {
         'Disneyland Paris Acesso a 2 parques em 1 dia 2024': '1 Dia 2 Parques - Disney Paris',
@@ -42,26 +40,27 @@ def decolar_paris2(dados):
 
     # Iterar sobre os dados originais e converter para o formato desejado
     for dado in dados_originais:
-        data_viagem = f"2024-{meses[dado['mes']]:02d}-{int(dado['dia']):02d}"
+        data_viagem = f"2024-{meses[dado['test']]:02d}-{int(dado['dia']):02d}"
         Preco_Parcelado = clean_price(dado['Preco_Parcelado'])
-        preco_avista = Preco_Parcelado * 0.97  # Desconto de 3% para pagamento à vista
-        Parque = parques_mapping.get(dado['Parque'], dado['Parque'])
-        Hora_coleta = dado['hora']
+        #Parque = parques_mapping.get(dado['Parque'], dado['Parque'])
+        Parque= dado['Parque']
+        Hora_coleta = dados_originais[0]['Hora_coleta']
         dados_formatados.append({
             'Hora_coleta': Hora_coleta,
             'Data_viagem': data_viagem,
             'Parque': Parque,
             'Preco_Parcelado': Preco_Parcelado,
-            'Preco_Avista': preco_avista
+            # Removendo o arredondamento do preço à vista
+            'Preco_Avista': float(Preco_Parcelado) * 0.97
         })
 
     df = pd.DataFrame(dados_formatados)
     
-    hora= df['Hora_coleta'].iloc[0]
+    # Ordenar o DataFrame pelo campo 'Data_viagem' e 'Parque'
     df = df.sort_values(by=['Data_viagem', 'Parque'])
-    df['Preco_Avista'] = df['Preco_Parcelado'] * 0.97 
-    df = df[['Data_viagem', 'Parque', 'Preco_Parcelado', 'Preco_Avista']]
-    # Converter o DataFrame de volta para uma lista de dicionários
+    
+    # Remover duplicatas mantendo apenas a primeira ocorrência
+    df.drop_duplicates(subset=['Data_viagem', 'Parque'], inplace=True)
     
     # Agrupar os dados por data_viagem e converter em formato de lista
     grouped_data = df.groupby('Data_viagem').apply(lambda x: x.to_dict(orient='records')).reset_index(
@@ -71,8 +70,14 @@ def decolar_paris2(dados):
     formatted_data = []
     for index, row in grouped_data.iterrows():
         formatted_data.extend(row['Dados'])
-    print(formatted_data)
-    nome_arquivo = f'disney_decolar_data_atual.json'
-    #salvar_dados_decolar(formatted_data, nome_arquivo ,'decolar',str(hora))
+    
+    # Obter a hora de coleta
+    hora = df['Hora_coleta'].iloc[0]
+    
+    # Nome do arquivo
+    nome_arquivo = f'california_decolar_{data_atual}.json'
+    df.to_json(nome_arquivo, orient='records', lines=True)
+    # Salvar os dados
+    #salvar_dados_decolar(formatted_data, nome_arquivo, 'teste/paris/decolar', str(hora))
     
     return jsonify({"message": "Dados salvos com sucesso!"})

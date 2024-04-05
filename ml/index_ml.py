@@ -1,16 +1,14 @@
 from imports import *
 from junta_dados import juntarjsons
 
-from ml.ml_universal.ml_universal import coletar_precos_ml_universal
-from ml.mldisney.ml_disney import coletar_precos_ml_disney
-from ml.mlsea.mlsea import coletar_precos_ml_seaworld
 
-
+from ml.orlando.mldisney.ml_disney import coletar_precos_ml_disney
+from ml.orlando.mlsea.mlsea import coletar_precos_ml_seaworld
+from ml.orlando.ml_universal.ml_universal import coletar_precos_ml_universal
 
 async def main_ml(hour,array_datas,data_atual,run_once=False):
     if run_once:
         logging.info("Iniciando coleta de preços.")
-        
         
         try:
             # Execute as funções assíncronas em sequência

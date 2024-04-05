@@ -2,9 +2,7 @@ from imports import *
 
 # Inicialize o driver do Selenium (certifique-se de ter o WebDriver correspondente instalado)
 
-
 #from atualizar_calibragem import atualizar_calibragem
-
 
 async def coletar_precos_voupra_paris(hour,array_datas,data_atual):
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
@@ -18,11 +16,11 @@ async def coletar_precos_voupra_paris(hour,array_datas,data_atual):
 
     # Mapeamento dos nomes dos parques
     mapeamento_nomes = {
-        329431: "1 Dia Disneyland Paris para 1 Parque",
-        329472: "1 Dia Disneyland Paris para 2 Parques",
-        329476: "2 Dias Disneyland Paris para 2 Parques",
-        369974: "3 Dias Disneyland Paris para 2 Parques",
-        369978: "4 Dias Disneyland Paris para 2 Parques",
+        329431: "1 Dia 1 Parque - Disney Paris",
+        329472: "1 Dia 2 Parques - Disney Paris",
+        329476: "2 Dias 2 Parques - Disney Paris",
+        369974: "3 Dias 2 Parques - Disney Paris",
+        369978: "4 Dias 2 Parques - Disney Paris",
     }
 
     for data in datas:
@@ -136,11 +134,11 @@ async def coletar_precos_voupra_paris(hour,array_datas,data_atual):
     df['MargemCategoria'].fillna('-', inplace=True)
     df = df.sort_values(by=['Data_viagem', 'Parque'])
 
-    nome_arquivo = f'seaworld_voupra_{data_atual}.json'
-    #salvar_dados(df, nome_arquivo, 'voupra', hour)
-    print(df)
+    nome_arquivo = f'paris_voupra_{data_atual}.json'
+    salvar_dados(df, nome_arquivo, 'paris/voupra', hour)
+    
     #atualizar_calibragem(20)
-    logging.info("Coleta de preços Voupra Seaworld  finalizada.")
+    logging.info("Coleta de preços Voupra Paris  finalizada.")
     return
 
 if __name__ == "__main__":
@@ -150,4 +148,3 @@ if __name__ == "__main__":
     array_datas = [7, 14, 21, 28]
     asyncio.run(coletar_precos_voupra_sea(hour,array_datas,data_atual))
     #atualizar_calibragem(20)
-    logging.info("Coleta de preços Voupra Seaworld finalizada.")
