@@ -13,7 +13,9 @@ from decolar.sea_decolar import seaworld_decolar
 from decolar.universal_decolar import receive_universal_decolar
 import pyautogui
 from pynput.keyboard import Key, Controller
+from junta_dados_california import juntarjsons_california
 from junta_dados_paris import juntarjsons_paris
+from run_california import executar_california
 from run_paris import executar_paris
 
 app = Flask(__name__)
@@ -75,6 +77,8 @@ async def dados_paris():
     
     
     await juntarjsons_paris(hora_global,data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
 
 # Função para gerar as URLs com as datas desejadas
 def generate_urls(url):
@@ -170,6 +174,32 @@ async def receive_json_seaworld():
 
 
 #ROTAS PARA CALIFORNIA
+@app.route('/california', methods=['GET'])
+async def coleta_california():
+    global data_atual
+    global hora_global
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
+    array_datas = [5, 10, 20, 47, 65, 126]
+    
+    time.sleep(5)
+    #pyautogui.hotkey('ctrl', '2')
+    await executar_california(hora_global, array_datas, data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+@app.route('/dados_california', methods=['GET'])
+async def dados_california():
+    
+    global data_atual
+    global hora_global
+    
+    
+    await juntarjsons_california(hora_global,data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
+    
 @app.route('/xpath_california', methods=['GET'])
 def get_xpath_california():
     

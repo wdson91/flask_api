@@ -34,19 +34,29 @@ def decolar_california(dados,data_atual):
     
     # Dicionário para mapear os nomes dos parques
     parques_mapping = {
-        'Disneyland Paris Acesso a 2 parques em 1 dia 2024': '1 Dia 2 Parques - Disney Paris',
-        'Disneyland Paris: 1 dia / 1 parque': '1 Dia 1 Parque - Disney Paris'
+        'Entrada no Disney Park 1 dia': '1 Dia - Disney California',
+        'Entrada na Disney 2 dias (1 parque x dia)': '2 Dias - Disney California',
+        'Entrada na Disney 3 dias (1 parque x dia)': '3 Dias - Disney California',
+        'Bilhete Hopper de 4 dias (Disney Park and Adventure)': '4 Dias - Disney California',
+        'Bilhete Hopper de 5 dias (Disney Park and Adventure)': '5 Dias - Disney California',
     }
 
     # Iterar sobre os dados originais e converter para o formato desejado
     for dado in dados_originais:
         data_viagem = f"2024-{meses[dado['test']]:02d}-{int(dado['dia']):02d}"
         Preco_Parcelado = clean_price(dado['Preco_Parcelado'])
-        #Parque = parques_mapping.get(dado['Parque'], dado['Parque'])
-        Parque= dado['Parque']
+        
+        # Mapear o nome do parque
+        Parque = None
+        for nome_parque, nome_parque_mapeado in parques_mapping.items():
+            if nome_parque in dado['Parque']:
+                Parque = nome_parque_mapeado
+                break
+        # if Parque is None:
+        #     Parque = dado['Parque']  # Usar o nome original do parque se não houver mapeamento
+
         Hora_coleta = dados_originais[0]['Hora_coleta']
         dados_formatados.append({
-            'Hora_coleta': Hora_coleta,
             'Data_viagem': data_viagem,
             'Parque': Parque,
             'Preco_Parcelado': Preco_Parcelado,
@@ -61,7 +71,7 @@ def decolar_california(dados,data_atual):
     
     # Remover duplicatas mantendo apenas a primeira ocorrência
     df.drop_duplicates(subset=['Data_viagem', 'Parque'], inplace=True)
-    
+    df = df.dropna(subset=['Parque'])
     # Agrupar os dados por data_viagem e converter em formato de lista
     grouped_data = df.groupby('Data_viagem').apply(lambda x: x.to_dict(orient='records')).reset_index(
         name='Dados')
@@ -72,12 +82,12 @@ def decolar_california(dados,data_atual):
         formatted_data.extend(row['Dados'])
     
     # Obter a hora de coleta
-    hora = df['Hora_coleta'].iloc[0]
+    hora = dados_originais[0]['Hora_coleta']
     
     # Nome do arquivo
     nome_arquivo = f'california_decolar_{data_atual}.json'
-    df.to_json(nome_arquivo, orient='records', lines=True)
+    #df.to_json(nome_arquivo, orient='records', lines=True)
     # Salvar os dados
-    #salvar_dados_decolar(formatted_data, nome_arquivo, 'teste/paris/decolar', str(hora))
+    salvar_dados_decolar(formatted_data, nome_arquivo, 'california/decolar', str(hora))
     
     return jsonify({"message": "Dados salvos com sucesso!"})

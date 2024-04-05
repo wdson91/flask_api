@@ -16,15 +16,15 @@ async def coletar_precos_voupra_california(hour,array_datas,data_atual):
 
     # Mapeamento dos nomes dos parques
     mapeamento_nomes = {
-        379495: "1 Dia 1 Parque - Disney California",
-        368167: "2 Dias 1 Parque - Disney California",
-        368170: "3 Dias 1 Parque - Disney California",
-        368172: "4 Dias 1 Parque - Disney California",
-        368174: "5 Dias 1 Parque - Disney California",
+        379495: "1 Dia - Disney California",
+        368167: "2 Dias - Disney California",
+        368170: "3 Dias - Disney California",
+        368172: "4 Dias - Disney California",
+        368174: "5 Dias - Disney California",
     }
 
     for data in datas:
-        url = f"https://shopapp-montagem.azurewebsites.net/estados-unidos/california/disneyland-california?Id=56284&Busca=true&DataTemporada{data}&dump=true"
+        url = f"https://shopapp-montagem.azurewebsites.net/estados-unidos/california/disneyland-california?Id=56284&Busca=true&DataTemporada={data}&dump=true"
         driver.get(url)
         time.sleep(2)
 
@@ -134,17 +134,17 @@ async def coletar_precos_voupra_california(hour,array_datas,data_atual):
     df['MargemCategoria'].fillna('-', inplace=True)
     df = df.sort_values(by=['Data_viagem', 'Parque'])
 
-    nome_arquivo = f'paris_voupra_{data_atual}.json'
+    nome_arquivo = f'california_voupra_{data_atual}.json'
     salvar_dados(df, nome_arquivo, 'california/voupra', hour)
     
     #atualizar_calibragem(20)
-    logging.info("Coleta de preços Voupra Paris  finalizada.")
+    logging.info("Coleta de preços Voupra California  finalizada.")
     return
 
 if __name__ == "__main__":
     # Hora global
     hour = datetime.now(pytz.timezone('America/Sao_Paulo'))
     data_atual = datetime.now().date()
-    array_datas = [7, 14, 21, 28]
+    array_datas = [5, 10, 20, 47, 65, 126]
     asyncio.run(coletar_precos_voupra_sea(hour,array_datas,data_atual))
     #atualizar_calibragem(20)

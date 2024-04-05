@@ -7,11 +7,11 @@ async def coletar_precos_vmz_california(hour, array_datas,data_atual):
     
     # Configuração dos sites e URLs
     sites = [
-        ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/1-parque-1-dia-data-fixa?", '1 Dia 1 Parque - Disney California'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/2-parques-1-dia-park-to-park-data-fixa?", '2 Dias 1 Parque - Disney California'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/2-parques-2-dias-park-to-park-data-fixa?", '3 Dias 1 Parque - Disney California'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/2-parques-4-dias-park-to-park-data-fixa?", '4 Dia s1 Parque - Disney California'),
-        ("https://www.vmzviagens.com.br/ingressos/california/disneyland-california/disneyland-california-4-dias-basicos?", '5 Dias 1 Parque - Disney California')
+        #("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/1-parque-1-dia-data-fixa?", "1 Dia - Disney California"),
+        ("https://www.vmzviagens.com.br/ingressos/california/disneyland-california/disneyland-california-2-dias-basicos?", '2 Dias - Disney California'),
+        ("https://www.vmzviagens.com.br/ingressos/california/disneyland-california/disneyland-california-3-dias-basicos?", '3 Dias - Disney California'),
+        ("https://www.vmzviagens.com.br/ingressos/california/disneyland-california/disneyland-california-4-dias-basicos?", '4 Dias - Disney California'),
+        #("https://www.vmzviagens.com.br/ingressos/california/disneyland-california/disneyland-california-4-dias-basicos?", '5 Dias - Disney California')
     ]
     url_14_dias = "https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/14-dias-flexiveis-uso-em-2024?"
     
@@ -53,7 +53,7 @@ async def coletar_precos_vmz_california(hour, array_datas,data_atual):
         # Criação do DataFrame e salvamento dos dados
         df = pd.DataFrame(dados)
         nome_arquivo = f'california_vmz_{data_atual}.json'
-        salvar_dados(df, nome_arquivo, 'vmz', hour)
+        salvar_dados(df, nome_arquivo, 'california/vmz', hour)
         #atualizar_calibragem(75)
         logging.info("Coleta finalizada Site Vmz- California.")
 
@@ -63,7 +63,7 @@ async def coletar_precos_vmz_california(hour, array_datas,data_atual):
 
 def extrair_precos(driver):
     try:
-        preco_parcelado_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/b')
+        preco_parcelado_element = driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/b')
         preco_avista_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]')
     except NoSuchElementException:
         # try:
@@ -84,4 +84,4 @@ def extrair_precos(driver):
 
 
 if __name__ == "__main__":
-    asyncio.run(coletar_precos_vmz_universal())
+    asyncio.run(coletar_precos_vmz_california())
