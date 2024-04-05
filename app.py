@@ -1,22 +1,12 @@
 from atualizar_calibragem import mudar_horarios
 
-
-
-
-from decolar.california.decolar_california import decolar_california
-from decolar.paris.decolar_paris import decolar_paris
-from decolar.paris.dias_paris import dias_paris
-from decolar.paris.meses_paris import meses_paris
 from imports import *
-from decolar.decolar_disney import  receive_disney_decolar
-from decolar.sea_decolar import seaworld_decolar
-from decolar.universal_decolar import receive_universal_decolar
+
+
+
 import pyautogui
 from pynput.keyboard import Key, Controller
-from junta_dados_california import juntarjsons_california
-from junta_dados_paris import juntarjsons_paris
-from run_california import executar_california
-from run_paris import executar_paris
+
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})

@@ -55,6 +55,24 @@ from ml.orlando.ml_universal.ml_universal import coletar_precos_ml_universal
 from ml.orlando.mldisney.ml_disney import coletar_precos_ml_disney
 from ml.orlando.mlsea.mlsea import coletar_precos_ml_seaworld
 
+
+from decolar.california.decolar_california import decolar_california
+from decolar.paris.decolar_paris import decolar_paris
+from decolar.paris.dias_paris import dias_paris
+from decolar.paris.meses_paris import meses_paris
+
+
+from junta_dados_california import juntarjsons_california
+from junta_dados_paris import juntarjsons_paris
+from run_california import executar_california
+from run_paris import executar_paris
+
+
+from decolar.orlando.decolar_disney import  receive_disney_decolar
+from decolar.orlando.sea_decolar import seaworld_decolar
+from decolar.orlando.universal_decolar import receive_universal_decolar
+
+
 import os
 
 sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
