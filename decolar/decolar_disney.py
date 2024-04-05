@@ -51,7 +51,7 @@ async def receive_disney_decolar(data,data_hora,data_atual):
     for index, row in grouped_data.iterrows():
         formatted_data.extend(row['Dados'])
 
-    nome_arquivo = f'decolar_{data_atual}.json'
+    nome_arquivo = f'disney_decolar_{data_atual}.json'
     salvar_dados_decolar(formatted_data, nome_arquivo ,'decolar',str(hora))
     
     return jsonify({"message": "Dados salvos com sucesso!"})
