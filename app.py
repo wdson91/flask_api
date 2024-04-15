@@ -1,8 +1,10 @@
 from atualizar_calibragem import mudar_horarios
-
+from apscheduler.schedulers.background import BackgroundScheduler
 from imports import *
 import pyautogui
 from pynput.keyboard import Key, Controller
+
+from vmz.vmz_disney_hopper.index_vmz_hopper import main_vmz_hopper
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -17,9 +19,32 @@ hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
 horarios = []
 
 
+# def fazer_get_para_ip():
+#     ip = 'flask-api-render-6ul3.onrender.com'  # Substitua pelo seu endereço IP
+    
+#     try:
+#         response = requests.get(f'http://{ip}')
+#         print(response.text)
+#         # if response.status_code == 200:
+#         #     print("Solicitação GET bem-sucedida para o IP:", ip)
+#         # else:
+#         #     print("Falha na solicitação GET para o IP:", ip)
+#     except Exception as e:
+#         print("Ocorreu um erro ao fazer a solicitação GET para o IP:", ip)
+#         print("Erro:", e)
+
+
+#     # Configuração do Flask-Scheduler
+#     scheduler = BackgroundScheduler(daemon=True)
+#     scheduler.add_job(fazer_get_para_ip, 'interval', seconds=30)
+#     # Inicialização do Flask-Scheduler
+#     scheduler.start()
+
 @app.route('/', methods=['GET'])
 def hello():
     return  hora_global
+
+
 
 #ROTAS PARA PARIS
 @app.route('/meses_paris', methods=['GET'])
@@ -159,6 +184,18 @@ async def receive_json_seaworld():
     return jsonify({"message": "Dados salvos com sucesso!"})
 
 
+@app.route('/hopper', methods=['GET'])
+async def hopper():
+    
+    global hora_global
+    global data_atual
+    
+
+    data = data_atual
+    hora = hora_global
+    await main_vmz_hopper(hora, days_to_add, data)
+    return  hora_global
+
 #ROTAS PARA CALIFORNIA
 # @app.route('/xpath_california', methods=['GET'])
 # def get_xpath_california():
@@ -200,7 +237,7 @@ async def coleta_california():
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     
-    array_datas = [5, 10, 20, 47, 65, 126]
+    array_datas = [10, 20, 47, 65, 126]
     
     time.sleep(5)
     #pyautogui.hotkey('ctrl', '2')
@@ -229,6 +266,7 @@ def receive_json_decolar_california():
     return jsonify({"message": "Dados salvos com sucesso!"})
 
 
+
 @app.route('/calibrar', methods=['GET'])
 async def calibrar():
 
@@ -255,12 +293,16 @@ async def calibrar():
     if tipo == 'manual':
         pyautogui.hotkey('ctrl', '1')
     
-    if hora_global == "07:00" or "11:00" or "14:00" or "17:00":
-        if hora_global == "07:00":
-            horarios = []
-        horarios.append(hora_global)
+    
+    # Criar o nome do arquivo usando a data atual
+    nome_arquivo = f"horarios_{data_atual}.txt"
+    # Abrir o arquivo em modo de adição (append) ou criá-lo se não existir
+    with open(nome_arquivo, "a") as arquivo:
+        # Adicionar o horário ao arquivo
+        arquivo.write(hora_global + "\n")
+    
     time.sleep(3)
-    await executar_ambos(hora_global, days_to_add,data_atual)
+    await executar_ambos(hora_global, days_to_add, data_atual)
 
     return jsonify({"message": "Calibragem iniciada com sucesso!"})
 
@@ -270,18 +312,24 @@ async def status_calibragem():
     global calibragem
     global hora_global
     global tipo_calibragem
-    global horarios
     global calibrating
     
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    nome_arquivo = f"horarios_{data_atual}.txt"
     
+    # Verificar se o arquivo existe antes de tentar ler
+    if os.path.exists(nome_arquivo):
+        with open(nome_arquivo, 'r') as file:
+            horarios = file.read().splitlines()
+    else:
+        horarios = []
+
     return jsonify({"Porcentagem": calibragem,
                     "Hora_inicio": hora_global,
                     "Tipo": tipo_calibragem,
                     "Data": data_atual,
                     "Horarios": horarios,
                     "Calibrating": calibrating})
-
 
 
 
@@ -341,4 +389,5 @@ def atualizar_hora():
 
 
 if __name__ == '__main__':
+    
     app.run(debug=True, host='0.0.0.0',port=5000)

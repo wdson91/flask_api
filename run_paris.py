@@ -1,4 +1,8 @@
 # Importando os módulos necessários
+
+from civitatis.paris.civitatis_paris import coletar_precos_civitatis_paris
+
+from get_your_guide.paris.get_your_guide_paris import coletar_precos_gyg_paris
 from imports import *
 from junta_dados_paris import juntarjsons_paris
 from ml.paris.ml_paris import coletar_precos_ml_paris
@@ -20,11 +24,21 @@ async def executar_paris(hour, array_datas, data_atual):
         logging.info("ml_paris concluída.")  # Registra uma mensagem de log
     except Exception as e:
         logging.error(f"Erro ao executar ml_paris: {e}")
-    # try:
-    #     await juntarjsons_paris(hour, data_atual)  # Executa a função main_vmz com o argumento hour
-    #     logging.info("juntarjsons_paris concluída.")  # Registra uma mensagem de log
-    # except Exception as e:
-    #     logging.error(f"Erro ao executar juntarjsons_paris: {e}")
+    try: 
+        await coletar_precos_civitatis_paris(hour, array_datas, data_atual)
+        logging.info("civitatis_paris concluída.")
+    except Exception as e:
+        logging.error(f"Erro ao executar civitatis_paris: {e}")
+    try:
+        await coletar_precos_gyg_paris(hour, array_datas, data_atual)  # Executa a função main_gyg com o argumento hour
+        logging.info("gyr_paris concluída.")  # Registra uma mensagem de log
+    except Exception as e:
+        logging.error(f"Erro ao executar gyr_paris: {e}")
+    try:
+        await juntarjsons_paris(hour, data_atual)  # Executa a função main_vmz com o argumento hour
+        logging.info("juntarjsons_paris concluída.")  # Registra uma mensagem de log
+    except Exception as e:
+        logging.error(f"Erro ao executar juntarjsons_paris: {e}")
         
 # Verifica se o script está sendo executado diretamente
 if __name__ == "__main__":

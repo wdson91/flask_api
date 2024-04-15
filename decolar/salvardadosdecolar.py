@@ -10,7 +10,7 @@ connect_str = "DefaultEndpointsProtocol=https;AccountName=sdarq;AccountKey=1WFQX
 #connect_str = "DefaultEndpointsProtocol=https;AccountName=sshopblob;AccountKey=sq6Uky1VBg/TxprQyuCnfYesOFSWdGGQNED15QKkAGrLb2kShaGwX2qgwD7N+sIBcRXH29taUr6QZRCb+Mip+A==;EndpointSuffix=core.windows.net"
 #container_name = f'imagens/Automacao_python'
 
-container_name_teste = f'imagens/Automacao_python'
+container_name_teste = f'imagens/Automacao_python/teste'
 # Função para verificar se o arquivo existe no Azure Blob Storage e baixá-lo
 def baixar_blob_se_existir(nome_arquivo_json, pasta):
     blob_service_client = BlobServiceClient.from_connection_string(connect_str)

@@ -20,5 +20,3 @@ def apagar_arquivos_json_na_pasta_atual():
             except OSError as e:
                 print(f"Erro ao apagar o arquivo {caminho_completo}: {e}")
 
-# Chamar a função para apagar arquivos JSON na pasta atual
-apagar_arquivos_json_na_pasta_atual()

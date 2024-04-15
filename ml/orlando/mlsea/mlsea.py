@@ -143,7 +143,7 @@ async def coletar_precos_ml_seaworld(hour, array_datas,data_atual):
                     cash_price_text = '-'
 
                 
-                if "R$" in price_text:
+                if "R$ " in price_text:
                     try:
                         price_number_str = price_text.replace("R$", "").replace(",", ".").strip()
                         price_number = float(price_number_str)
@@ -163,7 +163,7 @@ async def coletar_precos_ml_seaworld(hour, array_datas,data_atual):
                     'Preco_Parcelado': float(multiplied_price),
                     'Preco_Avista': cash_price_number
                 })
-               
+                
     except TimeoutException as e:
             print("Erro: Elemento não encontrado ou tempo de espera excedido", e)    
     finally:

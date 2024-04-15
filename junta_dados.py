@@ -1,5 +1,5 @@
 from app import *
-
+from excluir_json import apagar_arquivos_json_na_pasta_atual
 from imports import *
 from salvardados import baixar_blob_se_existir, carregar_dados_json, salvar_dados_margem
 arquivos = os.listdir()
