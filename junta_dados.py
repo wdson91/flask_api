@@ -21,7 +21,7 @@ async def juntarjsons(hour,data_atual):
     # Baixa os arquivos JSON dos diferentes parques e empresas
     for empresa in empresas:
         for parque in parques:
-            baixar_blob_se_existir(f'{parque}_{empresa}_{data_atual}.json', empresa)
+            baixar_blob_se_existir(f'{parque}_{empresa}_{data_atual}.json', f'orlando/{empresa}')
 
             # Carrega os dados JSON baixados
             dados = carregar_dados_json(f'{parque}_{empresa}_{data_atual}.json')
@@ -45,7 +45,7 @@ async def juntarjsons(hour,data_atual):
     df = pd.read_json(nome_arquivo)
     df = pd.DataFrame(df)
     
-    salvar_dados_margem(df, nome_arquivo, 'dados',nova_hora_formatada)
+    salvar_dados_margem(df, nome_arquivo, 'orlando/dados',nova_hora_formatada)
     
     finalizar_calibragem()
     
