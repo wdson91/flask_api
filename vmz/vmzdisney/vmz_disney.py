@@ -27,7 +27,7 @@ async def coletar_precos_vmz(hour,array_datas,data_atual):
     
     nome_arquivo = f'disney_vmz_{data_atual}.json'
     
-    salvar_dados(df_sorted, nome_arquivo, 'vmz', hour)
+    salvar_dados(df_sorted, nome_arquivo, 'orlando/vmz', hour)
     
     
     logging.info("Coleta finalizada.")
@@ -96,7 +96,7 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual):
     
     # Criando um DataFrame
     df = pd.DataFrame(dados)
-    salvar_dados(df, 'disney_vmz_basicos_parcial.json','vmz',hour)
+    salvar_dados(df, 'disney_vmz_basicos_parcial.json','orlando/vmz',hour)
     driver.quit()
     
     atualizar_calibragem(40)
@@ -238,7 +238,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
     
     
     df = pd.DataFrame(resultados)
-    salvar_dados(df, 'disney_vmz_dias_parcial.json','vmz',hour)
+    salvar_dados(df, 'disney_vmz_dias_parcial.json','orlando/vmz',hour)
     driver.quit()
     atualizar_calibragem(60)
     return

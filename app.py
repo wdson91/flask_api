@@ -1,5 +1,5 @@
 from atualizar_calibragem import mudar_horarios
-from apscheduler.schedulers.background import BackgroundScheduler
+#from apscheduler.schedulers.background import BackgroundScheduler
 from imports import *
 import pyautogui
 from pynput.keyboard import Key, Controller
@@ -237,7 +237,7 @@ async def coleta_california():
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     
-    array_datas = [10, 20, 47, 65, 126]
+    array_datas = [5,10, 20, 47, 65, 126]
     
     time.sleep(5)
     #pyautogui.hotkey('ctrl', '2')
@@ -305,6 +305,7 @@ async def calibrar():
     await executar_ambos(hora_global, days_to_add, data_atual)
 
     return jsonify({"message": "Calibragem iniciada com sucesso!"})
+
 
 @app.route('/status_calibragem', methods=['GET'])
 async def status_calibragem():

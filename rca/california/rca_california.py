@@ -16,10 +16,12 @@ async def coletar_precos_california_rca(hour, array_datas,data_atual):
     df = df.drop_duplicates()
     df = df.sort_values(by=['Data_viagem', 'Parque'])
     
+    # Selecionar apenas o primeiro dado de cada dia para cada parque
+    df= df.groupby(['Data_viagem', 'Parque']).first().reset_index()
     
     # Exibir o DataFrame mesclado
     nome_arquivo = f'california_rca_{data_atual}.json'
-    #df.to_json('california_rca2.json', orient='records', lines=True)
+    df.to_json('california_rca2.json', orient='records', lines=True)
     
     salvar_dados(df, nome_arquivo,'california/rca',hour)
 
@@ -95,7 +97,7 @@ async def coletar_precos_california_rca1(array_datas):
         ("1 Dia - Disney California", "https://www.ingressosrca.com.br/parques-tematicos/disneyland-california/disneyland-california-1-dia-basico-nivel-3.html"),
         ("1 Dia - Disney California", "https://www.ingressosrca.com.br/parques-tematicos/disneyland-california/disneyland-california-1-dia-basico-nivel-4.html"),
         ("1 Dia - Disney California", "https://www.ingressosrca.com.br/parques-tematicos/disneyland-california/disneyland-california-1-dia-basico-nivel-5.html"),
-        ("1 Dia - Disney California", "https://www.ingressosrca.com.br/parques-tematicos/disneyland-california/disneyland-california-1-dia-basico-nivel-6.html")
+        #("1 Dia - Disney California", "https://www.ingressosrca.com.br/parques-tematicos/disneyland-california/disneyland-california-1-dia-basico-nivel-6.html")
     ]
 
     # Datas desejadas

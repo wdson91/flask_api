@@ -62,7 +62,7 @@ async def coletar_precos_vmz_seaworld(hour,array_datas,data_atual):
         df = pd.DataFrame(dados)
         
         nome_arquivo = f'seaworld_vmz_{data_atual}.json'
-        salvar_dados(df, nome_arquivo,'vmz',hour)
+        salvar_dados(df, nome_arquivo,'orlando/vmz',hour)
         
         logging.info("Coleta finalizada Site Vmz- SeaWorld")
         

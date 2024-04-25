@@ -106,7 +106,7 @@ async def coletar_precos_ml_disney(hour,array_datas,data_atual):
                 df = pd.DataFrame(dados)
                 
                 nome_arquivo = f'disney_ml_{data_atual}.json'
-                salvar_dados(df, nome_arquivo,'ml',hour)
+                salvar_dados(df, nome_arquivo,'orlando/ml',hour)
                 
                 logging.info("Coleta de preços ML Disney finalizada")
                 atualizar_calibragem(80)

@@ -170,7 +170,7 @@ async def coletar_precos_ml_seaworld(hour, array_datas,data_atual):
         driver.quit()
         df = pd.DataFrame(dados)
         nome_arquivo = f'seaworld_ml_{data_atual}.json'
-        salvar_dados(df, nome_arquivo, 'ml', hour)
+        salvar_dados(df, nome_arquivo, 'orlando/ml', hour)
         logging.info("Coleta de preços ML SeaWorld concluída")
         atualizar_calibragem(85)
 if __name__ == '__main__':

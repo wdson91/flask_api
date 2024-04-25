@@ -138,7 +138,7 @@ async def coletar_precos_voupra_universal(hour,array_datas,data_atual):
     
     nome_arquivo = f'universal_voupra_{data_atual}.json'
     
-    salvar_dados(df, nome_arquivo,'voupra',hour)
+    salvar_dados(df, nome_arquivo,'orlando/voupra',hour)
     atualizar_calibragem(15)
     return
 # async def coletar_precos_voupra_universal(hour,array_datas):

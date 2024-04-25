@@ -11,21 +11,21 @@ async def receive_disney_decolar(data,data_hora,data_atual):
     
     # Mapeamento dos nomes dos parques
     mapping = {
-        "Ingresso de 1 dia Magic Kingdom Park - 2024": "1 Dia - Disney Basico Magic Kingdom",
-        "Ingresso de 1 dia Disney Park Hollywood Studios 2024": "1 Dia - Disney Basico Hollywood Studios",
-        "Ingresso de 1 dia para o Disney Animal Kingdom Park - 2024": "1 Dia - Disney Basico Animal Kingdom",
-        "Ingresso de 1 dia EPCOT Park - 2024": "1 Dia - Disney Basico Epcot",
-        "Ingresso de 2 dias - 2024": "2 Dias - Disney World Basico",
-        "Bilhete de 3 dias - 2024": "3 Dias - Disney World Basico",
+        "Ingresso de 1 dia Magic Kingdom Park": "1 Dia - Disney Basico Magic Kingdom",
+        "Ingresso de 1 dia Disney Park Hollywood Studios": "1 Dia - Disney Basico Hollywood Studios",
+        "Ingresso de 1 dia para o Disney Animal Kingdom Park": "1 Dia - Disney Basico Animal Kingdom",
+        "Ingresso de 1 dia EPCOT Park": "1 Dia - Disney Basico Epcot",
+        "Ingresso de 2 dias": "2 Dias - Disney World Basico",
+        "Bilhete de 3 dias": "3 Dias - Disney World Basico",
         "Ingresso Mágico 4 dias - 4 parques": "4 Dias - Disney Promocional",
         "Ingresso Mágico 4 dias - 4 parques + Parques Aquáticos e Esportes Adicionais":"4 Dias - Disney Promocional com Aquatico e Esportes",
-        "Ingresso de 4 dias - 2024": "4 Dias - Disney World Basico",
-        "Ingresso de 5 dias - 2024": "5 Dias - Disney World Basico",
-        "Bilhete de 6 dias - 2024": "6 Dias - Disney World Basico",
-        "Ingresso de 7 dias - 2024": "7 Dias - Disney World Basico",
-        "Ingresso de 8 dias - 2024": "8 Dias - Disney World Basico",
-        "Ingresso de 9 dias - 2024": "9 Dias - Disney World Basico",
-        "Ingresso de 10 dias - 2024": "10 Dias - Disney World Basico"
+        "Ingresso de 4 dias": "4 Dias - Disney World Basico",
+        "Ingresso de 5 dias": "5 Dias - Disney World Basico",
+        "Bilhete de 6 dias": "6 Dias - Disney World Basico",
+        "Ingresso de 7 dias": "7 Dias - Disney World Basico",
+        "Ingresso de 8 dias": "8 Dias - Disney World Basico",
+        "Ingresso de 9 dias": "9 Dias - Disney World Basico",
+        "Ingresso de 10 dias": "10 Dias - Disney World Basico"
     }
 
     filtered_data_list = [item for item in data_list if item['Parque'] in mapping]

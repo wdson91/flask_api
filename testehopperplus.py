@@ -30,6 +30,8 @@ element.click()
 data = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="page-content"]/div[2]/div/div[2]/div/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/div[1]/div[1]')))
 print(data.text)
 
+
+
 time.sleep(50)
 # Fechar o navegador
 driver.quit()

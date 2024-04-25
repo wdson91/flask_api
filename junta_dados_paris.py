@@ -8,7 +8,7 @@ from atualizar_calibragem import atualizar_calibragem, finalizar_calibragem, mud
 async def juntarjsons_paris(hour,data_atual):
     
     # Lista de empresas e parques
-    empresas = ['voupra', 'decolar', 'ml']
+    empresas = ['voupra', 'decolar', 'ml','gyg','civitatis']
     parques = ['paris']
     
     # Dicionário para armazenar os dados modificados

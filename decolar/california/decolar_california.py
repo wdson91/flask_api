@@ -37,8 +37,8 @@ def decolar_california(dados,data_atual):
         'Entrada no Disney Park 1 dia': '1 Dia - Disney California',
         'Entrada na Disney 2 dias (1 parque x dia)': '2 Dias - Disney California',
         'Entrada na Disney 3 dias (1 parque x dia)': '3 Dias - Disney California',
-        'Bilhete Hopper de 4 dias (Disney Park and Adventure)': '4 Dias - Disney California',
-        'Bilhete Hopper de 5 dias (Disney Park and Adventure)': '5 Dias - Disney California',
+        'Entrada na Disney 4 dias (1 parque x dia)': '4 Dias - Disney California',
+        'Entrada na Disney 5 dias (1 parque x dia)': '5 Dias - Disney California',
     }
 
     # Iterar sobre os dados originais e converter para o formato desejado

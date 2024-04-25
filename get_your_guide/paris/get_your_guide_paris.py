@@ -69,7 +69,8 @@ async def coletar_precos_gyg_paris_1(hour, array_datas,data_atual):
                     price_element = wait.until(EC.visibility_of_element_located((By.XPATH, price_xpath)))
                     title = title_element.text
                     price = price_element.text.replace('€ ', '').replace(',', '.')
-                    
+                    price = float(price) * euro
+                    price = round(price, 2)
                     # Mapeamento condicional dos nomes dos parques
                     if '1 dia/1 parque' in title:
                         title = '1 Dia 1 Parque - Disney Paris'
@@ -79,8 +80,8 @@ async def coletar_precos_gyg_paris_1(hour, array_datas,data_atual):
                     dados.append({
                         'Data_viagem': data_formatada,
                         'Parque': title,
-                        'Preco_Parcelado': '-',
-                        'Preco_Avista': float(price) * euro
+                        'Preco_Parcelado': price,
+                        'Preco_Avista': price
                     })
                 except TimeoutException as e:
                     print(f"TimeoutException: Elemento não encontrado ou tempo de espera excedido: {e}")
@@ -131,6 +132,8 @@ async def coletar_precos_gyg_paris_2(hour, array_datas,data_atual):
                     price_element = wait.until(EC.visibility_of_element_located((By.XPATH, price_xpath)))
                     title = title_element.text
                     price = price_element.text.replace('€ ', '').replace(',', '.')
+                    price = float(price) * euro
+                    price = round(price, 2)
                     
                     # Mapeamento condicional dos nomes dos parques
                     if '2 dias/2 parques' in title:
@@ -139,12 +142,13 @@ async def coletar_precos_gyg_paris_2(hour, array_datas,data_atual):
                         title = '3 Dias 2 Parques - Disney Paris'
                     elif '4 dias/2 parques' in title:
                         title = '4 Dias 2 Parques - Disney Paris'
+                    
                         
                     dados.append({
                         'Data_viagem': data_formatada,
                         'Parque': title,
-                        'Preco_Parcelado': float(price) * euro,
-                        'Preco_Avista': price
+                        'Preco_Parcelado': price,
+                        'Preco_Avista':  price
                     })
                 except TimeoutException as e:
                     print(f"TimeoutException: Elemento não encontrado ou tempo de espera excedido: {e}")

@@ -137,7 +137,7 @@ async def coletar_precos_voupra_sea(hour,array_datas,data_atual):
     df = df.sort_values(by=['Data_viagem', 'Parque'])
 
     nome_arquivo = f'seaworld_voupra_{data_atual}.json'
-    salvar_dados(df, nome_arquivo, 'voupra', hour)
+    salvar_dados(df, nome_arquivo, 'orlando/voupra', hour)
     
     atualizar_calibragem(20)
     logging.info("Coleta de preços Voupra Seaworld  finalizada.")

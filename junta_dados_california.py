@@ -1,3 +1,4 @@
+from excluir_json import apagar_arquivos_json_na_pasta_atual
 from app import *
 from imports import *
 from salvardados import baixar_blob_se_existir, carregar_dados_json, salvar_dados_margem
@@ -7,7 +8,7 @@ from atualizar_calibragem import atualizar_calibragem, finalizar_calibragem, mud
 async def juntarjsons_california(hour,data_atual):
     
     # Lista de empresas e parques
-    empresas = ['voupra', 'decolar', 'ml', 'vmz']
+    empresas = ['voupra', 'decolar', 'ml', 'vmz','rca']
     parques = ['california']
     
     # Dicionário para armazenar os dados modificados

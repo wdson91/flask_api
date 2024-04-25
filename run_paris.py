@@ -34,11 +34,11 @@ async def executar_paris(hour, array_datas, data_atual):
         logging.info("gyr_paris concluída.")  # Registra uma mensagem de log
     except Exception as e:
         logging.error(f"Erro ao executar gyr_paris: {e}")
-    try:
-        await juntarjsons_paris(hour, data_atual)  # Executa a função main_vmz com o argumento hour
-        logging.info("juntarjsons_paris concluída.")  # Registra uma mensagem de log
-    except Exception as e:
-        logging.error(f"Erro ao executar juntarjsons_paris: {e}")
+    # try:
+    #     await juntarjsons_paris(hour, data_atual)  # Executa a função main_vmz com o argumento hour
+    #     logging.info("juntarjsons_paris concluída.")  # Registra uma mensagem de log
+    # except Exception as e:
+    #     logging.error(f"Erro ao executar juntarjsons_paris: {e}")
         
 # Verifica se o script está sendo executado diretamente
 if __name__ == "__main__":
