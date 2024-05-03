@@ -1,14 +1,14 @@
+
 from imports import *
 
-from helpers.atualizar_calibragem import atualizar_calibragem
 
-# Function to calculate future dates
+
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
 # List of days to add to the current date
 
-async def coletar_precos_ml_universal(hour,array_datas,data_atual):
+async def coletar_precos_ml_fura_fila(hour,array_datas,data_atual):
     options = webdriver.ChromeOptions()
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
    # driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
@@ -19,34 +19,30 @@ async def coletar_precos_ml_universal(hour,array_datas,data_atual):
     
     
     xpath_pairs = [
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/span','1 Dia 1 Parque - Universal Orlando'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/span','1 Dia 2 Parques - Universal Orlando'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button[2]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/span','2 Dias 2 Parques - Universal Orlando'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[2]/div[2]/div[1]/div[1]/span','4 Dias 2 Parques - Universal Orlando'),
-                #('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','4 Dias 3 Parques - Universal Orlando'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[1]/span','14 Dias 3 Parques - Universal Orlando')
-                
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/span','1 Dia Limitado - Universal Fura Fila'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','1 Dia Ilimitado - Universal Fura Fila'),
+               
                 # Add other pairs as needed
             ]
     try:
     
         for days in array_datas:
             future_date = get_future_date(days)
-            url = f"https://www.vamonessa.com.br/ingressos/Orlando/7?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
+            url = f"https://www.vamonessa.com.br/ingressos/Express%20Pass%20Universal%20Orlando/E-U10-UNIEXPRESS?destination=Orlando&destinationCode=2&destinationState=Florida&destinationStateCode=2&date={future_date}&utm_source=Advert&utm_medium=Ingressos+ORLANDO+MAGIC+14-10-2022&utm_campaign=Ingressos+para+NBA&utm_id=ORLANDO+MAGIC&provider=2"
             driver.get(url)
             time.sleep(3)
             logging.info(f"Coletando preços para {future_date}")
             for button_xpath, preco_parcelado, preco_avista, park_name in xpath_pairs:
                 # Scroll to button and click
-                button = wait.until(EC.presence_of_element_located((By.XPATH, button_xpath)))
-                driver.execute_script("arguments[0].scrollIntoView();", button)
+                # button = wait.until(EC.presence_of_element_located((By.XPATH, button_xpath)))
+                # driver.execute_script("arguments[0].scrollIntoView();", button)
                 
 
-                try:
-                    button.click()
-                except ElementClickInterceptedException:
+                # try:
+                #     button.click()
+                # except ElementClickInterceptedException:
                     
-                    driver.execute_script("arguments[0].click();", button)
+                #     driver.execute_script("arguments[0].click();", button)
 
                 try:
                     price1 = wait.until(EC.presence_of_element_located((By.XPATH, preco_parcelado)))
@@ -92,9 +88,12 @@ async def coletar_precos_ml_universal(hour,array_datas,data_atual):
                 driver.quit()
                 df = pd.DataFrame(dados)
                 
-                nome_arquivo = f'universal_ml_{data_atual}.json'
-                salvar_dados(df, nome_arquivo,'orlando/ml',hour)
+                nome_arquivo = f'furafila_ml_{data_atual}.json'
+                #df.to_json(nome_arquivo, orient='records', lines=True)
+                salvar_dados(df, nome_arquivo,'outros/furafila',hour)
                 logging.info("Coleta de preços ML Disney finalizada")
-                atualizar_calibragem(95)
+               # atualizar_calibragem(95)
+    return
 if __name__ == '__main__':
-    asyncio.run(coletar_precos_ml_universal())
+    array_datas =  [5,10,20,47,65,126]
+    asyncio.run(coletar_precos_ml_universal('hora_global',array_datas,'2024-03-25'))

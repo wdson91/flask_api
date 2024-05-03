@@ -1,4 +1,4 @@
-from atualizar_calibragem import atualizar_calibragem
+from helpers.atualizar_calibragem import atualizar_calibragem
 from imports import *
 
 async def coletar_precos_disney_aquaticos(hour,array_datas,data_atual):

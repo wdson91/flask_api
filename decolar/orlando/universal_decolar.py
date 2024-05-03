@@ -42,6 +42,6 @@ async def receive_universal_decolar(data,data_hora,data_atual):
         formatted_data.extend(row['Dados'])
     
     nome_arquivo = f'universal_decolar_{data_atual}.json'
-    salvar_dados_decolar(formatted_data, nome_arquivo ,'decolar',str(hora))
+    salvar_dados_decolar(formatted_data, nome_arquivo ,'orlando/decolar',str(hora))
 
     return jsonify({"message": "Dados salvos com sucesso!"})

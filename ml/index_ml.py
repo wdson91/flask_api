@@ -2,6 +2,7 @@ from imports import *
 from junta_dados import juntarjsons
 
 
+from classes.junta_dados_classe import JuntarJsons
 from ml.orlando.mldisney.ml_disney import coletar_precos_ml_disney
 from ml.orlando.mlsea.mlsea import coletar_precos_ml_seaworld
 from ml.orlando.ml_universal.ml_universal import coletar_precos_ml_universal
@@ -29,11 +30,7 @@ async def main_ml(hour,array_datas,data_atual,run_once=False):
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Universal: {e}")
         
-        try:
-            await juntarjsons(hour,data_atual)
-            
-        except Exception as e:
-            logging.error(f"Erro durante a junção dos arquivos: {e}")
+        
         
         return 
 if __name__ == "__main__":

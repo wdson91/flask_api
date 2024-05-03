@@ -1,6 +1,6 @@
 from imports import *
 
-from atualizar_calibragem import atualizar_calibragem
+from helpers.atualizar_calibragem import atualizar_calibragem
 
 # Function to calculate future dates
 def get_future_date(days):

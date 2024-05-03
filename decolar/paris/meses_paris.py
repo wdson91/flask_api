@@ -18,7 +18,7 @@ def meses_paris(lista_dias):
         # Criando um dicionário com dia e mês
     
         datas_formatadas.append(mes_extenso)
-
+        
     return datas_formatadas 
 
 # Lista de dias a serem adicionados

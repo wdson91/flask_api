@@ -1,10 +1,18 @@
-from atualizar_calibragem import mudar_horarios
-#from apscheduler.schedulers.background import BackgroundScheduler
+from helpers.atualizar_calibragem import mudar_horarios
+
 from imports import *
 import pyautogui
 from pynput.keyboard import Key, Controller
 
+from classes.junta_dados_classe import JuntarJsons
+
+
+
+
+
+from vmz.index_vmz import main_vmz
 from vmz.vmz_disney_hopper.index_vmz_hopper import main_vmz_hopper
+from voupra.orlando.index_voupra import main_voupra
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -18,27 +26,50 @@ data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
 hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
 horarios = []
 
-
-# def fazer_get_para_ip():
-#     ip = 'flask-api-render-6ul3.onrender.com'  # Substitua pelo seu endereço IP
+@app.route('/voupra', methods=['GET'])
+async def voupra():
+    global data_atual
+    global hora_global
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     
-#     try:
-#         response = requests.get(f'http://{ip}')
-#         print(response.text)
-#         # if response.status_code == 200:
-#         #     print("Solicitação GET bem-sucedida para o IP:", ip)
-#         # else:
-#         #     print("Falha na solicitação GET para o IP:", ip)
-#     except Exception as e:
-#         print("Ocorreu um erro ao fazer a solicitação GET para o IP:", ip)
-#         print("Erro:", e)
+    array_datas = [5, 10, 20, 47, 65, 126]
+    
+    time.sleep(5)
+    #pyautogui.hotkey('ctrl', '2')
+    await main_voupra(hora_global, array_datas, data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
 
+@app.route('/vmz', methods=['GET'])
+async def vmz():
+    global data_atual
+    global hora_global
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
+    array_datas = [5, 10, 20, 47, 65, 126]
+    
+    time.sleep(5)
+    #pyautogui.hotkey('ctrl', '2')
+    await main_vmz(hora_global, array_datas, data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
 
-#     # Configuração do Flask-Scheduler
-#     scheduler = BackgroundScheduler(daemon=True)
-#     scheduler.add_job(fazer_get_para_ip, 'interval', seconds=30)
-#     # Inicialização do Flask-Scheduler
-#     scheduler.start()
+app.route('/ml', methods=['GET'])
+async def ml():
+    global data_atual
+    global hora_global
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
+    array_datas = [5, 10, 20, 47, 65, 126]
+    
+    time.sleep(5)
+    #pyautogui.hotkey('ctrl', '2')
+    await main_ml(hora_global, array_datas, data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
 
 @app.route('/', methods=['GET'])
 def hello():
@@ -80,16 +111,7 @@ def get_urls_paris():
     
     return jsonify(urls)
 
-@app.route('/dados_paris', methods=['GET'])
-async def dados_paris():
-    
-    global data_atual
-    global hora_global
-    
-    
-    await juntarjsons_paris(hora_global,data_atual)
-    
-    return jsonify({"message": "Dados salvos com sucesso!"})
+
 
 # Função para gerar as URLs com as datas desejadas
 def generate_urls(url):
@@ -197,38 +219,6 @@ async def hopper():
     return  hora_global
 
 #ROTAS PARA CALIFORNIA
-# @app.route('/xpath_california', methods=['GET'])
-# def get_xpath_california():
-    
-#     base_xpath = "/html/body/div[2]/div/div[2]/div/div/div/div[4]/tour-modalities/div/ul/li"
-#     xpaths = []
-#     for i in range(1, num_elements + 1):
-#         xpath = f"{base_xpath}[{i}]/tour-modality-cluster/div/div/em/div/div[2]/div[1]/div[3]/section[1]/date-picker/div/div[1]/div/input"
-#         xpaths.append(xpath)
-    
-#     return jsonify(xpaths)
-
-# @app.route('/xpath_calendar', methods=['GET'])
-# def get_xpath_calendar():
-    
-#     xpath_base = '/html/body/div[2]/div/div[2]/div/div/div/div[4]/tour-modalities/div/ul/li'
-    
-#     xpaths = []
-#     for i in range(1, num_elements + 1):
-#         xpath = f"{xpath_base}[{i}]/tour-modality-cluster/div/div/em/div/div[2]/div[1]/div[3]/section[1]/date-picker/div/span/span"
-#         xpaths.append(xpath)
-    
-#     return jsonify(xpaths)
-
-# @app.route('/xpath_preco_california', methods=['GET'])
-# def get_xpath_preco_california():
-    # base_xpath = "/html/body/div[2]/div/div[2]/div/div/div/div[4]/tour-modalities/div/ul/li"
-    
-    # xpaths = []
-    # for i in range(1, num_elements + 1):
-    #     xpath = f"{base_xpath}[{i}]/tour-modality-cluster/div/div/em/div/div[2]/div[2]/div/div/div[2]/div/span[2]"
-    #     xpaths.append(xpath)
-    # return jsonify(xpaths)
 
 @app.route('/california', methods=['GET'])
 async def coleta_california():
@@ -245,17 +235,6 @@ async def coleta_california():
     
     return jsonify({"message": "Dados salvos com sucesso!"})
 
-@app.route('/dados_california', methods=['GET'])
-async def dados_california():
-    
-    global data_atual
-    global hora_global
-    
-    
-    await juntarjsons_california(hora_global,data_atual)
-    
-    return jsonify({"message": "Dados salvos com sucesso!"})
-
 
 @app.route('/receive_json_decolar_california', methods=['POST'])
 def receive_json_decolar_california():
@@ -265,8 +244,145 @@ def receive_json_decolar_california():
     decolar_california(data,data_atual)
     return jsonify({"message": "Dados salvos com sucesso!"})
 
+##ROTAS DISCOVERY COVE
+@app.route('/receive_json_decolar_discovery_cove', methods=['POST'])
+def receive_json_decolar_discovery_cove():
+    global data_atual
+    data = request.json
+    decolar_discovery_cove(data,data_atual)
+    return jsonify({"message": "Dados salvos com sucesso!"})
 
 
+@app.route('/outros_parques', methods=['GET'])
+async def outros_parques():
+    global data_atual
+    global hora_global
+
+    # Recebendo o parâmetro da requisição
+    parque = request.args.get('parque')
+    
+    if not parque:
+        return jsonify({"error": "O parque deve ser especificado."}), 400
+
+    empresas = ['voupra', 'decolar', 'ml', 'vmz']
+    
+    if parque == 'discovery_cove':
+        
+        parques = ['discovery_cove']
+        pasta = 'outros/discovery_cove'
+        
+    elif parque == 'nasa':
+        
+        parques = ['nasa', 'discovery_cove', 'lego', 'furafila']
+        pasta = 'outros/nasa'
+        
+    elif parque == 'lego':
+            
+            parques = ['lego']
+            pasta = 'outros/lego'
+    elif parque ==  'paris':
+        
+            empresas = ['voupra', 'decolar', 'ml','gyg','civitatis']
+            parques = ['paris']
+            pasta = 'paris'
+    elif parque == 'california':
+        
+        empresas = ['voupra', 'decolar', 'ml', 'vmz','rca']
+        parques = ['california']
+        pasta = 'california'
+    else:
+        return jsonify({"error": "Parque inválido."}), 400
+    
+    juntar_jsons = JuntarJsons(data_atual, empresas, parques, pasta)
+    await juntar_jsons.executar()
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+
+@app.route('/cove', methods=['GET'])
+async def coleta_discovery_cove():
+    global data_atual
+    global hora_global
+    # data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    # hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
+    array_datas = [5,10, 20, 47, 65, 126]
+    
+    time.sleep(5)
+    
+    await coleta_cove(hora_global, array_datas, data_atual)
+
+##ROTAS NASA
+
+@app.route('/receive_json_decolar_nasa', methods=['POST'])
+def receive_json_decolar_nasa():
+    global data_atual
+    data = request.json
+    decolar_nasa(data,data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+
+
+@app.route('/nasa', methods=['GET'])
+async def nasa():
+    global data_atual
+    global hora_global
+    # data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    # hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
+    array_datas = [5,10, 20, 47, 65, 126]
+    
+    time.sleep(5)
+    
+    await coleta_nasa(hora_global, array_datas, data_atual)
+
+
+##ROTAS LEGOLAND
+
+@app.route('/receive_json_decolar_lego', methods=['POST'])
+def receive_json_decolar_lego():
+    global data_atual
+    data = request.json
+    decolar_lego(data,data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+
+
+@app.route('/lego', methods=['GET'])
+async def lego():
+    global data_atual
+    global hora_global
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
+    array_datas = [5,10, 20, 47, 65, 126]
+    
+    time.sleep(5)
+    
+    await coleta_lego(hora_global, array_datas, data_atual)
+
+
+## ROTAS FURA FILA
+@app.route('/furafila', methods=['GET'])
+async def furafila():
+    global data_atual
+    global hora_global
+    # data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    # hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
+    array_datas = [5,10, 20, 47, 65, 126]
+    
+    time.sleep(5)
+    
+    await coleta_furafila(hora_global, array_datas, data_atual)
+
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+
+## ROTAS CALIBRAGEM
+ 
 @app.route('/calibrar', methods=['GET'])
 async def calibrar():
 
@@ -306,6 +422,45 @@ async def calibrar():
 
     return jsonify({"message": "Calibragem iniciada com sucesso!"})
 
+@app.route('/calibrar_teste', methods=['GET'])
+async def calibrar_teste():
+
+    global calibragem
+    global hora_global
+    global tipo_calibragem
+    global calibrating
+    global horarios
+    global data_atual
+    
+    # Se a calibragem já estiver em andamento, retorne uma mensagem de erro
+    if calibrating:
+        return jsonify({"error": "Calibragem já em andamento"}), 400
+
+    tipo = request.args.get('tipo', 'automatica')  # Obter o parâmetro tipo da URL, padrão é 'manual'
+
+    calibrating = True
+    calibragem = 1
+    tipo_calibragem = tipo
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    
+    time.sleep(5)
+    if tipo == 'manual':
+        pyautogui.hotkey('ctrl', '1')
+    
+    
+    # Criar o nome do arquivo usando a data atual
+    nome_arquivo = f"horarios_{data_atual}.txt"
+    # Abrir o arquivo em modo de adição (append) ou criá-lo se não existir
+    with open(nome_arquivo, "a") as arquivo:
+        # Adicionar o horário ao arquivo
+        arquivo.write(hora_global + "\n")
+    
+    time.sleep(3)
+    await executar_ambos_teste(hora_global, days_to_add, data_atual)
+
+    return jsonify({"message": "Calibragem iniciada com sucesso!"})
+
 
 @app.route('/status_calibragem', methods=['GET'])
 async def status_calibragem():
@@ -316,7 +471,7 @@ async def status_calibragem():
     global calibrating
     
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
-    nome_arquivo = f"horarios_{data_atual}.txt"
+    nome_arquivo = f"horarios/horarios_{data_atual}.txt"
     
     # Verificar se o arquivo existe antes de tentar ler
     if os.path.exists(nome_arquivo):
@@ -331,8 +486,6 @@ async def status_calibragem():
                     "Data": data_atual,
                     "Horarios": horarios,
                     "Calibrating": calibrating})
-
-
 
 
 @app.route('/calibragem', methods=['POST'])

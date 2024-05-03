@@ -6,8 +6,8 @@ from helpers.atualizar_calibragem import atualizar_calibragem
 
 
 
-async def coletar_precos_vmz_seaworld(hour,array_datas,data_atual):
-    logging.info("Iniciando coleta de preços do SeaWorld.")
+async def coletar_precos_vmz_nasa(hour,array_datas,data_atual):
+    logging.info("Iniciando coleta de preços do Vmz Nasa.")
     
     # Configuração inicial do Selenium
     options = webdriver.ChromeOptions()
@@ -16,11 +16,8 @@ async def coletar_precos_vmz_seaworld(hour,array_datas,data_atual):
     #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     # Lista de sites e nomes de parques
     sites = [
-        ("https://www.vmzviagens.com.br/ingressos/orlando/seaworld-orlando/seaworld-1-dia", '1 Dia 1 Parque - SeaWorld Orlando'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/seaworld-orlando/promocao-seaworld-busch-gardens-aquatica", '3 Dias 3 Parques - SeaWorld Orlando'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/seaworld-orlando/seaworld-14-dias-estacionamento", '14 Dias 3 Parques - SeaWorld Orlando'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/busch-gardens-tampa/busch-gardens-seaworld-aquatica-com-plano-alimentacao?data=2024-12-31", '3 Dias 3 Parques com Refeições - SeaWorld Orlando'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/busch-gardens-tampa/busch-gardens-1-dia?",'1 Dia 1 Parque - Busch Gardens'),
+        ("https://www.vmzviagens.com.br/ingressos/orlando/kennedy-space-center/kennedy-space-center?data=", 'NASA Kennedy Space Center'),
+        
     ]
 
     
@@ -35,12 +32,12 @@ async def coletar_precos_vmz_seaworld(hour,array_datas,data_atual):
             for url, parque in sites:
                 logging.info(f"Coletando precos do parque {parque}.")
 
-                driver.get(url)
-
+                driver.get(f'{url}{data}')
+                
                 
                 try:
-                    preco_parcelado_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div/div[1]/b')
-                    preco_avista_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div/div[1]/span[1]')
+                    preco_parcelado_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/b')
+                    preco_avista_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]')
 
                     # Multiplicar o preço parcelado por 10
                     preco_parcelado = preco_parcelado_element.text.replace('R$ ', '').replace(',', '.')
@@ -61,16 +58,16 @@ async def coletar_precos_vmz_seaworld(hour,array_datas,data_atual):
         # Criando um DataFrame
         df = pd.DataFrame(dados)
         
-        nome_arquivo = f'seaworld_vmz_{data_atual}.json'
-        salvar_dados(df, nome_arquivo,'orlando/vmz',hour)
+        nome_arquivo = f'nasa_vmz_{data_atual}.json'
+        salvar_dados(df, nome_arquivo,'outros/nasa',hour)
         
-        logging.info("Coleta finalizada Site Vmz- SeaWorld")
+        logging.info("Coleta finalizada Site Vmz - Nasa")
         
     finally:
         driver.quit()
-        atualizar_calibragem(70)
+        #atualizar_calibragem(70)
         return
         
     
 if __name__ == "__main__":
-    asyncio.run(coletar_precos_vmz_seaworld())
+    asyncio.run(coletar_precos_vmz_nasa())
