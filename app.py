@@ -6,10 +6,6 @@ from pynput.keyboard import Key, Controller
 
 from classes.junta_dados_classe import JuntarJsons
 
-
-
-
-
 from vmz.index_vmz import main_vmz
 from vmz.vmz_disney_hopper.index_vmz_hopper import main_vmz_hopper
 from voupra.orlando.index_voupra import main_voupra
@@ -26,55 +22,10 @@ data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
 hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
 horarios = []
 
-@app.route('/voupra', methods=['GET'])
-async def voupra():
-    global data_atual
-    global hora_global
-    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
-    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
-    
-    array_datas = [5, 10, 20, 47, 65, 126]
-    
-    time.sleep(5)
-    #pyautogui.hotkey('ctrl', '2')
-    await main_voupra(hora_global, array_datas, data_atual)
-    
-    return jsonify({"message": "Dados salvos com sucesso!"})
-
-@app.route('/vmz', methods=['GET'])
-async def vmz():
-    global data_atual
-    global hora_global
-    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
-    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
-    
-    array_datas = [5, 10, 20, 47, 65, 126]
-    
-    time.sleep(5)
-    #pyautogui.hotkey('ctrl', '2')
-    await main_vmz(hora_global, array_datas, data_atual)
-    
-    return jsonify({"message": "Dados salvos com sucesso!"})
-
-app.route('/ml', methods=['GET'])
-async def ml():
-    global data_atual
-    global hora_global
-    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
-    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
-    
-    array_datas = [5, 10, 20, 47, 65, 126]
-    
-    time.sleep(5)
-    #pyautogui.hotkey('ctrl', '2')
-    await main_ml(hora_global, array_datas, data_atual)
-    
-    return jsonify({"message": "Dados salvos com sucesso!"})
 
 @app.route('/', methods=['GET'])
 def hello():
     return  hora_global
-
 
 
 #ROTAS PARA PARIS
@@ -403,6 +354,7 @@ async def calibrar():
     calibragem = 1
     tipo_calibragem = tipo
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     
     time.sleep(5)
@@ -411,7 +363,7 @@ async def calibrar():
     
     
     # Criar o nome do arquivo usando a data atual
-    nome_arquivo = f"horarios_{data_atual}.txt"
+    nome_arquivo = f"horarios/horarios_{data_atual}.txt"
     # Abrir o arquivo em modo de adição (append) ou criá-lo se não existir
     with open(nome_arquivo, "a") as arquivo:
         # Adicionar o horário ao arquivo

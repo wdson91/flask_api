@@ -30,8 +30,6 @@ async def main_ml(hour,array_datas,data_atual,run_once=False):
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Universal: {e}")
         
-        
-        
         return 
 if __name__ == "__main__":
     # Crie um loop de eventos e execute a função principal
