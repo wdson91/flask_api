@@ -1,4 +1,5 @@
 # Importando os módulos necessários
+from classes.junta_dados_classe import JuntarJsons
 from imports import *
 from ml.index_ml import main_ml
 from vmz.index_vmz import main_vmz
@@ -25,6 +26,16 @@ async def executar_ambos(hour, array_datas, data_atual):
     except Exception as e:
         logging.error(f"Erro ao executar main_ml: {e}")  # Registra uma mensagem de log de erro
 
+    try:
+            empresas = ['voupra', 'vmz', 'decolar','ml']
+            parques = ['disney', 'universal', 'seaworld']
+            
+            juntar_json = JuntarJsons(data_atual, empresas, parques, 'orlando')
+            
+            await juntar_json.executar()
+              
+    except Exception as e:
+            logging.error(f"Erro durante a junção dos arquivos: {e}")
 
 # Verifica se o script está sendo executado diretamente
 if __name__ == "__main__":

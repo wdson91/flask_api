@@ -4,7 +4,7 @@ from imports import *
 
 async def receive_disney_decolar(data,data_hora,data_atual):
     data_list = data  # Recebe a lista de objetos JSON enviada na solicitação
-
+    print(data_list)
     # Trim 'Parque' field in each item
     for item in data_list:
         item['Parque'] = item['Parque'].strip()

@@ -1,5 +1,5 @@
 from imports import *
-from junta_dados import juntarjsons
+
 
 from .vmzdisney.vmz_disney import coletar_precos_vmz, coletar_precos_vmz_disneybasicos, coletar_precos_vmz_disneydias
 from .vmzsea.vmzsea import coletar_precos_vmz_seaworld

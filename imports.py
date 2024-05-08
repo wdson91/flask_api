@@ -37,7 +37,8 @@ from datetime import datetime  # Importa a classe datetime do módulo datetime
 import pytz  # Importa o módulo pytz para lidar com fusos horários
 from selenium.common.exceptions import NoSuchElementException
 import re
-
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 
 from voupra.orlando.voupradisney.voupradisney import coletar_precos_voupra_disney
 from voupra.orlando.vouprasea.vouprasea import coletar_precos_voupra_sea
@@ -46,7 +47,6 @@ from voupra.orlando.vouprauniversal.vouprauniversal import coletar_precos_voupra
 from selenium.webdriver.chrome.options import Options
 from urllib.parse import urlparse, parse_qs
 
-from run import executar_ambos
 
 from vmz.vmzdisney.vmz_disney import coletar_precos_vmz
 from vmz.vmzsea.vmzsea import coletar_precos_vmz_seaworld
@@ -57,17 +57,19 @@ from ml.orlando.ml_universal.ml_universal import coletar_precos_ml_universal
 from ml.orlando.mldisney.ml_disney import coletar_precos_ml_disney
 from ml.orlando.mlsea.mlsea import coletar_precos_ml_seaworld
 
+from decolar.discovery_cove.decolar_cove import decolar_discovery_cove
+from decolar.legoland.decolar_lego import decolar_lego
+from decolar.nasa.decolar_nasa import decolar_nasa
 
 from decolar.california.decolar_california import decolar_california
 from decolar.paris.decolar_paris import decolar_paris
 from decolar.paris.dias_paris import dias_paris
 from decolar.paris.meses_paris import meses_paris
 
+from start.run import executar_ambos
+from start.run_california import executar_california
 
-from junta_dados_california import juntarjsons_california
-from junta_dados_paris import juntarjsons_paris
-from run_california import executar_california
-from run_paris import executar_paris
+from start.run_paris import executar_paris
 
 
 from decolar.orlando.decolar_disney import  receive_disney_decolar
@@ -76,7 +78,7 @@ from decolar.orlando.universal_decolar import receive_universal_decolar
 
 
 import os
-from excluir_json import apagar_arquivos_json_na_pasta_atual
+from helpers.excluir_json import apagar_arquivos_json_na_pasta_atual
 sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
 
 

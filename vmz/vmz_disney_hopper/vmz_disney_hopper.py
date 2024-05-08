@@ -1,6 +1,6 @@
 from imports import *
 from salvardados import *
-from atualizar_calibragem import atualizar_calibragem
+from helpers.atualizar_calibragem import atualizar_calibragem
 
 
 async def coletar_precos_vmz_hopper(hour,array_datas,data_atual):

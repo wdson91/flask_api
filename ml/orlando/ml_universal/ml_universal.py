@@ -1,6 +1,6 @@
 from imports import *
 
-from atualizar_calibragem import atualizar_calibragem
+from helpers.atualizar_calibragem import atualizar_calibragem
 
 # Function to calculate future dates
 def get_future_date(days):
@@ -96,5 +96,6 @@ async def coletar_precos_ml_universal(hour,array_datas,data_atual):
                 salvar_dados(df, nome_arquivo,'orlando/ml',hour)
                 logging.info("Coleta de preços ML Disney finalizada")
                 atualizar_calibragem(95)
+                return
 if __name__ == '__main__':
     asyncio.run(coletar_precos_ml_universal())

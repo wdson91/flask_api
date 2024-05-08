@@ -70,6 +70,33 @@ def salvar_dados(df, nome_arquivo_json, pasta,hour):
     # Fazer upload do arquivo atualizado para o Azure Blob Storage
     upload_blob(nome_arquivo_json, nome_arquivo_json, pasta)
 
+def salvar_dados_lead(df, nome_arquivo_json, pasta,hour):
+    
+    
+    
+    # Baixar o arquivo JSON do Azure Blob Storage se ele existir
+    baixar_blob_se_existir(nome_arquivo_json, pasta)
+
+    # Carregar os dados existentes do arquivo JSON
+    dados_exist = carregar_dados_json(nome_arquivo_json)
+
+    # Adicionar o novo registro aos dados existentes
+    dados_exist.append(df)
+
+    # Salvar os dados no arquivo JSON
+    with open(nome_arquivo_json, 'w') as file:
+        json.dump(dados_exist, file, indent=4)
+        
+    # Fazer upload do arquivo atualizado para o Azure Blob Storage
+    upload_blob(nome_arquivo_json, nome_arquivo_json, pasta)
+    
+    #apagar json da pasta atual
+    
+    os.remove(nome_arquivo_json)
+    
+    
+    
+    
 def salvar_dados_margem(df, nome_arquivo_json, pasta, hour):
     # Converter o DataFrame para JSON
     json_data = df.to_json()

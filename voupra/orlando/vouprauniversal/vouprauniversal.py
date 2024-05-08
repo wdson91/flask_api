@@ -1,6 +1,6 @@
 from imports import *
 
-from atualizar_calibragem import atualizar_calibragem
+from helpers.atualizar_calibragem import atualizar_calibragem
         
 async def coletar_precos_voupra_universal(hour,array_datas,data_atual):
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]

@@ -1,6 +1,6 @@
 from imports import *
 from salvardados import *
-from atualizar_calibragem import atualizar_calibragem
+from helpers.atualizar_calibragem import atualizar_calibragem
 
  
 
@@ -128,6 +128,11 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
                 EC.visibility_of_element_located((By.CSS_SELECTOR, botao_fechar_selector))
             )
             botao_fechar.click()
+            botao_cookies = WebDriverWait(driver, waiter + 3).until(
+                EC.visibility_of_element_located((By.XPATH, '//*[@id="__layout"]/div/div[3]/div/div/div[2]/button'))
+            )
+            botao_cookies.click()
+            
             logging.info("Pop-up fechado.")
         except Exception as e:
             logging.warning(f"Popup não encontrada")

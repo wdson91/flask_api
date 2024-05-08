@@ -1,9 +1,9 @@
 from app import *
-from excluir_json import apagar_arquivos_json_na_pasta_atual
+from helpers.excluir_json import apagar_arquivos_json_na_pasta_atual
 from imports import *
 from salvardados import baixar_blob_se_existir, carregar_dados_json, salvar_dados_margem
 arquivos = os.listdir()
-from atualizar_calibragem import atualizar_calibragem, finalizar_calibragem, mudar_horarios
+from helpers.atualizar_calibragem import atualizar_calibragem, finalizar_calibragem, mudar_horarios
 
 async def juntarjsons(hour,data_atual):
     

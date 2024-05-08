@@ -9,7 +9,7 @@ import pytz
 
 from imports import baixar_blob_se_existir, upload_blob
 from salvardados import carregar_dados_json, salvar_dados_json, salvar_dados_margem
-from atualizar_calibragem import atualizar_calibragem, finalizar_calibragem
+from helpers.atualizar_calibragem import atualizar_calibragem, finalizar_calibragem
 
 async def juntarjsons(hour, data_atual):
     # Lista de empresas e parques
