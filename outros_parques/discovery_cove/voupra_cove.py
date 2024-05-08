@@ -139,7 +139,7 @@ async def coletar_precos_voupra_cove(hour,array_datas,data_atual):
     df = df.sort_values(by=['Data_viagem', 'Parque'])
 
     nome_arquivo = f'discovery_cove_voupra_{data_atual}.json'
-    salvar_dados(df, nome_arquivo, 'outros/discovery_cove', hour)
+    salvar_dados(df, nome_arquivo, 'outros/voupra', hour)
     
     #atualizar_calibragem(20)
     logging.info("Coleta de preços Voupra Discovery Cove  finalizada.")

@@ -16,7 +16,7 @@ async def coletar_precos_vmz_cove(hour,array_datas,data_atual):
     #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     # Lista de sites e nomes de parques
     sites = [
-        ("https://www.vmzviagens.com.br/ingressos/orlando/discovery-cove-orlando/1-dia-de-discovery-cove-sem-nado?data=", '1 Dia de Discovery Cove'),
+        ("https://www.vmzviagens.com.br/ingressos/orlando/discovery-cove-orlando/1-dia-de-discovery-cove-sem-nado?data=", '1 Dia Discovery Cove'),
         ("https://www.vmzviagens.com.br/ingressos/orlando/discovery-cove-orlando/1-dia-de-discovery-cove-com-nado-com-golfinhos?data=", '1 Dia Discovery Cove com Nado com Golfinhos'),
         ("https://www.vmzviagens.com.br/ingressos/orlando/discovery-cove-orlando/discovery-cove-package-sem-nado?data=", '1 Dia Discovery Cove + 14 Dias SeaWorld Orlando e Aquatica'),
         ("https://www.vmzviagens.com.br/ingressos/orlando/discovery-cove-orlando/discovery-cove-ultimate-sem-nado?data=", '1 Dia Discovery Cove + 14 Dias SeaWorld, Busch Gardens, e Aquatica'),
@@ -64,7 +64,7 @@ async def coletar_precos_vmz_cove(hour,array_datas,data_atual):
         df = pd.DataFrame(dados)
         
         nome_arquivo = f'discovery_cove_vmz_{data_atual}.json'
-        salvar_dados(df, nome_arquivo,'outros/discovery_cove',hour)
+        salvar_dados(df, nome_arquivo,'outros/vmz',hour)
         
         logging.info("Coleta finalizada Site Vmz- Discovery Cove")
         

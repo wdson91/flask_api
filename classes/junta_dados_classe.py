@@ -20,6 +20,7 @@ class JuntarJsons:
         for empresa in self.empresas:
             for parque in self.parques:
                 pasta_empresa = self.cidade + '/' + empresa if self.cidade else empresa
+                
                 arquivo = f'{parque}_{empresa}_{self.data_atual}.json'
                 baixar_blob_se_existir(arquivo, pasta_empresa)
                 
@@ -36,7 +37,7 @@ class JuntarJsons:
         finalizar_calibragem()
         apagar_arquivos_json_na_pasta_atual()
 
-        time.sleep(30)
+        return
         # Se necessário, descomente a linha abaixo para chamar a função `atualizar_calibragem`
         # atualizar_calibragem(100)
 

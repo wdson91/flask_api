@@ -140,7 +140,7 @@ async def coletar_precos_voupra_lego(hour,array_datas,data_atual):
     df = df.sort_values(by=['Data_viagem', 'Parque'])
 
     nome_arquivo = f'lego_voupra_{data_atual}.json'
-    salvar_dados(df, nome_arquivo, 'outros/lego', hour)
+    salvar_dados(df, nome_arquivo, 'outros/voupra', hour)
     
     #atualizar_calibragem(20)
     logging.info("Coleta de preços Voupra lego finalizada.")

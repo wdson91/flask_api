@@ -65,7 +65,7 @@ async def coletar_precos_vmz_lego(hour,array_datas,data_atual):
         df = pd.DataFrame(dados)
         
         nome_arquivo = f'lego_vmz_{data_atual}.json'
-        salvar_dados(df, nome_arquivo,'outros/lego',hour)
+        salvar_dados(df, nome_arquivo,'outros/vmz',hour)
         
         logging.info("Coleta finalizada Site Vmz - lego")
         

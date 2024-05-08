@@ -105,7 +105,7 @@ async def coletar_precos_ml_cove(hour, array_datas,data_atual):
         df = pd.DataFrame(dados)
         nome_arquivo = f'discovery_cove_ml_{data_atual}.json'
         
-        salvar_dados(df, nome_arquivo, 'outros/discovery_cove', hour)
+        salvar_dados(df, nome_arquivo, 'outros/ml', hour)
         logging.info("Coleta de preços ML Cove concluída")
         #atualizar_calibragem(85)
         return

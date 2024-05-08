@@ -1,3 +1,4 @@
+
 from helpers.atualizar_calibragem import mudar_horarios
 
 from imports import *
@@ -5,11 +6,17 @@ import pyautogui
 from pynput.keyboard import Key, Controller
 
 from classes.junta_dados_classe import JuntarJsons
+from decolar.hopper.decolar_disney_hopper import receive_disney_decolar_hopper
+from qualidade.qualidade import coleta_precos
 
+
+from start.run_halloween import executar_halloween
+from start.run_outros import  coleta_outros_parques
 from vmz.index_vmz import main_vmz
 from vmz.vmz_disney_hopper.index_vmz_hopper import main_vmz_hopper
 from voupra.orlando.index_voupra import main_voupra
-
+from qualidade.qualidade_teste import coleta_precos_teste
+from decolar.halloween.decolar_halloween import decolar_halloween
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 days_to_add =[5, 10, 20, 47, 65, 126]
@@ -27,6 +34,41 @@ horarios = []
 def hello():
     return  hora_global
 
+##ROTAS HALLOWEEN - TEMPORARIA
+@app.route('/halloween', methods=['GET'])
+async def coleta_halloween():
+    
+    global data_atual
+    global hora_global
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
+    array_datas = [5, 10, 20, 47, 65, 126]
+    time.sleep(3)
+    await executar_halloween(hora_global, array_datas, data_atual)
+
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+
+@app.route('/meses_halloween', methods=['GET'])
+def meses_halloween():
+    meses = ['setembro', 'outubro', 'novembro']
+    
+    return jsonify(meses)
+
+@app.route('/dias_halloween', methods=['GET'])
+def dias_halloween():
+    urls = [1,3,5,9,18,23]
+    
+    return urls
+
+@app.route('/receive_json_decolar_halloween', methods=['POST'])
+def receive_json_decolar_halloween():
+    global data_atual
+    data = request.json
+    decolar_halloween(data,data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
 
 #ROTAS PARA PARIS
 @app.route('/meses_paris', methods=['GET'])
@@ -143,6 +185,20 @@ async def receive_json_disney():
 
     return jsonify({"message": "Dados salvos com sucesso!"})
 
+@app.route('/receive_json_hopper', methods=['POST'])
+async def receive_json_hopper():
+    
+    
+    global hora_global
+    global data_atual
+    data = data_atual
+    hora = hora_global
+    data_list = request.json
+    await receive_disney_decolar_hopper(data_list,hora,data)
+
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+
 @app.route('/receive_json_seaworld', methods=['POST'])
 async def receive_json_seaworld():
     global hora_global
@@ -215,53 +271,40 @@ async def outros_parques():
     if not parque:
         return jsonify({"error": "O parque deve ser especificado."}), 400
 
-    empresas = ['voupra', 'decolar', 'ml', 'vmz']
+    if parque == 'halloween':
+        empresas = ['voupra', 'decolar', 'ml', 'vmz']
+        parques = ['halloween']
+        pasta = 'halloween'
+        
+    elif parque == 'dados':
+        
+        empresas = ['voupra', 'vmz', 'decolar','ml']
+        parques = ['lego', 'nasa', 'discovery_cove','furafila']
+        pasta = 'outros'
+           
     
-    if parque == 'discovery_cove':
-        
-        parques = ['discovery_cove']
-        pasta = 'outros/discovery_cove'
-        
-    elif parque == 'nasa':
-        
-        parques = ['nasa', 'discovery_cove', 'lego', 'furafila']
-        pasta = 'outros/nasa'
-        
-    elif parque == 'lego':
-            
-            parques = ['lego']
-            pasta = 'outros/lego'
     elif parque ==  'paris':
         
-            empresas = ['voupra', 'decolar', 'ml','gyg','civitatis']
-            parques = ['paris']
-            pasta = 'paris'
+        empresas = ['voupra', 'decolar', 'ml','gyg','civitatis']
+        parques = ['paris']
+        pasta = 'paris'
+        
     elif parque == 'california':
         
         empresas = ['voupra', 'decolar', 'ml', 'vmz','rca']
         parques = ['california']
         pasta = 'california'
+        
     else:
         return jsonify({"error": "Parque inválido."}), 400
     
     juntar_jsons = JuntarJsons(data_atual, empresas, parques, pasta)
+        
     await juntar_jsons.executar()
     
-    return jsonify({"message": "Dados salvos com sucesso!"})
+    return {"message": "Dados salvos com sucesso!"}, 200
 
 
-@app.route('/cove', methods=['GET'])
-async def coleta_discovery_cove():
-    global data_atual
-    global hora_global
-    # data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
-    # hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
-    
-    array_datas = [5,10, 20, 47, 65, 126]
-    
-    time.sleep(5)
-    
-    await coleta_cove(hora_global, array_datas, data_atual)
 
 ##ROTAS NASA
 
@@ -275,18 +318,6 @@ def receive_json_decolar_nasa():
 
 
 
-@app.route('/nasa', methods=['GET'])
-async def nasa():
-    global data_atual
-    global hora_global
-    # data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
-    # hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
-    
-    array_datas = [5,10, 20, 47, 65, 126]
-    
-    time.sleep(5)
-    
-    await coleta_nasa(hora_global, array_datas, data_atual)
 
 
 ##ROTAS LEGOLAND
@@ -301,10 +332,14 @@ def receive_json_decolar_lego():
 
 
 
-@app.route('/lego', methods=['GET'])
-async def lego():
+
+
+## ROTAS FURA FILA
+@app.route('/coleta_outros', methods=['GET'])
+async def furafila():
     global data_atual
     global hora_global
+    
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     
@@ -312,22 +347,8 @@ async def lego():
     
     time.sleep(5)
     
-    await coleta_lego(hora_global, array_datas, data_atual)
-
-
-## ROTAS FURA FILA
-@app.route('/furafila', methods=['GET'])
-async def furafila():
-    global data_atual
-    global hora_global
-    # data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
-    # hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
-    
-    array_datas = [5,10, 20, 47, 65, 126]
-    
-    time.sleep(5)
-    
-    await coleta_furafila(hora_global, array_datas, data_atual)
+    #await coleta_furafila(hora_global, array_datas, data_atual)
+    await coleta_outros_parques(hora_global, array_datas, data_atual)
 
     return jsonify({"message": "Dados salvos com sucesso!"})
 
@@ -370,7 +391,7 @@ async def calibrar():
         arquivo.write(hora_global + "\n")
     
     time.sleep(3)
-    await executar_ambos(hora_global, days_to_add, data_atual)
+    await executar_ambos('14:00', days_to_add, data_atual)
 
     return jsonify({"message": "Calibragem iniciada com sucesso!"})
 
@@ -491,8 +512,41 @@ def atualizar_hora():
     
     horarios.append(horario)
 
+## ROTAS PARA QUALIDADE
+@app.route('/qualidade', methods=['GET'])
+def coleta():
+    
+    global calibrating
+     # Se a calibragem já estiver em andamento, retorne uma mensagem de erro
+    if calibrating:
+        return jsonify({"error": "Calibragem já em andamento"}), 400
+    
+    calibrating = True
+    coleta_precos()
+    return jsonify({"message": "Dados salvos com sucesso!"})
 
+# @app.route('/nota', methods=['GET'])
+# def nota():
+    
+#     dia = datetime.now().strftime('%d-%m-%Y')
+#     # Abre o arquivo JSON e lê os dados
+#     with open(f'leads_{dia}.json', 'r', encoding='utf-8') as f:
+#         dados = json.load(f)
+    
+#     # Retorna os dados como resposta JSON
+#     return jsonify(dados)
 
+# @app.route('/qualidadeteste', methods=['GET'])
+# def coletateste():
+    
+#     global calibrating
+#      # Se a calibragem já estiver em andamento, retorne uma mensagem de erro
+#     if calibrating:
+#         return jsonify({"error": "Calibragem já em andamento"}), 400
+    
+#     calibrating = True
+#     coleta_precos_teste()
+#     return jsonify({"message": "Dados salvos com sucesso!"})
 
 if __name__ == '__main__':
     

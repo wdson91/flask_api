@@ -22,8 +22,8 @@ async def coletar_precos_voupra_fura_fila(hour, array_datas,data_atual):
     base_url = "https://www.voupra.com/estados-unidos/orlando/universal-express---fura-fila?Id=57594&DataIngresso="
 
     xpath_pairs = [
-                ('/html/body/div[3]/div/div[1]/div[2]/div[7]/div/div/div[3]/div[1]/div[1]','/html/body/div[3]/div/div[1]/div[2]/div[7]/div/div/div[3]/div[1]/div[5]','1 Dia Limitado - Universal Fura Fila'),
-                ('/html/body/div[3]/div/div[1]/div[2]/div[13]/div/div/div[3]/div[1]/div[1]','/html/body/div[3]/div/div[1]/div[2]/div[13]/div/div/div[3]/div[1]/div[5]','1 Dia Ilimitado - Universal Fura Fila')]
+                ('/html/body/div[3]/div/div[1]/div[2]/div[7]/div/div/div[3]/div[1]/div[1]','/html/body/div[3]/div/div[1]/div[2]/div[7]/div/div/div[3]/div[1]/div[5]','Ingresso 1 Dia Universal Express Pass'),
+                ('/html/body/div[3]/div/div[1]/div[2]/div[13]/div/div/div[3]/div[1]/div[1]','/html/body/div[3]/div/div[1]/div[2]/div[13]/div/div/div[3]/div[1]/div[5]','Ingresso 1 Dia Universal Express Unlimited')]
     dados = []  # Inicializa os dados dentro do loop
     
     # Iniciar o loop pelas datas
@@ -83,7 +83,7 @@ async def coletar_precos_voupra_fura_fila(hour, array_datas,data_atual):
     #df.to_json(nome_arquivo, orient='records', lines=True)
     
      
-    salvar_dados(df, nome_arquivo,'outros/furafila',hour)
+    salvar_dados(df, nome_arquivo,'outros/voupra',hour)
     # Finalizando o WebDriver fora do loop
     driver.quit()
 

@@ -14,51 +14,22 @@ async def coletar_precos_ml_halloween(hour, array_datas,data_atual):
     dados = []
     wait = WebDriverWait(driver, 5)
     logging.info("Iniciando a coleta de preços ML halloween")
+    datas = [f'2024-09-05',f'2024-09-18',f'2024-10-09',f'2024-10-23',f'2024-11-01',f'2024-11-03']
+
     try:
-        for days in array_datas:
-            future_date = get_future_date(days)
-            url = f"https://www.vamonessa.com.br/ingressos/Orlando/10?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}&provider=0"
+        for days in datas:
+            #future_date = get_future_date(days)
+            url = f"https://www.vamonessa.com.br/ingressos/HALLOWEEN%20HORROR%20NIGHTS%20UNIVERSAL/536?destination=Orlando&destinationCode=2&destinationState=Florida&destinationStateCode=2&date={days}&provider=0"
             driver.get(url)
             await asyncio.sleep(3)  # Aguardar o carregamento da página
-            logging.info(f"Coletando preços para {future_date}")
+            logging.info(f"Coletando preços para {days}")
 
             # Pares de XPaths para botões e elementos de preço correspondentes
             xpath_pairs = [
-                 ( '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[1]',
-                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span',
-                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/span',
-                  '1 Dia - Legoland Florida'),
-                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[2]',
-                   '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span',
-                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/span',
-                  '2 Dias - Legoland Florida'),
-                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button[1]',
-                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span',
-                '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/span',
-                '1 Dia - Legoland Florida com Parque Aquático'),
-                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button[2]',
-                '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span',
-                '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/span',
-                '2 Dias - Legoland Florida com Parque Aquático'),
-                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[1]/button[1]',
-                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span',
-                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[1]/span',
-                  '1 Dia - Peppa Pig Theme Park e Legoland'),
-                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[1]/button[2]',
-                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span',
-                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[1]/span',
-                  '2 Dias - Peppa Pig Theme Park e Legoland'),
-                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[1]/button[1]',
-                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span',
-                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[2]/div[2]/div[1]/div[1]/span',
-                  '2 Dias - Peppa Pig Theme Park e Legoland com Parque Aquático'),
-                  ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[1]/button[2]',
-                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span',
-                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[2]/div[2]/div[1]/div[1]/span',
-                  '3 Dias - Peppa Pig Theme Park e Legoland com Parque Aquático'),
-                
-                
-                # Adicionar outros pares conforme necessário
+                 ( '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div/div[2]/div[1]/button',
+                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div/div[2]/div[2]/div[2]/div[1]/div[2]/span/span',
+                  '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div/div[2]/div[2]/div[2]/div[1]/div[1]/span',
+                  'Universal Halloween Horror Nights')
             ]
             
             for button_xpath,price_xpath, cash_price_xpath, park_name in xpath_pairs:
@@ -70,7 +41,7 @@ async def coletar_precos_ml_halloween(hour, array_datas,data_atual):
                 except TimeoutException:
                     logging.error(f"Tempo esgotado ao tentar localizar o botão para {park_name}")
                     dados.append({
-                        'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
+                        'Data_viagem': days,
                         'Parque': park_name,
                         'Preco_Avista': '-',
                         'Preco_Parcelado':  '-'
@@ -106,7 +77,7 @@ async def coletar_precos_ml_halloween(hour, array_datas,data_atual):
                 data_hora_atual = datetime.now()
                 
                 dados.append({
-                    'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
+                    'Data_viagem': days,
                     'Parque': park_name,
                     'Preco_Parcelado': float(multiplied_price),
                     'Preco_Avista': cash_price_number
@@ -119,7 +90,7 @@ async def coletar_precos_ml_halloween(hour, array_datas,data_atual):
         df = pd.DataFrame(dados)
         nome_arquivo = f'halloween_ml_{data_atual}.json'
         
-        salvar_dados(df, nome_arquivo, 'outros/halloween', hour)
+        salvar_dados(df, nome_arquivo, 'halloween/ml', hour)
         logging.info("Coleta de preços ML halloween concluída")
         #atualizar_calibragem(85)
         return

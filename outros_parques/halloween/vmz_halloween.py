@@ -16,29 +16,23 @@ async def coletar_precos_vmz_halloween(hour,array_datas,data_atual):
     #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     # Lista de sites e nomes de parques
     sites = [
-        ("https://www.vmzviagens.com.br/ingressos/orlando/halloweenland-florida/halloweenland-florida?data=", '1 Dia - Legoland Florida'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/halloweenland-florida/halloweenland-florida-1-dia-parque-aquatico?data=", '1 Dia - Legoland Florida com Parque Aquático'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/halloweenland-florida/peppa-pighalloweenland-1-dia?data=", '1 Dia - Peppa Pig Theme Park e Legoland'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/halloweenland-florida/halloweenland-florida-2-dias?data=", '2 Dias - Legoland Florida'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/halloweenland-florida/halloweenland-florida-2-dias-parque-aquatico?data=", '2 Dias - Legoland Florida com Parque Aquático'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/halloweenland-florida/peppa-pighalloweenland-2-dias?data=", '2 Dias - Peppa Pig Theme Park e Legoland'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/halloweenland-florida/peppa-pighalloweenlandwater-park-2-dias?data=", '2 Dias - Peppa Pig Theme Park e Legoland com Parque Aquático'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/halloweenland-florida/peppa-pighalloweenlandwater-park-3-dias?data=", '3 Dias - Peppa Pig Theme Park e Legoland com Parque Aquático')
+        ("https://www.vmzviagens.com.br/ingressos/orlando/universal-halloween-horror-nights/universal-halloween-horror-nights?data=", 'Universal Halloween Horror Nights'),
+        
     ]
 
-    
+    datas = [f'2024-09-05',f'2024-09-18',f'2024-10-09',f'2024-10-23',f'2024-11-01',f'2024-11-03']
     try:
         # Definindo as datas
-        datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
-
+        #datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
+        
         # Lista para armazenar os dados
         dados = []
-
+        
         for data in datas:
-            for url, parque in sites:
-                logging.info(f"Coletando precos do parque {parque}.")
+            #for url, parque in sites:
+                logging.info(f"Coletando precos do parque")
 
-                driver.get(f'{url}{data}')
+                driver.get(f'https://www.vmzviagens.com.br/ingressos/orlando/universal-halloween-horror-nights/universal-halloween-horror-nights?data={data}')
                 
                 
                 try:
@@ -56,8 +50,8 @@ async def coletar_precos_vmz_halloween(hour,array_datas,data_atual):
                     
                     preco_final_avista = preco_float = "-"
                 dados.append({
-                    'Data_viagem': data.strftime("%Y-%m-%d"),
-                    'Parque': parque,
+                    'Data_viagem': data,
+                    'Parque': 'Universal Halloween Horror Nights',
                     'Preco_Parcelado': preco_float,
                     'Preco_Avista': preco_final_avista
                 })
@@ -65,7 +59,7 @@ async def coletar_precos_vmz_halloween(hour,array_datas,data_atual):
         df = pd.DataFrame(dados)
         
         nome_arquivo = f'halloween_vmz_{data_atual}.json'
-        salvar_dados(df, nome_arquivo,'outros/halloween',hour)
+        salvar_dados(df, nome_arquivo,'halloween/vmz',hour)
         
         logging.info("Coleta finalizada Site Vmz - halloween")
         

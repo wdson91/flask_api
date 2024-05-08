@@ -1,10 +1,36 @@
-from imports import *
-from salvardados import *
-from helpers.atualizar_calibragem import atualizar_calibragem
+import json
+import locale
+from flask import Flask, jsonify, request
+from datetime import datetime, timedelta
+import pandas as pd
+import pytz
+import asyncio
+import os
+import sys
+import time
+import requests
+import pandas as pd
+from datetime import datetime, timedelta
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.common.exceptions import ElementClickInterceptedException, TimeoutException
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support import expected_conditions as EC
+import logging
+from selenium.webdriver.chrome.service import Service as ChromeService
+import schedule
+from flask_cors import CORS
+from bs4 import BeautifulSoup
+import json
+from threading import Thread
+
 
  
 
-async def coletar_precos_vmz(hour,array_datas,data_atual):
+async def coletar_precos_vmz_hopper(hour,array_datas,data_atual):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     # Defina sua lógica para baixar os arquivos e esperar por eles
     baixar_blob_se_existir('disney_vmz_basicos_parcial.json', 'vmz')
@@ -25,17 +51,17 @@ async def coletar_precos_vmz(hour,array_datas,data_atual):
     # # Crie o DataFrame a partir dos dados formatados
     # df = pd.DataFrame(dados_formatados)
     
-    nome_arquivo = f'disney_vmz_{data_atual}.json'
+    nome_arquivo = f'hopper_vmz_{data_atual}.json'
     
-    salvar_dados(df_sorted, nome_arquivo, 'orlando/vmz', hour)
+    salvar_dados(df_sorted, nome_arquivo, 'outros/vmz', hour)
     
     
     logging.info("Coleta finalizada.")
-    atualizar_calibragem(65)
+    
     return 
 
 
-async def coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual):
+async def coletar_precos_vmz_hopperbasicos(array_datas,hour,data_atual):
     
     options = webdriver.ChromeOptions()
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
@@ -96,10 +122,10 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual):
     
     # Criando um DataFrame
     df = pd.DataFrame(dados)
-    salvar_dados(df, 'disney_vmz_basicos_parcial.json','orlando/vmz',hour)
+    #salvar_dados(df, 'disney_vmz_basicos_parcial.json','orlando/vmz',hour)
     driver.quit()
     
-    atualizar_calibragem(40)
+    #atualizar_calibragem(40)
     return
 
 async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,data_atual):
@@ -142,7 +168,19 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
         time.sleep(waiter + 2)  # Espera para a rolagem acontecer
     
     def mudar_mes_ano(driver, mes, ano):
+        
+        data_objeto = datetime.strptime(data_atual, "%Y-%m-%d")
+
+        # Obtém o nome do mês por extenso
+        mes_extenso = data_objeto.strftime("%B")
+        print(mes_extenso)
+        mes_atual = driver.find_element(By.XPATH, "//*[@id='custom-month']").text
+        print(mes_atual)
+        
         try:
+            
+            
+            
             # Espera até que o seletor do ano esteja clicável
             year_select = WebDriverWait(driver, waiter + 20).until(EC.element_to_be_clickable((By.ID, "year-control")))
             
@@ -162,7 +200,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
             month_select = WebDriverWait(driver, waiter + 20).until(EC.element_to_be_clickable((By.ID, "month-control")))
             
             # Lê o mês atual selecionado
-            mes_atual = month_select.get_attribute("value")
+            mes_atual = month_select.text ("value")
             
             # Verifica se o mês atual é o mesmo que o mês desejado
             if mes_atual != mes:
@@ -243,11 +281,18 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
     
     
     df = pd.DataFrame(resultados)
-    salvar_dados(df, 'disney_vmz_dias_parcial.json','orlando/vmz',hour)
+    #salvar_dados(df, 'disney_vmz_dias_parcial.json','orlando/vmz',hour)
     driver.quit()
-    atualizar_calibragem(60)
+    #atualizar_calibragem(60)
     return
 
 
 if __name__ == "__main__":
-    df_final = asyncio.run(coletar_precos_vmz())
+    
+    dias_para_processar = [2,3,4,5,6,7,8,9,10]
+    array_datas = [5,10,20,47,65,126]
+    hour = datetime.now().hour
+    data_atual = datetime.now().strftime('%Y-%m-%d')
+    
+    
+    df_final = asyncio.run(coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,data_atual))

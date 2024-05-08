@@ -13,14 +13,14 @@ async def coletar_precos_ml_fura_fila(hour,array_datas,data_atual):
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
    # driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
-    logging.info("Iniciando a coleta de preços ML Universal")
+    logging.info("Iniciando a coleta de preços ML Fura Fila")
     dados = []
     wait = WebDriverWait(driver, 5)
     
     
     xpath_pairs = [
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/span','1 Dia Limitado - Universal Fura Fila'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','1 Dia Ilimitado - Universal Fura Fila'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[10]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[10]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[10]/div[2]/div[2]/div[2]/div[1]/div[1]/span','Ingresso 1 Dia Universal Express Pass'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[11]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[11]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[11]/div[2]/div[2]/div[2]/div[1]/div[1]/span','Ingresso 1 Dia Universal Express Unlimited'),
                
                 # Add other pairs as needed
             ]
@@ -28,7 +28,7 @@ async def coletar_precos_ml_fura_fila(hour,array_datas,data_atual):
     
         for days in array_datas:
             future_date = get_future_date(days)
-            url = f"https://www.vamonessa.com.br/ingressos/Express%20Pass%20Universal%20Orlando/E-U10-UNIEXPRESS?destination=Orlando&destinationCode=2&destinationState=Florida&destinationStateCode=2&date={future_date}&utm_source=Advert&utm_medium=Ingressos+ORLANDO+MAGIC+14-10-2022&utm_campaign=Ingressos+para+NBA&utm_id=ORLANDO+MAGIC&provider=2"
+            url = f"https://www.vamonessa.com.br/ingressos/Orlando/7?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}&provider=0"
             driver.get(url)
             time.sleep(3)
             logging.info(f"Coletando preços para {future_date}")
@@ -90,7 +90,7 @@ async def coletar_precos_ml_fura_fila(hour,array_datas,data_atual):
                 
                 nome_arquivo = f'furafila_ml_{data_atual}.json'
                 #df.to_json(nome_arquivo, orient='records', lines=True)
-                salvar_dados(df, nome_arquivo,'outros/furafila',hour)
+                salvar_dados(df, nome_arquivo,'outros/ml',hour)
                 logging.info("Coleta de preços ML Disney finalizada")
                # atualizar_calibragem(95)
     return

@@ -94,6 +94,6 @@ def decolar_lego(dados,data_atual):
     nome_arquivo = f'lego_decolar_{data_atual}.json'
     #df.to_json(nome_arquivo, orient='records', lines=True)
     # Salvar os dados
-    salvar_dados_decolar(formatted_data, nome_arquivo, 'outros/lego', str(hora))
+    salvar_dados_decolar(formatted_data, nome_arquivo, 'outros/decolar', str(hora))
     
     return jsonify({"message": "Dados salvos com sucesso!"})

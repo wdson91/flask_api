@@ -135,7 +135,7 @@ async def coletar_precos_voupra_halloween(hour,array_datas,data_atual):
     df = df.sort_values(by=['Data_viagem', 'Parque'])
 
     nome_arquivo = f'halloween_voupra_{data_atual}.json'
-    salvar_dados(df, nome_arquivo, 'outros/halloween', hour)
+    salvar_dados(df, nome_arquivo, 'halloween/voupra', hour)
     
     #atualizar_calibragem(20)
     logging.info("Coleta de preços Voupra halloween finalizada.")

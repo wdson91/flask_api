@@ -84,7 +84,7 @@ async def coletar_precos_ml_nasa(hour, array_datas,data_atual):
         df = pd.DataFrame(dados)
         nome_arquivo = f'nasa_ml_{data_atual}.json'
         
-        salvar_dados(df, nome_arquivo, 'outros/nasa', hour)
+        salvar_dados(df, nome_arquivo, 'outros/ml', hour)
         logging.info("Coleta de preços ML nasa concluída")
         #atualizar_calibragem(85)
         return

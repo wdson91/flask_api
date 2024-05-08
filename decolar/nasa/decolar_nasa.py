@@ -6,8 +6,8 @@ from decolar.salvardadosdecolar import salvar_dados_decolar
 
 def clean_price(string):
     if isinstance(string, str):  # Verificar se é uma string válida
-        last_three_chars = string[-4:].rstrip()  # Pegar os últimos três caracteres da string
-        
+        last_three_chars = string[-7:].rstrip()  # Pegar os últimos três caracteres da string
+        last_three_chars=last_three_chars.replace(".", "").replace(",", ".").replace("R$", "").strip()
         #if last_three_chars.isdigit():  # Verificar se os últimos três caracteres são dígitos
         return int(float(last_three_chars))
     return None
@@ -36,7 +36,7 @@ def decolar_nasa(dados,data_atual):
     # Dicionário para mapear os nomes dos parques
     parques_mapping = {
         'Kennedy Space Center com transporte ': 'NASA Kennedy Space Center com Transporte',
-        'Kennedy Space Center': 'NASA Kennedy Space Center'
+        'Ingresso de 1 dia': 'NASA Kennedy Space Center'
         
     }
 
@@ -88,6 +88,6 @@ def decolar_nasa(dados,data_atual):
     nome_arquivo = f'nasa_decolar_{data_atual}.json'
     #df.to_json(nome_arquivo, orient='records', lines=True)
     # Salvar os dados
-    salvar_dados_decolar(formatted_data, nome_arquivo, 'outros/nasa', str(hora))
+    salvar_dados_decolar(formatted_data, nome_arquivo, 'outros/decolar', str(hora))
     
     return jsonify({"message": "Dados salvos com sucesso!"})

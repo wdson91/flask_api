@@ -122,7 +122,7 @@ async def coletar_precos_ml_lego(hour, array_datas,data_atual):
         df = pd.DataFrame(dados)
         nome_arquivo = f'lego_ml_{data_atual}.json'
         
-        salvar_dados(df, nome_arquivo, 'outros/lego', hour)
+        salvar_dados(df, nome_arquivo, 'outros/ml', hour)
         logging.info("Coleta de preços ML lego concluída")
         #atualizar_calibragem(85)
         return

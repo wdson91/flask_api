@@ -34,7 +34,7 @@ async def executar_paris(hour, array_datas, data_atual):
         logging.info("gyr_paris concluída.")  # Registra uma mensagem de log
     except Exception as e:
         logging.error(f"Erro ao executar gyr_paris: {e}")
-    
+    return
         
 # Verifica se o script está sendo executado diretamente
 if __name__ == "__main__":

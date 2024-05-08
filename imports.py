@@ -37,7 +37,8 @@ from datetime import datetime  # Importa a classe datetime do módulo datetime
 import pytz  # Importa o módulo pytz para lidar com fusos horários
 from selenium.common.exceptions import NoSuchElementException
 import re
-
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 
 from voupra.orlando.voupradisney.voupradisney import coletar_precos_voupra_disney
 from voupra.orlando.vouprasea.vouprasea import coletar_precos_voupra_sea
@@ -67,10 +68,7 @@ from decolar.paris.meses_paris import meses_paris
 
 from start.run import executar_ambos
 from start.run_california import executar_california
-from start.run_cove import coleta_cove
-from start.run_furafila import coleta_furafila
-from start.run_lego import coleta_lego
-from start.run_nasa import coleta_nasa
+
 from start.run_paris import executar_paris
 
 
