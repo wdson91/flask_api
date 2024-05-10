@@ -391,7 +391,7 @@ async def calibrar():
         arquivo.write(hora_global + "\n")
     
     time.sleep(3)
-    await executar_ambos('14:00', days_to_add, data_atual)
+    await executar_ambos(hora_global, days_to_add, data_atual)
 
     return jsonify({"message": "Calibragem iniciada com sucesso!"})
 

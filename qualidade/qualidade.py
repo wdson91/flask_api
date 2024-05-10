@@ -11,7 +11,7 @@ def coleta_precos():
     dia = datetime.now().strftime('%d-%m-%Y')
     
     chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Ativa o modo headless
+    #chrome_options.add_argument("--headless")  # Ativa o modo headless
 
     # Inicializa o serviço do Chrome
     service = Service(ChromeDriverManager().install())
@@ -41,7 +41,7 @@ def coleta_precos():
     actions.send_keys(Keys.ENTER)
     actions.perform()
     
-    time.sleep(15)
+    time.sleep(30)
 
 
     driver.get('https://grupoysa.sz.chat/monitoring')

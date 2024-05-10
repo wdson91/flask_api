@@ -7,8 +7,8 @@ from helpers.atualizar_calibragem import atualizar_calibragem
 async def coletar_precos_vmz(hour,array_datas,data_atual):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     # Defina sua lógica para baixar os arquivos e esperar por eles
-    baixar_blob_se_existir('disney_vmz_basicos_parcial.json', 'vmz')
-    baixar_blob_se_existir('disney_vmz_dias_parcial.json', 'vmz')
+    baixar_blob_se_existir('disney_vmz_basicos_parcial.json', 'orlando/vmz')
+    baixar_blob_se_existir('disney_vmz_dias_parcial.json', 'orlando/vmz')
     
     # Carregue os dados do JSON baixado
     disney_basicos = carregar_dados_json('disney_vmz_basicos_parcial.json')
@@ -177,7 +177,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
 
     def encontrar_preco_data(driver, data):
         try:
-            wait = WebDriverWait(driver, 30)  # Espera de até 30 segundos
+            wait = WebDriverWait(driver, 60)  # Espera de até 30 segundos
             # Aguarda até que o calendário seja clicável ou visível
             wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'fc-content')))
             elementos_fc_content = driver.find_elements(By.CLASS_NAME, 'fc-content')
@@ -187,7 +187,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
                     calendar_event_price = elemento.find_element(By.CLASS_NAME, 'calendar-event-price')
                     price_text = calendar_event_price.text.strip()
                     preco_avista = float(price_text.replace('R$', '').replace('.', '').replace(',', '.').strip())
-                    preco_parcelado = round(preco_avista * 1.08,2)
+                    preco_parcelado = round(preco_avista * 1.087,2)
                     
                     return preco_avista, preco_parcelado
         except Exception as e:
@@ -243,7 +243,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
     
     
     df = pd.DataFrame(resultados)
-    salvar_dados(df, 'disney_vmz_dias_parcial.json','orlando/vmz',hour)
+    salvar_dados(df,'disney_vmz_dias_parcial.json','orlando/vmz',hour)
     driver.quit()
     atualizar_calibragem(60)
     return
