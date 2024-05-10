@@ -1,4 +1,5 @@
 
+import threading
 from helpers.atualizar_calibragem import mudar_horarios
 
 from imports import *
@@ -7,6 +8,7 @@ from pynput.keyboard import Key, Controller
 
 from classes.junta_dados_classe import JuntarJsons
 from decolar.hopper.decolar_disney_hopper import receive_disney_decolar_hopper
+from outros_parques.hopper.vmz_hopper import coletar_precos_vmz_hopper, coletar_precos_vmz_hopperbasicos, coletar_precos_vmz_hopperdisneydias
 from qualidade.qualidade import coleta_precos
 
 
@@ -17,6 +19,11 @@ from vmz.vmz_disney_hopper.index_vmz_hopper import main_vmz_hopper
 from voupra.orlando.index_voupra import main_voupra
 from qualidade.qualidade_teste import coleta_precos_teste
 from decolar.halloween.decolar_halloween import decolar_halloween
+from start.run_hopper import coleta_hopper_aquaticos
+
+
+
+
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 days_to_add =[5, 10, 20, 47, 65, 126]
@@ -281,8 +288,7 @@ async def outros_parques():
         empresas = ['voupra', 'vmz', 'decolar','ml']
         parques = ['lego', 'nasa', 'discovery_cove','furafila']
         pasta = 'outros'
-           
-    
+
     elif parque ==  'paris':
         
         empresas = ['voupra', 'decolar', 'ml','gyg','civitatis']
@@ -548,6 +554,26 @@ def coleta():
 #     coleta_precos_teste()
 #     return jsonify({"message": "Dados salvos com sucesso!"})
 
+
+@app.route('/hopper', methods=['GET'])
+async def hopper_2():
+    
+    global hora_global
+    global data_atual
+
+    hour = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    array_datas = [5,10, 20, 47, 65, 126]
+    thread = threading.Thread(target=coletar_precos_vmz_hopperbasicos ,args=(hour, array_datas, data_atual))
+    #thread = threading.Thread(target=coletar_precos_vmz_hopperdisneydias, args=(hour, array_datas, data_atual))
+    
+    thread.start()
+    thread.join()
+    return  hora_global
+
+
+
+
+
 if __name__ == '__main__':
     
-    app.run(debug=True, host='0.0.0.0',port=5000)
+    app.run(threaded=True,debug=True, host='0.0.0.0',port=5000)
