@@ -8,14 +8,14 @@ from pynput.keyboard import Key, Controller
 
 from classes.junta_dados_classe import JuntarJsons
 from decolar.hopper.decolar_disney_hopper import receive_disney_decolar_hopper
-from outros_parques.hopper.vmz_hopper import coletar_precos_vmz_hopper, coletar_precos_vmz_hopperbasicos, coletar_precos_vmz_hopperdisneydias
 from qualidade.qualidade import coleta_precos
 
 
+from start.run_hopper import executar_hopper
 from start.run_halloween import executar_halloween
 from start.run_outros import  coleta_outros_parques
 from vmz.index_vmz import main_vmz
-from vmz.vmz_disney_hopper.index_vmz_hopper import main_vmz_hopper
+
 from voupra.orlando.index_voupra import main_voupra
 from qualidade.qualidade_teste import coleta_precos_teste
 from decolar.halloween.decolar_halloween import decolar_halloween
@@ -26,7 +26,8 @@ from start.run_hopper import coleta_hopper_aquaticos
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
-days_to_add =[5, 10, 20, 47, 65, 126]
+days_to_add =[5, 10
+              , 20, 47, 65, 126]
 calibrating = False
 global hora_global
 global data_atual
@@ -68,6 +69,25 @@ def dias_halloween():
     urls = [1,3,5,9,18,23]
     
     return urls
+
+@app.route('/urls_halloween', methods=['GET'])
+def get_urls_halloween():
+    
+    urls = [{'dias':'2024-09-05',
+           'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-09-05'},
+            {'dias':'2024-09-18',
+             'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-09-18'},
+            {'dias':'2024-10-09',
+             'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-10-09'},
+            {'dias':'2024-10-23',
+             'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-10-23'},
+            {'dias':'2024-11-01',
+             'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-11-01'},
+            {'dias':'2024-11-03',
+             'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-11-03'}]
+    
+    #urls=['https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-09-05','https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-09-18','https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-10-09','https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-10-09','https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-10-23','https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-11-01','https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-11-03']
+    return jsonify(urls)
 
 @app.route('/receive_json_decolar_halloween', methods=['POST'])
 def receive_json_decolar_halloween():
@@ -139,6 +159,7 @@ def get_urls_disney():
     
     return jsonify(urls)
 
+
 @app.route('/receive_json_decolar_paris', methods=['POST'])
 def receive_json_paris_disney():
     global data_atual
@@ -153,6 +174,8 @@ def get_urls_universal():
     
     urls = generate_urls("https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_2P2DAY-date&fixedDate={date}")
     return jsonify(urls)
+
+
 
 @app.route('/urls_universal_aqua', methods=['GET'])
 def get_urls_universal_aqua():
@@ -229,7 +252,7 @@ async def hopper():
 
     data = data_atual
     hora = hora_global
-    await main_vmz_hopper(hora, days_to_add, data)
+    await executar_hopper(hora, days_to_add, data)
     return  hora_global
 
 #ROTAS PARA CALIFORNIA

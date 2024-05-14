@@ -34,14 +34,14 @@ def decolar_halloween(dados,data_atual):
     }
     
     parques_mapping = {
-    "Universal Orlando - Noites de Terror no Halloween": 'Universal Halloween Horror Nights',
+    ' Ingresso para Noites de Terror de Halloween ':'Universal Halloween Horror Nights',
     
 }
-
+    
     # Iterar sobre os dados originais e converter para o formato desejado
     for dado in dados_originais:
-        data_viagem = f"2024-{meses[dado['test']]:02d}-{int(dado['dia']):02d}"
-        Preco_Parcelado = clean_price(dado['Preco_Parcelado'])
+        data_viagem = dado['Data_viagem']
+        Preco_Parcelado = dado['Preco_Parcelado']
         
         # Mapear o nome do parque
         Parque = None
@@ -85,7 +85,7 @@ def decolar_halloween(dados,data_atual):
     
     # Nome do arquivo
     nome_arquivo = f'halloween_decolar_{data_atual}.json'
-    #df.to_json(nome_arquivo, orient='records', lines=True)
+    df.to_json(nome_arquivo, orient='records', lines=True)
     # Salvar os dados
     salvar_dados_decolar(formatted_data, nome_arquivo, 'halloween/decolar', str(hora))
     

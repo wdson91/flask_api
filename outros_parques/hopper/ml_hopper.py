@@ -26,26 +26,26 @@ async def coletar_precos_ml_hopper(hour,array_datas,data_atual):
             time.sleep(3)
             
             xpath_pairs = [
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','1 Dia - Disney Park Hopper'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[2]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','2 Dias - Disney Park Hopper'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[3]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','3 Dias - Disney Park Hopper'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[4]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','4 Dias - Disney Park Hopper'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[5]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','5 Dias - Disney Park Hopper'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[6]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','6 Dias - Disney Park Hopper'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[7]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','7 Dias - Disney Park Hopper'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[8]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','8 Dias - Disney Park Hopper'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[9]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','9 Dias - Disney Park Hopper'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[10]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','10 Dias - Disney Park Hopper'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','///*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','1 Dia - Disney Park Hopper Plus"'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[2]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','///*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','2 Dias - Disney Park Hopper Plus'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[3]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','///*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','3 Dias - Disney Park Hopper Plus'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[4]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','///*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','4 Dias - Disney Park Hopper Plus'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[5]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','///*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','5 Dias - Disney Park Hopper Plus'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[6]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','///*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','6 Dias - Disney Park Hopper Plus'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[7]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','///*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','7 Dias - Disney Park Hopper Plus'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[8]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','///*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','8 Dias - Disney Park Hopper Plus'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[9]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','///*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','9 Dias - Disney Park Hopper Plus'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[10]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','///*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','10 Dias - Disney Park Hopper Plus'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[1]/span','1 Dia - Disney Park Hopper'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[2]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[1]/span','2 Dias - Disney Park Hopper'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[3]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[1]/span','3 Dias - Disney Park Hopper'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[4]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[1]/span','4 Dias - Disney Park Hopper'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[5]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[1]/span','5 Dias - Disney Park Hopper'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[6]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[1]/span','6 Dias - Disney Park Hopper'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[7]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[1]/span','7 Dias - Disney Park Hopper'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[8]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[1]/span','8 Dias - Disney Park Hopper'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[9]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[1]/span','9 Dias - Disney Park Hopper'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button[10]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[1]/span','10 Dias - Disney Park Hopper'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','1 Dia - Disney Park Hopper Plus"'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[2]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','2 Dias - Disney Park Hopper Plus'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[3]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','3 Dias - Disney Park Hopper Plus'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[4]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','4 Dias - Disney Park Hopper Plus'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[5]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','5 Dias - Disney Park Hopper Plus'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[6]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','6 Dias - Disney Park Hopper Plus'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[7]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','7 Dias - Disney Park Hopper Plus'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[8]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','8 Dias - Disney Park Hopper Plus'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[9]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','9 Dias - Disney Park Hopper Plus'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[1]/button[10]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[8]/div[2]/div[2]/div[2]/div[1]/div[1]/span','10 Dias - Disney Park Hopper Plus'),
                 
             ]
 
@@ -69,22 +69,22 @@ async def coletar_precos_ml_hopper(hour,array_datas,data_atual):
                     
                     price_element_parcelado = wait.until(EC.presence_of_element_located((By.XPATH, price_xpath_parcelado)))
                     price_element_vista = wait.until(EC.presence_of_element_located((By.XPATH, price_xpath_vista)))
+                    
                     driver.execute_script("arguments[0].scrollIntoView();", price_element_vista)
+                    
                     price_text_parcelado = price_element_parcelado.text
                     price_text_vista = price_element_vista.text
                         
-                    if price_text_parcelado != '-':
-                        price_number_str_parcelado = price_text_parcelado.replace("R$", "").replace(",", ".").strip()
-                        price_number_parcelado = float(price_number_str_parcelado)
-                        multiplied_price_parcelado = price_number_parcelado * 10
-                    else:
-                        multiplied_price_parcelado = '-'
+                   
+                    price_number_str_parcelado = price_text_parcelado.replace("R$", "").replace(",", ".").strip()
+                    price_number_parcelado = float(price_number_str_parcelado)
+                    multiplied_price_parcelado = price_number_parcelado * 10
+                    
 
-                    if price_text_vista != '-':
-                        price_number_str_vista = price_text_vista.replace("R$", "").replace(".", "").replace(",", ".").strip()
-                        price_number_vista = float(price_number_str_vista)
-                    else:
-                        price_number_vista = '-'
+                    
+                    price_number_str_vista = price_text_vista.replace("R$", "").replace(".", "").replace(",", ".").strip()
+                    price_number_vista = float(price_number_str_vista)
+                    
                         
                 except TimeoutException:
                     logging.error(f"Tempo esgotado ao tentar obter o preço à vista para {park_name}")

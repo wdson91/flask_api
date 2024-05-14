@@ -1,17 +1,15 @@
 from imports import *
 
-from vmz.vmz_disney_hopper.vmz_disney_hopper_plus import coletar_precos_vmz_disneydias_hopperplus, coletar_precos_vmz_hopper_plus, coletar_precos_vmz_hopperplus_basicos
+from outros_parques.hopper.vmz_disney_hopper_plus import coletar_precos_vmz_disneydias_hopperplus, coletar_precos_vmz_hopper_plus, coletar_precos_vmz_hopperplus_basicos
 
 
 
 
 #from .vmzdisney.teste import coletar_precos_vmz
 
-dias_para_processar = [2,3,4,5]
-async def main_vmz_hopper(hour,array_datas,data_atual,run_once=False):
-    if run_once:
-        global calibragem
-        
+dias_para_processar = [2,3,4,5,6,7,8,9,10]
+async def main_vmz_hopper(hour,array_datas,data_atual):
+    
         logging.info("Iniciando coleta de preços.")
         try:
             await coletar_precos_vmz_hopperplus_basicos(hour,array_datas,data_atual)
@@ -19,13 +17,13 @@ async def main_vmz_hopper(hour,array_datas,data_atual,run_once=False):
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços do SeaWorld: {e}")
         try:
-            await coletar_precos_vmz_disneydias_hopperplus(array_datas,hour,data_atual)
+            await coletar_precos_vmz_disneydias_hopperplus(dias_para_processar,array_datas,hour,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")
 
         try: 
-            await coletar_precos_vmz_hopper_plus(dias_para_processar,array_datas,hour,data_atual)
+            await coletar_precos_vmz_hopper_plus(array_datas,hour,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")

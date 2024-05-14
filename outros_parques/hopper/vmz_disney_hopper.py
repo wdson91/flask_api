@@ -1,17 +1,37 @@
 from imports import *
+<<<<<<< Updated upstream:outros_parques/hopper/vmz_hopper.py
+
+pasta = 'outros/vmz'
+=======
 from salvardados import *
 from helpers.atualizar_calibragem import atualizar_calibragem
 
+>>>>>>> Stashed changes:outros_parques/hopper/vmz_disney_hopper.py
 
 async def coletar_precos_vmz_hopper(hour,array_datas,data_atual):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    
+    await asyncio.gather(
+        coletar_precos_vmz_hopperbasicos(array_datas, hour, data_atual),
+        coletar_precos_vmz_hopperdisneydias(array_datas, hour, data_atual)
+    )
+    
     # Defina sua lógica para baixar os arquivos e esperar por eles
-    baixar_blob_se_existir('disney_vmz_basicos_hopper_parcial.json', 'vmz')
-    baixar_blob_se_existir('disney_vmz_dias_hopper_parcial.json', 'vmz')
+<<<<<<< Updated upstream:outros_parques/hopper/vmz_hopper.py
+    baixar_blob_se_existir('disney_vmz_hopper_basicos_parcial.json', pasta)
+    baixar_blob_se_existir('disney_vmz_hopper_dias_parcial.json', pasta)
+    
+    # Carregue os dados do JSON baixado
+    disney_basicos = carregar_dados_json('disney_vmz_hopper_basicos_parcial.json')
+    disney_dias = carregar_dados_json('disney_vmz_hopper_dias_parcial.json')
+=======
+    baixar_blob_se_existir('disney_vmz_basicos_hopper_parcial.json', 'outros/vmz')
+    baixar_blob_se_existir('disney_vmz_dias_hopper_parcial.json', 'outros/vmz')
     
     # Carregue os dados do JSON baixado
     disney_basicos = carregar_dados_json('disney_vmz_basicos_hopper_parcial.json')
     disney_dias = carregar_dados_json('disney_vmz_dias_hopper_parcial.json')
+>>>>>>> Stashed changes:outros_parques/hopper/vmz_disney_hopper.py
 
 
     # Combine os dados de disney_basicos e disney_dias
@@ -21,6 +41,12 @@ async def coletar_precos_vmz_hopper(hour,array_datas,data_atual):
     df = pd.DataFrame(dados_combinados)
     
     df_sorted = df.sort_values(by=['Data_viagem', 'Parque'], ignore_index=True)
+<<<<<<< Updated upstream:outros_parques/hopper/vmz_hopper.py
+
+    nome_arquivo = f'hopper_vmz_{data_atual}.json'
+    
+    salvar_dados(df_sorted, nome_arquivo, pasta, hour)
+=======
     # # Crie o DataFrame a partir dos dados formatados
     # df = pd.DataFrame(dados_formatados)
     
@@ -28,6 +54,7 @@ async def coletar_precos_vmz_hopper(hour,array_datas,data_atual):
     
     salvar_dados(df_sorted, nome_arquivo, 'vmz', hour)
     
+>>>>>>> Stashed changes:outros_parques/hopper/vmz_disney_hopper.py
     
     logging.info("Coleta finalizada.")
     atualizar_calibragem(65)
@@ -45,8 +72,13 @@ async def coletar_precos_vmz_hopper_basicos(array_datas,hour,data_atual):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     sites = [
+<<<<<<< Updated upstream:outros_parques/hopper/vmz_hopper.py
+    ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/1-dia-hopper-disney?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Park Hopper'),
+    
+=======
     ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/1-dia-hopper-disney?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Hopper'),
     # Adicione outros sites, XPaths e nomes de parques conforme necessario
+>>>>>>> Stashed changes:outros_parques/hopper/vmz_disney_hopper.py
 ]
 
     # Definindo as datas
@@ -90,21 +122,41 @@ async def coletar_precos_vmz_hopper_basicos(array_datas,hour,data_atual):
     
     # Criando um DataFrame
     df = pd.DataFrame(dados)
-    salvar_dados(df, 'disney_vmz_basicos_hopper_parcial.json','vmz',hour)
+<<<<<<< Updated upstream:outros_parques/hopper/vmz_hopper.py
+    salvar_dados(df, 'disney_vmz_hopper_basicos_parcial.json',pasta,hour)
+=======
+    salvar_dados(df, 'disney_vmz_basicos_hopper_parcial.json','outros/vmz',hour)
+>>>>>>> Stashed changes:outros_parques/hopper/vmz_disney_hopper.py
     driver.quit()
     
-    #atualizar_calibragem(40)
+    
     return
 
+<<<<<<< Updated upstream:outros_parques/hopper/vmz_hopper.py
+async def coletar_precos_vmz_hopperdisneydias(array_datas, hour, data_atual):
+    waiter = 2
+    dias_para_processar = [2,3,4,5,6,7,8,9,10]
+=======
 async def coletar_precos_vmz_disneydias_hopper(dias_para_processar,array_datas,hour,data_atual):
     waiter = 2
     
+>>>>>>> Stashed changes:outros_parques/hopper/vmz_disney_hopper.py
     options = webdriver.ChromeOptions()
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
-    
+    wait = WebDriverWait(driver, 60)
+
     nome_pacotes = {
+<<<<<<< Updated upstream:outros_parques/hopper/vmz_hopper.py
+        2: "2 Dias - Disney Park Hopper",
+        3: "3 Dias - Disney Park Hopper",
+        4: "4 Dias - Disney Park Hopper",
+        5: "5 Dias - Disney Park Hopper",
+        6: "6 Dias - Disney Park Hopper",
+        7: "7 Dias - Disney Park Hopper",
+        8: "8 Dias - Disney Park Hopper",
+        9: "9 Dias - Disney Park Hopper",
+        10: "10 Dias - Disney Park Hopper",
+=======
         2: "2 Dias - Disney Hopper",
         3: "3 Dias - Disney Hopper",
         4: "4 Dias - Disney Hopper",
@@ -114,7 +166,9 @@ async def coletar_precos_vmz_disneydias_hopper(dias_para_processar,array_datas,h
         8: "8 Dias - Disney Hopper",
         9: "9 Dias - Disney Hopper",
         10: "10 Dias - Disney Hopper",
+>>>>>>> Stashed changes:outros_parques/hopper/vmz_disney_hopper.py
     }
+
     def fechar_popups(driver):
         try:
             botao_fechar_selector = '.dinTargetFormCloseButtom'
@@ -122,10 +176,20 @@ async def coletar_precos_vmz_disneydias_hopper(dias_para_processar,array_datas,h
                 EC.visibility_of_element_located((By.CSS_SELECTOR, botao_fechar_selector))
             )
             botao_fechar.click()
+<<<<<<< Updated upstream:outros_parques/hopper/vmz_hopper.py
+            botao_cookies = WebDriverWait(driver, waiter + 3).until(
+                EC.visibility_of_element_located((By.XPATH, '//*[@id="__layout"]/div/div[3]/div/div/div[2]/button'))
+            )
+            botao_cookies.click()
+
+=======
+>>>>>>> Stashed changes:outros_parques/hopper/vmz_disney_hopper.py
             logging.info("Pop-up fechado.")
         except Exception as e:
             logging.warning(f"Popup não encontrada")
 
+<<<<<<< Updated upstream:outros_parques/hopper/vmz_hopper.py
+=======
     def scroll_to_element(driver, element):
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
         time.sleep(waiter + 2)  # Espera para a rolagem acontecer
@@ -164,10 +228,9 @@ async def coletar_precos_vmz_disneydias_hopper(dias_para_processar,array_datas,h
             logging.error(f"Erro ao mudar mês e ano: {e}")
 
 
+>>>>>>> Stashed changes:outros_parques/hopper/vmz_disney_hopper.py
     def encontrar_preco_data(driver, data):
         try:
-            wait = WebDriverWait(driver, 30)  # Espera de até 30 segundos
-            # Aguarda até que o calendário seja clicável ou visível
             wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'fc-content')))
             elementos_fc_content = driver.find_elements(By.CLASS_NAME, 'fc-content')
             for elemento in elementos_fc_content:
@@ -176,13 +239,17 @@ async def coletar_precos_vmz_disneydias_hopper(dias_para_processar,array_datas,h
                     calendar_event_price = elemento.find_element(By.CLASS_NAME, 'calendar-event-price')
                     price_text = calendar_event_price.text.strip()
                     preco_avista = float(price_text.replace('R$', '').replace('.', '').replace(',', '.').strip())
-                    preco_parcelado = round(preco_avista * 1.08,2)
-                    
+                    preco_parcelado = round(preco_avista * 1.08, 2)
+
                     return preco_avista, preco_parcelado
         except Exception as e:
             logging.error(f"Erro ao encontrar preço para data {data}: {e}")
             return None
 
+<<<<<<< Updated upstream:outros_parques/hopper/vmz_hopper.py
+    def processar_dias(driver, dias, array_datas):
+        base_url = "https://www.vmzviagens.com.br/ingressos/orlando/walt-disney-orlando/ticket-disney-hopper"
+=======
 
     nome_pacotes = {
         2: "2 Dias - Disney Hopper",
@@ -198,6 +265,7 @@ async def coletar_precos_vmz_disneydias_hopper(dias_para_processar,array_datas,h
     def processar_dias(driver, dias,array_datas):
         base_url = "https://www.vmzviagens.com.br/ingressos/orlando/walt-disney-orlando/ticket-disney-hopper"
         datas = [datetime.now() + timedelta(days=d) for d in array_datas]
+>>>>>>> Stashed changes:outros_parques/hopper/vmz_disney_hopper.py
         dados = []
 
         for dia in dias:
@@ -207,13 +275,25 @@ async def coletar_precos_vmz_disneydias_hopper(dias_para_processar,array_datas,h
             driver.get(url_com_dias)
             fechar_popups(driver)
 
-            for data in datas:
-                mes = data.month - 1
-                ano = data.year
-                mudar_mes_ano(driver, mes, ano)
-                preco_avista,preco_parcelado = encontrar_preco_data(driver, data)
-                if preco_avista:
-                    
+            data_objeto = datetime.strptime(data_atual, "%Y-%m-%d")
+            mes_extenso = data_objeto.strftime("%B").lower()
+
+            mes_atual = driver.find_element(By.XPATH, "//*[@id='custom-month']").text.lower()
+
+            for data in array_datas:
+                if mes_extenso != mes_atual:
+                    while mes_extenso != mes_atual:
+                        botao_next = driver.find_element(By.XPATH, '//*[@id="custom-next"]')
+                        wait.until(EC.element_to_be_clickable(botao_next))
+                        botao_next.click()
+                        mes_atual = driver.find_element(By.CSS_SELECTOR, "#custom-next").text.lower()
+                else:
+                    logging.warning(f"Preço não encontrado para {nome_pacote} em {data}")
+                    continue
+
+                preco = encontrar_preco_data(driver, data)
+                if preco is not None:
+                    preco_avista, preco_parcelado = preco
                     dados.append({
                         'Data_viagem': data.strftime("%Y-%m-%d"),
                         'Parque': nome_pacote,
@@ -223,19 +303,32 @@ async def coletar_precos_vmz_disneydias_hopper(dias_para_processar,array_datas,h
                 else:
                     logging.warning(f"Preço não encontrado para {nome_pacote} em {data}")
 
-        return dados  # Return the 'dados' list
+        return dados
 
-    dias_para_processar = [2,3,4,5,6,7,8,9,10]
-    resultados = processar_dias(driver, dias_para_processar,array_datas)
+    dias_para_processar = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+    resultados = processar_dias(driver, dias_para_processar, array_datas)
 
-    
-    
     df = pd.DataFrame(resultados)
-    salvar_dados(df, 'disney_vmz_dias_hopper_parcial.json','vmz',hour)
+<<<<<<< Updated upstream:outros_parques/hopper/vmz_hopper.py
+    
+    salvar_dados(df,'disney_vmz_hopper_dias_parcial.json',pasta,hour)
+=======
+    salvar_dados(df, 'disney_vmz_dias_hopper_parcial.json','outros/vmz',hour)
+>>>>>>> Stashed changes:outros_parques/hopper/vmz_disney_hopper.py
     driver.quit()
-    #atualizar_calibragem(60)
-    return
 
+    return 
 
 if __name__ == "__main__":
+<<<<<<< Updated upstream:outros_parques/hopper/vmz_hopper.py
+    
+    dias_para_processar = [2,3,4,5,6,7,8,9,10]
+    array_datas = [5,10,20,47,65,126]
+    hour = datetime.now().hour
+    data_atual = datetime.now().strftime('%Y-%m-%d')
+    
+    
+    df_final = asyncio.run(coletar_precos_vmz_hopperdisneydias(dias_para_processar,array_datas,hour,data_atual))
+=======
     df_final = asyncio.run(coletar_precos_vmz())
+>>>>>>> Stashed changes:outros_parques/hopper/vmz_disney_hopper.py

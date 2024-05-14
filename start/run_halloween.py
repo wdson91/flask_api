@@ -1,6 +1,7 @@
 # Importando os módulos necessários
 
 
+from classes.junta_dados_classe import JuntarJsons
 from imports import *
 
 from outros_parques.halloween.ml_halloween import coletar_precos_ml_halloween
@@ -29,6 +30,17 @@ async def executar_halloween(hour, array_datas, data_atual):
         logging.info("coleta coletar_precos_vmz_halloween concluída.")  # Registra uma mensagem de log
     except Exception as e:
         logging.error(f"Erro ao executar coletar_precos_vmz_halloween: {e}")  # Registra uma mensagem de log de erro
+    
+    try:
+            empresas = ['voupra', 'vmz', 'ml', 'decolar']
+            parques = ['halloween']
+            
+            juntar_json = JuntarJsons(data_atual, empresas, parques, 'halloween')
+            
+            await juntar_json.executar()
+    
+    except Exception as e:
+            logging.error(f"Erro durante a junção dos arquivos: {e}")
     return
         
 # Verifica se o script está sendo executado diretamente

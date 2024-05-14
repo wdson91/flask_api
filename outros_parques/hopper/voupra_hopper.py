@@ -140,7 +140,7 @@ async def coletar_precos_voupra_hopper_plus(hour,array_datas,data_atual):
    
     return df 
 
-async def coletar_precos_voupra_disney(hour,array_datas,data_atual):
+async def coletar_precos_voupra_hopper(hour,array_datas,data_atual):
 
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
@@ -285,10 +285,8 @@ async def coletar_precos_voupra_disney(hour,array_datas,data_atual):
     merged_df = merged_df.sort_values(by=['Data_viagem', 'Parque'])
 
     nome_arquivo = f'disney_voupra_{data_atual}.json'
-    salvar_dados(merged_df, nome_arquivo, 'orlando/voupra', hour)
+    salvar_dados(merged_df, nome_arquivo, 'outros/voupra', hour)
     
-    # Define o novo valor para calibragem
-    atualizar_calibragem(10)
     
     logging.info("Coleta de preços Voupra Disney finalizada.")
     return

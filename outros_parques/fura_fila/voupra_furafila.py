@@ -14,7 +14,6 @@ async def coletar_precos_voupra_fura_fila(hour, array_datas,data_atual):
     # Configuração de logs
     log_format = '%(asctime)s - %(levelname)s - %(message)s'
     logging.basicConfig(level=logging.INFO, format=log_format)
-
     # Lista de datas a serem consideradas
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
@@ -22,7 +21,7 @@ async def coletar_precos_voupra_fura_fila(hour, array_datas,data_atual):
     base_url = "https://www.voupra.com/estados-unidos/orlando/universal-express---fura-fila?Id=57594&DataIngresso="
 
     xpath_pairs = [
-                ('/html/body/div[3]/div/div[1]/div[2]/div[7]/div/div/div[3]/div[1]/div[1]','/html/body/div[3]/div/div[1]/div[2]/div[7]/div/div/div[3]/div[1]/div[5]','Ingresso 1 Dia Universal Express Pass'),
+                ('/html/body/div[3]/div/div[1]/div[2]/div[8]/div/div/div[3]/div[1]/div[1]','/html/body/div[3]/div/div[1]/div[2]/div[8]/div/div/div[3]/div[1]/div[5]','Ingresso 1 Dia Universal Express Pass'),
                 ('/html/body/div[3]/div/div[1]/div[2]/div[13]/div/div/div[3]/div[1]/div[1]','/html/body/div[3]/div/div[1]/div[2]/div[13]/div/div/div[3]/div[1]/div[5]','Ingresso 1 Dia Universal Express Unlimited')]
     dados = []  # Inicializa os dados dentro do loop
     

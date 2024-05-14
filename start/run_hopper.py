@@ -1,7 +1,7 @@
 # Importando os módulos necessários
 from classes.junta_dados_classe import JuntarJsons
 from imports import *
-from outros_parques.hopper.vmz_hopper import coletar_precos_vmz_hopper
+
 
 
 array_datas =  [5,10,20,47,65,126]
