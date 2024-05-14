@@ -1,6 +1,6 @@
 
 import threading
-from helpers.atualizar_calibragem import mudar_horarios
+
 
 from imports import *
 import pyautogui
@@ -14,12 +14,9 @@ from qualidade.qualidade import coleta_precos
 from start.run_hopper import executar_hopper
 from start.run_halloween import executar_halloween
 from start.run_outros import  coleta_outros_parques
-from vmz.index_vmz import main_vmz
 
-from voupra.orlando.index_voupra import main_voupra
-from qualidade.qualidade_teste import coleta_precos_teste
 from decolar.halloween.decolar_halloween import decolar_halloween
-from start.run_hopper import coleta_hopper_aquaticos
+
 
 
 
@@ -249,10 +246,12 @@ async def hopper():
     global hora_global
     global data_atual
     
+    days_to_add = [5, 10, 20, 47, 65, 126]
 
-    data = data_atual
-    hora = hora_global
-    await executar_hopper(hora, days_to_add, data)
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
+    await executar_hopper(hora_global, days_to_add, data_atual)
     return  hora_global
 
 #ROTAS PARA CALIFORNIA

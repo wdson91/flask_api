@@ -97,7 +97,7 @@ async def coletar_precos_vmz_hopperplus_basicos(hour,array_datas,data_atual):
     
     # Criando um DataFrame
     df = pd.DataFrame(dados)
-    salvar_dados(df, 'disney_vmz_basicos_hopper_parcial.json','outrs/vmz',hour)
+    salvar_dados(df, 'disney_vmz_basicos_hopperplus_parcial.json','outrs/vmz',hour)
     driver.quit()
     
     #atualizar_calibragem(40)
