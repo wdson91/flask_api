@@ -85,7 +85,7 @@ def decolar_halloween(dados,data_atual):
     
     # Nome do arquivo
     nome_arquivo = f'halloween_decolar_{data_atual}.json'
-    df.to_json(nome_arquivo, orient='records', lines=True)
+    df.to_json(nome_arquivo, orient='records')
     # Salvar os dados
     salvar_dados_decolar(formatted_data, nome_arquivo, 'halloween/decolar', str(hora))
     

@@ -2,12 +2,12 @@ from imports import *
 from salvardados import *
 from helpers.atualizar_calibragem import atualizar_calibragem
 
-
+pasta='hopper/vmz'
 async def coletar_precos_vmz_hopper_plus(hour,array_datas,data_atual):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     # Defina sua lógica para baixar os arquivos e esperar por eles
-    baixar_blob_se_existir('disney_vmz_basicos_hopperplus_parcial.json', 'outros/vmz')
-    baixar_blob_se_existir('disney_vmz_dias_hopperplus_parcial.json', 'outros/vmz')
+    baixar_blob_se_existir('disney_vmz_basicos_hopperplus_parcial.json', pasta)
+    baixar_blob_se_existir('disney_vmz_dias_hopperplus_parcial.json', pasta)
     
     # Carregue os dados do JSON baixado
     disney_basicos = carregar_dados_json('disney_vmz_basicos_hopperplus_parcial.json')
@@ -24,9 +24,9 @@ async def coletar_precos_vmz_hopper_plus(hour,array_datas,data_atual):
     # # Crie o DataFrame a partir dos dados formatados
     # df = pd.DataFrame(dados_formatados)
     
-    nome_arquivo = f'disney_vmz_hopperplus_{data_atual}.json'
+    nome_arquivo = f'hopperplus_vmz_{data_atual}.json'
     
-    salvar_dados(df_sorted, nome_arquivo,'outros/vmz', hour)
+    salvar_dados(df_sorted, nome_arquivo,pasta, hour)
     
     
     logging.info("Coleta finalizada.")
@@ -47,7 +47,7 @@ async def coletar_precos_vmz_hopperplus_basicos(hour,array_datas,data_atual):
     sites = [
     
     ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/1-dia-hopper-plus-disney?",  '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]','/html/body/div[1]/div/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/b', '1 Dia - Disney Hopper Plus'),
-    # Adicione outros sites, XPaths e nomes de parques conforme necessario
+    # Adicione hopper sites, XPaths e nomes de parques conforme necessario
 ]
 
     # Definindo as datas
@@ -97,7 +97,7 @@ async def coletar_precos_vmz_hopperplus_basicos(hour,array_datas,data_atual):
     
     # Criando um DataFrame
     df = pd.DataFrame(dados)
-    salvar_dados(df, 'disney_vmz_basicos_hopperplus_parcial.json','outrs/vmz',hour)
+    salvar_dados(df, 'disney_vmz_basicos_hopperplus_parcial.json',pasta,hour)
     driver.quit()
     
     #atualizar_calibragem(40)
@@ -227,7 +227,7 @@ async def coletar_precos_vmz_disneydias_hopperplus(hour,array_datas,data_atual):
     
     
     df = pd.DataFrame(resultados)
-    salvar_dados(df, 'disney_vmz_dias_hopperplus_parcial.json','outros/vmz',hour)
+    salvar_dados(df, 'disney_vmz_dias_hopperplus_parcial.json',pasta,hour)
     driver.quit()
     #atualizar_calibragem(60)
     return

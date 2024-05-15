@@ -60,9 +60,9 @@ async def executar_hopper(hour, array_datas, data_atual):
     
     # try:
     #         empresas = ['voupra', 'vmz', 'decolar','ml']
-    #         parques = ['disney', 'universal', 'seaworld']
+    #         parques = ['hopper','hopperplus']
             
-    #         juntar_json = JuntarJsons(data_atual, empresas, parques, 'orlando')
+    #         juntar_json = JuntarJsons(data_atual, empresas, parques, 'hopper')
             
     #         await juntar_json.executar()
               

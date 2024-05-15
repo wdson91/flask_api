@@ -111,7 +111,7 @@ async def coletar_precos_ml_hopper(hour,array_datas,data_atual):
                 df = pd.DataFrame(dados)
                 
                 nome_arquivo = f'hopper_ml_{data_atual}.json'
-                salvar_dados(df, nome_arquivo,'outros/ml',hour)
+                salvar_dados(df, nome_arquivo,'hopper/ml',hour)
                 
                 logging.info("Coleta de preços ML Disney Hopper finalizada")
                 atualizar_calibragem(80)

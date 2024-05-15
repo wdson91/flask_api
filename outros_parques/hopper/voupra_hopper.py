@@ -284,8 +284,8 @@ async def coletar_precos_voupra_hopper(hour,array_datas,data_atual):
     merged_df['MargemCategoria'].fillna('-', inplace=True)
     merged_df = merged_df.sort_values(by=['Data_viagem', 'Parque'])
 
-    nome_arquivo = f'disney_voupra_{data_atual}.json'
-    salvar_dados(merged_df, nome_arquivo, 'outros/voupra', hour)
+    nome_arquivo = f'hopper_voupra_{data_atual}.json'
+    salvar_dados(merged_df, nome_arquivo, 'hopper/voupra', hour)
     
     
     logging.info("Coleta de preços Voupra Disney finalizada.")

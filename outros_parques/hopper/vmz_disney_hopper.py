@@ -1,6 +1,6 @@
 from imports import *
 
-pasta = 'outros/vmz'
+pasta = 'hopper/vmz'
 
 async def coletar_precos_vmz_hopper(hour,array_datas,data_atual):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -31,7 +31,7 @@ async def coletar_precos_vmz_hopper(hour,array_datas,data_atual):
     return 
 
 
-async def coletar_precos_vmz_hopper_basicos(array_datas,hour,data_atual):
+async def coletar_precos_vmz_hopper_basicos(hour,array_datas,data_atual):
     
     options = webdriver.ChromeOptions()
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
@@ -45,16 +45,19 @@ async def coletar_precos_vmz_hopper_basicos(array_datas,hour,data_atual):
     ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/1-dia-hopper-disney?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Park Hopper'),
     
 ]
-
+    
     # Definindo as datas
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
     # Lista para armazenar os dados
     dados = []
-
+    site_url = "https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/1-dia-hopper-disney?"
+    xpath_selector = '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]'
+    parque_nome = '1 Dia - Disney Park Hopper'
+   
     # Percorrer cada site e coletar preços
-    for site_url, xpath_selector, parque_nome in sites:
-        for data in datas:
+    #for site_url, xpath_selector, parque_nome in sites:
+    for data in datas:
             logging.info(f"Coletando preços para {parque_nome} na data: {data}")
             url_com_data = f"{site_url}&data={data.strftime('%Y-%m-%d')}"
             driver.get(url_com_data)
@@ -93,7 +96,7 @@ async def coletar_precos_vmz_hopper_basicos(array_datas,hour,data_atual):
     
     return
 
-async def coletar_precos_vmz_hopper_disneydias(array_datas, hour, data_atual):
+async def coletar_precos_vmz_hopper_disneydias( hour,array_datas, data_atual):
     waiter = 2
     dias_para_processar = [2,3,4,5,6,7,8,9,10]
     options = webdriver.ChromeOptions()
