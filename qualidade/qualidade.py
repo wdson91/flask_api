@@ -2,7 +2,9 @@ from helpers.atualizar_calibragem import finalizar_calibragem
 from imports import *
 
 
-def coleta_precos(): 
+MAX_RETRIES = 3
+
+def coleta_precos(retries=0): 
     login = 'supervisao.fila@voupra.com'
     senha =  'Vp!7070st'
     valor_conversores = 0    
@@ -36,13 +38,22 @@ def coleta_precos():
 
     #login_button = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="q-app"]/div/div/div[1]/div[1]/div[2]/form/button/span[2]')))
     actions = ActionChains(driver) 
-
-
     actions.send_keys(Keys.ENTER)
     actions.perform()
     
     time.sleep(30)
 
+    try:
+        dashboard = driver.find_element(By.XPATH, '/html/body/span/header/nav[2]/div[1]/ul/li/a[3]/div/div[1]/span')
+    except Exception as e:
+        print(f"Dashboard not found: {e}")
+        driver.quit()
+        if retries < MAX_RETRIES:
+            print(f"Retrying... ({retries + 1}/{MAX_RETRIES})")
+            coleta_precos(retries + 1)
+        else:
+            print("Max retries reached. Exiting.")
+        return
 
     driver.get('https://grupoysa.sz.chat/monitoring')
 
@@ -104,13 +115,8 @@ def coleta_precos():
 
     qualiddade_do_lead = (valor_conversores / valor_pimeiroContato) * 10
 
-    #qualidade_do_lead_formatado = round(qualiddade_do_lead, 2)
-
-    # Imprime o valor formatado
-    
-    if qualiddade_do_lead>10:
+    if qualiddade_do_lead > 10:
         qualiddade_do_lead = 10
-    
     
     dados = {
         "qualidade": qualiddade_do_lead,
@@ -120,8 +126,6 @@ def coleta_precos():
     }
     
     driver.quit()
-    
-   
     
     nome_arquivo = f'leads_{dia}.json'
     
@@ -134,6 +138,4 @@ def coleta_precos():
 
 if __name__ == '__main__':
     coleta_precos()
-
-
 
