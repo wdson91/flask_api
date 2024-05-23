@@ -22,3 +22,11 @@ def mudar_horarios(hour):
         print("Horários atualizados com sucesso.")
     else:
         print("Erro ao atualizar os horários.")
+    
+def finalizar_halloween():
+    response = requests.get('http://localhost:5000/finalizar_halloween')
+    
+    if response.status_code == 200:
+        print("Halloween finalizado com sucesso.")
+    else:
+        print("Erro ao finalizar o Halloween.")

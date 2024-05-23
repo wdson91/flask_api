@@ -3,12 +3,12 @@ from imports import *
 async def seaworld_decolar(json_data, data_hora,data_atual):
     # Mapeamento dos nomes dos parques
     mapping = {
+        "Ingresso para 1 parque": "1 Dia 1 Parque - SeaWorld Orlando",
         "Ingresso 3 parques pelo preço de 2": "3 Dias 3 Parques - SeaWorld Orlando",
         "Ingresso para 2 parques": "2 Dias 2 Parques - SeaWorld Orlando",
-        "Ingresso para 1 parque": "1 Dia 1 Parque - SeaWorld Orlando",
         "Visitas ilimitadas + estacionamento gratuito": "14 Dias 3 Parques - SeaWorld Orlando",
         "Visite 3 parques ao preço de 2 com plano de refeições": "3 Dias 3 Parques com Refeições - SeaWorld Orlando",
-        "Um dia no parque Busch Gardens": "1 Dia 1 Parque - Busch Gardens"
+        #"Um dia no parque Busch Gardens": "1 Dia 1 Parque - Busch Gardens"
     }
     
     days_to_add = [5, 10, 20, 47, 65, 126]

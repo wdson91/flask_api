@@ -58,16 +58,16 @@ async def executar_hopper(hour, array_datas, data_atual):
     except Exception as e:
         logging.error(f"Erro ao executar main_ml: {e}")
     
-    # try:
-    #         empresas = ['voupra', 'vmz', 'decolar','ml']
-    #         parques = ['hopper','hopperplus']
+    try:
+            empresas = ['voupra', 'vmz', 'decolar','ml']
+            parques = ['hopper','hopperplus']
             
-    #         juntar_json = JuntarJsons(data_atual, empresas, parques, 'hopper')
+            juntar_json = JuntarJsons(data_atual, empresas, parques, 'hopper')
             
-    #         await juntar_json.executar()
+            await juntar_json.executar()
               
-    # except Exception as e:
-    #         logging.error(f"Erro durante a junção dos arquivos: {e}")
+    except Exception as e:
+            logging.error(f"Erro durante a junção dos arquivos: {e}")
 
 # Verifica se o script está sendo executado diretamente
 if __name__ == "__main__":

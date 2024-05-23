@@ -20,7 +20,7 @@ async def coletar_precos_vmz_halloween(hour,array_datas,data_atual):
         
     ]
 
-    datas = [f'2024-08-30',f'2024-09-06',f'2024-09-22',f'2024-10-04',f'2024-10-11',f'2024-10-31']
+    datas = [f'2024-09-05',f'2024-09-18',f'2024-10-09',f'2024-10-23',f'2024-11-01',f'2024-11-03']
     try:
         # Definindo as datas
         #datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]

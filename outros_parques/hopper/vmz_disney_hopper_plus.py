@@ -46,7 +46,7 @@ async def coletar_precos_vmz_hopperplus_basicos(hour,array_datas,data_atual):
 
     sites = [
     
-    ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/1-dia-hopper-plus-disney?",  '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]','/html/body/div[1]/div/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/b', '1 Dia - Disney Hopper Plus'),
+    ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/1-dia-hopper-plus-disney?",  '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]','/html/body/div[1]/div/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/b', '1 Dia - Disney Parques Aquaticos'),
     # Adicione hopper sites, XPaths e nomes de parques conforme necessario
 ]
 
@@ -59,7 +59,7 @@ async def coletar_precos_vmz_hopperplus_basicos(hour,array_datas,data_atual):
     # Percorrer cada site e coletar preços
     #for site_url,price,price_decimal, parque_nome in sites:
     for data in datas:
-            logging.info(f"Coletando preços para Disney Hopper Plus na data: {data}")
+            logging.info(f"Coletando preços para Disney Parques Aq Plus na data: {data}")
             url_com_data = f"https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/1-dia-hopper-plus-disney?&data={data.strftime('%Y-%m-%d')}"
             driver.get(url_com_data)
             
@@ -88,7 +88,7 @@ async def coletar_precos_vmz_hopperplus_basicos(hour,array_datas,data_atual):
             # Adicionar os dados coletados à lista
             dados.append({
                 'Data_viagem': data.strftime("%Y-%m-%d"),
-                'Parque': '1 Dia - Disney Hopper Plus',
+                'Parque': '1 Dia - Disney Parques Aquaticos',
                 'Preco_Parcelado': preco_parcelado_final,
                 'Preco_Avista': preco_aVista_final
             })
@@ -181,18 +181,18 @@ async def coletar_precos_vmz_disneydias_hopperplus(hour,array_datas,data_atual):
 
 
     nome_pacotes = {
-        2: "2 Dias - Disney Hopper",
-        3: "3 Dias - Disney Hopper",
-        4: "4 Dias - Disney Hopper",
-        5: "5 Dias - Disney Hopper",
-        6: "6 Dias - Disney Hopper",
-        7: "7 Dias - Disney Hopper",
-        8: "8 Dias - Disney Hopper",
-        9: "9 Dias - Disney Hopper",
-        10: "10 Dias - Disney Hopper",
+        2: "2 Dias - Disney Parques Aquaticos",
+        3: "3 Dias - Disney Parques Aquaticos",
+        4: "4 Dias - Disney Parques Aquaticos",
+        5: "5 Dias - Disney Parques Aquaticos",
+        6: "6 Dias - Disney Parques Aquaticos",
+        7: "7 Dias - Disney Parques Aquaticos",
+        8: "8 Dias - Disney Parques Aquaticos",
+        9: "9 Dias - Disney Parques Aquaticos",
+        10: "10 Dias - Disney Parques Aquaticos",
     }
     def processar_dias(driver, dias,array_datas):
-        base_url = "https://www.vmzviagens.com.br/ingressos/orlando/walt-disney-orlando/ticket-disney-hopper"
+        base_url = "https://www.vmzviagens.com.br/ingressos/orlando/walt-disney-orlando/ticket-disney-hopper-plus"
         datas = [datetime.now() + timedelta(days=d) for d in array_datas]
         dados = []
 

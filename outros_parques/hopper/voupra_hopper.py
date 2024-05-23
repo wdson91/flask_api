@@ -20,16 +20,16 @@ async def coletar_precos_voupra_hopper_plus(hour,array_datas,data_atual):
     # Mapping of park names
     mapeamento_nomes = {
        
-        283807: "1 Dia - Disney Park Hopper Plus",
-        283809: "2 Dias - Disney Park Hopper Plus",
-        283812: "3 Dias - Disney Park Hopper Plus",
-        283814: "4 Dias - Disney Park Hopper Plus",
-        283817: "5 Dias - Disney Park Hopper Plus",
-        283821: "6 Dias - Disney Park Hopper Plus",
-        283823: "7 Dias - Disney Park Hopper Plus",
-        283825: "8 Dias - Disney Park Hopper Plus",
-        283828: "9 Dias - Disney Park Hopper Plus",
-        283830: "10 Dias - Disney Park Hopper Plus",
+        283807: "1 Dia - Disney Parques Aquaticos",
+        283809: "2 Dias - Disney Parques Aquaticos",
+        283812: "3 Dias - Disney Parques Aquaticos",
+        283814: "4 Dias - Disney Parques Aquaticos",
+        283817: "5 Dias - Disney Parques Aquaticos",
+        283821: "6 Dias - Disney Parques Aquaticos",
+        283823: "7 Dias - Disney Parques Aquaticos",
+        283825: "8 Dias - Disney Parques Aquaticos",
+        283828: "9 Dias - Disney Parques Aquaticos",
+        283830: "10 Dias - Disney Parques Aquaticos",
     }
 
     for data in datas:
