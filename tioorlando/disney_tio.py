@@ -125,6 +125,7 @@ async def coleta_tio_orlando(hora,array_datas,data_atual):# Inicializar o driver
             time.sleep(5)
 
             seletor_dia = f".react-datepicker__day--0{dia}"
+            
             try:
                 # Aguardar até que o elemento correspondente ao dia desejado esteja clicável na página
                 elemento_dia = WebDriverWait(driver, 30).until(

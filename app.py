@@ -8,7 +8,7 @@ from pynput.keyboard import Key, Controller
 
 from classes.junta_dados_classe import JuntarJsons
 from decolar.hopper.decolar_disney_hopper import receive_disney_decolar_hopper
-from qualidade.qualidade import coleta_precos
+from qualidade.qualidade import qualidade
 
 
 from start.run_hopper import executar_hopper
@@ -568,8 +568,8 @@ def coleta():
     if calibrating:
         return jsonify({"error": "Calibragem já em andamento"}), 400
     
-    calibrating = True
-    coleta_precos()
+    #calibrating = True
+    qualidade()
     return jsonify({"message": "Dados salvos com sucesso!"})
 
 # @app.route('/nota', methods=['GET'])

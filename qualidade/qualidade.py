@@ -4,7 +4,7 @@ from imports import *
 
 MAX_RETRIES = 3
 
-def coleta_precos(retries=0): 
+def qualidade(retries=0): 
     login = 'supervisao.fila@voupra.com'
     senha =  'Vp!7070st'
     valor_conversores = 0    
@@ -50,7 +50,7 @@ def coleta_precos(retries=0):
         driver.quit()
         if retries < MAX_RETRIES:
             print(f"Retrying... ({retries + 1}/{MAX_RETRIES})")
-            coleta_precos(retries + 1)
+            qualidade(retries + 1)
         else:
             print("Max retries reached. Exiting.")
         return
@@ -137,5 +137,5 @@ def coleta_precos(retries=0):
     return
 
 if __name__ == '__main__':
-    coleta_precos()
+    qualidade()
 
