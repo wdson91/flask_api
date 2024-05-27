@@ -1,8 +1,7 @@
 from helpers.atualizar_calibragem import finalizar_calibragem
 from imports import *
 
-from selenium.webdriver.firefox.service import Service
-from webdriver_manager.firefox import GeckoDriverManager
+
 MAX_RETRIES = 3
 
 def qualidade(retries=0): 
@@ -17,13 +16,10 @@ def qualidade(retries=0):
     #chrome_options.add_argument("--headless")  # Ativa o modo headless
 
     # Inicializa o serviço do Chrome
-    service = Service(GeckoDriverManager().install())
-
-    # Inicializando o navegador Firefox com o serviço configurado
-    driver = webdriver.Firefox(service=service)
+    service = Service(ChromeDriverManager().install())
 
     # Inicializa o driver do Chrome com as opções e o serviço
-    #driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver = webdriver.Chrome(service=service, options=chrome_options)
     wait = WebDriverWait(driver, 20)
     dados = {}   
 
