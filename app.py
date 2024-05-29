@@ -1,6 +1,7 @@
 from flask import redirect
 
 
+from decolar.fura_fila.fura_fila import decolar_fura_fila
 from decolar.orlando.decolar_universal_reserva import decolar_universal_reserva
 from imports import *
 import pyautogui
@@ -26,13 +27,14 @@ calibrating = False
 global hora_global
 global data_atual
 global valor_halloween
+global calibrating_leads
 valor_halloween = 0
 sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
 data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
 hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
 horarios = []
 
-
+calibrating_leads = False
 @app.route('/', methods=['GET'])
 def hello():
     return  hora_global
@@ -213,6 +215,19 @@ async def receive_json_universal():
     data_list = request.json
     
     await receive_universal_decolar(data_list,hora_global,data)
+
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+@app.route('/receive_json_universal_fura_fila', methods=['POST'])
+async def decolar_furaFila():
+    #data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    global hora_global
+    global data_atual
+    data = data_atual
+    hora = hora_global
+    data_list = request.json
+    
+    decolar_fura_fila(data_list,data)
 
     return jsonify({"message": "Dados salvos com sucesso!"})
 
@@ -489,7 +504,7 @@ async def status_calibragem():
     global hora_global
     global tipo_calibragem
     global calibrating
-    
+    global calibrating_leads
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     nome_arquivo = f"horarios/horarios_{data_atual}.txt"
     
@@ -505,7 +520,8 @@ async def status_calibragem():
                     "Tipo": tipo_calibragem,
                     "Data": data_atual,
                     "Horarios": horarios,
-                    "Calibrating": calibrating})
+                    "Calibrating": calibrating,
+                    "Calibrating_leads": calibrating_leads})
 
 
 @app.route('/calibragem', methods=['POST'])
@@ -537,7 +553,9 @@ def abortar_calibragem():
 @app.route('/finalizar_calibragem', methods=['POST'])
 def finalizar_calibragem_api():
     global calibrating
+    global calibrating_leads
     calibrating = False
+    calibrating_leads = False
     # hora_global = None
     # tipo_calibragem = None
     return jsonify({"message": "Calibragem finalizada com sucesso!"})
@@ -563,12 +581,12 @@ def atualizar_hora():
 @app.route('/qualidade', methods=['GET'])
 def coleta():
     
-    global calibrating
+    global calibrating_leads
      # Se a calibragem já estiver em andamento, retorne uma mensagem de erro
-    if calibrating:
+    if calibrating_leads:
         return jsonify({"error": "Calibragem já em andamento"}), 400
     
-    #calibrating = True
+    calibrating_leads= True
     qualidade()
     return jsonify({"message": "Dados salvos com sucesso!"})
 

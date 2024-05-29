@@ -22,9 +22,9 @@ async def coleta_tio_sea(hora,array_datas,data_atual):# Inicializar o driver do 
     mapeamento_parques = {
         "SeaWorld Orlando 1-Dia": "1 Dia 1 Parque - SeaWorld Orlando",
         "Busch Gardens Tampa 1-Dia": "1 Dia 1 Parque - Busch Gardens",
-        "2-Dias + 1-Dia GRÁTIS!* de parque à sua escolha (SeaWorld, Busch Gardens, Aquatica ou Adventure Island Tampa*)": "3 Dias 3 Parques - SeaWorld Orlando",
-        "2-Dias + 1-Dia GRÁTIS!* de parque à sua escolha (SeaWorld, Busch Gardens, Aquatica ou Adventure Island Tampa*) + Plano de Refeição": "3 Dias 3 Parques com Refeições - SeaWorld Orlando",
-        "14-Dias de parques à sua escolha (SeaWorld, Busch Gardens, Aquatica ou Adventure Island Tampa*) com estacionamento GRÁTIS!*": "14 Dias 3 Parques - SeaWorld Orlando",
+        "2-Dias + 1-Dia GRÁTIS!* de parque à sua escolha (SeaWorld Orlando, Busch Gardens Tampa Bay, Aquatica Orlando ou Adventure Island Tampa*)": "3 Dias 3 Parques - SeaWorld Orlando",
+        "2-Dias + 1-Dia GRÁTIS!* de parque à sua escolha (SeaWorld Orlando, Busch Gardens Tampa Bay, Aquatica Orlando ou Adventure Island Tampa*) + Plano de Refeição": "3 Dias 3 Parques com Refeições - SeaWorld Orlando",
+        "14-Dias de parques à sua escolha (SeaWorld Orlando, Busch Gardens Tampa Bay, Aquatica Orlando ou Adventure Island Tampa*) com estacionamento GRÁTIS!*": "14 Dias 3 Parques - SeaWorld Orlando",
         
     }
 
