@@ -1,5 +1,25 @@
-from imports import *
+import asyncio
+import time
+from urllib.parse import parse_qs, urlparse
 
+import pandas as pd
+#from helpers.atualizar_calibragem import atualizar_calibragem
+from datetime import datetime, timedelta
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.common.exceptions import ElementClickInterceptedException, TimeoutException
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support import expected_conditions as EC
+import logging
+from selenium.webdriver.chrome.service import Service as ChromeService
+import schedule
+from flask_cors import CORS
+from bs4 import BeautifulSoup
+import json
+from threading import Thread
 
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")

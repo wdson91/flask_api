@@ -1,9 +1,11 @@
+from imports import *
 from flask import redirect
 
 
 from decolar.fura_fila.fura_fila import decolar_fura_fila
 from decolar.orlando.decolar_universal_reserva import decolar_universal_reserva
-from imports import *
+
+
 import pyautogui
 from pynput.keyboard import Key, Controller
 
@@ -11,7 +13,7 @@ from classes.junta_dados_classe import JuntarJsons
 from decolar.hopper.decolar_disney_hopper import receive_disney_decolar_hopper
 from qualidade.qualidade import qualidade
 
-
+from fastpass.orlando.index_fast import main_fastPass
 from start.run_hopper import executar_hopper
 from start.run_halloween import executar_halloween
 from start.run_outros import  coleta_outros_parques
@@ -494,6 +496,45 @@ async def calibrar():
 
     return jsonify({"message": "Calibragem iniciada com sucesso!"})
 
+@app.route('/fast', methods=['GET'])
+async def fastPass():
+
+    global calibragem
+    global hora_global
+    global tipo_calibragem
+    global calibrating
+    global horarios
+    global data_atual
+    
+    # Se a calibragem já estiver em andamento, retorne uma mensagem de erro
+    if calibrating:
+        return jsonify({"error": "Calibragem já em andamento"}), 400
+
+    tipo = request.args.get('tipo', 'automatica')  # Obter o parâmetro tipo da URL, padrão é 'manual'
+
+    calibrating = True
+    calibragem = 1
+    tipo_calibragem = tipo
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    
+    time.sleep(3)
+    if tipo == 'manual':
+        pyautogui.hotkey('ctrl', '1')
+    
+    
+    # Criar o nome do arquivo usando a data atual
+    nome_arquivo = f"horarios/horarios_{data_atual}.txt"
+    # # Abrir o arquivo em modo de adição (append) ou criá-lo se não existir
+    # with open(nome_arquivo, "a") as arquivo:
+    #     # Adicionar o horário ao arquivo
+    #     arquivo.write(hora_global + "\n")
+    
+    #time.sleep(3)
+    #await executar_ambos(hora_global, days_to_add, data_atual)
+    await main_fastPass(hora_global, days_to_add, data_atual)
+    return jsonify({"message": "Calibragem iniciada com sucesso!"})
 
 
 
