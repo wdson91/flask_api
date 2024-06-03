@@ -27,7 +27,7 @@ async def executar_ambos(hour, array_datas, data_atual):
         logging.error(f"Erro ao executar main_ml: {e}")  # Registra uma mensagem de log de erro
 
     try:
-            empresas = ['voupra', 'vmz', 'decolar','ml','tio']
+            empresas = ['voupra', 'vmz', 'decolar','ml','tio','fastPass']
             parques = ['disney', 'universal', 'seaworld']
             
             juntar_json = JuntarJsons(data_atual, empresas, parques, 'orlando')

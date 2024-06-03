@@ -72,18 +72,9 @@ def dias_halloween():
 @app.route('/urls_halloween', methods=['GET'])
 def get_urls_halloween():
     
-    urls = [{'dias':'2024-08-30',
-           'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-08-30'},
-            {'dias':'2024-09-06',
-             'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-09-06'},
-            {'dias':'2024-09-22',
-             'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-09-22'},
-            {'dias':'2024-10-04',
-             'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-10-04'},
-            {'dias':'2024-10-11',
-             'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-10-11'},
+    urls = [
             {'dias':'2024-10-31',
-             'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-10-31'},
+             'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_2P-4DAYPTP-PROMO-date&fixedDate=2024-10-31'},
             {'dias':'2024-08-30',
              'urls':'https://www.decolar.com/atracoes-turisticas/d-DY_ORL/ingressos+para+walt+disney+world+resort-orlando?clickedPrice=696&priceDate=1716211515176&clickedCurrency=BRL&distribution=1&fixedDate=2024-08-30&modalityId=MKHALLOWEEN-20240830'},
             {'dias':'2024-09-06',
@@ -95,13 +86,18 @@ def get_urls_halloween():
             {'dias':'2024-10-11',
              'urls':'https://www.decolar.com/atracoes-turisticas/d-DY_ORL/ingressos+para+walt+disney+world+resort-orlando?clickedPrice=696&priceDate=1716211515176&clickedCurrency=BRL&distribution=1&fixedDate=2024-10-11&modalityId=MKHALLOWEEN-20241011'},
             {'dias':'2024-10-31',
-             'urls':'https://www.decolar.com/atracoes-turisticas/d-DY_ORL/ingressos+para+walt+disney+world+resort-orlando?clickedPrice=696&priceDate=1716211515176&clickedCurrency=BRL&distribution=1&fixedDate=2024-10-31&modalityId=MKHALLOWEEN-20241031'}
-            
-            
-            
-            
-            
-    
+             'urls':'https://www.decolar.com/atracoes-turisticas/d-DY_ORL/ingressos+para+walt+disney+world+resort-orlando?clickedPrice=696&priceDate=1716211515176&clickedCurrency=BRL&distribution=1&fixedDate=2024-10-31&modalityId=MKHALLOWEEN-20241031'},
+            { 'dias':'2024-08-30',
+            'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_2P-4DAYPTP-PROMO-date&fixedDate=2024-08-30'},
+            {'dias':'2024-09-06',
+             'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_2P-4DAYPTP-PROMO-date&fixedDate=2024-09-06'},
+            {'dias':'2024-09-22',
+             'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_2P-4DAYPTP-PROMO-date&fixedDate=2024-09-22'},
+            {'dias':'2024-10-04',
+             'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_2P-4DAYPTP-PROMO-date&fixedDate=2024-10-04'},
+            {'dias':'2024-10-11',
+             'urls':'https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_2P-4DAYPTP-PROMO-date&fixedDate=2024-10-11'}
+          
             ]
     
     #urls=['https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-09-05','https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-09-18','https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-10-09','https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-10-09','https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-10-23','https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-11-01','https://www.decolar.com/atracoes-turisticas/d-UN_ORL/ingressos+para+universal+orlando+resort-orlando?clickedPrice=2069&priceDate=1711367621828&clickedCurrency=BRL&distribution=1&modalityId=ORL_24_HHN_LATIN_DATE&fixedDate=2024-11-03']
@@ -506,32 +502,32 @@ async def fastPass():
     global horarios
     global data_atual
     
-    # Se a calibragem já estiver em andamento, retorne uma mensagem de erro
-    if calibrating:
-        return jsonify({"error": "Calibragem já em andamento"}), 400
+    # # Se a calibragem já estiver em andamento, retorne uma mensagem de erro
+    # if calibrating:
+    #     return jsonify({"error": "Calibragem já em andamento"}), 400
 
-    tipo = request.args.get('tipo', 'automatica')  # Obter o parâmetro tipo da URL, padrão é 'manual'
+    # tipo = request.args.get('tipo', 'automatica')  # Obter o parâmetro tipo da URL, padrão é 'manual'
 
-    calibrating = True
-    calibragem = 1
-    tipo_calibragem = tipo
+    #calibrating = True
+    #calibragem = 1
+    #tipo_calibragem = tipo
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     
-    time.sleep(3)
-    if tipo == 'manual':
-        pyautogui.hotkey('ctrl', '1')
+    # time.sleep(3)
+    # if tipo == 'manual':
+    #     pyautogui.hotkey('ctrl', '1')
     
     
     # Criar o nome do arquivo usando a data atual
-    nome_arquivo = f"horarios/horarios_{data_atual}.txt"
+    #nome_arquivo = f"horarios/horarios_{data_atual}.txt"
     # # Abrir o arquivo em modo de adição (append) ou criá-lo se não existir
     # with open(nome_arquivo, "a") as arquivo:
     #     # Adicionar o horário ao arquivo
     #     arquivo.write(hora_global + "\n")
     
-    #time.sleep(3)
+    time.sleep(3)
     #await executar_ambos(hora_global, days_to_add, data_atual)
     await main_fastPass(hora_global, days_to_add, data_atual)
     return jsonify({"message": "Calibragem iniciada com sucesso!"})
