@@ -1,3 +1,4 @@
+
 from imports import *
 from flask import redirect
 
@@ -666,7 +667,18 @@ async def tioorlando():
     
     return jsonify({"message": "Dados salvos com sucesso!"})
 
-
+@app.route('/gyg', methods=['GET'])
+async def gygFura():
+    global data_atual
+    global hora_global
+    
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    array_datas = [5,10, 20, 47, 65, 126]
+    #time.sleep(3)
+    await coletar_precos_gyg_furaFila(hora_global,array_datas,data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
 if __name__ == '__main__':
     
     app.run(threaded=True,debug=True, host='0.0.0.0',port=5000)

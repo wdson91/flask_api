@@ -1,27 +1,18 @@
-import json
 import locale
 from flask import Flask, jsonify, request
-from datetime import datetime, timedelta
 import pandas as pd
-import pytz
-import asyncio
-import os
 import sys
 import time
 import requests
-import pandas as pd
 from datetime import datetime, timedelta
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.common.exceptions import ElementClickInterceptedException, TimeoutException
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 import logging
 from selenium.webdriver.chrome.service import Service as ChromeService
-import schedule
 from flask_cors import CORS
 from bs4 import BeautifulSoup
 import json
@@ -32,8 +23,7 @@ from salvardados import *
 from urllib.parse import urlparse, parse_qs
 import chromedriver_autoinstaller
 import asyncio  # Importa o módulo asyncio para suporte a tarefas assíncronas
-import schedule  # Importa o módulo schedule para agendar tarefas
-from datetime import datetime  # Importa a classe datetime do módulo datetime
+import schedule  # Importa o módulo schedule para agendar tarefas # Importa a classe datetime do módulo datetime
 import pytz  # Importa o módulo pytz para lidar com fusos horários
 from selenium.common.exceptions import NoSuchElementException
 import re
@@ -75,7 +65,7 @@ from start.run_paris import executar_paris
 from decolar.orlando.decolar_disney import  receive_disney_decolar
 from decolar.orlando.sea_decolar import seaworld_decolar
 from decolar.orlando.universal_decolar import receive_universal_decolar
-
+from get_your_guide.paris.get_your_guide_furaFila import coletar_precos_gyg_furaFila
 
 import os
 from helpers.excluir_json import apagar_arquivos_json_na_pasta_atual

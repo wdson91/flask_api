@@ -16,7 +16,7 @@ async def receive_disney_decolar(data,data_hora,data_atual):
         "Ingresso de 1 dia para o Disney Animal Kingdom Park": "1 Dia - Disney Basico Animal Kingdom",
         "Ingresso de 1 dia EPCOT Park": "1 Dia - Disney Basico Epcot",
         "Ingresso de 2 dias": "2 Dias - Disney World Basico",
-        "Bilhete de 3 dias": "3 Dias - Disney World Basico",
+        "Ingresso de 3 dias": "3 Dias - Disney World Basico",
         "Ingresso Mágico 4 dias - 4 parques": "4 Dias - Disney Promocional",
         "Ingresso Mágico 4 dias - 4 parques + Parques Aquáticos e Esportes Adicionais":"4 Dias - Disney Promocional com Aquatico e Esportes",
         "Ingresso de 4 dias": "4 Dias - Disney World Basico",
