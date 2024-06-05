@@ -2,8 +2,8 @@ from imports import *
 
 
 async def coleta_tio_sea(hora,array_datas,data_atual):# Inicializar o driver do Selenium
-    driver = webdriver.Chrome()
-    driver.maximize_window()
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
     # Lista de datas para a coleta de dados
     array_datas = [10, 20, 47, 65, 126]
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]

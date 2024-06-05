@@ -12,6 +12,7 @@ from pynput.keyboard import Key, Controller
 
 from classes.junta_dados_classe import JuntarJsons
 from decolar.hopper.decolar_disney_hopper import receive_disney_decolar_hopper
+
 from qualidade.qualidade import qualidade
 
 from fastpass.orlando.index_fast import main_fastPass
@@ -22,6 +23,9 @@ from start.run_outros import  coleta_outros_parques
 from decolar.halloween.decolar_halloween import decolar_halloween
 
 from tioorlando.index_tio import main_tio
+from vmz.index_vmz import main_vmz
+from voupra.orlando.index_voupra import main_voupra
+from ml.index_ml import main_ml
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -679,6 +683,55 @@ async def gygFura():
     await coletar_precos_gyg_furaFila(hora_global,array_datas,data_atual)
     
     return jsonify({"message": "Dados salvos com sucesso!"})
+
+
+
+
+@app.route('/voupra', methods=['GET'])
+async def voupra():
+    global data_atual
+    global hora_global
+    
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    array_datas = [5,10, 20, 47, 65, 126]
+    #time.sleep(3)
+    await main_voupra(hora_global, array_datas,data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+
+@app.route('/vmz', methods=['GET'])
+async def vmz():
+    global data_atual
+    global hora_global
+    
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    array_datas = [5,10, 20, 47, 65, 126]
+    #time.sleep(3)
+    await main_vmz(hora_global,array_datas,data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+
+@app.route('/ml', methods=['GET'])
+async def ml():
+    global data_atual
+    global hora_global
+    
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    array_datas = [5,10, 20, 47, 65, 126]
+    #time.sleep(3)
+    await main_ml(hora_global,array_datas,data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+
+
+
+
 if __name__ == '__main__':
     
     app.run(threaded=True,debug=True, host='0.0.0.0',port=5000)

@@ -1,5 +1,5 @@
 from imports import *
-from junta_dados import juntarjsons
+
 
 
 from classes.junta_dados_classe import JuntarJsons
@@ -7,8 +7,8 @@ from ml.orlando.mldisney.ml_disney import coletar_precos_ml_disney
 from ml.orlando.mlsea.mlsea import coletar_precos_ml_seaworld
 from ml.orlando.ml_universal.ml_universal import coletar_precos_ml_universal
 
-async def main_ml(hour,array_datas,data_atual,run_once=False):
-    if run_once:
+async def main_ml(hour,array_datas,data_atual):
+    
         logging.info("Iniciando coleta de preços.")
         
         try:

@@ -11,7 +11,7 @@ def get_future_date(days):
 async def coletar_precos_fastPass_seaworld(hour, array_datas,data_atual):
     # Configurações do WebDriver Selenium
     options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
     # WebDriver remoto
     #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)

@@ -7,34 +7,33 @@ from .vmzuniversal.vmzuniversal import coletar_precos_vmz_universal
 #from .vmzdisney.teste import coletar_precos_vmz
 
 dias_para_processar = [2,3,4,5]
-async def main_vmz(hour,array_datas,data_atual,run_once=False):
-    if run_once:
+async def main_vmz(hour,array_datas,data_atual):
+
         global calibragem
         
         logging.info("Iniciando coleta de preços.")
-        try:
-            await coletar_precos_vmz_seaworld(hour,array_datas,data_atual)
-            
+        try: 
+            await coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,data_atual)
+            await coletar_precos_vmz(hour,array_datas,data_atual)
         except Exception as e:
-            logging.error(f"Erro durante a coleta de preços do SeaWorld: {e}")
+            logging.error(f"Erro durante a coleta de preços da Disney: {e}")
+        
         try:
             await coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")
 
-        try: 
-            await coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,data_atual)
+        # try:
+        #     await coletar_precos_vmz(hour,array_datas,data_atual)
             
-        except Exception as e:
-            logging.error(f"Erro durante a coleta de preços da Disney: {e}")
-            
+        # except Exception as e:
+        #     logging.error(f"Erro durante a coleta de preços da Disney: {e}")
         try:
-            await coletar_precos_vmz(hour,array_datas,data_atual)
+            await coletar_precos_vmz_seaworld(hour,array_datas,data_atual)
             
         except Exception as e:
-            logging.error(f"Erro durante a coleta de preços da Disney: {e}")
-            
+            logging.error(f"Erro durante a coleta de preços do SeaWorld: {e}")
         try:
             await coletar_precos_vmz_universal(hour,array_datas,data_atual)
             

@@ -10,7 +10,7 @@ def get_future_date(days):
 
 async def coletar_precos_ml_universal(hour,array_datas,data_atual):
     options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
    # driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     logging.info("Iniciando a coleta de preços ML Universal")
@@ -95,7 +95,7 @@ async def coletar_precos_ml_universal(hour,array_datas,data_atual):
                 nome_arquivo = f'universal_ml_{data_atual}.json'
                 salvar_dados(df, nome_arquivo,'orlando/ml',hour)
                 logging.info("Coleta de preços ML Disney finalizada")
-                atualizar_calibragem(95)
+                #atualizar_calibragem(95)
                 return
 if __name__ == '__main__':
     asyncio.run(coletar_precos_ml_universal())
