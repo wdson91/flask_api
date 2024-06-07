@@ -671,8 +671,6 @@ async def fastPass():
     await main_fastPass(hora_global, days_to_add, data_atual)
     return jsonify({"message": "Calibragem iniciada com sucesso!"})
 
-
-
 @app.route('/voupra', methods=['GET'])
 async def voupra():
     global data_atual
@@ -681,7 +679,7 @@ async def voupra():
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
-    #time.sleep(3)
+    time.sleep(3)
     await main_parques2(hora_global, array_datas,data_atual)
     
     return jsonify({"message": "Dados salvos com sucesso!"})
@@ -695,7 +693,7 @@ async def voupra2():
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
-    #time.sleep(3)
+    time.sleep(3)
     await main_parques3(hora_global, array_datas,data_atual)
     
     return jsonify({"message": "Dados salvos com sucesso!"})
@@ -708,7 +706,7 @@ async def vmz():
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
-    #time.sleep(3)
+    time.sleep(3)
     await main_vmz(hora_global,array_datas,data_atual)
     
     return jsonify({"message": "Dados salvos com sucesso!"})
@@ -733,4 +731,4 @@ async def ml():
 
 if __name__ == '__main__':
     
-    app.run(threaded=True,debug=True, host='0.0.0.0',port=5000)
+    app.run(debug=True, host='0.0.0.0',port=5000)
