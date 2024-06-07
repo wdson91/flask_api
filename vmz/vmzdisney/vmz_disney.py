@@ -2,9 +2,9 @@ from imports import *
 from salvardados import *
 from helpers.atualizar_calibragem import atualizar_calibragem
 
- 
+from webdriver_setup import get_webdriver
 
-async def coletar_precos_vmz(hour,array_datas,data_atual):
+async def coletar_precos_vmz(hour,array_datas,data_atual) -> None:
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     # Defina sua lógica para baixar os arquivos e esperar por eles
     baixar_blob_se_existir('disney_vmz_basicos_parcial.json', 'orlando/vmz')
@@ -37,11 +37,7 @@ async def coletar_precos_vmz(hour,array_datas,data_atual):
 
 async def coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual):
     
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
-    
+    driver = get_webdriver()
     
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -93,22 +89,19 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual):
             })
 
     logging.info("Coleta de preços finalizada.")
-    
+    driver.quit()
     # Criando um DataFrame
     df = pd.DataFrame(dados)
     salvar_dados(df, 'disney_vmz_basicos_parcial.json','orlando/vmz',hour)
-    driver.quit()
+    
     
     atualizar_calibragem(40)
     return
 
 async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,data_atual):
     waiter = 2
-     
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    
+    driver = get_webdriver()
     
     nome_pacotes = {
         2: "2 Dias - Disney World Basico",
@@ -223,6 +216,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
                 mes = data.month - 1
                 ano = data.year
                 mudar_mes_ano(driver, mes, ano)
+                time.sleep(5)  # Espera para a mudança de mês e ano acontecer
                 preco_avista,preco_parcelado = encontrar_preco_data(driver, data)
                 if preco_avista:
                     
@@ -236,7 +230,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
                     logging.warning(f"Preço não encontrado para {nome_pacote} em {data}")
 
         return dados  # Return the 'dados' list
-
+    
     dias_para_processar = [2,3,4,5,6,7,8,9,10]
     resultados = processar_dias(driver, dias_para_processar,array_datas)
 
@@ -245,6 +239,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
     df = pd.DataFrame(resultados)
     salvar_dados(df,'disney_vmz_dias_parcial.json','orlando/vmz',hour)
     driver.quit()
+    await coletar_precos_vmz(hour,array_datas,data_atual)
     atualizar_calibragem(60)
     return
 

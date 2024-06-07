@@ -1,6 +1,7 @@
 from imports import *
 from salvardados import *
 from helpers.atualizar_calibragem import atualizar_calibragem
+from webdriver_setup import get_webdriver
 
 
 
@@ -11,7 +12,11 @@ async def coletar_precos_vmz_lego(hour,array_datas,data_atual):
     
     # Configuração inicial do Selenium
     options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver = webdriver.Remote(
+        command_executor='http://172.20.0.7:4444/wd/hub',
+        options=options
+    )
+    driver.maximize_window()
     #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     # Lista de sites e nomes de parques

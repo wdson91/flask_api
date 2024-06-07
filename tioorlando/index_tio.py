@@ -10,7 +10,8 @@ from tioorlando.universal_tio import coleta_tio_universal
 
 async def main_tio(hour,array_datas,data_atual):
     
-
+        
+        logging.info("Iniciando a coleta de preços de Tio Orlando.")
         try:
             # Execute as funções assíncronas em sequência
             await coleta_tio_orlando(hour,array_datas,data_atual)
@@ -18,17 +19,17 @@ async def main_tio(hour,array_datas,data_atual):
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")
 
-        try:
-            await coleta_tio_universal(hour,array_datas,data_atual)
+        # try:
+        #     await coleta_tio_universal(hour,array_datas,data_atual)
             
-        except Exception as e:
-            logging.error(f"Erro durante a coleta de preços do SeaWorld: {e}")
-
-        try:
-            await coleta_tio_sea(hour,array_datas,data_atual)
+        # except Exception as e:
+        #     logging.error(f"Erro durante a coleta de preços do SeaWorld: {e}")
             
-        except Exception as e:
-            logging.error(f"Erro durante a coleta de preços da Universal: {e}")
+        # try:
+        #     await coleta_tio_sea(hour,array_datas,data_atual)
+            
+        # except Exception as e:
+        #     logging.error(f"Erro durante a coleta de preços da Universal: {e}")
         
         return 
 if __name__ == "__main__":

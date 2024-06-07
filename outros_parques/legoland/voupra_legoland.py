@@ -1,16 +1,21 @@
 
 from imports import *
- # Inicialize o driver do Selenium (certifique-se de ter o WebDriver correspondente instalado)
+# Inicialize o driver do Selenium (certifique-se de ter o WebDriver correspondente instalado)
 
 
 from helpers.atualizar_calibragem import atualizar_calibragem
+from webdriver_setup import get_webdriver
 
 
 async def coletar_precos_voupra_lego(hour,array_datas,data_atual):
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     options = webdriver.ChromeOptions()
+    driver = webdriver.Remote(
+        command_executor='http://172.20.0.7:4444/wd/hub',
+        options=options
+    )
+    driver.maximize_window()
     #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     # Lista para armazenar os dados dos produtos

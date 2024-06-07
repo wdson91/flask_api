@@ -1,7 +1,7 @@
 from imports import *
 
 from helpers.atualizar_calibragem import atualizar_calibragem
-
+from webdriver_setup import get_webdriver
 # Function to calculate future dates
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
@@ -9,10 +9,7 @@ def get_future_date(days):
 # List of days to add to the current date
 
 async def coletar_precos_ml_universal(hour,array_datas,data_atual):
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
-   # driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = get_webdriver()
     logging.info("Iniciando a coleta de preços ML Universal")
     dados = []
     wait = WebDriverWait(driver, 5)

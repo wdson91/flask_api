@@ -1,9 +1,9 @@
 from imports import *
+from webdriver_setup import get_webdriver
 
 
 async def coleta_tio_sea(hora,array_datas,data_atual):# Inicializar o driver do Selenium
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
+    driver = get_webdriver()
     # Lista de datas para a coleta de dados
     array_datas = [10, 20, 47, 65, 126]
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
@@ -49,7 +49,7 @@ async def coleta_tio_sea(hora,array_datas,data_atual):# Inicializar o driver do 
 
     for i in range(1, 4):
         driver.get('https://www.tioorlando.com.br/ingressos-seaworld-parks')
-
+        
         # Aguardar o carregamento do elemento
         elemento = WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.XPATH, f'//*[@id="page-content"]/div[2]/div/div[2]/div/div/div/div[2]/div[1]/div[2]/div/div[{i}]/button'))
@@ -152,7 +152,7 @@ async def coleta_tio_sea(hora,array_datas,data_atual):# Inicializar o driver do 
     
     salvar_dados(df, nome_arquivo, 'orlando/tio', hora)
     
-    
+    return
     
 if __name__ == '__main__':
     

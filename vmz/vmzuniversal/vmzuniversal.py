@@ -1,6 +1,7 @@
 from imports import *
 from salvardados import *
 from helpers.atualizar_calibragem import atualizar_calibragem
+from webdriver_setup import get_webdriver
 
 async def coletar_precos_vmz_universal(hour, array_datas,data_atual):
     logging.info("Iniciando coleta de preços da Universal Orlando.")
@@ -16,10 +17,7 @@ async def coletar_precos_vmz_universal(hour, array_datas,data_atual):
     url_14_dias = "https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/14-dias-flexiveis-uso-em-2024?"
     
     # Configurações do WebDriver
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = get_webdriver()
     
     try:
         datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]

@@ -1,5 +1,6 @@
 from helpers.atualizar_calibragem import finalizar_calibragem
 from imports import *
+from webdriver_setup import get_webdriver
 
 
 MAX_RETRIES = 3
@@ -16,10 +17,10 @@ def qualidade(retries=0):
     #chrome_options.add_argument("--headless")  # Ativa o modo headless
 
     # Inicializa o serviço do Chrome
-    service = Service(ChromeDriverManager().install())
+    #service = Service(ChromeDriverManager().install())
 
     # Inicializa o driver do Chrome com as opções e o serviço
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver = get_webdriver()
     wait = WebDriverWait(driver, 20)
     dados = {}   
 

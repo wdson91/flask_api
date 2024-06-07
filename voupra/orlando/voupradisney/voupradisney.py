@@ -1,14 +1,18 @@
+
 from helpers.atualizar_calibragem import atualizar_calibragem
-from imports import *
+from imports import * 
 from selenium.webdriver import Remote
+from webdriver_setup import get_webdriver
+
+
 async def coletar_precos_disney_aquaticos(hour,array_datas,data_atual):
-    
+    driver = get_webdriver()
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
     # Initialize the Selenium driver (make sure to have the corresponding WebDriver installed)
-    options = webdriver.ChromeOptions()
-    #driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
+    # options = webdriver.ChromeOptions()
+    # #driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    # driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
     #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     # driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
 
@@ -136,16 +140,14 @@ async def coletar_precos_disney_aquaticos(hour,array_datas,data_atual):
     return df
 
 async def coletar_precos_voupra_disney(hour,array_datas,data_atual):
-
+    
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
-
+    driver = get_webdriver()
     # Initialize the Selenium driver (make sure to have the corresponding WebDriver installed)
     
     #driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     #driver = Remote(desired_capabilities={"browserName":"chrome"})
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
-
+    
     # List to store product data
     all_data_set = set()  # Using a set to store unique data
 

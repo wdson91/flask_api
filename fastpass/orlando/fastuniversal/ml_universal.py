@@ -1,6 +1,7 @@
 from imports import *
 
 from helpers.atualizar_calibragem import atualizar_calibragem
+from webdriver_setup import get_webdriver
 
 # Function to calculate future dates
 def get_future_date(days):
@@ -9,11 +10,7 @@ def get_future_date(days):
 # List of days to add to the current date
 
 async def coletar_precos_fastPass_universal(hour,array_datas,data_atual):
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
-    # driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
-    logging.info("Iniciando a coleta de preços fastPass Universal")
+    driver = get_webdriver()
     dados = []
     wait = WebDriverWait(driver, 5)
     
@@ -97,5 +94,4 @@ async def coletar_precos_fastPass_universal(hour,array_datas,data_atual):
                 logging.info("Coleta de preços fastPass Disney finalizada")
                 atualizar_calibragem(95)
                 return
-if __name__ == '__main__':
-    asyncio.run(coletar_precos_fastPass_universal())
+

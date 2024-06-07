@@ -13,6 +13,8 @@ from pynput.keyboard import Key, Controller
 from classes.junta_dados_classe import JuntarJsons
 from decolar.hopper.decolar_disney_hopper import receive_disney_decolar_hopper
 
+from index_parques import main_parques
+from index_parques2 import main_parques2
 from qualidade.qualidade import qualidade
 
 from fastpass.orlando.index_fast import main_fastPass
@@ -507,30 +509,10 @@ async def fastPass():
     global horarios
     global data_atual
     
-    # # Se a calibragem já estiver em andamento, retorne uma mensagem de erro
-    # if calibrating:
-    #     return jsonify({"error": "Calibragem já em andamento"}), 400
-
-    # tipo = request.args.get('tipo', 'automatica')  # Obter o parâmetro tipo da URL, padrão é 'manual'
-
-    #calibrating = True
-    #calibragem = 1
-    #tipo_calibragem = tipo
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     
-    # time.sleep(3)
-    # if tipo == 'manual':
-    #     pyautogui.hotkey('ctrl', '1')
-    
-    
-    # Criar o nome do arquivo usando a data atual
-    #nome_arquivo = f"horarios/horarios_{data_atual}.txt"
-    # # Abrir o arquivo em modo de adição (append) ou criá-lo se não existir
-    # with open(nome_arquivo, "a") as arquivo:
-    #     # Adicionar o horário ao arquivo
-    #     arquivo.write(hora_global + "\n")
     
     time.sleep(3)
     #await executar_ambos(hora_global, days_to_add, data_atual)
@@ -696,7 +678,7 @@ async def voupra():
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
     #time.sleep(3)
-    await main_voupra(hora_global, array_datas,data_atual)
+    await main_parques2(hora_global, array_datas,data_atual)
     
     return jsonify({"message": "Dados salvos com sucesso!"})
 
@@ -724,7 +706,7 @@ async def ml():
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
     #time.sleep(3)
-    await main_ml(hora_global,array_datas,data_atual)
+    await main_parques(hora_global,array_datas,data_atual)
     
     return jsonify({"message": "Dados salvos com sucesso!"})
 

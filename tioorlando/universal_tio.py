@@ -1,9 +1,9 @@
 from imports import *
+from webdriver_setup import get_webdriver
 
 
 async def coleta_tio_universal(hora,array_datas,data_atual):# Inicializar o driver do Selenium
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
+    driver = get_webdriver()
     # Lista de datas para a coleta de dados
     array_datas = [10, 20, 47, 65, 126]
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
@@ -163,7 +163,7 @@ async def coleta_tio_universal(hora,array_datas,data_atual):# Inicializar o driv
     
     salvar_dados(df, nome_arquivo, 'orlando/tio', hora)
     
-    
+    return
     
 if __name__ == '__main__':
     coleta_tio_universal()

@@ -1,9 +1,9 @@
 from imports import *
+from webdriver_setup import get_webdriver
 
 
 async def coleta_tio_orlando(hora,array_datas,data_atual):# Inicializar o driver do Selenium
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
+    driver = get_webdriver()
     # Lista de datas para a coleta de dados
     array_datas = [10, 20, 47, 65, 126]
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
@@ -122,13 +122,13 @@ async def coleta_tio_orlando(hora,array_datas,data_atual):# Inicializar o driver
                     print("Não foi possível encontrar o botão de navegação ou clicar nele.")
                     break
 
-            time.sleep(5)
+            time.sleep(3)
 
             seletor_dia = f".react-datepicker__day--0{dia}"
             
             try:
                 # Aguardar até que o elemento correspondente ao dia desejado esteja clicável na página
-                elemento_dia = WebDriverWait(driver, 30).until(
+                elemento_dia = WebDriverWait(driver, 5).until(
                     EC.element_to_be_clickable((By.CSS_SELECTOR, seletor_dia))
                 )
 
@@ -197,8 +197,5 @@ async def coleta_tio_orlando(hora,array_datas,data_atual):# Inicializar o driver
     
     salvar_dados(df, nome_arquivo, 'orlando/tio', hora)
     
+    return 
     
-    
-if __name__ == '__main__':
-    coleta_tio_orlando()
-    print("Coleta de dados finalizada com sucesso.")

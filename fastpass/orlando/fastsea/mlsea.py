@@ -3,18 +3,14 @@ from imports import *
 
 
 from helpers.atualizar_calibragem import atualizar_calibragem
+from webdriver_setup import get_webdriver
 
 # Function to calculate future dates
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
-async def coletar_precos_fastPass_seaworld(hour, array_datas,data_atual):
-    # Configurações do WebDriver Selenium
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
-    # WebDriver remoto
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+def coletar_precos_fastPass_seaworld(hour, array_datas,data_atual):
+    driver = get_webdriver()
     dados = []
     wait = WebDriverWait(driver, 5)
     logging.info("Iniciando a coleta de preços fastPass SeaWorld")
@@ -23,7 +19,7 @@ async def coletar_precos_fastPass_seaworld(hour, array_datas,data_atual):
             future_date = get_future_date(days)
             url = f"https://ingressos.orlandofastpass.com.br/ingressos/Orlando/8?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
             driver.get(url)
-            await asyncio.sleep(3)  # Aguardar o carregamento da página
+            time.sleep(3)  # Aguardar o carregamento da página
             logging.info(f"Coletando preços para {future_date}")
 
             # Pares de XPaths para botões e elementos de preço correspondentes
@@ -51,7 +47,7 @@ async def coletar_precos_fastPass_seaworld(hour, array_datas,data_atual):
                 try:
                     button = wait.until(EC.presence_of_element_located((By.XPATH, button_xpath)))
                     driver.execute_script("arguments[0].scrollIntoView();", button)
-                    await asyncio.sleep(2)  # Permitir tempo para quaisquer elementos carregados preguiçosos
+                    time.sleep(2)  # Permitir tempo para quaisquer elementos carregados preguiçosos
                     button.click()
                 except TimeoutException:
                     print("Timeout ao esperar pelo botão:", button_xpath)
@@ -104,7 +100,7 @@ async def coletar_precos_fastPass_seaworld(hour, array_datas,data_atual):
             future_date = get_future_date(days)
             url = f"https://ingressos.orlandofastpass.com.br/ingressos/Orlando/9?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
             driver.get(url)
-            await asyncio.sleep(3)  # Aguardar o carregamento da página
+            time.sleep(3)  # Aguardar o carregamento da página
             logging.info(f"Coletando preços para {future_date}")
             
            # Pares de XPaths para botões e elementos de preço correspondentes
@@ -120,7 +116,7 @@ async def coletar_precos_fastPass_seaworld(hour, array_datas,data_atual):
                 try:
                     button = wait.until(EC.presence_of_element_located((By.XPATH, button_xpath)))
                     driver.execute_script("arguments[0].scrollIntoView();", button)
-                    await asyncio.sleep(2)  # Permitir tempo para quaisquer elementos carregados preguiçosos
+                    time.sleep(2)  # Permitir tempo para quaisquer elementos carregados preguiçosos
                     button.click()
                 except TimeoutException:
                     print("Timeout ao esperar pelo botão:", button_xpath)
