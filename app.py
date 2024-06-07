@@ -14,7 +14,8 @@ from classes.junta_dados_classe import JuntarJsons
 from decolar.hopper.decolar_disney_hopper import receive_disney_decolar_hopper
 
 from index_parques import main_parques
-from index_parques2 import main_parques2
+from index_parques import main_parques2
+from index_parques import main_parques3
 from qualidade.qualidade import qualidade
 
 from fastpass.orlando.index_fast import main_fastPass
@@ -499,25 +500,7 @@ async def calibrar():
 
     return jsonify({"message": "Calibragem iniciada com sucesso!"})
 
-@app.route('/fast', methods=['GET'])
-async def fastPass():
 
-    global calibragem
-    global hora_global
-    global tipo_calibragem
-    global calibrating
-    global horarios
-    global data_atual
-    
-    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
-    
-    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
-    
-    
-    time.sleep(3)
-    #await executar_ambos(hora_global, days_to_add, data_atual)
-    await main_fastPass(hora_global, days_to_add, data_atual)
-    return jsonify({"message": "Calibragem iniciada com sucesso!"})
 
 
 
@@ -668,6 +651,27 @@ async def gygFura():
 
 
 
+@app.route('/fast', methods=['GET'])
+async def fastPass():
+
+    global calibragem
+    global hora_global
+    global tipo_calibragem
+    global calibrating
+    global horarios
+    global data_atual
+    
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    
+    
+    time.sleep(3)
+    #await executar_ambos(hora_global, days_to_add, data_atual)
+    await main_fastPass(hora_global, days_to_add, data_atual)
+    return jsonify({"message": "Calibragem iniciada com sucesso!"})
+
+
 
 @app.route('/voupra', methods=['GET'])
 async def voupra():
@@ -682,6 +686,19 @@ async def voupra():
     
     return jsonify({"message": "Dados salvos com sucesso!"})
 
+
+@app.route('/voupra2', methods=['GET'])
+async def voupra2():
+    global data_atual
+    global hora_global
+    
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    array_datas = [5,10, 20, 47, 65, 126]
+    #time.sleep(3)
+    await main_parques3(hora_global, array_datas,data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
 
 @app.route('/vmz', methods=['GET'])
 async def vmz():

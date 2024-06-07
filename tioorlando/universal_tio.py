@@ -3,6 +3,7 @@ from webdriver_setup import get_webdriver
 
 
 async def coleta_tio_universal(hora,array_datas,data_atual):# Inicializar o driver do Selenium
+    logging.info("Iniciando coleta de preços Tio Orlando Universal.")
     driver = get_webdriver()
     # Lista de datas para a coleta de dados
     array_datas = [10, 20, 47, 65, 126]
@@ -16,7 +17,7 @@ async def coleta_tio_universal(hora,array_datas,data_atual):# Inicializar o driv
             )
             botao_fechar.click()
         except TimeoutException:
-            print("Elemento bloqueador não encontrado ou não clicável.")
+            logging.error("Elemento bloqueador não encontrado ou não clicável - Universal Tio Orlando.")
 
     # Mapeamento dos nomes dos parques
     mapeamento_parques = {
@@ -25,6 +26,7 @@ async def coleta_tio_universal(hora,array_datas,data_atual):# Inicializar o driv
         "Universal 2-Dias 2-Parks Park-to-Park": "2 Dias 2 Parques - Universal Orlando",
         "PROMO: Universal 2-Park Play 4-Dias": "4 Dias 2 Parques - Universal Orlando",
         "Universal 14-Dias 3-Park Explorer Park-to-Park – 2024":"14 Dias 3 Parques - Universal Orlando",
+        "PROMO: Universal 2-Park 3-Dias + 2-Dias GRÁTIS!":"5 Dias 2 Parques - Universal Orlando"
     }
 
     # Mapeamento dos meses em português
@@ -77,7 +79,7 @@ async def coleta_tio_universal(hora,array_datas,data_atual):# Inicializar o driv
                         EC.presence_of_element_located((By.CLASS_NAME, "react-datepicker__current-month"))
                     )
                 except TimeoutException:
-                    print("Não foi possível encontrar o botão de navegação ou clicar nele.")
+                    logging.error("Não foi possível encontrar o botão de navegação ou clicar nele. - Universal Tio Orlando.")
                     break
 
             time.sleep(5)
@@ -85,7 +87,7 @@ async def coleta_tio_universal(hora,array_datas,data_atual):# Inicializar o driv
             seletor_dia = f".react-datepicker__day--0{dia}"
             try:
                 # Aguardar até que o elemento correspondente ao dia desejado esteja clicável na página
-                elemento_dia = WebDriverWait(driver, 30).until(
+                elemento_dia = WebDriverWait(driver, 10).until(
                     EC.element_to_be_clickable((By.CSS_SELECTOR, seletor_dia))
                 )
 
@@ -93,7 +95,7 @@ async def coleta_tio_universal(hora,array_datas,data_atual):# Inicializar o driv
                 elemento_dia.click()
                 
             except TimeoutException:
-                print(f"Não foi possível clicar no dia {dia}.")
+                logging.error(f"Não foi possível clicar no dia {dia} - Universal Tio Orlando.")
                 continue
 
             time.sleep(7)
@@ -132,14 +134,13 @@ async def coleta_tio_universal(hora,array_datas,data_atual):# Inicializar o driv
     
 
     driver.get('https://www.tioorlando.com.br/promo-universal-orlando')
-    
+    logging.info("Coletando dados do site Tio Orlando - Universal Orlando.")
     time.sleep(5)
     
     await coleta(datas)
     
-    
-    
     for i in range(1, 5):
+        logging.info(f"Coletando dados do site Tio Orlando - Universal Orlando dia {i}.")
         driver.get('https://www.tioorlando.com.br/ingressos-universal-orlando')
 
         # Aguardar o carregamento do elemento
@@ -163,8 +164,9 @@ async def coleta_tio_universal(hora,array_datas,data_atual):# Inicializar o driv
     
     salvar_dados(df, nome_arquivo, 'orlando/tio', hora)
     
+    logging.info("Coleta finalizada Site Tio Orlando - Universal Orlando.")
     return
     
 if __name__ == '__main__':
     coleta_tio_universal()
-    print("Coleta de dados finalizada com sucesso.")
+    logging.info("Coleta de dados finalizada com sucesso.")

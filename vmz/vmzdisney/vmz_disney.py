@@ -30,17 +30,16 @@ async def coletar_precos_vmz(hour,array_datas,data_atual) -> None:
     salvar_dados(df_sorted, nome_arquivo, 'orlando/vmz', hour)
     
     
-    logging.info("Coleta finalizada.")
+    logging.info("Coleta finalizada. Vmz Disney.")
     atualizar_calibragem(65)
     return 
 
 
 async def coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual):
-    
+    logging.info("Iniciando coleta de preços Vmz Disney Basicos.")
     driver = get_webdriver()
     
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
+    
     sites = [
     ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/disney-ingresso-magic-kingdom-1dia?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Basico Magic Kingdom'),
     ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/epcot?",  '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Basico Epcot'),
@@ -60,7 +59,7 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual):
     # Percorrer cada site e coletar preços
     for site_url, xpath_selector, parque_nome in sites:
         for data in datas:
-            logging.info(f"Coletando preços para {parque_nome} na data: {data}")
+            logging.info(f"Coletando preços para {parque_nome} na data: {data} Vmz Basicos.")
             url_com_data = f"{site_url}&data={data.strftime('%Y-%m-%d')}"
             driver.get(url_com_data)
             
@@ -88,7 +87,7 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual):
                 'Preco_Avista': new_price
             })
 
-    logging.info("Coleta de preços finalizada.")
+    logging.info("Coleta de preços finalizada Vmz Basicos.")
     driver.quit()
     # Criando um DataFrame
     df = pd.DataFrame(dados)
@@ -100,7 +99,7 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual):
 
 async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,data_atual):
     waiter = 2
-    
+    logging.info("Iniciando coleta de preços Vmz Disney Dias.")
     driver = get_webdriver()
     
     nome_pacotes = {
@@ -126,9 +125,9 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
             )
             botao_cookies.click()
             
-            logging.info("Pop-up fechado.")
+            logging.info("Pop-up fechado. Vmz Disney Dias.")
         except Exception as e:
-            logging.warning(f"Popup não encontrada")
+            logging.warning(f"Popup não encontrada - {e} Vmz Disney Dias.")
 
     def scroll_to_element(driver, element):
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
@@ -163,9 +162,9 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
                 month_select.click()
                 driver.find_element(By.CSS_SELECTOR, f'option[value="{mes}"]').click()
 
-            logging.info(f"Mudança para mês {mes} e ano {ano} realizada com sucesso.")
+            logging.info(f"Mudança para mês {mes} e ano {ano} realizada com sucesso. - Vmz Disney Dias.")
         except Exception as e:
-            logging.error(f"Erro ao mudar mês e ano: {e}")
+            logging.error(f"Erro ao mudar mês e ano - Vmz Disney Dias: {e}")
 
 
     def encontrar_preco_data(driver, data):
@@ -184,7 +183,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
                     
                     return preco_avista, preco_parcelado
         except Exception as e:
-            logging.error(f"Erro ao encontrar preço para data {data}: {e}")
+            logging.error(f"Erro ao encontrar preço para data {data}: {e} - Vmz Disney Dias.")
             return None
 
 
@@ -206,7 +205,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
         dados = []
 
         for dia in dias:
-            logging.info(f"Coletando preços para {dia} dias.")
+            logging.info(f"Coletando preços para {dia} dias - Vmz Disney Dias.")
             nome_pacote = nome_pacotes.get(dia, f"{dia} Dias - Desconhecido")
             url_com_dias = f"{base_url}?mes=2024-01&dias={dia}"
             driver.get(url_com_dias)
@@ -216,7 +215,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
                 mes = data.month - 1
                 ano = data.year
                 mudar_mes_ano(driver, mes, ano)
-                time.sleep(5)  # Espera para a mudança de mês e ano acontecer
+                time.sleep(7)  # Espera para a mudança de mês e ano acontecer
                 preco_avista,preco_parcelado = encontrar_preco_data(driver, data)
                 if preco_avista:
                     
@@ -227,7 +226,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
                         'Preco_Avista': preco_avista
                     })
                 else:
-                    logging.warning(f"Preço não encontrado para {nome_pacote} em {data}")
+                    logging.warning(f"Preço não encontrado para {nome_pacote} em {data} - Vmz Disney Dias.")
 
         return dados  # Return the 'dados' list
     
@@ -239,6 +238,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
     df = pd.DataFrame(resultados)
     salvar_dados(df,'disney_vmz_dias_parcial.json','orlando/vmz',hour)
     driver.quit()
+    logging.info("Coleta de preços finalizada Vmz Disney Dias.")
     await coletar_precos_vmz(hour,array_datas,data_atual)
     atualizar_calibragem(60)
     return

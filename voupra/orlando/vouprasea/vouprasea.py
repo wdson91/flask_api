@@ -5,7 +5,7 @@ from webdriver_setup import get_webdriver
 async def coletar_precos_voupra_sea(hour,array_datas,data_atual):
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
-    
+    logging.info("Iniciando coleta de preços Voupra SeaWorld.")
     driver = get_webdriver()
     #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)

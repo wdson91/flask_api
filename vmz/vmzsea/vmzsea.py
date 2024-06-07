@@ -8,8 +8,7 @@ from webdriver_setup import get_webdriver
 
 
 async def coletar_precos_vmz_seaworld(hour,array_datas,data_atual):
-    logging.info("Iniciando coleta de preços do SeaWorld.")
-    
+    logging.info("Iniciando coleta de preços Vmz Seaworld.")
     driver = get_webdriver()
     # Lista de sites e nomes de parques
     sites = [
@@ -30,7 +29,7 @@ async def coletar_precos_vmz_seaworld(hour,array_datas,data_atual):
 
         for data in datas:
             for url, parque in sites:
-                logging.info(f"Coletando precos do parque {parque}.")
+                logging.info(f"Coletando precos do parque {parque} - Vmz Seaworld.")
 
                 driver.get(url)
 

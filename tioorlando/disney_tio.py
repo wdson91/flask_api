@@ -16,7 +16,7 @@ async def coleta_tio_orlando(hora,array_datas,data_atual):# Inicializar o driver
             )
             botao_fechar.click()
         except TimeoutException:
-            print("Elemento bloqueador não encontrado ou não clicável.")
+            logging.info("Elemento bloqueador não encontrado ou não clicável - Disney Tio Orlando.")
 
     # Mapeamento dos nomes dos parques
     mapeamento_parques = {
@@ -86,7 +86,7 @@ async def coleta_tio_orlando(hora,array_datas,data_atual):# Inicializar o driver
     # Lista para armazenar os dados
     dados = []
     async def coleta(datas):
-         # Aguardar a presença do elemento do mês atual
+        # Aguardar a presença do elemento do mês atual
         mes_atual = WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.CLASS_NAME, "react-datepicker__current-month"))
         )
@@ -119,7 +119,7 @@ async def coleta_tio_orlando(hora,array_datas,data_atual):# Inicializar o driver
                         EC.presence_of_element_located((By.CLASS_NAME, "react-datepicker__current-month"))
                     )
                 except TimeoutException:
-                    print("Não foi possível encontrar o botão de navegação ou clicar nele.")
+                    logging.info("Não foi possível encontrar o botão de navegação ou clicar nele. - Disney Tio Orlando")
                     break
 
             time.sleep(3)
@@ -136,7 +136,7 @@ async def coleta_tio_orlando(hora,array_datas,data_atual):# Inicializar o driver
                 elemento_dia.click()
                 
             except TimeoutException:
-                print(f"Não foi possível clicar no dia {dia}.")
+                logging.info(f"Não foi possível clicar no dia {dia} - Disney Tio Orlando.")
                 continue
 
             time.sleep(7)
@@ -185,7 +185,7 @@ async def coleta_tio_orlando(hora,array_datas,data_atual):# Inicializar o driver
         # Clicar no botão
         elemento.click()
         await coleta(datas)    
-       
+    
     # Fechar o navegador após processar todos os dados
     driver.quit()
     # Salvar os dados em um arquivo JSON
@@ -196,6 +196,6 @@ async def coleta_tio_orlando(hora,array_datas,data_atual):# Inicializar o driver
     nome_arquivo = f'disney_tio_{data_atual}.json'
     
     salvar_dados(df, nome_arquivo, 'orlando/tio', hora)
-    
+    logging.info('Coleta Finalizada Disney Tio Orlando')
     return 
     

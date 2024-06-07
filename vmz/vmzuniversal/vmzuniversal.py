@@ -4,15 +4,15 @@ from helpers.atualizar_calibragem import atualizar_calibragem
 from webdriver_setup import get_webdriver
 
 async def coletar_precos_vmz_universal(hour, array_datas,data_atual):
-    logging.info("Iniciando coleta de preços da Universal Orlando.")
-    
+    logging.info("Iniciando coleta de preços Vmz Universal.")
     # Configuração dos sites e URLs
     sites = [
         ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/1-parque-1-dia-data-fixa?", '1 Dia 1 Parque - Universal Orlando'),
         ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/2-parques-1-dia-park-to-park-data-fixa?", '1 Dia 2 Parques - Universal Orlando'),
         ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/2-parques-2-dias-park-to-park-data-fixa?", '2 Dias 2 Parques - Universal Orlando'),
         ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/2-parques-4-dias-park-to-park-data-fixa?", '4 Dias 2 Parques - Universal Orlando'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/3-parques-play-4-dias-park-to-park-data-fixa?", '4 Dias 3 Parques - Universal Orlando')
+        ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/3-parques-play-4-dias-park-to-park-data-fixa?", '4 Dias 3 Parques - Universal Orlando'),
+        ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/2-parques-compre-3-dias-e-ganhe-2-dias-park-to-park?", '5 Dias 2 Parques - Universal Orlando')
     ]
     url_14_dias = "https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/14-dias-flexiveis-uso-em-2024?"
     
@@ -25,7 +25,7 @@ async def coletar_precos_vmz_universal(hour, array_datas,data_atual):
 
         for data in datas:
             for url_template, parque in sites:
-                logging.info(f"Coletando preços do parque {parque}.")
+                logging.info(f"Coletando preços do parque {parque} - Vmz Universal.")
                 site_url = f"{url_template}data={data.strftime('%Y-%m-%d')}"
                 driver.get(site_url)
 
@@ -58,7 +58,7 @@ async def coletar_precos_vmz_universal(hour, array_datas,data_atual):
 
     finally:
         driver.quit()
-
+        return
 
 def extrair_precos(driver,tipo):
 
@@ -87,7 +87,7 @@ def extrair_precos(driver,tipo):
 
     return preco_float, preco_final_avista
 
-    
+
 
 if __name__ == "__main__":
     asyncio.run(coletar_precos_vmz_universal())

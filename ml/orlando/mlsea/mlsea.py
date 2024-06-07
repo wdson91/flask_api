@@ -19,7 +19,7 @@ async def coletar_precos_ml_seaworld(hour, array_datas,data_atual):
             url = f"https://www.vamonessa.com.br/ingressos/Orlando/8?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
             driver.get(url)
             await asyncio.sleep(3)  # Aguardar o carregamento da página
-            logging.info(f"Coletando preços para {future_date}")
+            logging.info(f"Coletando preços para {future_date} - ML SeaWorld")
 
             # Pares de XPaths para botões e elementos de preço correspondentes
             xpath_pairs = [
@@ -100,7 +100,7 @@ async def coletar_precos_ml_seaworld(hour, array_datas,data_atual):
             url = f"https://www.vamonessa.com.br/ingressos/BUSCH%20GARDENS%20TAMPA/9?destination=Orlando&destinationCode=2&destinationState=Florida&destinationStateCode=2&date={future_date}"
             driver.get(url)
             await asyncio.sleep(3)  # Aguardar o carregamento da página
-            logging.info(f"Coletando preços para {future_date}")
+            logging.info(f"Coletando preços para {future_date} - ML SeaWorld")
             
            # Pares de XPaths para botões e elementos de preço correspondentes
             xpath_pairs = [
@@ -168,5 +168,6 @@ async def coletar_precos_ml_seaworld(hour, array_datas,data_atual):
         salvar_dados(df, nome_arquivo, 'orlando/ml', hour)
         logging.info("Coleta de preços ML SeaWorld concluída")
         atualizar_calibragem(85)
+        return
 if __name__ == '__main__':
     asyncio.run(coletar_precos_ml_seaworld()) 

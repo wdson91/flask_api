@@ -18,7 +18,7 @@ async def coletar_precos_fastPass_disney(hour,array_datas,data_atual):
     
         for days in array_datas:
             future_date = get_future_date(days)
-            logging.info(f"Processando data: {future_date}")
+            logging.info(f"Processando data: {future_date} - fastPass Disney")
             url = f"https://ingressos.orlandofastpass.com.br/ingressos/Orlando/6?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
             driver.get(url)
             time.sleep(3)
@@ -50,7 +50,7 @@ async def coletar_precos_fastPass_disney(hour,array_datas,data_atual):
                     time.sleep(2)
                     button.click()
                 except TimeoutException:
-                    logging.error(f"Tempo esgotado ao tentar localizar o botão para {park_name}")
+                    logging.error(f"Tempo esgotado ao tentar localizar o botão para {park_name}- fastPass Disney")
                     dados.append({
                         'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
                         'Parque': park_name,
@@ -80,7 +80,7 @@ async def coletar_precos_fastPass_disney(hour,array_datas,data_atual):
                         price_number_vista = '-'
                         
                 except TimeoutException:
-                    logging.error(f"Tempo esgotado ao tentar obter o preço à vista para {park_name}")
+                    logging.error(f"Tempo esgotado ao tentar obter o preço à vista para {park_name} - fastPass Disney")
                     price_number_vista = '-'
                     multiplied_price_parcelado = '-'
                     
@@ -95,9 +95,9 @@ async def coletar_precos_fastPass_disney(hour,array_datas,data_atual):
         
                 
     except TimeoutException as e:
-                logging.error("Erro: Elemento não encontrado ou tempo de espera excedido", e)
+                logging.error("Erro: Elemento não encontrado ou tempo de espera excedido - fastPass Disney", e)
     except Exception as e:
-        logging.error("Erro inesperado:", e)
+        logging.error("Erro inesperado: - fastPass Disney", e)
     finally:    
                 driver.quit()
 

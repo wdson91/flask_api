@@ -3,6 +3,7 @@ from webdriver_setup import get_webdriver
 
 
 async def coleta_tio_sea(hora,array_datas,data_atual):# Inicializar o driver do Selenium
+    logging.info("Iniciando coleta de preços Tio Orlando Seaworld.")
     driver = get_webdriver()
     # Lista de datas para a coleta de dados
     array_datas = [10, 20, 47, 65, 126]
@@ -16,7 +17,7 @@ async def coleta_tio_sea(hora,array_datas,data_atual):# Inicializar o driver do 
             )
             botao_fechar.click()
         except TimeoutException:
-            print("Elemento bloqueador não encontrado ou não clicável.")
+            logging.error("Elemento bloqueador não encontrado ou não clicável.")
 
     # Mapeamento dos nomes dos parques
     mapeamento_parques = {
@@ -49,7 +50,7 @@ async def coleta_tio_sea(hora,array_datas,data_atual):# Inicializar o driver do 
 
     for i in range(1, 4):
         driver.get('https://www.tioorlando.com.br/ingressos-seaworld-parks')
-        
+        logging.info(f"Coletando preços do dia {i} - Tio SeaWorld.")
         # Aguardar o carregamento do elemento
         elemento = WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.XPATH, f'//*[@id="page-content"]/div[2]/div/div[2]/div/div/div/div[2]/div[1]/div[2]/div/div[{i}]/button'))
@@ -91,7 +92,7 @@ async def coleta_tio_sea(hora,array_datas,data_atual):# Inicializar o driver do 
                         EC.presence_of_element_located((By.CLASS_NAME, "react-datepicker__current-month"))
                     )
                 except TimeoutException:
-                    print("Não foi possível encontrar o botão de navegação ou clicar nele.")
+                    logging.error("Não foi possível encontrar o botão de navegação ou clicar nele. - SeaWorld Tio Orlando")
                     break
 
             time.sleep(5)
@@ -99,7 +100,7 @@ async def coleta_tio_sea(hora,array_datas,data_atual):# Inicializar o driver do 
             seletor_dia = f".react-datepicker__day--0{dia}"
             try:
                 # Aguardar até que o elemento correspondente ao dia desejado esteja clicável na página
-                elemento_dia = WebDriverWait(driver, 30).until(
+                elemento_dia = WebDriverWait(driver, 10).until(
                     EC.element_to_be_clickable((By.CSS_SELECTOR, seletor_dia))
                 )
 
@@ -107,7 +108,7 @@ async def coleta_tio_sea(hora,array_datas,data_atual):# Inicializar o driver do 
                 elemento_dia.click()
                 
             except TimeoutException:
-                print(f"Não foi possível clicar no dia {dia}.")
+                logging.error(f"Não foi possível clicar no dia {dia}. - SeaWorld Tio Orlando.")
                 continue
 
             time.sleep(7)
@@ -151,7 +152,7 @@ async def coleta_tio_sea(hora,array_datas,data_atual):# Inicializar o driver do 
     nome_arquivo = f'seaworld_tio_{data_atual}.json'
     
     salvar_dados(df, nome_arquivo, 'orlando/tio', hora)
-    
+    logging.info("Coleta finalizada Site Tio Orlando - SeaWorld.")
     return
     
 if __name__ == '__main__':
@@ -159,4 +160,4 @@ if __name__ == '__main__':
     
     
     coleta_tio_sea()
-    print("Coleta de dados finalizada com sucesso.")
+    logging.info("Coleta de dados finalizada com sucesso.")

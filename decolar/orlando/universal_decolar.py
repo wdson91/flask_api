@@ -14,7 +14,8 @@ async def receive_universal_decolar(data,data_hora,data_atual):
         "Ingresso 2-Park 1-Day Park-to-Park": "1 Dia 2 Parques - Universal Orlando",
         "Ingresso 2 Parques 2 Dias (Parque a Parque)": "2 Dias 2 Parques - Universal Orlando",
         "Ingresso - Promoção 2 Parques 4 Dias (Parque a Parque)": "4 Dias 2 Parques - Universal Orlando",
-        "Ingresso Explorer 3 Parques 2024": "14 Dias 3 Parques - Universal Orlando"
+        "Ingresso Explorer 3 Parques 2024": "14 Dias 3 Parques - Universal Orlando",
+        "Promoção - Ingresso em 2 Parques 3 Dias (Parque a Parque)": "5 Dias 2 Parques - Universal Orlando"
     }
 
     filtered_data_list = [item for item in data_list if item['Parque'] in mapping]

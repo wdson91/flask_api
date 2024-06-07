@@ -5,7 +5,7 @@ from selenium import webdriver
 def get_webdriver():
     options = webdriver.ChromeOptions()
     driver = webdriver.Remote(
-        command_executor='http://172.21.0.5:4444/wd/hub',
+        command_executor='http://172.23.0.3:4444/wd/hub',
         options=options
     )
     driver.maximize_window()

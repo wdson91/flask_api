@@ -21,7 +21,8 @@ async def coletar_precos_ml_universal(hour,array_datas,data_atual):
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button[2]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/span','2 Dias 2 Parques - Universal Orlando'),
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[2]/div[2]/div[1]/div[1]/span','4 Dias 2 Parques - Universal Orlando'),
                 #('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','4 Dias 3 Parques - Universal Orlando'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[1]/span','14 Dias 3 Parques - Universal Orlando')
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[1]/span','14 Dias 3 Parques - Universal Orlando'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[1]/span','5 Dias 2 Parques - Universal Orlando')
                 
                 # Add other pairs as needed
             ]
@@ -32,7 +33,7 @@ async def coletar_precos_ml_universal(hour,array_datas,data_atual):
             url = f"https://www.vamonessa.com.br/ingressos/Orlando/7?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
             driver.get(url)
             time.sleep(3)
-            logging.info(f"Coletando preços para {future_date}")
+            logging.info(f"Coletando preços para {future_date} - ML Universal Orlando")
             for button_xpath, preco_parcelado, preco_avista, park_name in xpath_pairs:
                 # Scroll to button and click
                 button = wait.until(EC.presence_of_element_located((By.XPATH, button_xpath)))

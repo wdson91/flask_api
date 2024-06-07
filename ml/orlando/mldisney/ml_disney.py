@@ -7,6 +7,7 @@ def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
 async def coletar_precos_ml_disney(hour,array_datas,data_atual):
+    
     logging.info("Iniciando a coleta de preços ML Disney")
     driver = get_webdriver()
     dados = []
@@ -16,7 +17,7 @@ async def coletar_precos_ml_disney(hour,array_datas,data_atual):
     
         for days in array_datas:
             future_date = get_future_date(days)
-            logging.info(f"Processando data: {future_date}")
+            logging.info(f"Processando data: {future_date} - ML Disney")
             url = f"https://www.vamonessa.com.br/ingressos/WALT%20DISNEY%20WORLD/6?destination=Orlando&destinationCode=2&destinationState=Florida&destinationStateCode=2&date={future_date}"
             driver.get(url)
             time.sleep(3)
@@ -48,7 +49,7 @@ async def coletar_precos_ml_disney(hour,array_datas,data_atual):
                     time.sleep(2)
                     button.click()
                 except TimeoutException:
-                    logging.error(f"Tempo esgotado ao tentar localizar o botão para {park_name}")
+                    logging.error(f"Tempo esgotado ao tentar localizar o botão para {park_name} - Ml Disney")
                     dados.append({
                         'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
                         'Parque': park_name,
@@ -78,7 +79,7 @@ async def coletar_precos_ml_disney(hour,array_datas,data_atual):
                         price_number_vista = '-'
                         
                 except TimeoutException:
-                    logging.error(f"Tempo esgotado ao tentar obter o preço à vista para {park_name}")
+                    logging.error(f"Tempo esgotado ao tentar obter o preço à vista para {park_name} - Ml Disney")
                     price_number_vista = '-'
                     multiplied_price_parcelado = '-'
                     
@@ -106,5 +107,6 @@ async def coletar_precos_ml_disney(hour,array_datas,data_atual):
                 
                 logging.info("Coleta de preços ML Disney finalizada")
                 atualizar_calibragem(80)
+                return
 if __name__ == '__main__':
     asyncio.run(coletar_precos_ml_disney())

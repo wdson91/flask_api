@@ -14,15 +14,16 @@ async def coletar_precos_fastPass_universal(hour,array_datas,data_atual):
     dados = []
     wait = WebDriverWait(driver, 5)
     
-    
+    logging.info("Iniciando coleta de preços Universal FastPass.")
     xpath_pairs = [
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/span','1 Dia 1 Parque - Universal Orlando'),
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/span','1 Dia 2 Parques - Universal Orlando'),
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button[2]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/span','2 Dias 2 Parques - Universal Orlando'),
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[2]/div[2]/div[1]/div[1]/span','4 Dias 2 Parques - Universal Orlando'),
                 #('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','4 Dias 3 Parques - Universal Orlando'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[1]/span','14 Dias 3 Parques - Universal Orlando')
-                
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[1]/span','14 Dias 3 Parques - Universal Orlando'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[1]/button','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[6]/div[2]/div[2]/div[2]/div[1]/div[1]/span','5 Dias 2 Parques - Universal Orlando')
+
                 # Add other pairs as needed
             ]
     try:
@@ -32,7 +33,7 @@ async def coletar_precos_fastPass_universal(hour,array_datas,data_atual):
             url = f"https://ingressos.orlandofastpass.com.br/ingressos/Orlando/7?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
             driver.get(url)
             time.sleep(3)
-            logging.info(f"Coletando preços para {future_date}")
+            logging.info(f"Coletando preços para {future_date} em Universal FastPass.")
             for button_xpath, preco_parcelado, preco_avista, park_name in xpath_pairs:
                 # Scroll to button and click
                 button = wait.until(EC.presence_of_element_located((By.XPATH, button_xpath)))
@@ -59,7 +60,7 @@ async def coletar_precos_fastPass_universal(hour,array_datas,data_atual):
                     price_number_str_1 = price_text_1.replace("R$", "").replace(",", ".").strip()
                     price_number_str_2 = price_text_2.replace("R$", "").replace(",", ".").strip()
                 # Additional code to process and print the price
-                if "R$" in price_text_1:
+                if "R$" in price_text_1 or "R$" in price_text_2:
                     price_number_str_1 = price_text_1.replace("R$", "").replace(",", ".").strip()
                     price_number_str_2 = price_text_2.replace("R$", "").replace(",", ".").strip()
                     try:
@@ -81,9 +82,9 @@ async def coletar_precos_fastPass_universal(hour,array_datas,data_atual):
                     })
                 
     except TimeoutException as e:
-        logging.error("Erro: Elemento não encontrado ou tempo de espera excedido", e)
+        logging.error("Erro: Elemento não encontrado ou tempo de espera excedido Universal FastPass", e)
     except Exception as e:
-        logging.error("Erro inesperado:", e)
+        logging.error("Erro inesperado Universal FastPass:", e)
     finally:
                 
                 driver.quit()
@@ -91,7 +92,7 @@ async def coletar_precos_fastPass_universal(hour,array_datas,data_atual):
                 
                 nome_arquivo = f'universal_fastPass_{data_atual}.json'
                 salvar_dados(df, nome_arquivo,'orlando/fastPass',hour)
-                logging.info("Coleta de preços fastPass Disney finalizada")
+                logging.info("Coleta de preços Universal FastPass finalizada")
                 atualizar_calibragem(95)
                 return
 

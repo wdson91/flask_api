@@ -6,15 +6,10 @@ from webdriver_setup import get_webdriver
 
 
 async def coletar_precos_disney_aquaticos(hour,array_datas,data_atual):
+    
     driver = get_webdriver()
+    
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
-
-    # Initialize the Selenium driver (make sure to have the corresponding WebDriver installed)
-    # options = webdriver.ChromeOptions()
-    # #driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    # driver = webdriver.Remote(command_executor='http://172.18.0.3:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    # driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
 
     # List to store product data
     all_data_set = []  # Using a set to store unique data
@@ -136,22 +131,16 @@ async def coletar_precos_disney_aquaticos(hour,array_datas,data_atual):
     df['Margem'].fillna('-', inplace=True)
     df['MargemCategoria'].fillna('-', inplace=True)
     df = df.sort_values(by=['Data_viagem', 'Parque'])
-    
+    logging.info("Coleta de preços Voupra Disney Aquáticos finalizada.")
     return df
 
 async def coletar_precos_voupra_disney(hour,array_datas,data_atual):
-    
+    logging.info("Iniciando coleta de preços Voupra Disney.")
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
     driver = get_webdriver()
-    # Initialize the Selenium driver (make sure to have the corresponding WebDriver installed)
     
-    #driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    #driver = Remote(desired_capabilities={"browserName":"chrome"})
-    
-    # List to store product data
     all_data_set = set()  # Using a set to store unique data
 
-   
     # Mapping of park names
     mapeamento_nomes = {
         378149: "1 Dia - Disney Basico Magic Kingdom",
@@ -276,7 +265,9 @@ async def coletar_precos_voupra_disney(hour,array_datas,data_atual):
     json_data = json.dumps(all_data)
     
     df = pd.DataFrame(all_data)
+    logging.info("Coleta de preços Voupra Disney Aquáticos Iniciada.")
     df_disney = await coletar_precos_disney_aquaticos(hour, array_datas, data_atual)    
+    
     
     merged_df = pd.concat([df, df_disney], ignore_index=True)
     

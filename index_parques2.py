@@ -9,18 +9,19 @@ dias_para_processar = [2,3,4,5]
 async def main_parques2(hour,array_datas,data_atual):
 
         global calibragem
-        logging.info("Iniciando coleta de preços Vmz Disney.")
+        logging.info("Iniciando coleta de preços Tio Orlando Universal.")
         try:
             await coleta_tio_universal(hour,array_datas,data_atual)
             
         except Exception as e:
-            logging.error(f"Erro durante a coleta de preços do SeaWorld: {e}")
+            logging.error(f"Erro durante a coleta de preços do Tio Orlando Universal: {e}")
             
+        logging.info("Iniciando coleta de preços Tio Orlando Seaworld.")
         try:
             await coleta_tio_sea(hour,array_datas,data_atual)
             
         except Exception as e:
-            logging.error(f"Erro durante a coleta de preços da Universal: {e}")
+            logging.error(f"Erro durante a coleta de preços do Tio Orlando Seaworld: {e}")
         
         return
 
