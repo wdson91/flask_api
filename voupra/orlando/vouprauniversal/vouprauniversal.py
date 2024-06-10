@@ -19,6 +19,7 @@ async def coletar_precos_voupra_universal(hour,array_datas,data_atual):
         369879: "1 Dia 1 Parque - Universal Orlando",
         369881: "1 Dia 2 Parques - Universal Orlando",
         361016: "2 Dias 2 Parques - Universal Orlando",
+        379814: "5 Dias 2 Parques - Universal Orlando",
         352939: "4 Dias 2 Parques - Universal Orlando",
         361018: "14 Dias 3 Parques - Universal Orlando"
     }
