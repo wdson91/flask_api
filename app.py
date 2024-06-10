@@ -726,6 +726,30 @@ async def ml():
     return jsonify({"message": "Dados salvos com sucesso!"})
 
 
+async def run_funcs():
+    global data_atual
+    global hora_global
+    
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    array_datas = [5,10, 20, 47, 65, 126]
+    
+    await asyncio.gather(
+        main_parques(hora_global,array_datas,data_atual),
+        main_vmz(hora_global,array_datas,data_atual),
+        main_parques3(hora_global,array_datas,data_atual),
+        main_parques2(hora_global,array_datas,data_atual)
+    )
+    # asyncio.create_task(main_parques(hora_global,array_datas,data_atual))
+    # asyncio.create_task(main_vmz(hora_global,array_datas,data_atual))
+    # asyncio.create_task(main_parques3(hora_global, array_datas,data_atual))
+    # asyncio.create_task(main_parques2(hora_global, array_datas,data_atual))
+
+@app.route('/teste')
+def teste():
+    
+    asyncio.run(run_funcs())
+    return jsonify({'message': 'Async functions triggered'})
 
 
 
