@@ -377,11 +377,17 @@ async def outros_parques():
     if not parque:
         return jsonify({"error": "O parque deve ser especificado."}), 400
 
+    
     if parque == 'halloween':
         empresas = ['voupra', 'decolar', 'ml', 'vmz']
         parques = ['halloween']
         pasta = 'halloween'
         
+    elif parque == 'orlando':
+            empresas = ['voupra', 'vmz', 'decolar','ml','tio','fastPass']
+            parques = ['disney', 'universal', 'seaworld']
+            pasta = 'orlando'
+              
     elif parque == 'dados':
         
         empresas = ['voupra', 'vmz', 'decolar','ml']
@@ -675,7 +681,9 @@ async def fastPass():
 async def voupra():
     global data_atual
     global hora_global
+    global calibrating
     
+    calibrating = True
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
