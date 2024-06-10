@@ -1,4 +1,5 @@
 from imports import *
+from index_parques import juntar
 
 
 from .vmzdisney.vmz_disney import coletar_precos_vmz, coletar_precos_vmz_disneybasicos, coletar_precos_vmz_disneydias
@@ -38,6 +39,7 @@ async def main_vmz(hour,array_datas,data_atual):
             
         # except Exception as e:
         #     logging.error(f"Erro durante a coleta de preços da Universal: {e}")
+        await juntar(data_atual)  
         return
 
 if __name__ == "__main__":
