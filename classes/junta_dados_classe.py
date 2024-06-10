@@ -35,6 +35,8 @@ class JuntarJsons:
         self.salvar_dataframe_json(nome_arquivo, nova_hora_formatada)
         
         finalizar_calibragem()
+        
+        #
         apagar_arquivos_json_na_pasta_atual()
 
         return

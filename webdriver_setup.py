@@ -8,7 +8,7 @@ def get_webdriver():
     driver = webdriver.Remote(
         command_executor='http://localhost:4444/wd/hub',
         options=options,
-        desired_capabilities=capabilities
+        
     )
     driver.maximize_window()
     return driver

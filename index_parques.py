@@ -15,6 +15,11 @@ async def main_parques(hour,array_datas,data_atual):
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")
+        try:
+            await coletar_precos_vmz_universal(hour,array_datas,data_atual)
+            
+        except Exception as e:
+            logging.error(f"Erro durante a coleta de preços da Universal: {e}")
         
         try:
             # Execute as funções assíncronas em sequência
@@ -40,15 +45,6 @@ async def main_parques(hour,array_datas,data_atual):
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços do SeaWorld: {e}")
             
-        try:
-            await coletar_precos_vmz_universal(hour,array_datas,data_atual)
-            
-        except Exception as e:
-            logging.error(f"Erro durante a coleta de preços da Universal: {e}")
-
-        
-        
-        
         return
 
 async def main_parques2(hour,array_datas,data_atual):
