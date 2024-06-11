@@ -21,8 +21,8 @@ async def coletar_precos_voupra_fura_fila(hour, array_datas,data_atual):
     base_url = "https://shopapp-montagem.azurewebsites.net/estados-unidos/orlando/universal-express---fura-fila?Id=57594&DataIngresso="
 
     xpath_pairs = [
-                ('/html/body/div[4]/div/div[1]/div[2]/div[8]/div/div/div[3]/div[1]/div[1]','/html/body/div[4]/div/div[1]/div[2]/div[8]/div/div/div[3]/div[1]/div[5]','Ingresso 1 Dia Universal Express Pass'),
-                ('/html/body/div[4]/div/div[1]/div[2]/div[13]/div/div/div[3]/div[1]/div[1]','/html/body/div[4]/div/div[1]/div[2]/div[13]/div/div/div[3]/div[1]/div[5]','Ingresso 1 Dia Universal Express Unlimited')]
+                ('/html/body/div[4]/div/div[1]/div[2]/div[9]/div/div/div[3]/div[1]/div[1]','/html/body/div[4]/div/div[1]/div[2]/div[9]/div/div/div[3]/div[1]/div[5]','Ingresso 1 Dia Universal Express Pass'),
+                ('/html/body/div[4]/div/div[1]/div[2]/div[14]/div/div/div[3]/div[1]/div[1]','/html/body/div[4]/div/div[1]/div[2]/div[14]/div/div/div[3]/div[1]/div[5]','Ingresso 1 Dia Universal Express Unlimited')]
     dados = []  # Inicializa os dados dentro do loop
     
     # Iniciar o loop pelas datas
