@@ -9,7 +9,7 @@ def get_future_date(days):
 
 # List of days to add to the current date
 
-async def coletar_precos_fastPass_universal(hour,array_datas,data_atual):
+async def coletar_precos_fastPass_universal(hora_global,array_datas,data_atual):
     driver = get_webdriver()
     dados = []
     wait = WebDriverWait(driver, 5)
@@ -91,7 +91,7 @@ async def coletar_precos_fastPass_universal(hour,array_datas,data_atual):
                 df = pd.DataFrame(dados)
                 
                 nome_arquivo = f'universal_fastPass_{data_atual}.json'
-                salvar_dados(df, nome_arquivo,'orlando/fastPass',hour)
+                salvar_dados(df, nome_arquivo,'orlando/fastPass',hora_global)
                 logging.info("Coleta de preços Universal FastPass finalizada")
                 atualizar_calibragem(95)
                 return

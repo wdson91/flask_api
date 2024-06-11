@@ -1,4 +1,5 @@
 from imports import *
+from webdriver_setup import get_webdriver
 
 async def euro_price(driver):
     driver.get('https://www.google.com/search?client=firefox-b-d&q=euro')
@@ -9,12 +10,12 @@ async def euro_price(driver):
     preco_euro = preco_euro.text.replace(',', '.')
     return float(preco_euro)
 
-async def coletar_precos_gyg_paris(hour, array_datas,data_atual):
+async def coletar_precos_gyg_paris(hora_global, array_datas,data_atual):
     
     array_datas = [5,10,20,47,65,126]
     
-    df1 = await coletar_precos_gyg_paris_1(hour, array_datas,data_atual)
-    df2 = await coletar_precos_gyg_paris_2(hour, array_datas,data_atual)
+    df1 = await coletar_precos_gyg_paris_1(hora_global, array_datas,data_atual)
+    df2 = await coletar_precos_gyg_paris_2(hora_global, array_datas,data_atual)
     
     df = pd.DataFrame(df1 + df2)
     
@@ -26,15 +27,13 @@ async def coletar_precos_gyg_paris(hour, array_datas,data_atual):
     nome_arquivo = f'paris_gyg_{data_atual}.json'
     # Fechar o navegador
 
-    salvar_dados(df, nome_arquivo, 'paris/gyg', hour)
+    salvar_dados(df, nome_arquivo, 'paris/gyg', hora_global)
 
-async def coletar_precos_gyg_paris_1(hour, array_datas,data_atual):
+async def coletar_precos_gyg_paris_1(hora_global, array_datas,data_atual):
     # Configurações do WebDriver Selenium
     options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    # WebDriver remoto
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = get_webdriver()
+
     dados = []
     wait = WebDriverWait(driver, 5)
     # Lista de datas a serem verificadas
@@ -90,13 +89,11 @@ async def coletar_precos_gyg_paris_1(hour, array_datas,data_atual):
         driver.quit()
         return dados
 
-async def coletar_precos_gyg_paris_2(hour, array_datas,data_atual):
+async def coletar_precos_gyg_paris_2(hora_global, array_datas,data_atual):
     # Configurações do WebDriver Selenium
     options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    # WebDriver remoto
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = get_webdriver()
+
     dados = []
     wait = WebDriverWait(driver, 5)
     # Lista de datas a serem verificadas

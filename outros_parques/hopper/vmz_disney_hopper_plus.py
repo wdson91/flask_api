@@ -1,9 +1,10 @@
 from imports import *
 from salvardados import *
 from helpers.atualizar_calibragem import atualizar_calibragem
+from webdriver_setup import get_webdriver
 
 pasta='hopper/vmz'
-async def coletar_precos_vmz_hopper_plus(hour,array_datas,data_atual):
+async def coletar_precos_vmz_hopper_plus(hora_global,array_datas,data_atual):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     # Defina sua lógica para baixar os arquivos e esperar por eles
     baixar_blob_se_existir('disney_vmz_basicos_hopperplus_parcial.json', pasta)
@@ -26,7 +27,7 @@ async def coletar_precos_vmz_hopper_plus(hour,array_datas,data_atual):
     
     nome_arquivo = f'hopperplus_vmz_{data_atual}.json'
     
-    salvar_dados(df_sorted, nome_arquivo,pasta, hour)
+    salvar_dados(df_sorted, nome_arquivo,pasta, hora_global)
     
     
     logging.info("Coleta finalizada.")
@@ -34,12 +35,9 @@ async def coletar_precos_vmz_hopper_plus(hour,array_datas,data_atual):
     return 
 
 
-async def coletar_precos_vmz_hopperplus_basicos(hour,array_datas,data_atual):
+async def coletar_precos_vmz_hopperplus_basicos(hora_global,array_datas,data_atual):
     
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = get_webdriver()
     
     
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -97,19 +95,16 @@ async def coletar_precos_vmz_hopperplus_basicos(hour,array_datas,data_atual):
     
     # Criando um DataFrame
     df = pd.DataFrame(dados)
-    salvar_dados(df, 'disney_vmz_basicos_hopperplus_parcial.json',pasta,hour)
+    salvar_dados(df, 'disney_vmz_basicos_hopperplus_parcial.json',pasta,hora_global)
     driver.quit()
     
     #atualizar_calibragem(40)
     return
 
-async def coletar_precos_vmz_disneydias_hopperplus(hour,array_datas,data_atual):
+async def coletar_precos_vmz_disneydias_hopperplus(hora_global,array_datas,data_atual):
     waiter = 2
     
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = get_webdriver()
     
     def fechar_popups(driver):
         try:
@@ -227,7 +222,7 @@ async def coletar_precos_vmz_disneydias_hopperplus(hour,array_datas,data_atual):
     
     
     df = pd.DataFrame(resultados)
-    salvar_dados(df, 'disney_vmz_dias_hopperplus_parcial.json',pasta,hour)
+    salvar_dados(df, 'disney_vmz_dias_hopperplus_parcial.json',pasta,hora_global)
     driver.quit()
     #atualizar_calibragem(60)
     return

@@ -4,7 +4,7 @@ from helpers.atualizar_calibragem import atualizar_calibragem
 
 from webdriver_setup import get_webdriver
 
-async def coletar_precos_vmz(hour,array_datas,data_atual) -> None:
+async def coletar_precos_vmz(hora_global,array_datas,data_atual) -> None:
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     # Defina sua lógica para baixar os arquivos e esperar por eles
     baixar_blob_se_existir('disney_vmz_basicos_parcial.json', 'orlando/vmz')
@@ -27,7 +27,7 @@ async def coletar_precos_vmz(hour,array_datas,data_atual) -> None:
     
     nome_arquivo = f'disney_vmz_{data_atual}.json'
     
-    salvar_dados(df_sorted, nome_arquivo, 'orlando/vmz', hour)
+    salvar_dados(df_sorted, nome_arquivo, 'orlando/vmz', hora_global)
     
     
     logging.info("Coleta finalizada. Vmz Disney.")
@@ -35,7 +35,7 @@ async def coletar_precos_vmz(hour,array_datas,data_atual) -> None:
     return 
 
 
-async def coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual):
+async def coletar_precos_vmz_disneybasicos(array_datas,hora_global,data_atual):
     logging.info("Iniciando coleta de preços Vmz Disney Basicos.")
     driver = get_webdriver()
     
@@ -91,13 +91,13 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual):
     driver.quit()
     # Criando um DataFrame
     df = pd.DataFrame(dados)
-    salvar_dados(df, 'disney_vmz_basicos_parcial.json','orlando/vmz',hour)
+    salvar_dados(df, 'disney_vmz_basicos_parcial.json','orlando/vmz',hora_global)
     
     
     atualizar_calibragem(40)
     return
 
-async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,data_atual):
+async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_global,data_atual):
     waiter = 2
     logging.info("Iniciando coleta de preços Vmz Disney Dias.")
     driver = get_webdriver()
@@ -236,10 +236,10 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hour,dat
     
     
     df = pd.DataFrame(resultados)
-    salvar_dados(df,'disney_vmz_dias_parcial.json','orlando/vmz',hour)
+    salvar_dados(df,'disney_vmz_dias_parcial.json','orlando/vmz',hora_global)
     driver.quit()
     logging.info("Coleta de preços finalizada Vmz Disney Dias.")
-    await coletar_precos_vmz(hour,array_datas,data_atual)
+    await coletar_precos_vmz(hora_global,array_datas,data_atual)
     atualizar_calibragem(60)
     return
 

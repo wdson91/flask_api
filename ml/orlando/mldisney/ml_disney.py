@@ -6,7 +6,7 @@ from webdriver_setup import get_webdriver
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
-async def coletar_precos_ml_disney(hour,array_datas,data_atual):
+async def coletar_precos_ml_disney(hora_global,array_datas,data_atual):
     
     logging.info("Iniciando a coleta de preços ML Disney")
     driver = get_webdriver()
@@ -103,7 +103,7 @@ async def coletar_precos_ml_disney(hour,array_datas,data_atual):
                 df = pd.DataFrame(dados)
                 
                 nome_arquivo = f'disney_ml_{data_atual}.json'
-                salvar_dados(df, nome_arquivo,'orlando/ml',hour)
+                salvar_dados(df, nome_arquivo,'orlando/ml',hora_global)
                 
                 logging.info("Coleta de preços ML Disney finalizada")
                 atualizar_calibragem(80)

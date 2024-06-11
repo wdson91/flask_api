@@ -10,15 +10,9 @@ from webdriver_setup import get_webdriver
 async def coletar_precos_vmz_lego(hour,array_datas,data_atual):
     logging.info("Iniciando coleta de preços do Vmz lego.")
     
-    # Configuração inicial do Selenium
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(
-        command_executor='http://172.20.0.7:4444/wd/hub',
-        options=options
-    )
+    driver = get_webdriver()
     driver.maximize_window()
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+   
     # Lista de sites e nomes de parques
     sites = [
         ("https://www.vmzviagens.com.br/ingressos/orlando/legoland-florida/legoland-florida?data=", '1 Dia - Legoland Florida'),

@@ -7,24 +7,24 @@ from classes.junta_dados_classe import JuntarJsons
 from fastpass.orlando.fastdisney.fast_disney import coletar_precos_fastPass_disney
 from fastpass.orlando.fastuniversal.fast_universal import coletar_precos_fastPass_universal
 
-async def main_fastPass(hour,array_datas,data_atual,):
+async def main_fastPass(hora_global,array_datas,data_atual,):
         
         logging.info("Iniciando coleta de preços FastPass.")
         try:
             # Execute as funções assíncronas em sequência
-            await coletar_precos_fastPass_disney(hour,array_datas,data_atual)
+            await coletar_precos_fastPass_disney(hora_global,array_datas,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")
 
         try:
-            await coletar_precos_fastPass_seaworld(hour,array_datas,data_atual)
+            await coletar_precos_fastPass_seaworld(hora_global,array_datas,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços do SeaWorld: {e}")
 
         try:
-            await coletar_precos_fastPass_universal(hour,array_datas,data_atual)
+            await coletar_precos_fastPass_universal(hora_global,array_datas,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Universal: {e}")

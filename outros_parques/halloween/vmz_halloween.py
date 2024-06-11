@@ -1,19 +1,17 @@
 from imports import *
 from salvardados import *
 from helpers.atualizar_calibragem import atualizar_calibragem
+from webdriver_setup import get_webdriver
 
 
 
 
 
-async def coletar_precos_vmz_halloween(hour,array_datas,data_atual):
+async def coletar_precos_vmz_halloween(hora_global,array_datas,data_atual):
     logging.info("Iniciando coleta de preços do Vmz halloween.")
     
     # Configuração inicial do Selenium
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = get_webdriver()
     # Lista de sites e nomes de parques
     sites = [
         ("https://www.vmzviagens.com.br/ingressos/orlando/universal-halloween-horror-nights/universal-halloween-horror-nights?data=", 'Universal Halloween Horror Nights'),
@@ -61,7 +59,7 @@ async def coletar_precos_vmz_halloween(hour,array_datas,data_atual):
         df = pd.DataFrame(dados)
             
         nome_arquivo = f'halloween_vmz_{data_atual}.json'
-        salvar_dados(df, nome_arquivo,'halloween/vmz',hour)
+        salvar_dados(df, nome_arquivo,'halloween/vmz',hora_global)
             
         logging.info("Coleta finalizada Site Vmz - halloween")
         

@@ -6,59 +6,57 @@ from classes.junta_dados_classe import JuntarJsons
 #from .vmzdisney.teste import coletar_precos_vmz
 
 dias_para_processar = [2,3,4,5]
-async def main_parques(hour,array_datas,data_atual):
 
-        global calibragem
-        
+async def bloco01(hora_global,array_datas,data_atual):
+
         try:
-            await coletar_precos_vmz_disneybasicos(array_datas,hour,data_atual)
+            await coletar_precos_vmz_disneybasicos(array_datas,hora_global,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")
         try:
-            await coletar_precos_vmz_universal(hour,array_datas,data_atual)
+            await coletar_precos_vmz_universal(hora_global,array_datas,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Universal: {e}")
         
         try:
             # Execute as funções assíncronas em sequência
-            await coletar_precos_voupra_disney(hour, array_datas,data_atual)
+            await coletar_precos_voupra_disney(hora_global, array_datas,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços Disney: {e}")
             
         try:
-            await coletar_precos_voupra_sea(hour, array_datas,data_atual)
+            await coletar_precos_voupra_sea(hora_global, array_datas,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços SeaWorld: {e}")
         
         try:
-            await coletar_precos_voupra_universal(hour, array_datas,data_atual)
+            await coletar_precos_voupra_universal(hora_global, array_datas,data_atual)
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços Universal: {e}")
             
         try:
-            await coletar_precos_vmz_seaworld(hour,array_datas,data_atual)
+            await coletar_precos_vmz_seaworld(hora_global,array_datas,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços do SeaWorld: {e}")
             
         return
 
-async def main_parques2(hour,array_datas,data_atual):
+async def bloco02(hora_global,array_datas,data_atual):
 
-        global calibragem
         try:
-            await coleta_tio_universal(hour,array_datas,data_atual)
+            await coleta_tio_universal(hora_global,array_datas,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços do Tio Orlando Universal: {e}")
             
 
         try:
-            await coleta_tio_sea(hour,array_datas,data_atual)
+            await coleta_tio_sea(hora_global,array_datas,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços do Tio Orlando Seaworld: {e}")
@@ -66,28 +64,25 @@ async def main_parques2(hour,array_datas,data_atual):
         
         return
 
-async def main_parques3(hour,array_datas,data_atual):
+async def bloco03(hora_global,array_datas,data_atual):
 
-        global calibragem
-        
-        
         try:
             # Execute as funções assíncronas em sequência
-            await coletar_precos_ml_disney(hour,array_datas,data_atual)
+            await coletar_precos_ml_disney(hora_global,array_datas,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")
 
         
         try:
-            await coletar_precos_ml_seaworld(hour,array_datas,data_atual)
+            await coletar_precos_ml_seaworld(hora_global,array_datas,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços do SeaWorld: {e}")
 
         
         try:
-            await coletar_precos_ml_universal(hour,array_datas,data_atual)
+            await coletar_precos_ml_universal(hora_global,array_datas,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Universal: {e}")
@@ -95,7 +90,6 @@ async def main_parques3(hour,array_datas,data_atual):
         
         
         return
-
 
 
 async def juntar(data_atual):
@@ -106,11 +100,10 @@ async def juntar(data_atual):
             juntar_json = JuntarJsons(data_atual, empresas, parques, 'orlando')
             
             await juntar_json.executar()
+            return
         except Exception as e:
                 logging.error(f"Erro durante a junção dos arquivos: {e}")
                 
-                
-                
 if __name__ == "__main__":
     # Crie um loop de eventos e execute a função principal
-    asyncio.run(main_parques())
+    asyncio.run(bloco01())

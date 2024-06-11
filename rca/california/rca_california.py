@@ -4,7 +4,7 @@ from salvardados import salvar_dados
 
 porcentagem_parcelado = 1.1417 # 14,17% de acréscimo
 porcentagem_avista = 0.97 # 3% de desconto
-async def coletar_precos_california_rca(hour, array_datas,data_atual):
+async def coletar_precos_california_rca(hora_global, array_datas,data_atual):
     
     array_datas = [5,10,20,47,65,126]
 
@@ -23,7 +23,7 @@ async def coletar_precos_california_rca(hour, array_datas,data_atual):
     nome_arquivo = f'california_rca_{data_atual}.json'
     df.to_json('california_rca2.json', orient='records', lines=True)
     
-    salvar_dados(df, nome_arquivo,'california/rca',hour)
+    salvar_dados(df, nome_arquivo,'california/rca',hora_global)
 
 
 

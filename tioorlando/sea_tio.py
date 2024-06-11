@@ -2,7 +2,7 @@ from imports import *
 from webdriver_setup import get_webdriver
 
 
-async def coleta_tio_sea(hora,array_datas,data_atual):# Inicializar o driver do Selenium
+async def coleta_tio_sea(hora_global,array_datas,data_atual):# Inicializar o driver do Selenium
     logging.info("Iniciando coleta de preços Tio Orlando Seaworld.")
     driver = get_webdriver()
     # Lista de datas para a coleta de dados
@@ -151,7 +151,7 @@ async def coleta_tio_sea(hora,array_datas,data_atual):# Inicializar o driver do 
     
     nome_arquivo = f'seaworld_tio_{data_atual}.json'
     
-    salvar_dados(df, nome_arquivo, 'orlando/tio', hora)
+    salvar_dados(df, nome_arquivo, 'orlando/tio', hora_global)
     logging.info("Coleta finalizada Site Tio Orlando - SeaWorld.")
     return
     

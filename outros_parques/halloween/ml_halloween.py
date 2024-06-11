@@ -1,16 +1,14 @@
 from imports import *
+from webdriver_setup import get_webdriver
 
 # Function to calculate future dates
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
-async def coletar_precos_ml_halloween(hour, array_datas,data_atual):
+async def coletar_precos_ml_halloween(hora_global, array_datas,data_atual):
     # Configurações do WebDriver Selenium
     options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    # WebDriver remoto
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = get_webdriver()
     dados = []
     wait = WebDriverWait(driver, 10)
     logging.info("Iniciando a coleta de preços ML halloween")
@@ -91,7 +89,7 @@ async def coletar_precos_ml_halloween(hour, array_datas,data_atual):
     df = pd.DataFrame(dados)
     nome_arquivo = f'halloween_ml_{data_atual}.json'
             
-    salvar_dados(df, nome_arquivo, 'halloween/ml', hour)
+    salvar_dados(df, nome_arquivo, 'halloween/ml', hora_global)
     logging.info("Coleta de preços ML halloween concluída")
     #atualizar_calibragem(85)
     return

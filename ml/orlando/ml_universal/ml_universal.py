@@ -8,7 +8,7 @@ def get_future_date(days):
 
 # List of days to add to the current date
 
-async def coletar_precos_ml_universal(hour,array_datas,data_atual):
+async def coletar_precos_ml_universal(hora_global,array_datas,data_atual):
     driver = get_webdriver()
     logging.info("Iniciando a coleta de preços ML Universal")
     dados = []
@@ -91,7 +91,7 @@ async def coletar_precos_ml_universal(hour,array_datas,data_atual):
                 df = pd.DataFrame(dados)
                 
                 nome_arquivo = f'universal_ml_{data_atual}.json'
-                salvar_dados(df, nome_arquivo,'orlando/ml',hour)
+                salvar_dados(df, nome_arquivo,'orlando/ml',hora_global)
                 logging.info("Coleta de preços ML Disney finalizada")
                 #atualizar_calibragem(95)
                 return

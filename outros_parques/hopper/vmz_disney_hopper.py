@@ -1,8 +1,9 @@
 from imports import *
+from webdriver_setup import get_webdriver
 
 pasta = 'hopper/vmz'
 
-async def coletar_precos_vmz_hopper(hour,array_datas,data_atual):
+async def coletar_precos_vmz_hopper(hora_global,array_datas,data_atual):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     
     # Defina sua lógica para baixar os arquivos e esperar por eles
@@ -24,21 +25,17 @@ async def coletar_precos_vmz_hopper(hour,array_datas,data_atual):
 
     nome_arquivo = f'hopper_vmz_{data_atual}.json'
     
-    salvar_dados(df_sorted, nome_arquivo, pasta, hour)
+    salvar_dados(df_sorted, nome_arquivo, pasta, hora_global)
     
     logging.info("Coleta finalizada.")
     #atualizar_calibragem(65)
     return 
 
 
-async def coletar_precos_vmz_hopper_basicos(hour,array_datas,data_atual):
+async def coletar_precos_vmz_hopper_basicos(hora_global,array_datas,data_atual):
     
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
-    
-    
+    driver = get_webdriver()
+
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     # Definindo as datas
@@ -85,17 +82,17 @@ async def coletar_precos_vmz_hopper_basicos(hour,array_datas,data_atual):
     
     # Criando um DataFrame
     df = pd.DataFrame(dados)
-    salvar_dados(df, 'disney_vmz_hopper_basicos_parcial.json',pasta,hour)
+    salvar_dados(df, 'disney_vmz_hopper_basicos_parcial.json',pasta,hora_global)
     driver.quit()
     
     
     return
 
-async def coletar_precos_vmz_hopper_disneydias( hour,array_datas, data_atual):
+async def coletar_precos_vmz_hopper_disneydias( hora_global,array_datas, data_atual):
     waiter = 2
     dias_para_processar = [2,3,4,5,6,7,8,9,10]
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver = get_webdriver()
+
     wait = WebDriverWait(driver, 60)
    
     nome_pacotes = {
@@ -224,7 +221,7 @@ async def coletar_precos_vmz_hopper_disneydias( hour,array_datas, data_atual):
 
     df = pd.DataFrame(resultados)
     
-    salvar_dados(df,'disney_vmz_hopper_dias_parcial.json',pasta,hour)
+    salvar_dados(df,'disney_vmz_hopper_dias_parcial.json',pasta,hora_global)
     driver.quit()
 
     return 
@@ -233,8 +230,8 @@ if __name__ == "__main__":
     
     dias_para_processar = [2,3,4,5,6,7,8,9,10]
     array_datas = [5,10,20,47,65,126]
-    hour = datetime.now().hour
+    hora_global = datetime.now().hora_global
     data_atual = datetime.now().strftime('%Y-%m-%d')
     
     
-    df_final = asyncio.run(coletar_precos_vmz_hopper_disneydias(dias_para_processar,array_datas,hour,data_atual))
+    df_final = asyncio.run(coletar_precos_vmz_hopper_disneydias(dias_para_processar,array_datas,hora_global,data_atual))

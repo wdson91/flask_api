@@ -1,8 +1,9 @@
 from imports import *
 from salvardados import *
 from helpers.atualizar_calibragem import atualizar_calibragem
+from webdriver_setup import get_webdriver
 
-async def coletar_precos_vmz_california(hour, array_datas,data_atual):
+async def coletar_precos_vmz_california(hora_global, array_datas,data_atual):
     logging.info("Iniciando coleta de preços de VMZ California.")
     
     # Configuração dos sites e URLs
@@ -16,11 +17,7 @@ async def coletar_precos_vmz_california(hour, array_datas,data_atual):
     url_14_dias = "https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/14-dias-flexiveis-uso-em-2024?"
     
     # Configurações do WebDriver
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
-    
+    driver = get_webdriver()
     try:
         datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
         dados = []
@@ -53,7 +50,7 @@ async def coletar_precos_vmz_california(hour, array_datas,data_atual):
         # Criação do DataFrame e salvamento dos dados
         df = pd.DataFrame(dados)
         nome_arquivo = f'california_vmz_{data_atual}.json'
-        salvar_dados(df, nome_arquivo, 'california/vmz', hour)
+        salvar_dados(df, nome_arquivo, 'california/vmz', hora_global)
         #atualizar_calibragem(75)
         logging.info("Coleta finalizada Site Vmz- California.")
 

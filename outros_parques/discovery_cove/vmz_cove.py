@@ -1,6 +1,7 @@
 from imports import *
 from salvardados import *
 from helpers.atualizar_calibragem import atualizar_calibragem
+from webdriver_setup import get_webdriver
 
 
 
@@ -9,11 +10,7 @@ from helpers.atualizar_calibragem import atualizar_calibragem
 async def coletar_precos_vmz_cove(hour,array_datas,data_atual):
     logging.info("Iniciando coleta de preços do Discovery Cove Vmz.")
     
-    # Configuração inicial do Selenium
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = get_webdriver()
     # Lista de sites e nomes de parques
     sites = [
         ("https://www.vmzviagens.com.br/ingressos/orlando/discovery-cove-orlando/1-dia-de-discovery-cove-sem-nado?data=", '1 Dia Discovery Cove'),

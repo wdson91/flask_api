@@ -11,29 +11,29 @@ from voupra.california.voupracalifornia import coletar_precos_voupra_california
 
 array_datas =  [5,10,20,47,65,126]
 
-async def executar_california(hour, array_datas, data_atual):
+async def executar_california(hora_global, array_datas, data_atual):
     try:
-        await coletar_precos_voupra_california(hour, array_datas, data_atual)  # Executa a função main_voupra com o argumento hour
+        await coletar_precos_voupra_california(hora_global, array_datas, data_atual)  # Executa a função main_voupra com o argumento hora_global
         logging.info("voupra_california concluída.")  # Registra uma mensagem de log
     except Exception as e:
         logging.error(f"Erro ao executar voupra_california: {e}")  # Registra uma mensagem de log de erro
     try:
-        await coletar_precos_vmz_california(hour, array_datas, data_atual)  # Executa a função main_ml_seaworld com o argumento hour
+        await coletar_precos_vmz_california(hora_global, array_datas, data_atual)  # Executa a função main_ml_seaworld com o argumento hora_global
         logging.info("ml_california concluída.")  # Registra uma mensagem de log
     except Exception as e:
         logging.error(f"Erro ao executar ml_california: {e}")
     try:
-        await coletar_precos_ml_california(hour, array_datas, data_atual)  # Executa a função main_ml_seaworld com o argumento hour
+        await coletar_precos_ml_california(hora_global, array_datas, data_atual)  # Executa a função main_ml_seaworld com o argumento hora_global
         logging.info("ml_california concluída.")  # Registra uma mensagem de log
     except Exception as e:
         logging.error(f"Erro ao executar ml_california: {e}")
     try:
-        await coletar_precos_california_rca(hour, array_datas,data_atual)
+        await coletar_precos_california_rca(hora_global, array_datas,data_atual)
         logging.info("rca_california concluída.")
     except Exception as e:
         logging.error(f"Erro ao executar rca_california: {e}")
     # try:
-    #     await juntarjsons_california(hour, data_atual)  # Executa a função main_vmz com o argumento hour
+    #     await juntarjsons_california(hora_global, data_atual)  # Executa a função main_vmz com o argumento hora_global
     #     logging.info("juntarjsons_california concluída.")  # Registra uma mensagem de log
     # except Exception as e:
     #     logging.error(f"Erro ao executar juntarjsons_california: {e}")

@@ -2,7 +2,7 @@ from imports import *
 from webdriver_setup import get_webdriver
 
 
-async def coleta_tio_orlando(hora,array_datas,data_atual):# Inicializar o driver do Selenium
+async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o driver do Selenium
     driver = get_webdriver()
     # Lista de datas para a coleta de dados
     array_datas = [10, 20, 47, 65, 126]
@@ -195,7 +195,7 @@ async def coleta_tio_orlando(hora,array_datas,data_atual):# Inicializar o driver
     
     nome_arquivo = f'disney_tio_{data_atual}.json'
     
-    salvar_dados(df, nome_arquivo, 'orlando/tio', hora)
+    salvar_dados(df, nome_arquivo, 'orlando/tio', hora_global)
     logging.info('Coleta Finalizada Disney Tio Orlando')
     return 
     

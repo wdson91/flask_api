@@ -8,7 +8,7 @@ from webdriver_setup import get_webdriver
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
-async def coletar_precos_ml_seaworld(hour, array_datas,data_atual):
+async def coletar_precos_ml_seaworld(hora_global, array_datas,data_atual):
     driver = get_webdriver()
     dados = []
     wait = WebDriverWait(driver, 5)
@@ -165,7 +165,7 @@ async def coletar_precos_ml_seaworld(hour, array_datas,data_atual):
         driver.quit()
         df = pd.DataFrame(dados)
         nome_arquivo = f'seaworld_ml_{data_atual}.json'
-        salvar_dados(df, nome_arquivo, 'orlando/ml', hour)
+        salvar_dados(df, nome_arquivo, 'orlando/ml', hora_global)
         logging.info("Coleta de preços ML SeaWorld concluída")
         atualizar_calibragem(85)
         return

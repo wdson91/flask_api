@@ -7,7 +7,7 @@ from webdriver_setup import get_webdriver
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
-async def coletar_precos_fastPass_disney(hour,array_datas,data_atual):
+async def coletar_precos_fastPass_disney(hora_globalr,array_datas,data_atual):
     logging.info("Iniciando a coleta de preços fastPass Disney")
     driver = get_webdriver()
     
@@ -104,7 +104,7 @@ async def coletar_precos_fastPass_disney(hour,array_datas,data_atual):
                 df = pd.DataFrame(dados)
                 
                 nome_arquivo = f'disney_fastPass_{data_atual}.json'
-                salvar_dados(df, nome_arquivo,'orlando/fastPass',hour)
+                salvar_dados(df, nome_arquivo,'orlando/fastPass',hora_globalr)
                 
                 logging.info("Coleta de preços fastPass Disney finalizada")
                 atualizar_calibragem(80)

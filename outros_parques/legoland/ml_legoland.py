@@ -1,4 +1,5 @@
 from imports import *
+from webdriver_setup import get_webdriver
 
 
 
@@ -9,11 +10,8 @@ def get_future_date(days):
 
 async def coletar_precos_ml_lego(hour, array_datas,data_atual):
     # Configurações do WebDriver Selenium
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    # WebDriver remoto
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = get_webdriver()
+    
     dados = []
     wait = WebDriverWait(driver, 5)
     logging.info("Iniciando a coleta de preços ML lego")

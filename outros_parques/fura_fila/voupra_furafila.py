@@ -1,4 +1,5 @@
 from imports import *
+from webdriver_setup import get_webdriver
 
 
 def get_future_date(days):
@@ -7,8 +8,7 @@ def get_future_date(days):
 
 async def coletar_precos_voupra_fura_fila(hour, array_datas,data_atual):
     # Configuração do Selenium
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver = get_webdriver()
     wait = WebDriverWait(driver, 4)
 
     # Configuração de logs

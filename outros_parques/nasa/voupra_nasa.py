@@ -4,15 +4,13 @@ from imports import *
 
 
 from helpers.atualizar_calibragem import atualizar_calibragem
+from webdriver_setup import get_webdriver
 
 
 async def coletar_precos_voupra_nasa(hour,array_datas,data_atual):
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    options = webdriver.ChromeOptions()
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = get_webdriver()
     # Lista para armazenar os dados dos produtos
     all_data_set = set()  # Usando um conjunto para armazenar dados únicos
 

@@ -3,7 +3,7 @@ from salvardados import *
 from helpers.atualizar_calibragem import atualizar_calibragem
 from webdriver_setup import get_webdriver
 
-async def coletar_precos_vmz_universal(hour, array_datas,data_atual):
+async def coletar_precos_vmz_universal(hora_global, array_datas,data_atual):
     logging.info("Iniciando coleta de preços Vmz Universal.")
     # Configuração dos sites e URLs
     sites = [
@@ -53,7 +53,7 @@ async def coletar_precos_vmz_universal(hour, array_datas,data_atual):
         df = pd.DataFrame(dados)
         nome_arquivo = f'universal_vmz_{data_atual}.json'
         #df.to_json(nome_arquivo)
-        salvar_dados(df, nome_arquivo, 'orlando/vmz', hour)
+        salvar_dados(df, nome_arquivo, 'orlando/vmz', hora_global)
         atualizar_calibragem(75)
         logging.info("Coleta finalizada Site Vmz- Universal Orlando.")
 

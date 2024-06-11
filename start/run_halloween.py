@@ -16,19 +16,19 @@ from outros_parques.halloween_disnery.voupra_halloween_disney import coletar_pre
 
 array_datas =  [5,10,20,47,65,126]
 
-async def executar_halloween(hour, array_datas, data_atual):
+async def executar_halloween(hora_global, array_datas, data_atual):
     try:
-        await coletar_precos_ml_halloween(hour, array_datas, data_atual)  # Executa a função coleta coletar_precos_vmz_legocom o argumento hour
-        logging.info("coleta coletar_precos_vmz_halloween concluída.")  # Registra uma mensagem de log
-    except Exception as e:
-         logging.error(f"Erro ao executar coletar_precos_vmz_halloween: {e}")  # Registra uma mensagem de log de erro
-    try:
-        await coletar_precos_vmz_halloween(hour, array_datas, data_atual)  # Executa a função coleta coletar_precos_vmz_halloweencom o argumento hour
+        await coletar_precos_ml_halloween(hora_global, array_datas, data_atual)  # Executa a função coleta coletar_precos_vmz_legocom o argumento hora_global
         logging.info("coleta coletar_precos_vmz_halloween concluída.")  # Registra uma mensagem de log
     except Exception as e:
         logging.error(f"Erro ao executar coletar_precos_vmz_halloween: {e}")  # Registra uma mensagem de log de erro
     try:
-        await coletar_precos_voupra_halloween(hour, array_datas, data_atual)  # Executa a função coleta coletar_precos_vmz_halloweencom o argumento hour
+        await coletar_precos_vmz_halloween(hora_global, array_datas, data_atual)  # Executa a função coleta coletar_precos_vmz_halloweencom o argumento hora_global
+        logging.info("coleta coletar_precos_vmz_halloween concluída.")  # Registra uma mensagem de log
+    except Exception as e:
+        logging.error(f"Erro ao executar coletar_precos_vmz_halloween: {e}")  # Registra uma mensagem de log de erro
+    try:
+        await coletar_precos_voupra_halloween(hora_global, array_datas, data_atual)  # Executa a função coleta coletar_precos_vmz_halloweencom o argumento hora_global
         logging.info("coleta coletar_precos_vmz_halloween concluída.")  # Registra uma mensagem de log
     except Exception as e:
         logging.error(f"Erro ao executar coletar_precos_vmz_halloween: {e}")  # Registra uma mensagem de log de erro

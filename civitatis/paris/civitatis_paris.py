@@ -48,7 +48,7 @@ def calcular_mes_desejado(data):
         return mes_numero, nome_mes
 
 
-async def coletar_precos_civitatis_paris(hour, array_datas,data_atual):
+async def coletar_precos_civitatis_paris(hora_global, array_datas,data_atual):
     
     # Definir as datas desejadas em um intervalo de 10, 20, 47, 65, 126 dias, 5 dias não disponível
     array_datas =  [10,20,47,65,126]
@@ -66,7 +66,7 @@ async def coletar_precos_civitatis_paris(hour, array_datas,data_atual):
     nome_arquivo = f'paris_civitatis_{data_atual}.json'
     # Fechar o navegador
 
-    salvar_dados(df_precos_ingressos, nome_arquivo, 'paris/civitatis', hour)
+    salvar_dados(df_precos_ingressos, nome_arquivo, 'paris/civitatis', hora_global)
     
 async def coletar_1e2_dias(array_datas):# -> list:
     # Inicializar o navegador (neste exemplo, estamos usando o Chrome)

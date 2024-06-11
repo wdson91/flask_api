@@ -1,17 +1,14 @@
 from imports import *
+from webdriver_setup import get_webdriver
 
 # Inicialize o driver do Selenium (certifique-se de ter o WebDriver correspondente instalado)
 
 #from atualizar_calibragem import atualizar_calibragem
 
-async def coletar_precos_voupra_california(hour,array_datas,data_atual):
+async def coletar_precos_voupra_california(hora_globalarray_datas,data_atual):
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    options = webdriver.ChromeOptions()
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
-    # Lista para armazenar os dados dos produtos
+    driver = get_webdriver()
     all_data_set = set()  # Usando um conjunto para armazenar dados únicos
 
     # Mapeamento dos nomes dos parques
@@ -146,5 +143,5 @@ if __name__ == "__main__":
     hour = datetime.now(pytz.timezone('America/Sao_Paulo'))
     data_atual = datetime.now().date()
     array_datas = [5, 10, 20, 47, 65, 126]
-    asyncio.run(coletar_precos_voupra_sea(hour,array_datas,data_atual))
+    asyncio.run(coletar_precos_voupra_sea(hora_globalarray_datas,data_atual))
     #atualizar_calibragem(20)

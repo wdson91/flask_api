@@ -3,19 +3,19 @@ from imports import *
 
 
 from classes.junta_dados_classe import JuntarJsons
-from index_parques import juntar
+from coleta_orlando import juntar
 from tioorlando.sea_tio import coleta_tio_sea
 from tioorlando.disney_tio import coleta_tio_orlando
 from tioorlando.universal_tio import coleta_tio_universal
 
 
-async def main_tio(hour,array_datas,data_atual):
+async def main_tio(hora_global,array_datas,data_atual):
     
         
         logging.info("Iniciando a coleta de preços de Tio Orlando.")
         try:
             # Execute as funções assíncronas em sequência
-            await coleta_tio_orlando(hour,array_datas,data_atual)
+            await coleta_tio_orlando(hora_global,array_datas,data_atual)
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")

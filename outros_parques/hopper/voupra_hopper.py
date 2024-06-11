@@ -1,17 +1,15 @@
 from imports import *
+from webdriver_setup import get_webdriver
 
 
 
 
-async def coletar_precos_voupra_hopper_plus(hour,array_datas,data_atual):
+async def coletar_precos_voupra_hopper_plus(hora_global,array_datas,data_atual):
 
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
     # Initialize the Selenium driver (make sure to have the corresponding WebDriver installed)
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    # driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = get_webdriver()
 
     # List to store product data
     all_data_set = set()  # Using a set to store unique data
@@ -140,20 +138,17 @@ async def coletar_precos_voupra_hopper_plus(hour,array_datas,data_atual):
    
     return df 
 
-async def coletar_precos_voupra_hopper(hour,array_datas,data_atual):
+async def coletar_precos_voupra_hopper(hora_global,array_datas,data_atual):
 
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
     # Initialize the Selenium driver (make sure to have the corresponding WebDriver installed)
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    # driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = get_webdriver()
 
     # List to store product data
     all_data_set = set()  # Using a set to store unique data
 
-    df_disney = await coletar_precos_voupra_hopper_plus(hour, array_datas, data_atual) 
+    df_disney = await coletar_precos_voupra_hopper_plus(hora_global, array_datas, data_atual) 
     # Mapping of park names
     mapeamento_nomes = {
        
@@ -285,7 +280,7 @@ async def coletar_precos_voupra_hopper(hour,array_datas,data_atual):
     merged_df = merged_df.sort_values(by=['Data_viagem', 'Parque'])
 
     nome_arquivo = f'hopper_voupra_{data_atual}.json'
-    salvar_dados(merged_df, nome_arquivo, 'hopper/voupra', hour)
+    salvar_dados(merged_df, nome_arquivo, 'hopper/voupra', hora_global)
     
     
     logging.info("Coleta de preços Voupra Disney finalizada.")

@@ -5,7 +5,7 @@ from selenium.webdriver import Remote
 from webdriver_setup import get_webdriver
 
 
-async def coletar_precos_disney_aquaticos(hour,array_datas,data_atual):
+async def coletar_precos_disney_aquaticos(hora_global,array_datas,data_atual):
     
     driver = get_webdriver()
     
@@ -134,7 +134,7 @@ async def coletar_precos_disney_aquaticos(hour,array_datas,data_atual):
     logging.info("Coleta de preços Voupra Disney Aquáticos finalizada.")
     return df
 
-async def coletar_precos_voupra_disney(hour,array_datas,data_atual):
+async def coletar_precos_voupra_disney(hora_global,array_datas,data_atual):
     logging.info("Iniciando coleta de preços Voupra Disney.")
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
     driver = get_webdriver()
@@ -266,7 +266,7 @@ async def coletar_precos_voupra_disney(hour,array_datas,data_atual):
     
     df = pd.DataFrame(all_data)
     logging.info("Coleta de preços Voupra Disney Aquáticos Iniciada.")
-    df_disney = await coletar_precos_disney_aquaticos(hour, array_datas, data_atual)    
+    df_disney = await coletar_precos_disney_aquaticos(hora_global, array_datas, data_atual)    
     
     
     merged_df = pd.concat([df, df_disney], ignore_index=True)
@@ -278,17 +278,17 @@ async def coletar_precos_voupra_disney(hour,array_datas,data_atual):
     merged_df = merged_df.sort_values(by=['Data_viagem', 'Parque'])
 
     nome_arquivo = f'disney_voupra_{data_atual}.json'
-    salvar_dados(merged_df, nome_arquivo, 'orlando/voupra', hour)
+    salvar_dados(merged_df, nome_arquivo, 'orlando/voupra', hora_global)
     
     # Define o novo valor para calibragem
     atualizar_calibragem(10)
     
     logging.info("Coleta de preços Voupra Disney finalizada.")
     return
-# async def coletar_precos_voupra_disney(hour,array_datas):
+# async def coletar_precos_voupra_disney(hora_global,array_datas):
 #     # Configuração do Selenium
     
-#     extract_data_and_return_dataframe(array_datas, hour)
+#     extract_data_and_return_dataframe(array_datas, hora_global)
     
 #     options = webdriver.ChromeOptions()
 #     driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
@@ -415,7 +415,7 @@ async def coletar_precos_voupra_disney(hour,array_datas,data_atual):
 #     df_merged['MargemCategoria'].fillna('-', inplace=True)
     
 #     nome_arquivo = f'disney_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
-#     salvar_dados(df_merged, nome_arquivo, 'voupra', hour)
+#     salvar_dados(df_merged, nome_arquivo, 'voupra', hora_global)
 
 #     logging.info("Coleta de preços finalizada.")
 

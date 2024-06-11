@@ -1,18 +1,14 @@
 from imports import *
+from webdriver_setup import get_webdriver
 
 # Inicialize o driver do Selenium (certifique-se de ter o WebDriver correspondente instalado)
 
 #from atualizar_calibragem import atualizar_calibragem
 
-async def coletar_precos_voupra_paris(hour,array_datas,data_atual):
+async def coletar_precos_voupra_paris(hora_global,array_datas,data_atual):
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    options = webdriver.ChromeOptions()
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
-    # Lista para armazenar os dados dos produtos
-    all_data_set = set()  # Usando um conjunto para armazenar dados únicos
+    driver = get_webdriver()
 
     # Mapeamento dos nomes dos parques
     mapeamento_nomes = {
@@ -135,7 +131,7 @@ async def coletar_precos_voupra_paris(hour,array_datas,data_atual):
     df = df.sort_values(by=['Data_viagem', 'Parque'])
 
     nome_arquivo = f'paris_voupra_{data_atual}.json'
-    salvar_dados(df, nome_arquivo, 'paris/voupra', hour)
+    salvar_dados(df, nome_arquivo, 'paris/voupra', hora_global)
     
     #atualizar_calibragem(20)
     logging.info("Coleta de preços Voupra Paris  finalizada.")
@@ -143,8 +139,8 @@ async def coletar_precos_voupra_paris(hour,array_datas,data_atual):
 
 if __name__ == "__main__":
     # Hora global
-    hour = datetime.now(pytz.timezone('America/Sao_Paulo'))
+    hora_global = datetime.now(pytz.timezone('America/Sao_Paulo'))
     data_atual = datetime.now().date()
     array_datas = [7, 14, 21, 28]
-    asyncio.run(coletar_precos_voupra_sea(hour,array_datas,data_atual))
+    asyncio.run(coletar_precos_voupra_sea(hora_global,array_datas,data_atual))
     #atualizar_calibragem(20)

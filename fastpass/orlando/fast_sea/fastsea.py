@@ -9,7 +9,7 @@ from webdriver_setup import get_webdriver
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
-def coletar_precos_fastPass_seaworld(hour, array_datas,data_atual):
+def coletar_precos_fastPass_seaworld(hora_global, array_datas,data_atual):
     driver = get_webdriver()
     dados = []
     wait = WebDriverWait(driver, 5)
@@ -166,7 +166,7 @@ def coletar_precos_fastPass_seaworld(hour, array_datas,data_atual):
         driver.quit()
         df = pd.DataFrame(dados)
         nome_arquivo = f'seaworld_fastPass_{data_atual}.json'
-        salvar_dados(df, nome_arquivo, 'orlando/fastPass', hour)
+        salvar_dados(df, nome_arquivo, 'orlando/fastPass', hora_global)
         logging.info("Coleta de preços fastPass SeaWorld concluída")
         atualizar_calibragem(85)
         return

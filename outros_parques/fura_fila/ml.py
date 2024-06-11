@@ -1,5 +1,6 @@
 
 from imports import *
+from webdriver_setup import get_webdriver
 
 
 
@@ -10,9 +11,7 @@ def get_future_date(days):
 
 async def coletar_precos_ml_fura_fila(hour,array_datas,data_atual):
     options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-   # driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    driver = get_webdriver()
     logging.info("Iniciando a coleta de preços ML Fura Fila")
     dados = []
     wait = WebDriverWait(driver, 5)

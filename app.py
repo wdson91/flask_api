@@ -1,4 +1,5 @@
 
+from coleta_hopper import bloco01_hopper, bloco02_hopper, bloco03_hopper
 from imports import *
 from flask import redirect
 
@@ -13,9 +14,9 @@ from pynput.keyboard import Key, Controller
 from classes.junta_dados_classe import JuntarJsons
 from decolar.hopper.decolar_disney_hopper import receive_disney_decolar_hopper
 
-from index_parques import main_parques
-from index_parques import main_parques2
-from index_parques import main_parques3
+from coleta_orlando import bloco01
+from coleta_orlando import bloco02
+from coleta_orlando import bloco03
 from qualidade.qualidade import qualidade
 
 from fastpass.orlando.index_fast import main_fastPass
@@ -25,8 +26,10 @@ from start.run_outros import  coleta_outros_parques
 
 from decolar.halloween.decolar_halloween import decolar_halloween
 
+from tioorlando.disney_tio import coleta_tio_orlando
 from tioorlando.index_tio import main_tio
 from vmz.index_vmz import main_vmz
+from vmz.vmzdisney.vmz_disney import coletar_precos_vmz_disneydias
 from voupra.orlando.index_voupra import main_voupra
 from ml.index_ml import main_ml
 
@@ -638,7 +641,7 @@ async def tioorlando():
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
     time.sleep(3)
-    await main_tio(hora_global,array_datas,data_atual)
+    await  coleta_tio_orlando(hora_global,array_datas,data_atual)
     
     return jsonify({"message": "Dados salvos com sucesso!"})
 
@@ -654,8 +657,6 @@ async def gygFura():
     await coletar_precos_gyg_furaFila(hora_global,array_datas,data_atual)
     
     return jsonify({"message": "Dados salvos com sucesso!"})
-
-
 
 @app.route('/fast', methods=['GET'])
 async def fastPass():
@@ -677,8 +678,8 @@ async def fastPass():
     await main_fastPass(hora_global, days_to_add, data_atual)
     return jsonify({"message": "Calibragem iniciada com sucesso!"})
 
-@app.route('/voupra', methods=['GET'])
-async def voupra():
+@app.route('/orlando01', methods=['GET'])
+async def orlando01():
     global data_atual
     global hora_global
     global calibrating
@@ -687,14 +688,15 @@ async def voupra():
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
+    
     time.sleep(3)
-    await main_parques2(hora_global, array_datas,data_atual)
+    await bloco01(hora_global, array_datas,data_atual)
     
     return jsonify({"message": "Dados salvos com sucesso!"})
 
 
-@app.route('/voupra2', methods=['GET'])
-async def voupra2():
+@app.route('/orlando02', methods=['GET'])
+async def orlando02():
     global data_atual
     global hora_global
     
@@ -702,7 +704,21 @@ async def voupra2():
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
     time.sleep(3)
-    await main_parques3(hora_global, array_datas,data_atual)
+    await bloco02(hora_global, array_datas,data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+
+@app.route('/orlando03', methods=['GET'])
+async def orlando03():
+    global data_atual
+    global hora_global
+    
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    array_datas = [5,10, 20, 47, 65, 126]
+    #time.sleep(3)
+    await bloco03(hora_global,array_datas,data_atual)
     
     return jsonify({"message": "Dados salvos com sucesso!"})
 
@@ -711,17 +727,19 @@ async def vmz():
     global data_atual
     global hora_global
     
+    dias_para_processar = [2,3,4,5]
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
     time.sleep(3)
-    await main_vmz(hora_global,array_datas,data_atual)
+    await coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_global,data_atual)
     
     return jsonify({"message": "Dados salvos com sucesso!"})
 
+########################################COLETA PARK HOPPER##################################################
 
-@app.route('/ml', methods=['GET'])
-async def ml():
+@app.route('/hopper01', methods=['GET'])
+async def hopper01():
     global data_atual
     global hora_global
     
@@ -729,38 +747,37 @@ async def ml():
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
     #time.sleep(3)
-    await main_parques(hora_global,array_datas,data_atual)
+    await bloco01_hopper(hora_global,array_datas,data_atual)
     
     return jsonify({"message": "Dados salvos com sucesso!"})
 
 
-async def run_funcs():
+@app.route('/hopper02', methods=['GET'])
+async def hopper02():
     global data_atual
     global hora_global
     
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
+    #time.sleep(3)
+    await bloco02_hopper(hora_global,array_datas,data_atual)
     
-    await asyncio.gather(
-        main_parques(hora_global,array_datas,data_atual),
-        main_vmz(hora_global,array_datas,data_atual),
-        main_parques3(hora_global,array_datas,data_atual),
-        main_parques2(hora_global,array_datas,data_atual)
-    )
-    # asyncio.create_task(main_parques(hora_global,array_datas,data_atual))
-    # asyncio.create_task(main_vmz(hora_global,array_datas,data_atual))
-    # asyncio.create_task(main_parques3(hora_global, array_datas,data_atual))
-    # asyncio.create_task(main_parques2(hora_global, array_datas,data_atual))
+    return jsonify({"message": "Dados salvos com sucesso!"})
 
-@app.route('/teste')
-def teste():
+
+@app.route('/hopper03', methods=['GET'])
+async def hopper03():
+    global data_atual
+    global hora_global
     
-    asyncio.run(run_funcs())
-    return jsonify({'message': 'Async functions triggered'})
-
-
-
+    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
+    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
+    array_datas = [5,10, 20, 47, 65, 126]
+    #time.sleep(3)
+    await bloco03_hopper(hora_global,array_datas,data_atual)
+    
+    return jsonify({"message": "Dados salvos com sucesso!"})
 if __name__ == '__main__':
     
     app.run(debug=True, host='0.0.0.0',port=5000)
