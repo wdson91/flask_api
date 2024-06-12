@@ -55,13 +55,13 @@ async def coletar_precos_gyg_paris_1(hora_global, array_datas,data_atual):
                 ('//*[@id="booking-assistant"]/div[2]/div/details[1]/summary/div[1]/h1', '//*[@id="booking-assistant"]/div[2]/div/details[1]/summary/section[2]/div/div[1]/span[2]'),
                 ('//*[@id="booking-assistant"]/div[2]/div/details[2]/summary/div[1]/h1', '//*[@id="booking-assistant"]/div[2]/div/details[2]/summary/section/div/div[1]/span[2]')
             ]
-            time.sleep(2)
+            time.sleep(4)
             botao_disponibilidade = WebDriverWait(driver, 10).until(
                     EC.visibility_of_element_located((By.XPATH, '//*[@id="booking-assistant"]/div[1]/button'))
                 )
             botao_disponibilidade.click()
             
-            time.sleep(2)
+            time.sleep(4)
             for title_xpath, price_xpath in xpath_pairs:
                 try:
                     title_element = wait.until(EC.visibility_of_element_located((By.XPATH, title_xpath)))
@@ -71,9 +71,9 @@ async def coletar_precos_gyg_paris_1(hora_global, array_datas,data_atual):
                     price = float(price) * euro
                     price = round(price, 2)
                     # Mapeamento condicional dos nomes dos parques
-                    if '1 dia/1 parque' or '1-Day/1-Park' in title:
+                    if '1-Day/1-Park' in title:
                         title = '1 Dia 1 Parque - Disney Paris'
-                    elif '1 dia/2 parques' or '1-Day/2-Park' in title:
+                    elif '1-Day/2-Park' in title:
                         title = '1 Dia 2 Parques - Disney Paris'
                         
                     dados.append({
@@ -116,13 +116,13 @@ async def coletar_precos_gyg_paris_2(hora_global, array_datas,data_atual):
                 ('//*[@id="booking-assistant"]/div[2]/div/details[2]/summary/div[1]/h1', '//*[@id="booking-assistant"]/div[2]/div/details[2]/summary/section/div/div[1]/span[2]'),
                 ('//*[@id="booking-assistant"]/div[2]/div/details[3]/summary/div[1]/h1', '//*[@id="booking-assistant"]/div[2]/div/details[3]/summary/section/div/div[1]/span[2]')
             ]
-            time.sleep(2)
+            time.sleep(4)
             botao_disponibilidade = WebDriverWait(driver, 10).until(
                     EC.visibility_of_element_located((By.XPATH, '//*[@id="booking-assistant"]/div[1]/button'))
                 )
             botao_disponibilidade.click()
             
-            time.sleep(2)
+            time.sleep(4)
             for title_xpath, price_xpath in xpath_pairs:
                 try:
                     title_element = wait.until(EC.visibility_of_element_located((By.XPATH, title_xpath)))
@@ -133,11 +133,11 @@ async def coletar_precos_gyg_paris_2(hora_global, array_datas,data_atual):
                     price = round(price, 2)
                     
                     # Mapeamento condicional dos nomes dos parques
-                    if '2 dias/2 parques' or '2-Day/2-Park' in title:
+                    if '2-Day/2-Park'  in title:
                         title = '2 Dias 2 Parques - Disney Paris'
-                    elif '3 dias/2 parques ' or '3-Day/2-Park' in title:
+                    elif '3-Day/2-Park'  in title:
                         title = '3 Dias 2 Parques - Disney Paris'
-                    elif '4 dias/2 parques' or '4-Day/2-Park' in title:
+                    elif '4-Day/2-Park'  in title:
                         title = '4 Dias 2 Parques - Disney Paris'
                     
                         

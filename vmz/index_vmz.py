@@ -1,3 +1,4 @@
+from classes.junta_dados_classe import JuntarJsons
 from imports import *
 from coleta_orlando import juntar
 
@@ -39,7 +40,17 @@ async def main_vmz(hora_globa,array_datas,data_atual):
             
         # except Exception as e:
         #     logging.error(f"Erro durante a coleta de preços da Universal: {e}")
-        await juntar(data_atual)  
+        try:
+            empresas = ['voupra', 'vmz', 'decolar','ml','tio','fastPass']
+            parques = ['disney', 'universal', 'seaworld']
+            
+            juntar_json = JuntarJsons(data_atual, empresas, parques, 'orlando')
+            
+            await juntar_json.executar()
+        
+        except Exception as e:
+                logging.error(f"Erro durante a junção dos arquivos: {e}")
+ 
         return
 
 if __name__ == "__main__":
