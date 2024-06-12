@@ -5,7 +5,7 @@ from webdriver_setup import get_webdriver
 
 #from atualizar_calibragem import atualizar_calibragem
 
-async def coletar_precos_voupra_california(hora_globalarray_datas,data_atual):
+async def coletar_precos_voupra_california(hora_global,array_datas,data_atual):
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
     driver = get_webdriver()
@@ -132,7 +132,7 @@ async def coletar_precos_voupra_california(hora_globalarray_datas,data_atual):
     df = df.sort_values(by=['Data_viagem', 'Parque'])
 
     nome_arquivo = f'california_voupra_{data_atual}.json'
-    salvar_dados(df, nome_arquivo, 'california/voupra', hour)
+    salvar_dados(df, nome_arquivo, 'california/voupra', hora_global)
     
     #atualizar_calibragem(20)
     logging.info("Coleta de preços Voupra California  finalizada.")
@@ -140,7 +140,7 @@ async def coletar_precos_voupra_california(hora_globalarray_datas,data_atual):
 
 if __name__ == "__main__":
     # Hora global
-    hour = datetime.now(pytz.timezone('America/Sao_Paulo'))
+    hora_global = datetime.now(pytz.timezone('America/Sao_Paulo'))
     data_atual = datetime.now().date()
     array_datas = [5, 10, 20, 47, 65, 126]
     asyncio.run(coletar_precos_voupra_sea(hora_globalarray_datas,data_atual))

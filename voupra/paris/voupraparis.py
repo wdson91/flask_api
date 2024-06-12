@@ -9,7 +9,7 @@ async def coletar_precos_voupra_paris(hora_global,array_datas,data_atual):
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
     driver = get_webdriver()
-
+    all_data_set = set()
     # Mapeamento dos nomes dos parques
     mapeamento_nomes = {
         329431: "1 Dia 1 Parque - Disney Paris",

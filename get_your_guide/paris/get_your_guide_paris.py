@@ -71,9 +71,9 @@ async def coletar_precos_gyg_paris_1(hora_global, array_datas,data_atual):
                     price = float(price) * euro
                     price = round(price, 2)
                     # Mapeamento condicional dos nomes dos parques
-                    if '1 dia/1 parque' in title:
+                    if '1 dia/1 parque' or '1-Day/1-Park' in title:
                         title = '1 Dia 1 Parque - Disney Paris'
-                    elif '1 dia/2 parques' in title:
+                    elif '1 dia/2 parques' or '1-Day/2-Park' in title:
                         title = '1 Dia 2 Parques - Disney Paris'
                         
                     dados.append({
@@ -133,11 +133,11 @@ async def coletar_precos_gyg_paris_2(hora_global, array_datas,data_atual):
                     price = round(price, 2)
                     
                     # Mapeamento condicional dos nomes dos parques
-                    if '2 dias/2 parques' in title:
+                    if '2 dias/2 parques' or '2-Day/2-Park' in title:
                         title = '2 Dias 2 Parques - Disney Paris'
-                    elif '3 dias/2 parques ' in title:
+                    elif '3 dias/2 parques ' or '3-Day/2-Park' in title:
                         title = '3 Dias 2 Parques - Disney Paris'
-                    elif '4 dias/2 parques' in title:
+                    elif '4 dias/2 parques' or '4-Day/2-Park' in title:
                         title = '4 Dias 2 Parques - Disney Paris'
                     
                         
