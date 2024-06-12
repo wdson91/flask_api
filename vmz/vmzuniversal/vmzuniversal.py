@@ -15,7 +15,7 @@ async def coletar_precos_vmz_universal(hora_global, array_datas,data_atual):
         #("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/3-parques-play-4-dias-park-to-park-data-fixa?", '4 Dias 3 Parques - Universal Orlando')
         
     ]
-    url_14_dias = "https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/14-dias-flexiveis-uso-em-2024?"
+    url_14_dias = "https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/14-dias-explorer-2024?"
     
     # Configurações do WebDriver
     driver = get_webdriver()

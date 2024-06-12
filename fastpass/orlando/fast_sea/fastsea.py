@@ -9,7 +9,7 @@ from webdriver_setup import get_webdriver
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
-def coletar_precos_fastPass_seaworld(hora_global, array_datas,data_atual):
+async def coletar_precos_fastPass_seaworld(hora_global, array_datas,data_atual):
     driver = get_webdriver()
     dados = []
     wait = WebDriverWait(driver, 5)
