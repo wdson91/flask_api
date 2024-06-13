@@ -48,7 +48,7 @@ async def coletar_precos_voupra_universal(hora_global,array_datas,data_atual):
                 dump_count += 1
                 
                 # Verifica se é o terceiro dump desejado
-                if dump_count == 4:
+                if dump_count == 3:
                     # Extraia os dados do dump
                     dump_data = script.text.strip()
                     
