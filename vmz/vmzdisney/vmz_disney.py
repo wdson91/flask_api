@@ -1,3 +1,4 @@
+from classes.junta_dados_classe import JuntarJsons
 from imports import *
 from salvardados import *
 from helpers.atualizar_calibragem import atualizar_calibragem
@@ -241,6 +242,21 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
     logging.info("Coleta de preços finalizada Vmz Disney Dias.")
     await coletar_precos_vmz(hora_global,array_datas,data_atual)
     atualizar_calibragem(60)
+    
+    time.sleep(10)
+    
+    
+    try:
+            empresas = ['voupra', 'vmz', 'decolar','ml','tio','fastPass']
+            parques = ['disney', 'universal', 'seaworld']
+            
+            juntar_json = JuntarJsons(data_atual, empresas, parques, 'orlando')
+            
+            await juntar_json.executar()
+    
+    except Exception as e:
+            logging.error(f"Erro durante a junção dos arquivos: {e}")
+    
     return
 
 
