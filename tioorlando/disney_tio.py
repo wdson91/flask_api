@@ -21,13 +21,13 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
     # Mapeamento dos nomes dos parques
     mapeamento_parques = {
         "Disney 1-Dia 1-Parque Aquático": "Magic Kingdom",
-        "Disney 1-Dia no Animal Kingdom": "1 Dia - Disney Basico Animal Kingdom",
-        "Disney 1-Dia no Hollywood Studios": "1 Dia - Disney Basico Hollywood Studios",
-        "Disney 1-Dia no EPCOT": "1 Dia - Disney Basico Epcot",
-        "Disney 1-Dia no Magic Kingdom": "1 Dia - Disney Basico Magic Kingdom",
+        "PROMO: ingressos Disney 1-Dia no Animal Kingdom – ADULTO COM PREÇO DE CRIANÇA": "1 Dia - Disney Basico Animal Kingdom",
+        "PROMO: ingressos Disney 1-Dia no Hollywood Studios – ADULTO COM PREÇO DE CRIANÇA": "1 Dia - Disney Basico Hollywood Studios",
+        "PROMO: ingressos Disney 1-Dia no EPCOT – ADULTO COM PREÇO DE CRIANÇA": "1 Dia - Disney Basico Epcot",
+        "PROMO: ingressos Disney 1-Dia no Magic Kingdom – ADULTO COM PREÇO DE CRIANÇAm": "1 Dia - Disney Basico Magic Kingdom",
         "Disney 1-Dia Park Hopper":"1 Dia - Disney Park Hopper",
         "Disney 1-Dia Park Hopper Plus":"1 Dia - Disney Parques Aquaticos",
-        "Disney 2-Dias Básico": "2 Dias - Disney World Basico",
+        "PROMO: ingressos Disney 2-Dias Básico – ADULTO COM PREÇO DE CRIANÇA": "2 Dias - Disney World Basico",
         "Disney 2-Dias Básico com Parque Aquático e Esportes Aquáticos": "Disney 2-Dias Básico com Parque Aquático e Esportes Aquáticos",
         "Disney 2-Dias Park Hopper": "2 Dias - Disney Park Hopper",
         "Disney 2-Dias Park Hopper Plus": "2 Dias - Disney Parques Aquaticos",
@@ -99,6 +99,7 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
                 dia = f"0{dia}"
             mes_desejado = f'{mes} {ano}'
 
+        
             # Verificar se o mês atual é diferente do desejado
             while mes_desejado != mes_atual.text:
 
@@ -134,7 +135,7 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
 
                 elemento_dias = driver.find_elements(By.CSS_SELECTOR,seletor_dia)
 
-                if int(dia) > 20:
+                if int(dia) > 22:
                     elemento_dia = elemento_dias[-1]
                 else:
                     elemento_dia = elemento_dias[0]
@@ -165,7 +166,7 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
                 preco_parcelado = float(partes[-1].replace('R$', '').replace(',', '.'))
                 # Calcula o preço parcelado
                 parque = titulo.split(' - ', 1)[0]
-
+         
                 # Mapear o nome do parque para o nome completo
                 parque = mapeamento_parques.get(parque, titulo)
 
@@ -202,7 +203,7 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
 
     nome_arquivo = f'disney_tio_{data_atual}.json'
 
-    salvar_dados(df, nome_arquivo, 'orlando/tio', hora_global)
+    salvar_dados(df, nome_arquivo, 'orlando/tio', '14:00')
     logging.info('Coleta Finalizada Disney Tio Orlando')
     return
 

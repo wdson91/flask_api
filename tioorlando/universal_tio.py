@@ -59,7 +59,8 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
             if dia < 10:
                 dia = f"0{dia}"
             mes_desejado = f'{mes} {ano}'
-
+            print(mes_desejado)
+            print(mes_atual.text)
             # Verificar se o mês atual é diferente do desejado
             while mes_desejado not in mes_atual.text:
                 try:
