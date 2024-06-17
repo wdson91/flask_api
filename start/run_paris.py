@@ -24,18 +24,18 @@ async def executar_paris(hora_global, array_datas, data_atual):
         logging.info("ml_paris concluída.")  # Registra uma mensagem de log
     except Exception as e:
         logging.error(f"Erro ao executar ml_paris: {e}")
-    # try: 
-    #     await coletar_precos_civitatis_paris(hora_global, array_datas, data_atual)
-    #     logging.info("civitatis_paris concluída.")
-    # except Exception as e:
-    #     logging.error(f"Erro ao executar civitatis_paris: {e}")
+    try:
+        await coletar_precos_civitatis_paris(hora_global, array_datas, data_atual)
+        logging.info("civitatis_paris concluída.")
+    except Exception as e:
+        logging.error(f"Erro ao executar civitatis_paris: {e}")
     try:
         await coletar_precos_gyg_paris(hora_global, array_datas, data_atual)  # Executa a função main_gyg com o argumento hora_global
         logging.info("gyr_paris concluída.")  # Registra uma mensagem de log
     except Exception as e:
         logging.error(f"Erro ao executar gyr_paris: {e}")
     return
-        
+
 # Verifica se o script está sendo executado diretamente
 if __name__ == "__main__":
     asyncio.run(executar_paris('hora_global',array_datas,'2024-03-25'))  # Executa a função principal 'main' usando asyncio

@@ -4,7 +4,7 @@ import pandas as pd
 import asyncio
 
 def somar_15_porcento(valor):
-    return valor * 1.15 # acrescenta 15%(taxa do cartão de credito 12x) ao valor 
+    return valor * 1.15 # acrescenta 15%(taxa do cartão de credito 12x) ao valor
 
 def nome_para_numero_mes(nome_mes):
         meses = {
@@ -49,7 +49,7 @@ def calcular_mes_desejado(data):
 
 
 async def coletar_precos_civitatis_paris(hora_global, array_datas,data_atual):
-    
+
     # Definir as datas desejadas em um intervalo de 10, 20, 47, 65, 126 dias, 5 dias não disponível
     array_datas =  [10,20,47,65,126]
     # Função para converter o nome do mês para o formato de número
@@ -67,7 +67,7 @@ async def coletar_precos_civitatis_paris(hora_global, array_datas,data_atual):
     # Fechar o navegador
 
     salvar_dados(df_precos_ingressos, nome_arquivo, 'paris/civitatis', '04:00')
-    
+
 async def coletar_1e2_dias(array_datas):# -> list:
     # Inicializar o navegador (neste exemplo, estamos usando o Chrome)
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
@@ -95,18 +95,21 @@ async def coletar_1e2_dias(array_datas):# -> list:
 
         # Encontrar e imprimir o mês do calendário
         nome_elemnt = driver.find_element(By.XPATH, '//*[@id="activityCalendar"]/div[1]/div/div/div[2]/span[1]')
+
         driver.execute_script("arguments[0].scrollIntoView(true);", nome_elemnt)
-        mes_calendario = nome_elemnt.text
+
+        mes_calendario = nome_elemnt.text.capitalize()
+        mes_desejado_nome_captalized = mes_desejado_nome.capitalize()
 
         # Verificar se o mês do calendário é diferente do mês desejado
-        while mes_calendario != mes_desejado_nome:
+        while mes_calendario != mes_desejado_nome_captalized:
             # Clicar no botão "Próximo mês"
             botao_proximo_mes = driver.find_element(By.XPATH, '//*[@id="activityCalendar"]/div[1]/div/div/div[3]')
             botao_proximo_mes.click()
             time.sleep(2)
             # Atualizar o mês do calendário
             nome_elemnt = driver.find_element(By.XPATH, '//*[@id="activityCalendar"]/div[1]/div/div/div[2]/span[1]')
-            mes_calendario = nome_elemnt.text
+            mes_calendario = nome_elemnt.text.capitalize()
 
         # Iterar sobre os tipos de ingressos
         for parque_info in parques:
@@ -133,10 +136,10 @@ async def coletar_1e2_dias(array_datas):# -> list:
 
                 # Encontrar e imprimir o valor para a data atual e o tipo de ingresso
                 elemento_valor = driver.find_element(By.XPATH,'//*[@id="tPrecioSpan0"]')
-                
+
                 valor = elemento_valor.text
                 valor  = float(valor.replace('R$', '').replace('.', '').replace(',', '.'))
-                
+
                 #print(f"Valor para {data_desejada.strftime('%Y-%m-%d')} ({parque_tipo}): {valor}")
 
                 precos_ingressos.append({
@@ -188,17 +191,18 @@ async def coletar_2_dias(array_datas):# -> list:
         # Encontrar e imprimir o mês do calendário
         nome_elemnt = driver.find_element(By.XPATH, '//*[@id="activityCalendar"]/div[1]/div/div/div[2]/span[1]')
         driver.execute_script("arguments[0].scrollIntoView(true);", nome_elemnt)
-        mes_calendario = nome_elemnt.text
+        mes_calendario = nome_elemnt.text.capitalize()
+        mes_desejado_nome_captalized = mes_desejado_nome.capitalize()
 
         # Verificar se o mês do calendário é diferente do mês desejado
-        while mes_calendario != mes_desejado_nome:
+        while mes_calendario != mes_desejado_nome_captalized:
             # Clicar no botão "Próximo mês"
             botao_proximo_mes = driver.find_element(By.XPATH, '//*[@id="activityCalendar"]/div[1]/div/div/div[3]')
             botao_proximo_mes.click()
             time.sleep(2)
             # Atualizar o mês do calendário
             nome_elemnt = driver.find_element(By.XPATH, '//*[@id="activityCalendar"]/div[1]/div/div/div[2]/span[1]')
-            mes_calendario = nome_elemnt.text
+            mes_calendario = nome_elemnt.text.capitalize()
 
 
         try:
@@ -213,14 +217,14 @@ async def coletar_2_dias(array_datas):# -> list:
                 # Abrir o menu suspenso e selecionar o tipo de ingresso
                 elemento_menu = driver.find_element(By.ID, "formActividad-paxes")
                 elemento_menu.click()
-                
+
 
                 # Encontrar e imprimir o valor para a data atual e o tipo de ingresso
                 elemento_valor = driver.find_element(By.XPATH,'//*[@id="tPrecioSpan0"]')
-                
+
                 valor = elemento_valor.text
                 valor  = float(valor.replace('R$', '').replace('.', '').replace(',', '.'))
-                
+
                 #print(f"Valor para {data_desejada.strftime('%Y-%m-%d')} ({parque_tipo}): {valor}")
 
                 precos_ingressos.append({
@@ -243,21 +247,15 @@ async def coletar_2_dias(array_datas):# -> list:
                 })
                 print(f"Elemento do dia não encontrado para {data_desejada.strftime('%Y-%m-%d')} ({'2 Dias 2 Parques - Disney Paris'})")
 
-    # df_precos_ingressos = pd.DataFrame(precos_ingressos)
-    # # Exibir o DataFrame mesclado
-    # df_precos_ingressos = df_precos_ingressos.drop_duplicates()
-    # df_precos_ingressos = df_precos_ingressos.sort_values(by=['Data_viagem', 'Parque'])
-    # # Salvar como JSON
-    # df_precos_ingressos.to_json('precos_ingressos.json', orient='records')
-    # Fechar o navegador
+
     driver.quit()
-    
+
     return precos_ingressos
 # Chamada da função para obter os preços dos ingressos
 
 async def coletar_3e4_dias(array_datas):
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    
+
     # Maximizar a janela do navegador
     driver.maximize_window()
     # Abrir uma página da web
@@ -283,17 +281,19 @@ async def coletar_3e4_dias(array_datas):
         # Encontrar e imprimir o mês do calendário
         nome_elemnt = driver.find_element(By.XPATH, '//*[@id="activityCalendar"]/div[1]/div/div/div[2]/span[1]')
         driver.execute_script("arguments[0].scrollIntoView(true);", nome_elemnt)
-        mes_calendario = nome_elemnt.text
+        mes_calendario = nome_elemnt.text.capitalize()
+        mes_desejado_nome_captalized = mes_desejado_nome.capitalize()
+
 
         # Verificar se o mês do calendário é diferente do mês desejado
-        while mes_calendario != mes_desejado_nome:
+        while mes_calendario != mes_desejado_nome_captalized:
             # Clicar no botão "Próximo mês"
             botao_proximo_mes = driver.find_element(By.XPATH, '//*[@id="activityCalendar"]/div[1]/div/div/div[3]')
             botao_proximo_mes.click()
             time.sleep(2)
             # Atualizar o mês do calendário
             nome_elemnt = driver.find_element(By.XPATH, '//*[@id="activityCalendar"]/div[1]/div/div/div[2]/span[1]')
-            mes_calendario = nome_elemnt.text
+            mes_calendario = nome_elemnt.text.capitalize()
 
         # Iterar sobre os tipos de ingressos
         for parque_info in parques:
@@ -352,11 +352,11 @@ async def coletar_3e4_dias(array_datas):
     # df_precos_ingressos.to_json('precos_ingressos.json', orient='records')
     # # Fechar o navegador
     return precos_ingressos
-    
+
 # Chamada da função para obter os preços dos ingressos
 
 async def main():
     await coletar_precos_civitatis_paris('40', [ 10, 20, 47, 65, 126],datetime.now().strftime("%Y-%m-%d"))
-    
+
 if __name__ == "__main__":
     asyncio.run(main())
