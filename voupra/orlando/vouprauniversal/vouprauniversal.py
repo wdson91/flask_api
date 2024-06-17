@@ -48,7 +48,7 @@ async def coletar_precos_voupra_universal(hora_global,array_datas,data_atual):
                 dump_count += 1
                 
                 # Verifica se é o terceiro dump desejado
-                if dump_count == 3:
+                if '1321/Views/CompraExpressa/_RTabelaCusto.cshtml' in script.text:
                     # Extraia os dados do dump
                     dump_data = script.text.strip()
                     

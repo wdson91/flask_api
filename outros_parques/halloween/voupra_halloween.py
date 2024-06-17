@@ -46,7 +46,7 @@ async def coletar_precos_voupra_halloween_disney(hora_global,array_datas,data_at
                     dump_count += 1
                     
                     # Verifica se é o terceiro dump desejado
-                    if dump_count == 4:
+                    if '1321/Views/CompraExpressa/_RTemporada.cshtml' in script.text:
                         # Extraia os dados do dump
                         dump_data = script.text.strip()
                         
@@ -171,12 +171,14 @@ async def coletar_precos_voupra_halloween(hora_global,array_datas,data_atual):
         for script in script_tags:
             # Verifique se o script contém o padrão de dump desejado
             if '[DUMP]' in script.text:
+            
                 # Incrementa o contador de dumps
                 dump_count += 1
                 
                 # Verifica se é o terceiro dump desejado
-                if dump_count == 4:
+                if '1321/Views/CompraExpressa/_RTemporada.cshtml' in script.text:
                     # Extraia os dados do dump
+                    
                     dump_data = script.text.strip()
                     
                     # Salva os dados em um arquivo txt

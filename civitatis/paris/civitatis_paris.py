@@ -66,11 +66,11 @@ async def coletar_precos_civitatis_paris(hora_global, array_datas,data_atual):
     nome_arquivo = f'paris_civitatis_{data_atual}.json'
     # Fechar o navegador
 
-    salvar_dados(df_precos_ingressos, nome_arquivo, 'paris/civitatis', hora_global)
+    salvar_dados(df_precos_ingressos, nome_arquivo, 'paris/civitatis', '04:00')
     
 async def coletar_1e2_dias(array_datas):# -> list:
     # Inicializar o navegador (neste exemplo, estamos usando o Chrome)
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     # Maximizar a janela do navegador
     driver.maximize_window()
     # Abrir uma página da web
@@ -166,7 +166,7 @@ async def coletar_1e2_dias(array_datas):# -> list:
 
 async def coletar_2_dias(array_datas):# -> list:
     # Inicializar o navegador (neste exemplo, estamos usando o Chrome)
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     # Maximizar a janela do navegador
     driver.maximize_window()
     # Abrir uma página da web
@@ -256,7 +256,7 @@ async def coletar_2_dias(array_datas):# -> list:
 # Chamada da função para obter os preços dos ingressos
 
 async def coletar_3e4_dias(array_datas):
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     
     # Maximizar a janela do navegador
     driver.maximize_window()

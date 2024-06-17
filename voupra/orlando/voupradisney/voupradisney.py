@@ -40,11 +40,12 @@ async def coletar_precos_disney_aquaticos(hora_global,array_datas,data_atual):
         for script in script_tags:
             # Check if the script contains the desired dump pattern
             if '[DUMP]' in script.text:
+                
                 # Increment the dump counter
                 dump_count += 1
 
                 # Check if it is the third desired dump
-                if dump_count == 4:
+                if '1321/Views/CompraExpressa/_RTabelaCusto.cshtml' in script.text:
                     # Extract the data from the dump
                     dump_data = script.text.strip()
 
@@ -180,11 +181,13 @@ async def coletar_precos_voupra_disney(hora_global,array_datas,data_atual):
         for script in script_tags:
             # Check if the script contains the desired dump pattern
             if '[DUMP]' in script.text:
+                
                 # Increment the dump counter
                 dump_count += 1
 
                 # Check if it is the third desired dump
-                if dump_count == 4:
+                if '1321/Views/CompraExpressa/_RTabelaCusto.cshtml' in script.text:
+                    
                     # Extract the data from the dump
                     dump_data = script.text.strip()
 
