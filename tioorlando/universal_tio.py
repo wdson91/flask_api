@@ -44,22 +44,22 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
         11: "novembro",
         12: "dezembro"
     }
-    
+
     async def coleta(datas):
         # Aguardar a presença do elemento do mês atual
         mes_atual = WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.CLASS_NAME, "react-datepicker__current-month"))
         )
-        
+
         for data in datas:
             mes = nomes_meses_pt_BR[data.month]
             ano = data.year
-            
+
             dia = data.day
             if dia < 10:
                 dia = f"0{dia}"
             mes_desejado = f'{mes} {ano}'
-            
+
             # Verificar se o mês atual é diferente do desejado
             while mes_desejado not in mes_atual.text:
                 try:
@@ -73,7 +73,7 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
                     except ElementClickInterceptedException:
                         # Se o clique for interceptado, usa JavaScript para clicar
                         driver.execute_script("arguments[0].click();", botao_next)
-                    
+
                     # Aguardar a atualização do mês atual
                     mes_atual = WebDriverWait(driver, 20).until(
                         EC.presence_of_element_located((By.CLASS_NAME, "react-datepicker__current-month"))
@@ -86,20 +86,25 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
 
             seletor_dia = f".react-datepicker__day--0{dia}"
             try:
-                # Aguardar até que o elemento correspondente ao dia desejado esteja clicável na página
-                elemento_dia = WebDriverWait(driver, 10).until(
-                    EC.element_to_be_clickable((By.CSS_SELECTOR, seletor_dia))
-                )
+                # # Aguardar até que o elemento correspondente ao dia desejado esteja clicável na página
+                # elemento_dia = WebDriverWait(driver, 10).until(
+                #     EC.element_to_be_clickable((By.CSS_SELECTOR, seletor_dia))
+                # )
+                elemento_dias = driver.find_elements(By.CSS_SELECTOR,seletor_dia)
 
+                if int(dia) > 20:
+                    elemento_dia = elemento_dias[-1]
+                else:
+                    elemento_dia = elemento_dias[0]
                 # Clicar no elemento correspondente ao dia desejado
                 elemento_dia.click()
-                
+
             except TimeoutException:
                 logging.error(f"Não foi possível clicar no dia {dia} - Universal Tio Orlando.")
                 continue
 
             time.sleep(7)
-            
+
             # Encontrar todos os elementos com a classe 'MuiBox-root mui-7ulwng'
             elementos = driver.find_elements(By.CLASS_NAME, 'MuiBox-root.mui-7ulwng')
 
@@ -109,17 +114,17 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
                 titulo = elemento.find_element(By.CLASS_NAME, 'MuiTypography-root.MuiTypography-body2.mui-1sgqvsm').text
                 # Encontrar o preço dentro do elemento atual
                 preco_a_vista = elemento.find_element(By.CLASS_NAME, 'MuiBox-root.mui-1ahotr9').text
-               
+
                 preco_a_vista = float(preco_a_vista.replace("R$", "").replace(".", "").replace(",", ".").strip())
                 preco = elemento.find_elements(By.CLASS_NAME, 'MuiBox-root.mui-sw026l')
                 # Dividir a string pelo espaço em branco
                 partes = preco[2].text.split()
-                
+
                 # Remover o valor desejado
                 preco_parcelado = float(partes[-1].replace('R$', '').replace(',', '.'))
                 # Calcula o preço parcelado
                 parque = titulo.split(' - ', 1)[0]
-               
+
                 # Mapear o nome do parque para o nome completo
                 parque = mapeamento_parques.get(parque, titulo)
 
@@ -129,16 +134,16 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
                     "Preco_Avista": preco_a_vista,
                     "Preco_Parcelado": preco_parcelado * 12
                 })
-                
+
     #Lista para armazenar os dados
-    
+
 
     driver.get('https://www.tioorlando.com.br/promo-universal-orlando')
     logging.info("Coletando dados do site Tio Orlando - Universal Orlando.")
     time.sleep(5)
-    
+
     await coleta(datas)
-    
+
     for i in range(1, 5):
         logging.info(f"Coletando dados do site Tio Orlando - Universal Orlando dia {i}.")
         driver.get('https://www.tioorlando.com.br/ingressos-universal-orlando')
@@ -150,23 +155,23 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
 
         # Clicar no botão
         elemento.click()
-        
+
         time.sleep(5)
-        
-        await coleta(datas)    
+
+        await coleta(datas)
     #Fechar o navegador após processar todos os dados
     driver.quit()
     # Salvar os dados em um arquivo JSON
-  
+
     df = pd.DataFrame(dados)
-    
+
     nome_arquivo = f'universal_tio_{data_atual}.json'
-    
+
     salvar_dados(df, nome_arquivo, 'orlando/tio', hora_global)
-    
+
     logging.info("Coleta finalizada Site Tio Orlando - Universal Orlando.")
     return
-    
+
 if __name__ == '__main__':
     coleta_tio_universal()
     logging.info("Coleta de dados finalizada com sucesso.")

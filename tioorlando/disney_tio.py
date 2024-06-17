@@ -90,18 +90,18 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
         mes_atual = WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.CLASS_NAME, "react-datepicker__current-month"))
         )
-        
+
         for data in datas:
             mes = nomes_meses_pt_BR[data.month]
             ano = data.year
-            
             dia = data.day
             if dia < 10:
                 dia = f"0{dia}"
             mes_desejado = f'{mes} {ano}'
-            
+
             # Verificar se o mês atual é diferente do desejado
-            while mes_desejado not in mes_atual.text:
+            while mes_desejado != mes_atual.text:
+
                 try:
                     # Se não for, clicar no botão de navegação "next"
                     botao_next = WebDriverWait(driver, 20).until(
@@ -113,7 +113,7 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
                     except ElementClickInterceptedException:
                         # Se o clique for interceptado, usa JavaScript para clicar
                         driver.execute_script("arguments[0].click();", botao_next)
-                    
+
                     # Aguardar a atualização do mês atual
                     mes_atual = WebDriverWait(driver, 20).until(
                         EC.presence_of_element_located((By.CLASS_NAME, "react-datepicker__current-month"))
@@ -125,22 +125,29 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
             time.sleep(3)
 
             seletor_dia = f".react-datepicker__day--0{dia}"
-            
+
             try:
                 # Aguardar até que o elemento correspondente ao dia desejado esteja clicável na página
-                elemento_dia = WebDriverWait(driver, 5).until(
-                    EC.element_to_be_clickable((By.CSS_SELECTOR, seletor_dia))
-                )
+                # elemento_dia = WebDriverWait(driver, 5).until(
+                #     EC.element_to_be_clickable((By.CSS_SELECTOR, seletor_dia))
+                # )
 
+                elemento_dias = driver.find_elements(By.CSS_SELECTOR,seletor_dia)
+
+                if int(dia) > 20:
+                    elemento_dia = elemento_dias[-1]
+                else:
+                    elemento_dia = elemento_dias[0]
+                #driver.execute_script("arguments[0].scrollIntoView();", elemento_dia)
                 # Clicar no elemento correspondente ao dia desejado
                 elemento_dia.click()
-                
+
             except TimeoutException:
                 logging.info(f"Não foi possível clicar no dia {dia} - Disney Tio Orlando.")
                 continue
 
             time.sleep(7)
-            
+
             # Encontrar todos os elementos com a classe 'MuiBox-root mui-7ulwng'
             elementos = driver.find_elements(By.CLASS_NAME, 'MuiBox-root.mui-7ulwng')
 
@@ -158,22 +165,22 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
                 preco_parcelado = float(partes[-1].replace('R$', '').replace(',', '.'))
                 # Calcula o preço parcelado
                 parque = titulo.split(' - ', 1)[0]
-                
+
                 # Mapear o nome do parque para o nome completo
                 parque = mapeamento_parques.get(parque, titulo)
-                
+
                 dados.append({
                     'Data_viagem': data.strftime('%Y-%m-%d'),
                     'Parque': parque,
                     "Preco_Avista": preco_a_vista,
                     "Preco_Parcelado": preco_parcelado * 12
                 })
-    
+
     driver.get('https://www.tioorlando.com.br/disney-4-park-magic')
-    
+
     time.sleep(5)
-    
-    await coleta(datas)        
+
+    await coleta(datas)
     for i in range(1, 11):
         driver.get('https://www.tioorlando.com.br/ingressos-disney-orlando')
 
@@ -184,18 +191,18 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
 
         # Clicar no botão
         elemento.click()
-        await coleta(datas)    
-    
+        await coleta(datas)
+
     # Fechar o navegador após processar todos os dados
     driver.quit()
     # Salvar os dados em um arquivo JSON
-    
-    
+
+
     df = pd.DataFrame(dados)
-    
+
     nome_arquivo = f'disney_tio_{data_atual}.json'
-    
+
     salvar_dados(df, nome_arquivo, 'orlando/tio', hora_global)
     logging.info('Coleta Finalizada Disney Tio Orlando')
-    return 
-    
+    return
+

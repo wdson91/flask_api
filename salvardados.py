@@ -22,10 +22,10 @@ def baixar_blob_se_existir(nome_arquivo_json, pasta):
         with open(nome_arquivo_json, "wb") as download_file:
             print(f"Arquivo {nome_arquivo_json} baixado com sucesso.")
             return download_file.write(blob_client.download_blob().readall())
-        
+
     else:
         print(f"Arquivo {nome_arquivo_json} não existe no Blob Storage.")
-    
+
 # Função para fazer upload do arquivo para o Azure Blob Storage
 def upload_blob(caminho_arquivo_json, nome_arquivo_json, pasta):
     blob_service_client = BlobServiceClient.from_connection_string(connect_str)
@@ -66,14 +66,14 @@ def salvar_dados(df, nome_arquivo_json, pasta,hour):
     # Salvar os dados no arquivo JSON
     with open(nome_arquivo_json, 'w') as file:
         json.dump(dados_exist, file, indent=4)
-        
+
     # Fazer upload do arquivo atualizado para o Azure Blob Storage
     upload_blob(nome_arquivo_json, nome_arquivo_json, pasta)
 
 def salvar_dados_lead(df, nome_arquivo_json, pasta,hour):
-    
-    
-    
+
+
+
     # Baixar o arquivo JSON do Azure Blob Storage se ele existir
     baixar_blob_se_existir(nome_arquivo_json, pasta)
 
@@ -86,17 +86,17 @@ def salvar_dados_lead(df, nome_arquivo_json, pasta,hour):
     # Salvar os dados no arquivo JSON
     with open(nome_arquivo_json, 'w') as file:
         json.dump(dados_exist, file, indent=4)
-        
+
     # Fazer upload do arquivo atualizado para o Azure Blob Storage
     upload_blob(nome_arquivo_json, nome_arquivo_json, pasta)
-    
+
     #apagar json da pasta atual
-    
+
     os.remove(nome_arquivo_json)
-    
-    
-    
-    
+
+
+
+
 def salvar_dados_margem(df, nome_arquivo_json, pasta, hour):
     # Converter o DataFrame para JSON
     json_data = df.to_json()
