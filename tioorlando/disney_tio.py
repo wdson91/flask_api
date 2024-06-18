@@ -24,7 +24,7 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
         "PROMO: ingressos Disney 1-Dia no Animal Kingdom – ADULTO COM PREÇO DE CRIANÇA": "1 Dia - Disney Basico Animal Kingdom",
         "PROMO: ingressos Disney 1-Dia no Hollywood Studios – ADULTO COM PREÇO DE CRIANÇA": "1 Dia - Disney Basico Hollywood Studios",
         "PROMO: ingressos Disney 1-Dia no EPCOT – ADULTO COM PREÇO DE CRIANÇA": "1 Dia - Disney Basico Epcot",
-        "PROMO: ingressos Disney 1-Dia no Magic Kingdom – ADULTO COM PREÇO DE CRIANÇAm": "1 Dia - Disney Basico Magic Kingdom",
+        "PROMO: ingressos Disney 1-Dia no Magic Kingdom – ADULTO COM PREÇO DE CRIANÇA": "1 Dia - Disney Basico Magic Kingdom",
         "Disney 1-Dia Park Hopper":"1 Dia - Disney Park Hopper",
         "Disney 1-Dia Park Hopper Plus":"1 Dia - Disney Parques Aquaticos",
         "PROMO: ingressos Disney 2-Dias Básico – ADULTO COM PREÇO DE CRIANÇA": "2 Dias - Disney World Basico",
@@ -203,7 +203,7 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
 
     nome_arquivo = f'disney_tio_{data_atual}.json'
 
-    salvar_dados(df, nome_arquivo, 'orlando/tio', '14:00')
+    salvar_dados(df, nome_arquivo, 'orlando/tio', hora_global)
     logging.info('Coleta Finalizada Disney Tio Orlando')
     return
 

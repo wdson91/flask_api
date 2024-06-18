@@ -9,11 +9,10 @@ dias_para_processar = [2,3,4,5]
 
 async def bloco01(hora_global,array_datas,data_atual):
 
-        try:
-            await coletar_precos_vmz_disneybasicos(array_datas,hora_global,data_atual)
+        # try:
+        #     await coletar_precos_vmz_disneybasicos(array_datas,hora_global,data_atual)
             
-        except Exception as e:
-            logging.error(f"Erro durante a coleta de preços da Disney: {e}")
+        # except Exception as e:
         try:
             await coletar_precos_vmz_universal(hora_global,array_datas,data_atual)
             

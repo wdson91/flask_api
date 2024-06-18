@@ -54,7 +54,7 @@ async def coletar_precos_voupra_hopper_plus(hora_global,array_datas,data_atual):
                 dump_count += 1
 
                 # Check if it is the third desired dump
-                if dump_count == 4:
+                if '1321/Views/CompraExpressa/_RTabelaCusto.cshtml' in script.text:
                     # Extract the data from the dump
                     dump_data = script.text.strip()
 
@@ -188,7 +188,7 @@ async def coletar_precos_voupra_hopper(hora_global,array_datas,data_atual):
                 dump_count += 1
 
                 # Check if it is the third desired dump
-                if dump_count == 4:
+                if '1321/Views/CompraExpressa/_RTabelaCusto.cshtml' in script.text:
                     # Extract the data from the dump
                     dump_data = script.text.strip()
 
