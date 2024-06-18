@@ -4,6 +4,7 @@ from helpers.atualizar_calibragem import atualizar_calibragem
 from webdriver_setup import get_webdriver
 
 async def coletar_precos_vmz_universal(hora_global, array_datas,data_atual):
+
     logging.info("Iniciando coleta de preços Vmz Universal.")
     # Configuração dos sites e URLs
     sites = [
@@ -13,13 +14,13 @@ async def coletar_precos_vmz_universal(hora_global, array_datas,data_atual):
         ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/2-parques-2-dias-park-to-park-data-fixa?", '2 Dias 2 Parques - Universal Orlando'),
         #("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/2-parques-4-dias-park-to-park-data-fixa?", '4 Dias 2 Parques - Universal Orlando'),
         #("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/3-parques-play-4-dias-park-to-park-data-fixa?", '4 Dias 3 Parques - Universal Orlando')
-        
+
     ]
     url_14_dias = "https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/14-dias-explorer-2024?"
-    
+
     # Configurações do WebDriver
     driver = get_webdriver()
-    
+
     try:
         datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
         dados = []
@@ -31,7 +32,7 @@ async def coletar_precos_vmz_universal(hora_global, array_datas,data_atual):
                 driver.get(site_url)
 
                 preco_parcelado, preco_avista = extrair_precos(driver,'basicos')
-                
+
                 dados.append({
                     'Data_viagem': data.strftime("%Y-%m-%d"),
                     'Parque': parque,
@@ -56,35 +57,40 @@ async def coletar_precos_vmz_universal(hora_global, array_datas,data_atual):
         salvar_dados(df, nome_arquivo, 'orlando/vmz', hora_global)
         atualizar_calibragem(75)
         logging.info("Coleta finalizada Site Vmz- Universal Orlando.")
-
+    except Exception as e:
+        logging.error(f"Erro durante a coleta de preços Vmz Universal: {e}")
     finally:
         driver.quit()
         return
 
 def extrair_precos(driver,tipo):
-
+    preco_float =  preco_final_avista ='-'
     if tipo == 'basicos':
         try:
+            preco_parcelado_element = preco_avista_element = '-'
             preco_parcelado_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/b')
             preco_avista_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]')
+            preco_final_avista = float(preco_avista_element.text.replace('R$ ', '').replace('.','').replace(',', '.'))
+            preco_parcelado = preco_parcelado_element.text.replace('R$ ', '').replace(',', '.')
+            preco_float = float(preco_parcelado) * 10
         except NoSuchElementException:
-            preco_final_avista = preco_parcelado = "-"
             try:
-                preco_parcelado_element = driver.find_element(By.XPATH,'//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[3]/div[2]/b')
-                preco_avista_element = driver.find_element(By.XPATH,'//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[3]/div[2]/span[1]')
+              preco_parcelado_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[3]/div[2]/b')
+              preco_avista_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[3]/div[2]/span[1]')
+              preco_final_avista = float(preco_avista_element.text.replace('R$ ', '').replace('.','').replace(',', '.'))
+              preco_parcelado = preco_parcelado_element.text.replace('R$ ', '').replace(',', '.')
+              preco_float = float(preco_parcelado) * 10
             except NoSuchElementException:
-                preco_final_avista = preco_parcelado = "-"
+              preco_float = preco_parcelado = "-"
     else:
-            try:
-                preco_parcelado_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[1]/div[2]/b')
-                preco_avista_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[1]/div[2]/span[1]')
-            except NoSuchElementException:
-                preco_final_avista = preco_parcelado = "-"
-            
-            
-    preco_final_avista = float(preco_avista_element.text.replace('R$ ', '').replace('.','').replace(',', '.'))
-    preco_parcelado = preco_parcelado_element.text.replace('R$ ', '').replace(',', '.')
-    preco_float = float(preco_parcelado) * 10
+          try:
+                preco_parcelado_element = driver.find_element(By.XPATH,'//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[1]/div[2]/b')
+                preco_avista_element = driver.find_element(By.XPATH,'//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[1]/div[2]/span[1]')
+                preco_final_avista = float(preco_avista_element.text.replace('R$ ', '').replace('.','').replace(',', '.'))
+                preco_parcelado = preco_parcelado_element.text.replace('R$ ', '').replace(',', '.')
+                preco_float = float(preco_parcelado) * 10
+          except NoSuchElementException:
+                preco_float = preco_parcelado = "-"
 
     return preco_float, preco_final_avista
 
