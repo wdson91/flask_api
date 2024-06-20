@@ -73,16 +73,16 @@ def qualidade(retries=0):
 
     filtro_texto.send_keys('conver')
 
-    time.sleep(3)
+    time.sleep(5)
 
     filtro_input.send_keys(Keys.ENTER)
 
-    time.sleep(3)
+    time.sleep(5)
 
     botao_pesquisar = wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[3]/section/div/div/div[3]/form/button[1]')))
     botao_pesquisar.click()
 
-    time.sleep(3)
+    time.sleep(10)
 
     conversores = wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[3]/section/div/div/div[2]/div/div[1]/div/div[2]/div[1]')))
     valor_conversores= int(conversores.text)
@@ -117,7 +117,7 @@ def qualidade(retries=0):
 
     botao_pesquisar.click()
 
-    time.sleep(2)
+    time.sleep(10)
 
     primeiroContato = driver.find_element(By.XPATH, '/html/body/div[3]/section/div/div/div[2]/div/div[1]/div/div[2]/div[1]')
     valor_pimeiroContato = int(primeiroContato.text)
