@@ -9,7 +9,7 @@ async def coletar_precos_voupra_sea(hora_global,array_datas,data_atual):
     driver = get_webdriver()
     #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
-    
+
     # Lista para armazenar os dados dos produtos
     all_data_set = set()  # Usando um conjunto para armazenar dados únicos
 
@@ -20,6 +20,7 @@ async def coletar_precos_voupra_sea(hora_global,array_datas,data_atual):
         376030: "3 Dias 3 Parques - SeaWorld Orlando",
         376031: "3 Dias 3 Parques com Refeições - SeaWorld Orlando",
         376032: "14 Dias 3 Parques - SeaWorld Orlando",
+        381252: "2 Dias 2 Parques com Refeição no Busch Gardens - SeaWorld Orlando",
     }
 
     for data in datas:
@@ -44,16 +45,16 @@ async def coletar_precos_voupra_sea(hora_global,array_datas,data_atual):
             if '[DUMP]' in script.text:
                 # Incrementa o contador de dumps
                 dump_count += 1
-                
+
                 # Verifica se é o terceiro dump desejado
                 if '1321/Views/CompraExpressa/_RTemporada.cshtml' in script.text:
                     # Extraia os dados do dump
                     dump_data = script.text.strip()
-                    
+
                     # Salva os dados em um arquivo txt
                     with open('dados_dump.txt', 'w') as file:
                         file.write(dump_data)
-                    
+
                     break  # Saia do loop após encontrar o terceiro dump
 
         # Abra o arquivo de texto com os dados
@@ -124,7 +125,7 @@ async def coletar_precos_voupra_sea(hora_global,array_datas,data_atual):
 
     # Create a JSON from the collected data
     json_data = json.dumps(all_data)
-    
+
     df = pd.DataFrame(all_data)
 
     # Exibir o DataFrame mesclado
@@ -135,16 +136,16 @@ async def coletar_precos_voupra_sea(hora_global,array_datas,data_atual):
 
     nome_arquivo = f'seaworld_voupra_{data_atual}.json'
     salvar_dados(df, nome_arquivo, 'orlando/voupra', hora_global)
-    
+
     atualizar_calibragem(20)
     logging.info("Coleta de preços Voupra Seaworld  finalizada.")
     return
 
 # async def coletar_precos_voupra_sea(hora_global,array_datas):
 #     # Configuração do Selenium
-    
+
 #     extract_data_and_return_dataframe(array_datas, hora_global)
-    
+
 #     options = webdriver.ChromeOptions()
 #     driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
 #     #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
@@ -168,7 +169,7 @@ async def coletar_precos_voupra_sea(hora_global,array_datas,data_atual):
 #     }
 
 #     dados = []
-    
+
 #     # Iniciar o loop pelas datas
 #     for data in datas:
 #         try:
@@ -176,7 +177,7 @@ async def coletar_precos_voupra_sea(hora_global,array_datas,data_atual):
 #             # Montar a URL com a data atual do loop
 #             url = base_url + data.strftime('%d%%2F%m%%2F%Y') + '&dump=true'
 #             driver.get(url)
-            
+
 #             # Usar WebDriverWait
 #             wait = WebDriverWait(driver, 10)  # Esperar até 10 segundos
 
@@ -206,7 +207,7 @@ async def coletar_precos_voupra_sea(hora_global,array_datas,data_atual):
 
 #                     # Convertendo para float e formatando
 #                     preco_float = float(preco_texto)
-                    
+
 #                     preco_formatado = round(preco_float, 2)
 
 #                     # Adicionando o preço ao dicionário
@@ -223,35 +224,35 @@ async def coletar_precos_voupra_sea(hora_global,array_datas,data_atual):
 #                 else:
 #                     preco = '-'
 #                     preco_avista = '-'
-                    
+
 #                 # Adicionar os dados à lista
 #                 dados.append({
-                    
+
 #                     'Data_viagem': data.strftime("%Y-%m-%d"),
 #                     'Parque': nome_desejado,
 #                     'Preco_Parcelado': preco,
 #                     'Preco_Avista': preco_avista
 #                 })
-            
-            
+
+
 # # Exibindo o DataFrame resultante
-            
+
 #         except Exception as e:
 #             logging.error("Erro ao processar data:", e)
 
 #     # Fechar o driver
 #     driver.quit()
-    
+
 #     df = pd.DataFrame(dados)
-    
+
 #     all_data_json = baixar_blob_se_existir('dados.json', 'voupra')
 
 #     # Carregar os dados do JSON baixado
 #     dados_json = carregar_dados_json('dados.json')
 #     # Converta os dados JSON em um DataFrame do Pandas
-    
+
 #     df_json = pd.DataFrame(dados_json)
-    
+
 #     df_json['Margem'].fillna('-', inplace=True)
 #     df_json['MargemCategoria'].fillna('-', inplace=True)
 #     # Mesclar os dois DataFrames com base nas colunas 'Data_viagem' e 'Parque'
@@ -261,18 +262,18 @@ async def coletar_precos_voupra_sea(hora_global,array_datas,data_atual):
 #     df_merged = df_merged.drop_duplicates()
 #     df_merged['Margem'].fillna('-', inplace=True)
 #     df_merged['MargemCategoria'].fillna('-', inplace=True)
-    
+
 #     nome_arquivo = f'seaworld_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
 #     salvar_dados(df_merged, nome_arquivo, 'voupra', hora_global)
-    
+
 #     for filename in os.listdir('.'):
 #         if filename.endswith(".json"):
 #             os.remove(filename)
 #             logging.info(f"Arquivo {filename} removido com sucesso.")
-    
+
 #     logging.info("Coleta de preços finalizada.")
-    
-    
+
+
 
 
 if __name__ == "__main__":
