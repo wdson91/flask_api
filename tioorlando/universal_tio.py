@@ -4,8 +4,11 @@ from webdriver_setup import get_webdriver
 
 async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar o driver do Selenium
     logging.info("Iniciando coleta de preços Tio Orlando Universal.")
-    driver = get_webdriver()
-    # Lista de datas para a coleta de dados
+    #driver = get_webdriver()
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver.maximize_window()
+
+
     array_datas = [10, 20, 47, 65, 126]
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
     dados = []
@@ -59,7 +62,7 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
             if dia < 10:
                 dia = f"0{dia}"
             mes_desejado = f'{mes} {ano}'
-           
+
             # Verificar se o mês atual é diferente do desejado
             while mes_desejado not in mes_atual.text:
                 try:

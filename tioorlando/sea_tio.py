@@ -4,8 +4,9 @@ from webdriver_setup import get_webdriver
 
 async def coleta_tio_sea(hora_global,array_datas,data_atual):# Inicializar o driver do Selenium
     logging.info("Iniciando coleta de preços Tio Orlando Seaworld.")
-    driver = get_webdriver()
-    # Lista de datas para a coleta de dados
+    #driver = get_webdriver()
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver.maximize_window()
     array_datas = [10, 20, 47, 65, 126]
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 

@@ -4,7 +4,9 @@ from webdriver_setup import get_webdriver
 
 
 async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o driver do Selenium
-    driver = get_webdriver()
+    #driver = get_webdriver()
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver.maximize_window()
     # Lista de datas para a coleta de dados
     array_datas = [10, 20, 47, 65, 126]
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
@@ -100,7 +102,7 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
                 dia = f"0{dia}"
             mes_desejado = f'{mes} {ano}'
 
-        
+
             # Verificar se o mês atual é diferente do desejado
             while mes_desejado != mes_atual.text:
 
@@ -167,7 +169,6 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
                 preco_parcelado = float(partes[-1].replace('R$', '').replace(',', '.'))
                 # Calcula o preço parcelado
                 parque = titulo.split(' - ', 1)[0]
-         
                 # Mapear o nome do parque para o nome completo
                 parque = mapeamento_parques.get(parque, titulo)
 
@@ -210,14 +211,14 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
     try:
             empresas = ['voupra', 'vmz', 'decolar','ml','tio','fastPass']
             parques = ['disney', 'universal', 'seaworld']
-            
+
             juntar_json = JuntarJsons(data_atual, empresas, parques, 'orlando')
-            
+
             await juntar_json.executar()
-    
+
     except Exception as e:
             logging.error(f"Erro durante a junção dos arquivos: {e}")
-    
+
     return
     return
 
