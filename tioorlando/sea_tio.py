@@ -52,7 +52,7 @@ async def coleta_tio_sea(hora_global,array_datas,data_atual):# Inicializar o dri
         driver.get('https://www.tioorlando.com.br/ingressos-seaworld-parks')
         logging.info(f"Coletando preços do dia {i} - Tio SeaWorld.")
         # Aguardar o carregamento do elemento
-        elemento = WebDriverWait(driver, 20).until(
+        elemento = WebDriverWait(driver, 40).until(
             EC.presence_of_element_located((By.XPATH, f'//*[@id="page-content"]/div[2]/div/div[2]/div/div/div/div[2]/div[1]/div[2]/div/div[{i}]/button'))
         )
 
@@ -105,7 +105,7 @@ async def coleta_tio_sea(hora_global,array_datas,data_atual):# Inicializar o dri
                 # )
                 elemento_dias = driver.find_elements(By.CSS_SELECTOR,seletor_dia)
 
-                if int(dia) > 20:
+                if int(dia) > 23:
                     elemento_dia = elemento_dias[-1]
                 else:
                     elemento_dia = elemento_dias[0]

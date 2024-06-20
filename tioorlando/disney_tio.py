@@ -1,3 +1,4 @@
+from classes.junta_dados_classe import JuntarJsons
 from imports import *
 from webdriver_setup import get_webdriver
 
@@ -123,7 +124,7 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
                     logging.info("Não foi possível encontrar o botão de navegação ou clicar nele. - Disney Tio Orlando")
                     break
 
-            time.sleep(3)
+            time.sleep(7)
 
             seletor_dia = f".react-datepicker__day--0{dia}"
 
@@ -186,7 +187,7 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
         driver.get('https://www.tioorlando.com.br/ingressos-disney-orlando')
 
         # Aguardar o carregamento do elemento
-        elemento = WebDriverWait(driver, 20).until(
+        elemento = WebDriverWait(driver, 40).until(
             EC.presence_of_element_located((By.XPATH, f'//*[@id="page-content"]/div[2]/div/div[2]/div/div/div/div[2]/div[1]/div[2]/div/div[{i}]/button'))
         )
 
@@ -205,5 +206,18 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
 
     salvar_dados(df, nome_arquivo, 'orlando/tio', hora_global)
     logging.info('Coleta Finalizada Disney Tio Orlando')
+    time.sleep(10)
+    try:
+            empresas = ['voupra', 'vmz', 'decolar','ml','tio','fastPass']
+            parques = ['disney', 'universal', 'seaworld']
+            
+            juntar_json = JuntarJsons(data_atual, empresas, parques, 'orlando')
+            
+            await juntar_json.executar()
+    
+    except Exception as e:
+            logging.error(f"Erro durante a junção dos arquivos: {e}")
+    
+    return
     return
 

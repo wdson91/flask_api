@@ -59,8 +59,7 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
             if dia < 10:
                 dia = f"0{dia}"
             mes_desejado = f'{mes} {ano}'
-            print(mes_desejado)
-            print(mes_atual.text)
+           
             # Verificar se o mês atual é diferente do desejado
             while mes_desejado not in mes_atual.text:
                 try:
@@ -88,12 +87,12 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
             seletor_dia = f".react-datepicker__day--0{dia}"
             try:
                 # # Aguardar até que o elemento correspondente ao dia desejado esteja clicável na página
-                # elemento_dia = WebDriverWait(driver, 10).until(
-                #     EC.element_to_be_clickable((By.CSS_SELECTOR, seletor_dia))
+                # elemento_dias = WebDriverWait(driver, 30).until(
+                #     EC.visibility_of_all_elements_located((By.CSS_SELECTOR, seletor_dia))
                 # )
                 elemento_dias = driver.find_elements(By.CSS_SELECTOR,seletor_dia)
 
-                if int(dia) > 20:
+                if int(dia) > 23:
                     elemento_dia = elemento_dias[-1]
                 else:
                     elemento_dia = elemento_dias[0]
@@ -150,7 +149,7 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
         driver.get('https://www.tioorlando.com.br/ingressos-universal-orlando')
 
         # Aguardar o carregamento do elemento
-        elemento = WebDriverWait(driver, 20).until(
+        elemento = WebDriverWait(driver, 40).until(
             EC.presence_of_element_located((By.XPATH, f'//*[@id="page-content"]/div[2]/div/div[2]/div/div/div/div[2]/div[1]/div[2]/div/div[{i}]/button'))
         )
 
