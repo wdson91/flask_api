@@ -4,8 +4,8 @@ from webdriver_setup import get_webdriver
 
 async def coleta_tio_sea(hora_global,array_datas,data_atual):# Inicializar o driver do Selenium
     logging.info("Iniciando coleta de preços Tio Orlando Seaworld.")
-    #driver = get_webdriver()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver = get_webdriver()
+    #driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     driver.maximize_window()
     array_datas = [10, 20, 47, 65, 126]
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
@@ -106,7 +106,7 @@ async def coleta_tio_sea(hora_global,array_datas,data_atual):# Inicializar o dri
                 # )
                 elemento_dias = driver.find_elements(By.CSS_SELECTOR,seletor_dia)
 
-                if int(dia) > 23:
+                if len(elemento_dias) > 1 and int(dia) > 23:
                     elemento_dia = elemento_dias[-1]
                 else:
                     elemento_dia = elemento_dias[0]
@@ -117,11 +117,12 @@ async def coleta_tio_sea(hora_global,array_datas,data_atual):# Inicializar o dri
                 logging.error(f"Não foi possível clicar no dia {dia}. - SeaWorld Tio Orlando.")
                 continue
 
-            time.sleep(7)
+            time.sleep(12)
 
             # Encontrar todos os elementos com a classe 'MuiBox-root mui-7ulwng'
-            elementos = driver.find_elements(By.CLASS_NAME, 'MuiBox-root.mui-7ulwng')
-
+            elementos = WebDriverWait(driver, 20).until(
+                EC.presence_of_all_elements_located((By.CLASS_NAME, 'MuiBox-root.mui-7ulwng'))
+            )
             # Iterar sobre os elementos
             for elemento in elementos:
 
@@ -148,6 +149,7 @@ async def coleta_tio_sea(hora_global,array_datas,data_atual):# Inicializar o dri
                     "Preco_Avista": preco_a_vista,
                     "Preco_Parcelado": preco_parcelado * 12
                 })
+        time.sleep(5)
     # Fechar o navegador após processar todos os dados
     driver.quit()
     # Salvar os dados em um arquivo JSON

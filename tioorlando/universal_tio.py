@@ -4,8 +4,8 @@ from webdriver_setup import get_webdriver
 
 async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar o driver do Selenium
     logging.info("Iniciando coleta de preços Tio Orlando Universal.")
-    #driver = get_webdriver()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver = get_webdriver()
+    #driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     driver.maximize_window()
 
 
@@ -88,28 +88,32 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
             time.sleep(5)
 
             seletor_dia = f".react-datepicker__day--0{dia}"
+            
             try:
                 # # Aguardar até que o elemento correspondente ao dia desejado esteja clicável na página
-                # elemento_dias = WebDriverWait(driver, 30).until(
-                #     EC.visibility_of_all_elements_located((By.CSS_SELECTOR, seletor_dia))
-                # )
-                elemento_dias = driver.find_elements(By.CSS_SELECTOR,seletor_dia)
-
-                if int(dia) > 23:
+                elemento_dias = WebDriverWait(driver, 30).until(
+                    EC.visibility_of_all_elements_located((By.CSS_SELECTOR, seletor_dia))
+                )
+                
+                #elemento_dias = driver.find_elements(By.CSS_SELECTOR,seletor_dia)
+                if len(elemento_dias) > 1 and int(dia) > 23:
                     elemento_dia = elemento_dias[-1]
                 else:
                     elemento_dia = elemento_dias[0]
-                # Clicar no elemento correspondente ao dia desejado
+                    # Clicar no elemento correspondente ao dia desejado
                 elemento_dia.click()
 
             except TimeoutException:
                 logging.error(f"Não foi possível clicar no dia {dia} - Universal Tio Orlando.")
                 continue
 
-            time.sleep(7)
+            time.sleep(12)
 
             # Encontrar todos os elementos com a classe 'MuiBox-root mui-7ulwng'
-            elementos = driver.find_elements(By.CLASS_NAME, 'MuiBox-root.mui-7ulwng')
+            elementos = WebDriverWait(driver, 20).until(
+                EC.presence_of_all_elements_located((By.CLASS_NAME, 'MuiBox-root.mui-7ulwng'))
+            )
+            
 
             # Iterar sobre os elementos
             for elemento in elementos:
@@ -137,7 +141,9 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
                     "Preco_Avista": preco_a_vista,
                     "Preco_Parcelado": preco_parcelado * 12
                 })
-
+                
+        time.sleep(5)        
+        return
     #Lista para armazenar os dados
 
 
