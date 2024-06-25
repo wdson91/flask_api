@@ -108,7 +108,7 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
 
                 try:
                     # Se não for, clicar no botão de navegação "next"
-                    botao_next = WebDriverWait(driver, 20).until(
+                    botao_next = WebDriverWait(driver, 30).until(
                         EC.element_to_be_clickable((By.CLASS_NAME, "react-datepicker__navigation--next"))
                     )
                     try:
@@ -119,7 +119,7 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
                         driver.execute_script("arguments[0].click();", botao_next)
 
                     # Aguardar a atualização do mês atual
-                    mes_atual = WebDriverWait(driver, 20).until(
+                    mes_atual = WebDriverWait(driver, 30).until(
                         EC.presence_of_element_located((By.CLASS_NAME, "react-datepicker__current-month"))
                     )
                 except TimeoutException:
@@ -138,7 +138,9 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
 
                 elemento_dias = driver.find_elements(By.CSS_SELECTOR,seletor_dia)
 
-                if len(elemento_dias) > 1 and int(dia) > 23:
+                if  int(dia) < 5:
+                    elemento_dia = elemento_dias[0]
+                elif int(dia) > 23:
                     elemento_dia = elemento_dias[-1]
                 else:
                     elemento_dia = elemento_dias[0]
@@ -179,7 +181,7 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
                     "Preco_Avista": preco_a_vista,
                     "Preco_Parcelado": preco_parcelado * 12
                 })
-            
+        time.sleep(5)     
     driver.get('https://www.tioorlando.com.br/disney-4-park-magic')
 
     time.sleep(5)

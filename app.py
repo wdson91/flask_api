@@ -152,7 +152,7 @@ async def coleta_paris():
 
 @app.route('/urls_paris', methods=['GET'])
 def get_urls_paris():
-    urls = ['https://www.decolar.com/atracoes-turisticas/d-GL_PAR_2453/entrada+da+disneyland+paris-paris?clickedPrice=649&priceDate=1711975109134&clickedCurrency=BRL&currency=BRL','https://www.decolar.com/atracoes-turisticas/d-PAM_PAR_53515/disneyland+paris+acesso+a+2+parques+em+2+dias+2024-paris?clickedPrice=1475&priceDate=1712252562173&clickedCurrency=BRL&currency=BRL']
+    urls = ['https://www.decolar.com/atracoes-turisticas/d-PAM_PAR_53521/disneyland+paris+acesso+a+2+parques+em+1+dia+2024-paris?clickedPrice=839&priceDate=1719307557920&clickedCurrency=BRL&currency=BRL','https://www.decolar.com/atracoes-turisticas/d-PAM_PAR_53515/disneyland+paris+acesso+a+2+parques+em+2+dias+2024-paris?clickedPrice=1475&priceDate=1712252562173&clickedCurrency=BRL&currency=BRL']
     
     return jsonify(urls)
 

@@ -34,7 +34,7 @@ def decolar_paris(dados,data_atual):
     }
     
     parques_mapping = {
-    "Disneyland Paris - 1 dia / 2 parques": '1 Dia 2 Parques - Disney Paris',
+    "Disneyland Paris Acesso a 2 parques em 1 dia 2024": '1 Dia 2 Parques - Disney Paris',
     "Disneyland Paris: 1 dia / 1 parque": '1 Dia 1 Parque - Disney Paris',
     'Disneyland Paris Acesso a 2 parques em 2 dias 2024': '2 Dias 2 Parques - Disney Paris',
 }
