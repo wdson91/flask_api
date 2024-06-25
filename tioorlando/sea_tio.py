@@ -104,17 +104,18 @@ async def coleta_tio_sea(hora_global,array_datas,data_atual):# Inicializar o dri
                 # elemento_dia = WebDriverWait(driver, 10).until(
                 #     EC.element_to_be_clickable((By.CSS_SELECTOR, seletor_dia))
                 # )
-                elemento_dias = driver.find_elements(By.CSS_SELECTOR,seletor_dia)
+                elemento_dias = WebDriverWait(driver, 30).until(
+                    EC.presence_of_all_elements_located((By.CSS_SELECTOR, seletor_dia))
+                )
 
-                if  int(dia) < 5:
-                    elemento_dia = elemento_dias[0]
-                elif int(dia) > 23:
+                #elemento_dias = driver.find_elements(By.CSS_SELECTOR,seletor_dia)
+
+                if int(dia) > 23 and len(elemento_dias) > 1:
                     elemento_dia = elemento_dias[-1]
                 else:
                     elemento_dia = elemento_dias[0]
-                # Clicar no elemento correspondente ao dia desejado
+                    # Clicar no elemento correspondente ao dia desejado
                 elemento_dia.click()
-
             except TimeoutException:
                 logging.error(f"Não foi possível clicar no dia {dia}. - SeaWorld Tio Orlando.")
                 continue

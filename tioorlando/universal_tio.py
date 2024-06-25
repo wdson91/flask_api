@@ -88,17 +88,16 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
             time.sleep(7)
 
             seletor_dia = f".react-datepicker__day--0{dia}"
-            
+
             try:
                 # # Aguardar até que o elemento correspondente ao dia desejado esteja clicável na página
                 elemento_dias = WebDriverWait(driver, 30).until(
-                    EC.visibility_of_all_elements_located((By.CSS_SELECTOR, seletor_dia))
+                    EC.presence_of_all_elements_located((By.CSS_SELECTOR, seletor_dia))
                 )
-                
+
                 #elemento_dias = driver.find_elements(By.CSS_SELECTOR,seletor_dia)
-                if  int(dia) < 5:
-                    elemento_dia = elemento_dias[0]
-                elif int(dia) > 23:
+
+                if int(dia) > 23 and len(elemento_dias) > 1:
                     elemento_dia = elemento_dias[-1]
                 else:
                     elemento_dia = elemento_dias[0]
@@ -115,7 +114,7 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
             elementos = WebDriverWait(driver, 20).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, 'MuiBox-root.mui-7ulwng'))
             )
-            
+
 
             # Iterar sobre os elementos
             for elemento in elementos:
@@ -143,8 +142,8 @@ async def coleta_tio_universal(hora_global,array_datas,data_atual):# Inicializar
                     "Preco_Avista": preco_a_vista,
                     "Preco_Parcelado": preco_parcelado * 12
                 })
-                
-        time.sleep(5)        
+
+        time.sleep(5)
         return
     #Lista para armazenar os dados
 
