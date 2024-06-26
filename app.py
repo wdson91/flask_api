@@ -1,6 +1,5 @@
 
 from chip.americaChip import chip_eua_europa, esim_eua_europa
-from chip.tioorlandoChip import coleta_tio_chip
 from chip.voupraChip import coletar_precos_voupra_chip
 from coleta_hopper import bloco01_hopper, bloco02_hopper, bloco03_hopper
 from imports import *
@@ -43,10 +42,8 @@ calibrating = False
 global hora_global
 global data_atual
 global valor_halloween
-global valor_chip
 global calibrating_leads
 valor_halloween = 0
-valor_chip = 0
 sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
 data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
 hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
@@ -791,9 +788,8 @@ async def hopper03():
 async def chip():
     global data_atual
     global hora_global
-    global calibrating
-
-    calibrating = True
+    
+    
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
@@ -807,9 +803,9 @@ async def chip():
 async def americachipchip():
     global data_atual
     global hora_global
-    global calibrating
+    
 
-    calibrating = True
+    
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
@@ -823,9 +819,9 @@ async def americachipchip():
 async def americaesim():
     global data_atual
     global hora_global
-    global calibrating
+   
 
-    calibrating = True
+    
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
@@ -835,43 +831,6 @@ async def americaesim():
 
     return jsonify({"message": "Dados salvos com sucesso!"})
 
-@app.route('/finalizar_chip', methods=['GET'])
-async def finalizar_chip():
-
-    global valor_chip
-
-    valor_chip = valor_chip + 1
-
-    if valor_chip == 2:
-        try:
-            empresas = ['voupra', 'america','tio']
-            parques = ['chip','esim']
-
-            juntar_json = JuntarJsons(data_atual, empresas, parques, 'chip')
-
-            await juntar_json.executar()
-
-            valor_chip = 0
-        except Exception as e:
-            logging.error(f"Erro durante a junção dos arquivos: {e}")
-
-    return jsonify({"message": "Dados salvos com sucesso!"})
-
-@app.route('/tiochip', methods=['GET'])
-async def tiochip():
-    global data_atual
-    global hora_global
-    global calibrating
-
-    calibrating = True
-    data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
-    hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
-    array_datas = [5,10, 20, 47, 65, 126]
-
-
-    await coleta_tio_chip(hora_global,data_atual)
-
-    return jsonify({"message": "Dados salvos com sucesso!"})
 if __name__ == '__main__':
 
     app.run(debug=True, host='0.0.0.0',port=5000)
