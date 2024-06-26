@@ -1,3 +1,4 @@
+from helpers.atualizar_calibragem import finalizar_chip
 from imports import *
 
 from salvardados import salvar_dados
@@ -194,6 +195,7 @@ async def esim_eua_europa(hora_global,data_atual):# -> list:
     nome_arquivo = f'esim_america_{data_atual}.json'
     salvar_dados(df, nome_arquivo, 'chip/america', hora_global)
 
+    finalizar_chip()
     return
 
 
@@ -253,7 +255,9 @@ async def chip_eua_europa(hora_global,data_atual):
   nome_arquivo = f'chip_america_{data_atual}.json'
   salvar_dados(df, nome_arquivo, 'chip/america', hora_global)
 
-  return dados
+  finalizar_chip()
+
+  return
 
 
 
