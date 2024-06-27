@@ -24,13 +24,13 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
     # Mapeamento dos nomes dos parques
     mapeamento_parques = {
         "Disney 1-Dia 1-Parque Aquático": "Magic Kingdom",
-        "PROMO: ingressos Disney 1-Dia no Animal Kingdom – ADULTO COM PREÇO DE CRIANÇA": "1 Dia - Disney Basico Animal Kingdom",
-        "PROMO: ingressos Disney 1-Dia no Hollywood Studios – ADULTO COM PREÇO DE CRIANÇA": "1 Dia - Disney Basico Hollywood Studios",
-        "PROMO: ingressos Disney 1-Dia no EPCOT – ADULTO COM PREÇO DE CRIANÇA": "1 Dia - Disney Basico Epcot",
-        "PROMO: ingressos Disney 1-Dia no Magic Kingdom – ADULTO COM PREÇO DE CRIANÇA": "1 Dia - Disney Basico Magic Kingdom",
+        "PROMO: Disney 1-Dia no Animal Kingdom": "1 Dia - Disney Basico Animal Kingdom",
+        "PROMO: Disney 1-Dia no Hollywood Studios": "1 Dia - Disney Basico Hollywood Studios",
+        "PROMO: Disney 1-Dia no EPCOT": "1 Dia - Disney Basico Epcot",
+        "PROMO: Disney 1-Dia no Magic Kingdom": "1 Dia - Disney Basico Magic Kingdom",
         "Disney 1-Dia Park Hopper":"1 Dia - Disney Park Hopper",
         "Disney 1-Dia Park Hopper Plus":"1 Dia - Disney Parques Aquaticos",
-        "PROMO: ingressos Disney 2-Dias Básico – ADULTO COM PREÇO DE CRIANÇA": "2 Dias - Disney World Basico",
+        "PROMO: Disney 2-Dias Básico": "2 Dias - Disney World Basico",
         "Disney 2-Dias Básico com Parque Aquático e Esportes Aquáticos": "Disney 2-Dias Básico com Parque Aquático e Esportes Aquáticos",
         "Disney 2-Dias Park Hopper": "2 Dias - Disney Park Hopper",
         "Disney 2-Dias Park Hopper Plus": "2 Dias - Disney Parques Aquaticos",
@@ -132,7 +132,7 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
 
             try:
                 # Aguardar até que o elemento correspondente ao dia desejado esteja clicável na página
-                elemento_dias = WebDriverWait(driver, 30).until(
+                elemento_dias = WebDriverWait(driver, 10).until(
                     EC.presence_of_all_elements_located((By.CSS_SELECTOR, seletor_dia))
                 )
 
@@ -149,7 +149,7 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
                 logging.info(f"Não foi possível clicar no dia {dia} - Disney Tio Orlando.")
                 continue
 
-            time.sleep(12)
+            time.sleep(5)
 
             # Encontrar todos os elementos com a classe 'MuiBox-root mui-7ulwng'
             elementos = WebDriverWait(driver, 20).until(
@@ -169,9 +169,10 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
                 preco_parcelado = float(partes[-1].replace('R$', '').replace(',', '.'))
                 # Calcula o preço parcelado
                 parque = titulo.split(' - ', 1)[0]
+                
                 # Mapear o nome do parque para o nome completo
                 parque = mapeamento_parques.get(parque, titulo)
-
+                
                 dados.append({
                     'Data_viagem': data.strftime('%Y-%m-%d'),
                     'Parque': parque,
@@ -219,6 +220,5 @@ async def coleta_tio_orlando(hora_global,array_datas,data_atual):# Inicializar o
     except Exception as e:
             logging.error(f"Erro durante a junção dos arquivos: {e}")
 
-    return
     return
 
