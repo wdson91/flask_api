@@ -194,7 +194,7 @@ async def esim_eua_europa(hora_global,data_atual):# -> list:
     df = pd.DataFrame(dados)
     nome_arquivo = f'esim_america_{data_atual}.json'
     salvar_dados(df, nome_arquivo, 'chip/america', hora_global)
-
+    time.sleep(5)
     finalizar_chip()
     return
 
@@ -254,7 +254,7 @@ async def chip_eua_europa(hora_global,data_atual):
   df = pd.DataFrame(dados)
   nome_arquivo = f'chip_america_{data_atual}.json'
   salvar_dados(df, nome_arquivo, 'chip/america', hora_global)
-
+  time.sleep(5)
   finalizar_chip()
 
   return

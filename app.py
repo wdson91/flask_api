@@ -43,6 +43,8 @@ global hora_global
 global data_atual
 global valor_halloween
 global calibrating_leads
+global valor_chip
+valor_chip = 0
 valor_halloween = 0
 sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
 data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
@@ -788,8 +790,8 @@ async def hopper03():
 async def chip():
     global data_atual
     global hora_global
-    
-    
+
+
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
@@ -803,9 +805,9 @@ async def chip():
 async def americachipchip():
     global data_atual
     global hora_global
-    
 
-    
+
+
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
@@ -815,13 +817,37 @@ async def americachipchip():
 
     return jsonify({"message": "Dados salvos com sucesso!"})
 
+@app.route('/finalizar_chip', methods=['GET'])
+async def finalizar_chip():
+
+    global valor_chip
+
+    valor_chip = valor_chip + 1
+
+    if valor_chip == 2:
+        try:
+            empresas = ['voupra', 'america', 'tio']
+            parques = ['chip']
+
+            juntar_json = JuntarJsons(data_atual, empresas, parques, 'chip')
+
+            await juntar_json.executar()
+
+            valor_chip = 0
+
+        except Exception as e:
+            logging.error(f"Erro durante a junção dos arquivos: {e}")
+
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+
 @app.route('/americaesim', methods=['GET'])
 async def americaesim():
     global data_atual
     global hora_global
-   
 
-    
+
+
     data_atual = datetime.now(sao_paulo_tz).strftime("%Y-%m-%d")
     hora_global = datetime.now(sao_paulo_tz).strftime("%H:%M")
     array_datas = [5,10, 20, 47, 65, 126]
