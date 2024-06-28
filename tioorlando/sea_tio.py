@@ -104,7 +104,7 @@ async def coleta_tio_sea(hora_global,array_datas,data_atual):# Inicializar o dri
                 # elemento_dia = WebDriverWait(driver, 10).until(
                 #     EC.element_to_be_clickable((By.CSS_SELECTOR, seletor_dia))
                 # )
-                elemento_dias = WebDriverWait(driver, 30).until(
+                elemento_dias = WebDriverWait(driver, 10).until(
                     EC.presence_of_all_elements_located((By.CSS_SELECTOR, seletor_dia))
                 )
 
@@ -120,7 +120,7 @@ async def coleta_tio_sea(hora_global,array_datas,data_atual):# Inicializar o dri
                 logging.error(f"Não foi possível clicar no dia {dia}. - SeaWorld Tio Orlando.")
                 continue
 
-            time.sleep(12)
+            time.sleep(5)
 
             # Encontrar todos os elementos com a classe 'MuiBox-root mui-7ulwng'
             elementos = WebDriverWait(driver, 20).until(
