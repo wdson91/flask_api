@@ -116,9 +116,9 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
     }
     def fechar_popups(driver):
         try:
-            botao_fechar_selector = '.dinTargetFormCloseButtom'
-            botao_fechar = WebDriverWait(driver, waiter + 3).until(
-                EC.visibility_of_element_located((By.CSS_SELECTOR, botao_fechar_selector))
+            botao_fechar_selector = '//*[@id="rd-close_button-lxyz9zz9"]'
+            botao_fechar = WebDriverWait(driver, waiter + 5).until(
+                EC.visibility_of_element_located((By.XPATH, botao_fechar_selector))
             )
             botao_fechar.click()
             botao_cookies = WebDriverWait(driver, waiter + 3).until(
@@ -146,6 +146,9 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
             if ano_atual != ano:
                 # Scroll para o elemento do ano e clica para abrir a lista de opções
                 scroll_to_element(driver, year_select)
+                  # Espera para o scroll acontecer
+                fechar_popups(driver)
+                time.sleep(2)
                 year_select.click()
                 
                 # Seleciona o ano desejado
@@ -210,8 +213,8 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
             nome_pacote = nome_pacotes.get(dia, f"{dia} Dias - Desconhecido")
             url_com_dias = f"{base_url}?mes=2024-01&dias={dia}"
             driver.get(url_com_dias)
-            fechar_popups(driver)
-
+            #fechar_popups(driver)
+            
             for data in datas:
                 mes = data.month - 1
                 ano = data.year
