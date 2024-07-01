@@ -21,6 +21,8 @@ async def coletar_precos_voupra_sea(hora_global,array_datas,data_atual):
         376031: "3 Dias 3 Parques com Refeições - SeaWorld Orlando",
         376032: "14 Dias 3 Parques - SeaWorld Orlando",
         381252: "2 Dias 2 Parques com Refeição no Busch Gardens - SeaWorld Orlando",
+        381352: "1 Dia SeaWorld Orlando com Refeições Inclusas",
+        381353: "1 Dia Busch Gardens Tampa com Refeições Inclusas"
     }
 
     for data in datas:

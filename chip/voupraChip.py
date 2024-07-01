@@ -124,8 +124,8 @@ async def coletar_precos_voupra_chip(hora_global,data_atual):
         {
 
             'Chip': parque,
-            'data_ativacao': data_ida,
-            'dias':dias,
+            'Data_Ativacao': data_ida,
+            'Dias':dias,
             "Preco_Avista": preco_Avista,
             "Preco_Parcelado": preco_Parcelado
         }

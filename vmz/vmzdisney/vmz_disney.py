@@ -10,7 +10,7 @@ async def coletar_precos_vmz(hora_global,array_datas,data_atual) -> None:
     # Defina sua lógica para baixar os arquivos e esperar por eles
     baixar_blob_se_existir('disney_vmz_basicos_parcial.json', 'orlando/vmz')
     baixar_blob_se_existir('disney_vmz_dias_parcial.json', 'orlando/vmz')
-    
+
     # Carregue os dados do JSON baixado
     disney_basicos = carregar_dados_json('disney_vmz_basicos_parcial.json')
     disney_dias = carregar_dados_json('disney_vmz_dias_parcial.json')
@@ -21,26 +21,26 @@ async def coletar_precos_vmz(hora_global,array_datas,data_atual) -> None:
 
 
     df = pd.DataFrame(dados_combinados)
-    
+
     df_sorted = df.sort_values(by=['Data_viagem', 'Parque'], ignore_index=True)
     # # Crie o DataFrame a partir dos dados formatados
     # df = pd.DataFrame(dados_formatados)
-    
+
     nome_arquivo = f'disney_vmz_{data_atual}.json'
-    
+
     salvar_dados(df_sorted, nome_arquivo, 'orlando/vmz', hora_global)
-    
-    
+
+
     logging.info("Coleta finalizada. Vmz Disney.")
     atualizar_calibragem(65)
-    return 
+    return
 
 
 async def coletar_precos_vmz_disneybasicos(array_datas,hora_global,data_atual):
     logging.info("Iniciando coleta de preços Vmz Disney Basicos.")
     driver = get_webdriver()
-    
-    
+
+
     sites = [
     ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/disney-ingresso-magic-kingdom-1dia?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Basico Magic Kingdom'),
     ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/epcot?",  '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Basico Epcot'),
@@ -63,9 +63,9 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hora_global,data_atual):
             logging.info(f"Coletando preços para {parque_nome} na data: {data} Vmz Basicos.")
             url_com_data = f"{site_url}&data={data.strftime('%Y-%m-%d')}"
             driver.get(url_com_data)
-            
+
             try:
-                
+
                 # Tente localizar o elemento com o preço
                 wait = WebDriverWait(driver, 10)
                 elemento_preco = driver.find_element(By.XPATH, xpath_selector)
@@ -93,16 +93,16 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hora_global,data_atual):
     # Criando um DataFrame
     df = pd.DataFrame(dados)
     salvar_dados(df, 'disney_vmz_basicos_parcial.json','orlando/vmz',hora_global)
-    
-    
+
+
     atualizar_calibragem(40)
     return
 
 async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_global,data_atual):
     waiter = 2
     logging.info("Iniciando coleta de preços Vmz Disney Dias.")
-    driver = get_webdriver()
-    
+    #driver = get_webdriver()
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     nome_pacotes = {
         2: "2 Dias - Disney World Basico",
         3: "3 Dias - Disney World Basico",
@@ -125,7 +125,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
                 EC.visibility_of_element_located((By.XPATH, '//*[@id="__layout"]/div/div[3]/div/div/div[2]/button'))
             )
             botao_cookies.click()
-            
+
             logging.info("Pop-up fechado. Vmz Disney Dias.")
         except Exception as e:
             logging.warning(f"Popup não encontrada - {e} Vmz Disney Dias.")
@@ -133,33 +133,33 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
     def scroll_to_element(driver, element):
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
         time.sleep(waiter + 2)  # Espera para a rolagem acontecer
-    
+        fechar_popups(driver)
+
     def mudar_mes_ano(driver, mes, ano):
         try:
             # Espera até que o seletor do ano esteja clicável
             year_select = WebDriverWait(driver, waiter + 20).until(EC.element_to_be_clickable((By.ID, "year-control")))
-            
+
             # Lê o ano atual selecionado
             ano_atual = year_select.get_attribute("value")
-            
+
             # Verifica se o ano atual é o mesmo que o ano desejado
             if ano_atual != ano:
                 # Scroll para o elemento do ano e clica para abrir a lista de opções
                 scroll_to_element(driver, year_select)
-                  # Espera para o scroll acontecer
-                fechar_popups(driver)
+                # Espera para o scroll acontecer
                 time.sleep(2)
                 year_select.click()
-                
+
                 # Seleciona o ano desejado
                 driver.find_element(By.CSS_SELECTOR, f'option[value="{ano}"]').click()
 
             # Espera até que o seletor do mês esteja clicável
             month_select = WebDriverWait(driver, waiter + 20).until(EC.element_to_be_clickable((By.ID, "month-control")))
-            
+
             # Lê o mês atual selecionado
             mes_atual = month_select.get_attribute("value")
-            
+
             # Verifica se o mês atual é o mesmo que o mês desejado
             if mes_atual != mes:
                 # Seleciona o mês desejado
@@ -180,11 +180,12 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
             for elemento in elementos_fc_content:
                 fc_date = elemento.find_element(By.CLASS_NAME, 'fc-date').text
                 if fc_date == str(data.day):
+                    elemento.click()
                     calendar_event_price = elemento.find_element(By.CLASS_NAME, 'calendar-event-price')
                     price_text = calendar_event_price.text.strip()
                     preco_avista = float(price_text.replace('R$', '').replace('.', '').replace(',', '.').strip())
                     preco_parcelado = round(preco_avista * 1.087,2)
-                    
+
                     return preco_avista, preco_parcelado
         except Exception as e:
             logging.error(f"Erro ao encontrar preço para data {data}: {e} - Vmz Disney Dias.")
@@ -214,15 +215,15 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
             url_com_dias = f"{base_url}?mes=2024-01&dias={dia}"
             driver.get(url_com_dias)
             #fechar_popups(driver)
-            
+
             for data in datas:
                 mes = data.month - 1
                 ano = data.year
                 mudar_mes_ano(driver, mes, ano)
-                time.sleep(7)  # Espera para a mudança de mês e ano acontecer
+                time.sleep(5)  # Espera para a mudança de mês e ano acontecer
                 preco_avista,preco_parcelado = encontrar_preco_data(driver, data)
                 if preco_avista:
-                    
+
                     dados.append({
                         'Data_viagem': data.strftime("%Y-%m-%d"),
                         'Parque': nome_pacote,
@@ -233,33 +234,33 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
                     logging.warning(f"Preço não encontrado para {nome_pacote} em {data} - Vmz Disney Dias.")
 
         return dados  # Return the 'dados' list
-    
+
     dias_para_processar = [2,3,4,5,6,7,8,9,10]
     resultados = processar_dias(driver, dias_para_processar,array_datas)
 
-    
-    
+
+
     df = pd.DataFrame(resultados)
     salvar_dados(df,'disney_vmz_dias_parcial.json','orlando/vmz',hora_global)
     driver.quit()
     logging.info("Coleta de preços finalizada Vmz Disney Dias.")
     await coletar_precos_vmz(hora_global,array_datas,data_atual)
     atualizar_calibragem(60)
-    
+
     time.sleep(10)
-    
-    
+
+
     try:
             empresas = ['voupra', 'vmz', 'decolar','ml','tio','fastPass']
             parques = ['disney', 'universal', 'seaworld']
-            
+
             juntar_json = JuntarJsons(data_atual, empresas, parques, 'orlando')
-            
+
             await juntar_json.executar()
-    
+
     except Exception as e:
             logging.error(f"Erro durante a junção dos arquivos: {e}")
-    
+
     return
 
 

@@ -86,15 +86,15 @@ async def coleta_tio_chip(hora_global,data_atual):# Inicializar o driver do Sele
 
           dados.append({
                       'Chip': 'eSIM ILI EUA',
-                      'data_ativacao': datetime.now().date().strftime('%d-%m-%Y'),
-                      'dias':f'{dia} dias',
+                      'Data_Ativacao': datetime.now().date().strftime('%d-%m-%Y'),
+                      'Dias':f'{dia} dias',
                       "Preco_Avista":  preco_a_vista,
                       "Preco_Parcelado": preco_final_formatado
                   })
           dados.append({
                       'Chip': 'CHIP ILI EUA',
-                      'data_ativacao': datetime.now().date().strftime('%d-%m-%Y'),
-                      'dias':f'{dia} dias',
+                      'Data_Ativacao': datetime.now().date().strftime('%d-%m-%Y'),
+                      'Dias':f'{dia} dias',
                       "Preco_Avista": preco_a_vista + frete,
                       "Preco_Parcelado": preco_final_formatado + frete
           })

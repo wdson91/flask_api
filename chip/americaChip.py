@@ -180,11 +180,11 @@ async def esim_eua_europa(hora_global,data_atual):# -> list:
               time.sleep(3)
 
               dados.append({
-                  'Chip': 'eSIM ILI EUA' if local == 'eua' else 'eSIM ILI Europa',
-                  'data_ativacao': data,
-                  'dias': option_value,
-                  'preco_parcelado': float(precoParcelado.replace('R$','').replace('.','').replace(',','.')),
-                  'preco_a_vista': float(precoPix.replace('R$','').replace('.','').replace(',','.'))
+                  'Chip': 'eSIM ILI EUA' if local == 'eua' else 'eSIM ILI EUROPA',
+                  'Data_Ativacao': data,
+                  'Dias': option_value,
+                  'Preco_Parcelado': float(precoParcelado.replace('R$','').replace('.','').replace(',','.')),
+                  'Preco_Avista': float(precoPix.replace('R$','').replace('.','').replace(',','.'))
               })
               # Fechar o navegador
 
@@ -240,11 +240,11 @@ async def chip_eua_europa(hora_global,data_atual):
                 time.sleep(3)
 
                 dados.append({
-                    'Chip': 'CHIP ILI EUA' if local == 'eua' else 'CHIP ILI Europa',
-                    'data_ativacao': data,
-                    'dias': option_value,
-                    'preco_parcelado': float(precoParcelado),
-                    'preco_a_vista': float(precoPix)
+                    'Chip': 'CHIP ILI EUA' if local == 'eua' else 'CHIP ILI EUROPA',
+                    'Data_Ativacao': data,
+                    'Dias': option_value,
+                    'Preco_Parcelado': float(precoParcelado),
+                    'Preco_Avista': float(precoPix)
                 })
                 # Fechar o navegador
 
