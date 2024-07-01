@@ -5,8 +5,8 @@ from webdriver_setup import get_webdriver
 
 async def coleta_tio_chip(hora_global,data_atual):# Inicializar o driver do Selenium
     logging.info("Iniciando coleta de preços Tio Orlando Chip.")
-    driver = get_webdriver()
-    #driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    #driver = get_webdriver()
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     driver.maximize_window()
 
     # Lista para armazenar os dados
@@ -57,48 +57,49 @@ async def coleta_tio_chip(hora_global,data_atual):# Inicializar o driver do Sele
         logging.info(f"Coletando preços para {dia} dias - Tio Chip.")
         # Aguardar o carregamento do elemento
 
+        try:
+          inputDias: WebElement = WebDriverWait(driver, 20).until(
+              EC.presence_of_element_located((By.XPATH, '//*[@id=":r4:"]'))
+          )
 
-        inputDias: WebElement = WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.XPATH, '//*[@id=":r4:"]'))
-        )
+          inputDias.click()
 
-        inputDias.click()
+          opcao = driver.find_element(By.XPATH, f'//*[@role="option" and text()="{dia}"]')
+          opcao.click()
 
-        opcao = driver.find_element(By.XPATH, f'//*[@role="option" and text()="{dia}"]')
-        opcao.click()
-
-        time.sleep(3)
+          time.sleep(3)
 
 
-        preco_a_vista = WebDriverWait(driver, 20).until(
-            EC.element_to_be_clickable((By.XPATH, '//*[@id="page-content"]/div[2]/div/div[2]/div/div/div/div[2]/div[6]/div[2]/div[1]'))
-        ).text
+          preco_a_vista = WebDriverWait(driver, 20).until(
+              EC.element_to_be_clickable((By.CSS_SELECTOR, '#page-content > div.MuiContainer-root.MuiContainer-maxWidthLg.mui-2jualf > div > div:nth-child(2) > div > div > div > div.MuiBox-root.mui-0 > div.MuiBox-root.mui-1yjvs5a > div.MuiBox-root.mui-1yl4gnp > div.MuiBox-root.mui-148528'))
+          ).text
 
-        preco_parcelado = WebDriverWait(driver, 20).until(
-            EC.element_to_be_clickable((By.XPATH, '//*[@id="page-content"]/div[2]/div/div[2]/div/div/div/div[2]/div[6]/div[3]'))
-        ).text
+          preco_parcelado = WebDriverWait(driver, 20).until(
+              EC.element_to_be_clickable((By.CSS_SELECTOR, '#page-content > div.MuiContainer-root.MuiContainer-maxWidthLg.mui-2jualf > div > div:nth-child(2) > div > div:nth-child(1) > div > div.MuiBox-root.mui-0 > div.MuiBox-root.mui-1yjvs5a > div.MuiTypography-root.MuiTypography-body1.MuiBox-root.mui-zt93w0'))
+          ).text
 
-        preco_a_vista = float(preco_a_vista.replace('R$','').replace(',','.').strip())
-        preco_final = float(preco_parcelado[preco_parcelado.find('R$') + 3:].split(' ')[0].replace('.','').replace(',','.'))
-        preco_final_formatado = float(f'{preco_final:.2f}')* 12
-        # print(preco_a_vista)
-        # print(f'{float(preco_final)*12:.2f}')
+          preco_a_vista = float(preco_a_vista.replace('R$','').replace(',','.').strip())
+          preco_final = float(preco_parcelado[preco_parcelado.find('R$') + 3:].split(' ')[0].replace('.','').replace(',','.'))
+          preco_final_formatado = float(f'{preco_final:.2f}')* 12
+          # print(preco_a_vista)
+          # print(f'{float(preco_final)*12:.2f}')
 
-        dados.append({
-                    'Chip': 'eSIM ILI EUA',
-                    'data_ativacao': datetime.now().date().strftime('%d-%m-%Y'),
-                    'dias':f'{dia} dias',
-                    "Preco_Avista":  preco_a_vista,
-                    "Preco_Parcelado": preco_final_formatado
-                })
-        dados.append({
-                    'Chip': 'CHIP ILI EUA',
-                    'data_ativacao': datetime.now().date().strftime('%d-%m-%Y'),
-                    'dias':f'{dia} dias',
-                    "Preco_Avista": preco_a_vista + frete,
-                    "Preco_Parcelado": preco_final_formatado + frete
-        })
-        time.sleep(3)
+          dados.append({
+                      'Chip': 'eSIM ILI EUA',
+                      'data_ativacao': datetime.now().date().strftime('%d-%m-%Y'),
+                      'dias':f'{dia} dias',
+                      "Preco_Avista":  preco_a_vista,
+                      "Preco_Parcelado": preco_final_formatado
+                  })
+          dados.append({
+                      'Chip': 'CHIP ILI EUA',
+                      'data_ativacao': datetime.now().date().strftime('%d-%m-%Y'),
+                      'dias':f'{dia} dias',
+                      "Preco_Avista": preco_a_vista + frete,
+                      "Preco_Parcelado": preco_final_formatado + frete
+          })
+        except Exception as e:
+            logging.error(f"Erro ao coletar dados - Tio Orlando Chip: {e}")
 
 
 
@@ -110,7 +111,7 @@ async def coleta_tio_chip(hora_global,data_atual):# Inicializar o driver do Sele
 
     nome_arquivo = f'chip_tio_{data_atual}.json'
 
-    salvar_dados(df, nome_arquivo, 'orlando/tio', hora_global)
+    salvar_dados(df, nome_arquivo, 'chip/tio', hora_global)
     logging.info("Coleta finalizada Site Tio Orlando - Chip.")
     return
 
