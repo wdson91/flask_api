@@ -27,7 +27,8 @@ async def coleta_tio_sea(hora_global,array_datas,data_atual):# Inicializar o dri
         "2-Dias + 1-Dia GRÁTIS!* de parque à sua escolha (SeaWorld Orlando, Busch Gardens Tampa Bay, Aquatica Orlando ou Adventure Island Tampa*)": "3 Dias 3 Parques - SeaWorld Orlando",
         "2-Dias + 1-Dia GRÁTIS!* de parque à sua escolha (SeaWorld Orlando, Busch Gardens Tampa Bay, Aquatica Orlando ou Adventure Island Tampa*) + Plano de Refeição": "3 Dias 3 Parques com Refeições - SeaWorld Orlando",
         "14-Dias de parques à sua escolha (SeaWorld Orlando, Busch Gardens Tampa Bay, Aquatica Orlando ou Adventure Island Tampa*) com estacionamento GRÁTIS!*": "14 Dias 3 Parques - SeaWorld Orlando",
-
+        "Busch Gardens 1-Dia + Plano de Refeição":"1 Dia Busch Gardens Tampa com Refeições Inclusas",
+        "SeaWorld Orlando 1-Dia + Plano de Refeição":"1 Dia SeaWorld Orlando com Refeições Inclusas",
     }
 
     # Mapeamento dos meses em português
