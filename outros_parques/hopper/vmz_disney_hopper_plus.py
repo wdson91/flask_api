@@ -9,7 +9,7 @@ async def coletar_precos_vmz_hopper_plus(hora_global,array_datas,data_atual):
     # Defina sua lógica para baixar os arquivos e esperar por eles
     baixar_blob_se_existir('disney_vmz_basicos_hopperplus_parcial.json', pasta)
     baixar_blob_se_existir('disney_vmz_dias_hopperplus_parcial.json', pasta)
-    
+
     # Carregue os dados do JSON baixado
     disney_basicos = carregar_dados_json('disney_vmz_basicos_hopperplus_parcial.json')
     disney_dias = carregar_dados_json('disney_vmz_dias_hopperplus_parcial.json')
@@ -20,30 +20,30 @@ async def coletar_precos_vmz_hopper_plus(hora_global,array_datas,data_atual):
 
 
     df = pd.DataFrame(dados_combinados)
-    
+
     df_sorted = df.sort_values(by=['Data_viagem', 'Parque'], ignore_index=True)
     # # Crie o DataFrame a partir dos dados formatados
     # df = pd.DataFrame(dados_formatados)
-    
+
     nome_arquivo = f'hopperplus_vmz_{data_atual}.json'
-    
+
     salvar_dados(df_sorted, nome_arquivo,pasta, hora_global)
-    
-    
+
+
     logging.info("Coleta finalizada.")
     #atualizar_calibragem(65)
-    return 
+    return
 
 
 async def coletar_precos_vmz_hopperplus_basicos(hora_global,array_datas,data_atual):
-    
+
     driver = get_webdriver()
-    
-    
+
+
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     sites = [
-    
+
     ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/1-dia-hopper-plus-disney?",  '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]','/html/body/div[1]/div/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/b', '1 Dia - Disney Parques Aquaticos'),
     # Adicione hopper sites, XPaths e nomes de parques conforme necessario
 ]
@@ -60,9 +60,9 @@ async def coletar_precos_vmz_hopperplus_basicos(hora_global,array_datas,data_atu
             logging.info(f"Coletando preços para Disney Parques Aq Plus na data: {data}")
             url_com_data = f"https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/1-dia-hopper-plus-disney?&data={data.strftime('%Y-%m-%d')}"
             driver.get(url_com_data)
-            
+
             try:
-                
+
                 # Tente localizar o elemento com o preço
                 wait = WebDriverWait(driver, 10)
                 preco_aVista = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]')
@@ -70,15 +70,15 @@ async def coletar_precos_vmz_hopperplus_basicos(hora_global,array_datas,data_atu
                 # Multiplicar o preço por 10
                 preco_aVista = preco_aVista.text
                 preco_parcelado = preco_parcelado.text
-                
+
                 preco = float(preco_aVista.replace('R$', '').replace('.', '').replace(',', '.').strip())
-                
+
                 price_decimal = float(preco_parcelado.replace('R$', '').replace('.', '').replace(',', '.').strip())
-                
-                
+
+
                 preco_aVista_final = round(preco , 2)
                 preco_parcelado_final = round((price_decimal * 10), 2)
-                
+
             except NoSuchElementException:
                 # Se o elemento não for encontrado, atribua um traço "-" ao valor
                 preco_aVista_final = "-"
@@ -92,58 +92,64 @@ async def coletar_precos_vmz_hopperplus_basicos(hora_global,array_datas,data_atu
             })
 
     logging.info("Coleta de preços finalizada.")
-    
+
     # Criando um DataFrame
     df = pd.DataFrame(dados)
     salvar_dados(df, 'disney_vmz_basicos_hopperplus_parcial.json',pasta,hora_global)
     driver.quit()
-    
+
     #atualizar_calibragem(40)
     return
 
 async def coletar_precos_vmz_disneydias_hopperplus(hora_global,array_datas,data_atual):
     waiter = 2
-    
+
     driver = get_webdriver()
-    
     def fechar_popups(driver):
         try:
-            botao_fechar_selector = '.dinTargetFormCloseButtom'
-            botao_fechar = WebDriverWait(driver, waiter + 3).until(
-                EC.visibility_of_element_located((By.CSS_SELECTOR, botao_fechar_selector))
+            botao_fechar_selector = '//*[@id="rd-close_button-lxyz9zz9"]'
+            botao_fechar = WebDriverWait(driver, waiter + 5).until(
+                EC.visibility_of_element_located((By.XPATH, botao_fechar_selector))
             )
             botao_fechar.click()
-            logging.info("Pop-up fechado.")
+            botao_cookies = WebDriverWait(driver, waiter + 3).until(
+                EC.visibility_of_element_located((By.XPATH, '//*[@id="__layout"]/div/div[3]/div/div/div[2]/button'))
+            )
+            botao_cookies.click()
+
+            logging.info("Pop-up fechado. Vmz Disney Dias.")
         except Exception as e:
-            logging.warning(f"Popup não encontrada")
+            logging.warning(f"Popup não encontrada - {e} Vmz Disney Dias.")
 
     def scroll_to_element(driver, element):
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
         time.sleep(waiter + 2)  # Espera para a rolagem acontecer
-    
+
     def mudar_mes_ano(driver, mes, ano):
         try:
             # Espera até que o seletor do ano esteja clicável
             year_select = WebDriverWait(driver, waiter + 20).until(EC.element_to_be_clickable((By.ID, "year-control")))
-            
+
             # Lê o ano atual selecionado
             ano_atual = year_select.get_attribute("value")
-            
+
             # Verifica se o ano atual é o mesmo que o ano desejado
             if ano_atual != ano:
                 # Scroll para o elemento do ano e clica para abrir a lista de opções
                 scroll_to_element(driver, year_select)
+                #fechar_popups(driver)
+                time.sleep(2)
                 year_select.click()
-                
+
                 # Seleciona o ano desejado
                 driver.find_element(By.CSS_SELECTOR, f'option[value="{ano}"]').click()
 
             # Espera até que o seletor do mês esteja clicável
             month_select = WebDriverWait(driver, waiter + 20).until(EC.element_to_be_clickable((By.ID, "month-control")))
-            
+
             # Lê o mês atual selecionado
             mes_atual = month_select.get_attribute("value")
-            
+
             # Verifica se o mês atual é o mesmo que o mês desejado
             if mes_atual != mes:
                 # Seleciona o mês desejado
@@ -168,7 +174,7 @@ async def coletar_precos_vmz_disneydias_hopperplus(hora_global,array_datas,data_
                     price_text = calendar_event_price.text.strip()
                     preco_avista = float(price_text.replace('R$', '').replace('.', '').replace(',', '.').strip())
                     preco_parcelado = round(preco_avista * 1.08,2)
-                    
+
                     return preco_avista, preco_parcelado
         except Exception as e:
             logging.error(f"Erro ao encontrar preço para data {data}: {e}")
@@ -204,7 +210,7 @@ async def coletar_precos_vmz_disneydias_hopperplus(hora_global,array_datas,data_
                 mudar_mes_ano(driver, mes, ano)
                 preco_avista,preco_parcelado = encontrar_preco_data(driver, data)
                 if preco_avista:
-                    
+
                     dados.append({
                         'Data_viagem': data.strftime("%Y-%m-%d"),
                         'Parque': nome_pacote,
@@ -219,8 +225,8 @@ async def coletar_precos_vmz_disneydias_hopperplus(hora_global,array_datas,data_
     dias_para_processar = [2,3,4,5,6,7,8,9,10]
     resultados = processar_dias(driver, dias_para_processar,array_datas)
 
-    
-    
+
+
     df = pd.DataFrame(resultados)
     salvar_dados(df, 'disney_vmz_dias_hopperplus_parcial.json',pasta,hora_global)
     driver.quit()

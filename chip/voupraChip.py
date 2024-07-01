@@ -5,11 +5,12 @@ from webdriver_setup import get_webdriver
 async def coletar_precos_voupra_chip(hora_global,data_atual):
 
     data_inicial  =  datetime.now().date()
-    intervalos_de_dias = [5, 10,14,0]
+    intervalos_de_dias = [4, 9,13,0]
     datas = [(data_inicial + timedelta(days=d)).strftime('%d-%m-%Y') for d in intervalos_de_dias]
 
     logging.info("Iniciando coleta de preços Chip Voupra.")
     driver = get_webdriver()
+    #driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
 
@@ -33,9 +34,13 @@ async def coletar_precos_voupra_chip(hora_global,data_atual):
       time.sleep(2)
       data_ida_calculo = datetime.strptime(data_ida, '%d-%m-%Y')
       data_retorno_calculo = datetime.strptime(data_retorno, '%d-%m-%Y')
+      print(f"Coletando preços para {data_ida} - {data_retorno}.")
       # Calcular a diferença em dias
       diferenca_dias = (data_retorno_calculo - data_ida_calculo).days
-      print(f"Coletando preços para {diferenca_dias} dias.")
+      print(f"Coletando preços para {diferenca_dias+1} dias.")
+
+      driver.get(url)
+
       html_content = driver.page_source
 
       # Use BeautifulSoup para analisar o HTML
@@ -55,18 +60,18 @@ async def coletar_precos_voupra_chip(hora_global,data_atual):
               dump_count += 1
 
               # Verifica se é o terceiro dump desejado
-              if '1321/Views/CompraExpressa/_RCustoPorDia.cshtml' in script.text:
+              if '1321/Views/CompraExpressa/_RCustoPorDia.cshtml (CategoriaCustoPorDiaViewModel)' in script.text:
                   # Extraia os dados do dump
                   dump_data = script.text.strip()
 
                   # Salva os dados em um arquivo txt
-                  with open('dados_dump.txt', 'w') as file:
+                  with open('dadosChip_dump.txt', 'w') as file:
                       file.write(dump_data)
 
                   break  # Saia do loop após encontrar o terceiro dump
 
       # Abra o arquivo de texto com os dados
-      with open('dados_dump.txt', 'r') as file:
+      with open('dadosChip_dump.txt', 'r') as file:
           data = file.read()
 
       # Encontre o índice do início dos dados JSON
@@ -97,10 +102,12 @@ async def coletar_precos_voupra_chip(hora_global,data_atual):
           id = produto['Id']
           #margem = produto['Margem']
           preco_Avista = produto['ParcelaAVistaPadrao']['ValorTotal']
-          preco_Parcelado = produto['ParcelasPadrao'][1]['ValorTotal']
+
+          preco_Parcelado = produto['ParcelasPadrao'][-1]['ValorTotal']
+
           data_retorno = data_retorno
           # Verificar se 'Margem' é um número válido
-          dias = f'{diferenca_dias} dias'
+          dias = f'{diferenca_dias+1} dias'
           # Verifique se o parque está no mapeamento
           if id in mapeamento_nomes:
               # Mapeie o nome do parque
@@ -131,7 +138,7 @@ async def coletar_precos_voupra_chip(hora_global,data_atual):
     df = pd.DataFrame(all_data)
 
     # Exibir o DataFrame mesclado
-    #df = df.drop_duplicates()
+    df = df.drop_duplicates()
 
 
     nome_arquivo = f'chip_voupra_{data_atual}.json'
