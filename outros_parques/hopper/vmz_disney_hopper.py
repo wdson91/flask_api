@@ -93,8 +93,6 @@ async def coletar_precos_vmz_hopper_disneydias( hora_global,array_datas, data_at
     dias_para_processar = [2,3,4,5,6,7,8,9,10]
     driver = get_webdriver()
 
-    wait = WebDriverWait(driver, 60)
-
     nome_pacotes = {
         2: "2 Dias - Disney Park Hopper",
         3: "3 Dias - Disney Park Hopper",
@@ -122,15 +120,16 @@ async def coletar_precos_vmz_hopper_disneydias( hora_global,array_datas, data_at
         except Exception as e:
             logging.warning(f"Popup não encontrada - {e} Vmz Disney Dias.")
 
-    def scroll_to_element(driver, element):
-            driver.execute_script("arguments[0].scrollIntoView(true);", element)
-            time.sleep(waiter + 5)  # Espera para a rolagem acontecer
-            fechar_popups(driver)
+    def scroll_to_element(driver):
+        element = driver.find_element(By.XPATH,'//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[3]/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]')
+        driver.execute_script("arguments[0].scrollIntoView(true);", element)
+        time.sleep(3)
+        fechar_popups(driver)
 
     def mudar_mes_ano(driver, mes, ano):
             try:
                 # Espera até que o seletor do ano esteja clicável
-                year_select = WebDriverWait(driver, waiter + 20).until(EC.element_to_be_clickable((By.ID, "year-control")))
+                year_select = WebDriverWait(driver, waiter).until(EC.element_to_be_clickable((By.ID, "year-control")))
 
                 # Lê o ano atual selecionado
                 ano_atual = year_select.get_attribute("value")
@@ -138,9 +137,8 @@ async def coletar_precos_vmz_hopper_disneydias( hora_global,array_datas, data_at
                 # Verifica se o ano atual é o mesmo que o ano desejado
                 if ano_atual != ano:
                     # Scroll para o elemento do ano e clica para abrir a lista de opções
-                    scroll_to_element(driver, year_select)
-                    #fechar_popups(driver)
-                    time.sleep(5)
+
+
                     year_select.click()
 
                     # Seleciona o ano desejado
@@ -204,13 +202,15 @@ async def coletar_precos_vmz_hopper_disneydias( hora_global,array_datas, data_at
                     nome_pacote = nome_pacotes.get(dia, f"{dia} Dias - Desconhecido")
                     url_com_dias = f"{base_url}?mes=2024-01&dias={dia}"
                     driver.get(url_com_dias)
-                    #fechar_popups(driver)
+                    time.sleep(5)
+
+                    scroll_to_element(driver)
 
                     for data in datas:
                         mes = data.month - 1
                         ano = data.year
                         mudar_mes_ano(driver, mes, ano)
-                        time.sleep(10)
+                        time.sleep(7)
                         preco_avista,preco_parcelado = encontrar_preco_data(driver, data)
                         if preco_avista:
 

@@ -130,9 +130,10 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
         except Exception as e:
             logging.warning(f"Popup não encontrada - {e} Vmz Disney Dias.")
 
-    def scroll_to_element(driver, element):
+    def scroll_to_element(driver):
+        element = driver.find_element(By.XPATH,'//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[3]/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]')
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
-        time.sleep(waiter + 5)  # Espera para a rolagem acontecer
+        time.sleep(3)
         fechar_popups(driver)
 
     def mudar_mes_ano(driver, mes, ano):
@@ -145,17 +146,13 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
 
             # Verifica se o ano atual é o mesmo que o ano desejado
             if ano_atual != ano:
-                # Scroll para o elemento do ano e clica para abrir a lista de opções
-                scroll_to_element(driver, year_select)
-                # Espera para o scroll acontecer
-                time.sleep(5)
                 year_select.click()
 
                 # Seleciona o ano desejado
                 driver.find_element(By.CSS_SELECTOR, f'option[value="{ano}"]').click()
 
             # Espera até que o seletor do mês esteja clicável
-            month_select = WebDriverWait(driver, waiter + 20).until(EC.element_to_be_clickable((By.ID, "month-control")))
+            month_select = WebDriverWait(driver, waiter).until(EC.element_to_be_clickable((By.ID, "month-control")))
 
             # Lê o mês atual selecionado
             mes_atual = month_select.get_attribute("value")
@@ -173,14 +170,13 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
 
     def encontrar_preco_data(driver, data):
         try:
-            wait = WebDriverWait(driver, 60)  # Espera de até 30 segundos
+            wait = WebDriverWait(driver, 30)  # Espera de até 30 segundos
             # Aguarda até que o calendário seja clicável ou visível
             wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'fc-content')))
             elementos_fc_content = driver.find_elements(By.CLASS_NAME, 'fc-content')
             for elemento in elementos_fc_content:
                 fc_date = elemento.find_element(By.CLASS_NAME, 'fc-date').text
                 if fc_date == str(data.day):
-                    #elemento.click()
                     calendar_event_price = elemento.find_element(By.CLASS_NAME, 'calendar-event-price')
                     price_text = calendar_event_price.text.strip()
                     preco_avista = float(price_text.replace('R$', '').replace('.', '').replace(',', '.').strip())
@@ -190,19 +186,6 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
         except Exception as e:
             logging.error(f"Erro ao encontrar preço para data {data}: {e} - Vmz Disney Dias.")
             return None
-
-
-    nome_pacotes = {
-        2: "2 Dias - Disney World Basico",
-        3: "3 Dias - Disney World Basico",
-        4: "4 Dias - Disney World Basico",
-        5: "5 Dias - Disney World Basico",
-        6: "6 Dias - Disney World Basico",
-        7: "7 Dias - Disney World Basico",
-        8: "8 Dias - Disney World Basico",
-        9: "9 Dias - Disney World Basico",
-        10: "10 Dias - Disney World Basico"
-    }
 
     def processar_dias(driver, dias,array_datas):
         base_url = "https://www.vmzviagens.com.br/ingressos/orlando/walt-disney-orlando/ticket-disney-basico"
@@ -214,7 +197,9 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
             nome_pacote = nome_pacotes.get(dia, f"{dia} Dias - Desconhecido")
             url_com_dias = f"{base_url}?mes=2024-01&dias={dia}"
             driver.get(url_com_dias)
-            #fechar_popups(driver)
+            time.sleep(5)
+
+            scroll_to_element(driver)
 
             for data in datas:
                 mes = data.month - 1
