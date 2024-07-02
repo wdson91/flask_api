@@ -17,7 +17,7 @@ async def coletar_precos_vmz_seaworld(hora_global,array_datas,data_atual):
         ("https://www.vmzviagens.com.br/ingressos/orlando/seaworld-orlando/seaworld-14-dias-estacionamento", '14 Dias 3 Parques - SeaWorld Orlando'),
         ("https://www.vmzviagens.com.br/ingressos/orlando/busch-gardens-tampa/busch-gardens-seaworld-aquatica-com-plano-alimentacao?data=2024-12-31", '3 Dias 3 Parques com Refeições - SeaWorld Orlando'),
         ("https://www.vmzviagens.com.br/ingressos/orlando/busch-gardens-tampa/busch-gardens-1-dia?",'1 Dia 1 Parque - Busch Gardens'),
-        ("https://www.vmzviagens.com.br/ingressos/orlando/seaworld-orlando/promocao-seaworld-busch-gardens-com-voucher-de-alimentacao-no-busch-gardens?data=2024-12-27",'2 Dias 2 Parques com Refeição no Busch Gardens - SeaWorld Orlando'),
+        ("https://www.vmzviagens.com.br/ingressos/orlando/seaworld-orlando/promocao-seaworld-busch-gardens-com-voucher-de-alimentacao-no-busch-gardens?",'2 Dias 2 Parques com Refeição no Busch Gardens - SeaWorld Orlando'),
         ("https://www.vmzviagens.com.br/ingressos/orlando/busch-gardens-tampa/busch-gardens-plano-alimentacao?",'1 Dia Busch Gardens Tampa com Refeições Inclusas'),
         ("https://www.vmzviagens.com.br/ingressos/orlando/seaworld-orlando/seaworld-plano-alimentacao?",'1 Dia SeaWorld Orlando com Refeições Inclusas')
     ]

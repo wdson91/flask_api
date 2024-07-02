@@ -123,8 +123,9 @@ async def coletar_precos_vmz_disneydias_hopperplus(hora_global,array_datas,data_
 
     def scroll_to_element(driver, element):
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
-        time.sleep(waiter + 2)  # Espera para a rolagem acontecer
-
+        time.sleep(waiter + 5)  # Espera para a rolagem acontecer
+        fechar_popups(driver)
+        
     def mudar_mes_ano(driver, mes, ano):
         try:
             # Espera até que o seletor do ano esteja clicável
@@ -138,7 +139,7 @@ async def coletar_precos_vmz_disneydias_hopperplus(hora_global,array_datas,data_
                 # Scroll para o elemento do ano e clica para abrir a lista de opções
                 scroll_to_element(driver, year_select)
                 #fechar_popups(driver)
-                time.sleep(2)
+                time.sleep(5)
                 year_select.click()
 
                 # Seleciona o ano desejado
@@ -202,12 +203,13 @@ async def coletar_precos_vmz_disneydias_hopperplus(hora_global,array_datas,data_
             nome_pacote = nome_pacotes.get(dia, f"{dia} Dias - Desconhecido")
             url_com_dias = f"{base_url}?mes=2024-01&dias={dia}"
             driver.get(url_com_dias)
-            fechar_popups(driver)
+            #fechar_popups(driver)
 
             for data in datas:
                 mes = data.month - 1
                 ano = data.year
                 mudar_mes_ano(driver, mes, ano)
+                time.sleep(7)
                 preco_avista,preco_parcelado = encontrar_preco_data(driver, data)
                 if preco_avista:
 

@@ -101,8 +101,8 @@ async def coletar_precos_vmz_disneybasicos(array_datas,hora_global,data_atual):
 async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_global,data_atual):
     waiter = 2
     logging.info("Iniciando coleta de preços Vmz Disney Dias.")
-    #driver = get_webdriver()
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver = get_webdriver()
+    #driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     nome_pacotes = {
         2: "2 Dias - Disney World Basico",
         3: "3 Dias - Disney World Basico",
@@ -132,7 +132,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
 
     def scroll_to_element(driver, element):
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
-        time.sleep(waiter + 2)  # Espera para a rolagem acontecer
+        time.sleep(waiter + 5)  # Espera para a rolagem acontecer
         fechar_popups(driver)
 
     def mudar_mes_ano(driver, mes, ano):
@@ -148,7 +148,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
                 # Scroll para o elemento do ano e clica para abrir a lista de opções
                 scroll_to_element(driver, year_select)
                 # Espera para o scroll acontecer
-                time.sleep(2)
+                time.sleep(5)
                 year_select.click()
 
                 # Seleciona o ano desejado
@@ -180,7 +180,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
             for elemento in elementos_fc_content:
                 fc_date = elemento.find_element(By.CLASS_NAME, 'fc-date').text
                 if fc_date == str(data.day):
-                    elemento.click()
+                    #elemento.click()
                     calendar_event_price = elemento.find_element(By.CLASS_NAME, 'calendar-event-price')
                     price_text = calendar_event_price.text.strip()
                     preco_avista = float(price_text.replace('R$', '').replace('.', '').replace(',', '.').strip())
@@ -220,7 +220,7 @@ async def coletar_precos_vmz_disneydias(dias_para_processar,array_datas,hora_glo
                 mes = data.month - 1
                 ano = data.year
                 mudar_mes_ano(driver, mes, ano)
-                time.sleep(5)  # Espera para a mudança de mês e ano acontecer
+                time.sleep(7)  # Espera para a mudança de mês e ano acontecer
                 preco_avista,preco_parcelado = encontrar_preco_data(driver, data)
                 if preco_avista:
 
