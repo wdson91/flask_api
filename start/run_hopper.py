@@ -12,51 +12,51 @@ array_datas =  [5,10,20,47,65,126]
 
 async def executar_hopper(hora_global, array_datas, data_atual):
     
-    try:
-        await coletar_precos_ml_hopper(hora_global, array_datas, data_atual)  # Executa a função main_voupra com o argumento hora_global
-        logging.info("main_voupra concluída.")  # Registra uma mensagem de log
-    except Exception as e:
-        logging.error(f"Erro ao executar main_voupra: {e}")  # Registra uma mensagem de log de erro
+    # try:
+    #     await coletar_precos_ml_hopper(hora_global, array_datas, data_atual)  # Executa a função main_voupra com o argumento hora_global
+    #     logging.info("main_voupra concluída.")  # Registra uma mensagem de log
+    # except Exception as e:
+    #     logging.error(f"Erro ao executar main_voupra: {e}")  # Registra uma mensagem de log de erro
     
-    try:
-        await coletar_precos_vmz_disneydias_hopperplus(hora_global, array_datas, data_atual)  # Executa a função main_vmz com o argumento hora_global
-        logging.info("main_vmz concluída.")  # Registra uma mensagem de log
-    except Exception as e:
-        logging.error(f"Erro ao executar main_vmz: {e}")  # Registra uma mensagem de log de erro
+    # try:
+    #     await coletar_precos_vmz_disneydias_hopperplus(hora_global, array_datas, data_atual)  # Executa a função main_vmz com o argumento hora_global
+    #     logging.info("main_vmz concluída.")  # Registra uma mensagem de log
+    # except Exception as e:
+    #     logging.error(f"Erro ao executar main_vmz: {e}")  # Registra uma mensagem de log de erro
     
-    try:
-        await coletar_precos_vmz_hopperplus_basicos(hora_global, array_datas, data_atual)  # Executa a função main_ml com o argumento hora_global
-        logging.info("main_ml concluída.")  # Registra uma mensagem de log
-    except Exception as e:
-        logging.error(f"Erro ao executar main_ml: {e}")  # Registra uma mensagem de log de erro
+    # try:
+    #     await coletar_precos_vmz_hopperplus_basicos(hora_global, array_datas, data_atual)  # Executa a função main_ml com o argumento hora_global
+    #     logging.info("main_ml concluída.")  # Registra uma mensagem de log
+    # except Exception as e:
+    #     logging.error(f"Erro ao executar main_ml: {e}")  # Registra uma mensagem de log de erro
 
-    try:
-        await coletar_precos_vmz_hopper_plus(hora_global, array_datas, data_atual)
-        logging.info("main_ml concluída.")  # Registra uma mensagem de log
-    except Exception as e:
-        logging.error(f"Erro ao executar main_ml: {e}")
-    try:
-        await coletar_precos_vmz_hopper_disneydias(hora_global, array_datas, data_atual)  # Executa a função main_vmz com o argumento hora_global
-        logging.info("main_vmz concluída.")  # Registra uma mensagem de log
-    except Exception as e:
-        logging.error(f"Erro ao executar main_vmz: {e}")  # Registra uma mensagem de log de erro
+    # try:
+    #     await coletar_precos_vmz_hopper_plus(hora_global, array_datas, data_atual)
+    #     logging.info("main_ml concluída.")  # Registra uma mensagem de log
+    # except Exception as e:
+    #     logging.error(f"Erro ao executar main_ml: {e}")
+    # try:
+    #     await coletar_precos_vmz_hopper_disneydias(hora_global, array_datas, data_atual)  # Executa a função main_vmz com o argumento hora_global
+    #     logging.info("main_vmz concluída.")  # Registra uma mensagem de log
+    # except Exception as e:
+    #     logging.error(f"Erro ao executar main_vmz: {e}")  # Registra uma mensagem de log de erro
     
-    try:
-        await coletar_precos_vmz_hopper_basicos(hora_global, array_datas, data_atual)  # Executa a função main_ml com o argumento hora_global
-        logging.info("main_ml concluída.")  # Registra uma mensagem de log
-    except Exception as e:
-        logging.error(f"Erro ao executar main_ml: {e}")  # Registra uma mensagem de log de erro
+    # try:
+    #     await coletar_precos_vmz_hopper_basicos(hora_global, array_datas, data_atual)  # Executa a função main_ml com o argumento hora_global
+    #     logging.info("main_ml concluída.")  # Registra uma mensagem de log
+    # except Exception as e:
+    #     logging.error(f"Erro ao executar main_ml: {e}")  # Registra uma mensagem de log de erro
 
-    try:
-        await coletar_precos_vmz_hopper(hora_global, array_datas, data_atual)
-        logging.info("main_ml concluída.")  # Registra uma mensagem de log
-    except Exception as e:
-        logging.error(f"Erro ao executar main_ml: {e}")    
-    try:
-        await coletar_precos_voupra_hopper(hora_global, array_datas, data_atual)
-        logging.info("main_ml concluída.")  # Registra uma mensagem de log
-    except Exception as e:
-        logging.error(f"Erro ao executar main_ml: {e}")
+    # try:
+    #     await coletar_precos_vmz_hopper(hora_global, array_datas, data_atual)
+    #     logging.info("main_ml concluída.")  # Registra uma mensagem de log
+    # except Exception as e:
+    #     logging.error(f"Erro ao executar main_ml: {e}")    
+    # try:
+    #     await coletar_precos_voupra_hopper(hora_global, array_datas, data_atual)
+    #     logging.info("main_ml concluída.")  # Registra uma mensagem de log
+    # except Exception as e:
+    #     logging.error(f"Erro ao executar main_ml: {e}")
     
     try:
             empresas = ['voupra', 'vmz', 'decolar','ml']
