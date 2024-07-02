@@ -14,13 +14,13 @@ async def coleta_tio_chip(hora_global,data_atual):# Inicializar o driver do Sele
     dias = [5 ,10,14]
     driver.get('https://www.tioorlando.com.br/chip-de-celular')
 
-    time.sleep(3)
+    time.sleep(15)
 
     fisic_button = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="page-content"]/div[2]/div/div[2]/div/div/div/div[2]/div[3]/div/div[2]/button'))
         ).click()
 
-    time.sleep(2)
+    time.sleep(10)
 
     cep_input = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.ID, ':r2:'))
@@ -32,7 +32,7 @@ async def coleta_tio_chip(hora_global,data_atual):# Inicializar o driver do Sele
             EC.element_to_be_clickable((By.XPATH, '//*[@id="page-content"]/div[2]/div/div[2]/div/div[2]/div/form/div/div[2]/button'))
         ).click()
 
-    time.sleep(3)
+    time.sleep(10)
     frete_normal = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="page-content"]/div[2]/div/div[2]/div/div[2]/div/div/div/table/tbody/tr[1]/td'))
         )
@@ -44,14 +44,14 @@ async def coleta_tio_chip(hora_global,data_atual):# Inicializar o driver do Sele
         )
     virtual_button.click()
 
-    time.sleep(3)
+    time.sleep(10)
 
     data_button = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="page-content"]/div[2]/div/div[2]/div/div/div/div[2]/div[5]/div/div[1]/button'))
         )
     data_button.click()
 
-    time.sleep(3)
+    time.sleep(10)
     for dia in dias:
 
         logging.info(f"Coletando preços para {dia} dias - Tio Chip.")
@@ -67,7 +67,7 @@ async def coleta_tio_chip(hora_global,data_atual):# Inicializar o driver do Sele
           opcao = driver.find_element(By.XPATH, f'//*[@role="option" and text()="{dia}"]')
           opcao.click()
 
-          time.sleep(3)
+          time.sleep(10)
 
 
           preco_a_vista = WebDriverWait(driver, 20).until(

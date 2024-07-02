@@ -115,7 +115,7 @@ async def coletar_precos_voupra_chip(hora_global,data_atual):
 
               # Adicione os dados ao conjunto
               all_data_set.add(( id,data_ida,dias, preco_Avista, preco_Parcelado))
-
+              print(all_data_set)
     # Feche o navegador
     driver.quit()
 
