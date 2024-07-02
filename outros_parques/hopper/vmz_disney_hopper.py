@@ -1,3 +1,4 @@
+from helpers.atualizar_calibragem import finalizar_hopper
 from imports import *
 from webdriver_setup import get_webdriver
 
@@ -232,7 +233,8 @@ async def coletar_precos_vmz_hopper_disneydias( hora_global,array_datas, data_at
 
     salvar_dados(df,'disney_vmz_hopper_dias_parcial.json',pasta,hora_global)
     driver.quit()
-
+    time.sleep(10)
+    finalizar_hopper()
     return
 
 if __name__ == "__main__":

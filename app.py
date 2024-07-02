@@ -45,6 +45,8 @@ global data_atual
 global valor_halloween
 global calibrating_leads
 global valor_chip
+global valor_hopper
+valor_hopper = 0
 valor_chip = 0
 valor_halloween = 0
 sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
@@ -871,6 +873,29 @@ async def americaesim():
 
     time.sleep(3)
     await chip_eua_europa(hora_global,data_atual)
+
+    return jsonify({"message": "Dados salvos com sucesso!"})
+
+@app.route('/finalizar_hopper', methods=['GET'])
+async def finalizar_hopper():
+
+    global valor_hopper
+
+    valor_hopper = valor_hopper + 1
+
+    if valor_hopper == 2:
+        try:
+            empresas = ['voupra', 'vmz', 'decolar','ml']
+            parques = ['hopper','hopperplus']
+
+            juntar_json = JuntarJsons(data_atual, empresas, parques, 'hopper')
+
+            await juntar_json.executar()
+
+            valor_hopper = 0
+
+        except Exception as e:
+            logging.error(f"Erro durante a junção dos arquivos: {e}")
 
     return jsonify({"message": "Dados salvos com sucesso!"})
 

@@ -39,3 +39,11 @@ def finalizar_chip():
         print("Chip finalizado com sucesso.")
     else:
         print("Erro ao finalizar o Chip.")
+
+def finalizar_hopper():
+    response = requests.get('http://localhost:5000/finalizar_hopper')
+
+    if response.status_code == 200:
+        print("Chip finalizado com sucesso.")
+    else:
+        print("Erro ao finalizar o Chip.")

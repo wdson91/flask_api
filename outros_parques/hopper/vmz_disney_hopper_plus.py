@@ -1,6 +1,6 @@
 from imports import *
 from salvardados import *
-from helpers.atualizar_calibragem import atualizar_calibragem
+from helpers.atualizar_calibragem import atualizar_calibragem, finalizar_hopper
 from webdriver_setup import get_webdriver
 
 pasta='hopper/vmz'
@@ -234,6 +234,8 @@ async def coletar_precos_vmz_disneydias_hopperplus(hora_global,array_datas,data_
     salvar_dados(df, 'disney_vmz_dias_hopperplus_parcial.json',pasta,hora_global)
     driver.quit()
     #atualizar_calibragem(60)
+    time.sleep(10)
+    finalizar_hopper()
     return
 
 
